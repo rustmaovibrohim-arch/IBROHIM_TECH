@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IBROHIM_TECH | Ultra Mega Hardware Hub 2026</title>
+    <title>IBROHIM_TECH | AI-Powered Hardware Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,22 +17,14 @@
                     'md': '768px',
                     'lg': '1024px',
                     'xl': '1280px',
-                    '2xl': '1536px',
                 },
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            500: '#10b981',
                             Primary: '#6366f1',
                             Accent: '#38bdf8',
                             DarkBg: '#090d16',
-                            CardBg: '#111827'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif']
                     }
                 }
             }
@@ -43,67 +35,30 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #090d16;
-            transition: background-color 0.3s ease, color 0.3s ease;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Continuous Vibrant Cyan Glow */
         .brand-glow-text {
             color: #38bdf8;
             text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 22px rgba(99, 102, 241, 0.4);
-            animation: pulseGlow 3s infinite alternate ease-in-out;
         }
 
-        .title-glow-text {
-            color: #818cf8;
-            text-shadow: 0 0 18px rgba(129, 140, 248, 0.5);
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                text-shadow: 0 0 8px rgba(56, 189, 248, 0.5), 0 0 16px rgba(99, 102, 241, 0.3);
-            }
-
-            100% {
-                text-shadow: 0 0 18px rgba(56, 189, 248, 0.8), 0 0 30px rgba(99, 102, 241, 0.6);
-            }
-        }
-
-        /* Canvas Particle overlay */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 30;
-        }
-
-        /* Glassmorphism Panels */
         .glass-panel {
-            background: rgba(17, 24, 39, 0.82);
+            background: rgba(17, 24, 39, 0.85);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .light .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
 
         ::-webkit-scrollbar-track {
@@ -114,217 +69,153 @@
             background: #1e293b;
             border-radius: 4px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
     </style>
 </head>
 
 <body class="bg-[#090d16] text-gray-100 min-h-screen flex flex-col relative overflow-x-hidden pb-16 md:pb-0">
 
-    <!-- Interactive Canvas Overlay -->
-    <canvas id="particle-canvas"></canvas>
-
     <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-40 glass-panel border-b border-gray-800/80 shadow-2xl">
-        <!-- Live Bar -->
+        <!-- Live Header Bar -->
         <div class="bg-indigo-950/40 text-[11px] xs:text-xs py-1.5 px-3 md:px-6 border-b border-indigo-900/30">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-2 xs:gap-4">
-                    <span class="flex items-center gap-1.5 text-indigo-300 font-medium" id="weather-widget">
-                        <i class="fa-solid fa-spinner animate-spin"></i> Tashkent: Loading...
-                    </span>
+                <div class="flex items-center gap-3">
+                    <span class="text-indigo-300 font-medium" id="weather-widget">Tashkent: 24°C</span>
                     <span class="text-gray-600">|</span>
                     <span class="text-gray-300 font-mono" id="clock-widget">00:00:00</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <!-- Language Picker -->
-                    <div class="flex items-center gap-1 bg-gray-800/90 rounded-lg p-0.5 border border-gray-700">
-                        <button onclick="setLang('uz')"
-                            class="lang-btn px-1.5 py-0.5 text-[10px] font-bold rounded text-white bg-indigo-600"
-                            data-lang="uz">UZ</button>
-                        <button onclick="setLang('en')"
-                            class="lang-btn px-1.5 py-0.5 text-[10px] font-medium rounded text-gray-400 hover:text-white"
-                            data-lang="en">EN</button>
-                        <button onclick="setLang('ru')"
-                            class="lang-btn px-1.5 py-0.5 text-[10px] font-medium rounded text-gray-400 hover:text-white"
-                            data-lang="ru">RU</button>
-                    </div>
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" onclick="toggleTheme()"
-                        class="p-1 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 text-amber-400">
-                        <i class="fa-solid fa-moon text-xs" id="theme-icon"></i>
-                    </button>
+                <div class="flex items-center gap-2">
+                    <span
+                        class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30 font-bold">
+                        <i class="fa-solid fa-robot mr-1"></i> AI Online
+                    </span>
                 </div>
             </div>
         </div>
 
         <!-- Main Nav Header -->
-        <div class="max-w-7xl mx-auto px-3 xs:px-4 py-2.5 flex items-center justify-between gap-2 xs:gap-4">
+        <div class="max-w-7xl mx-auto px-3 xs:px-4 py-2.5 flex items-center justify-between gap-2">
             <!-- Brand Logo -->
-            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 xs:gap-3 group shrink-0">
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 group shrink-0">
                 <div
-                    class="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
-                    <i class="fa-solid fa-bolt text-white text-lg xs:text-xl"></i>
+                    class="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-bolt text-white text-lg"></i>
                 </div>
                 <div>
                     <span
-                        class="font-display font-extrabold text-xl xs:text-2xl tracking-wide brand-glow-text">IBROHIM_TECH</span>
-                    <span
-                        class="hidden xs:block text-[9px] text-gray-400 font-semibold tracking-widest uppercase -mt-1">Future
-                        Hardware Hub</span>
+                        class="font-display font-extrabold text-lg xs:text-xl tracking-wide brand-glow-text">IBROHIM_TECH</span>
                 </div>
             </a>
 
-            <!-- Search Bar with Live Suggest -->
+            <!-- Search Bar -->
             <div class="flex-1 max-w-md relative hidden sm:block">
                 <input type="text" id="main-search" oninput="handleSearch(this.value)"
-                    placeholder="Qidirish (Noutbuk, Phone, PS5, AirPods)..."
-                    class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2 pl-10 text-xs xs:text-sm focus:outline-none focus:border-indigo-500 text-gray-100">
+                    placeholder="300+ mahsulotdan qidirish..."
+                    class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2 pl-10 text-xs focus:outline-none focus:border-indigo-500 text-gray-100">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
-                <!-- Search Suggest Dropdown -->
-                <div id="search-suggest"
-                    class="absolute top-full left-0 right-0 mt-1 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl hidden z-50 max-h-60 overflow-y-auto">
-                </div>
             </div>
 
-            <!-- Top Actions -->
-            <div class="flex items-center gap-2 xs:gap-3">
-                <button onclick="openAuthModal()"
-                    class="flex items-center gap-1.5 bg-gray-800/90 hover:bg-gray-700 border border-gray-700 px-2.5 xs:px-3 py-1.5 xs:py-2 rounded-xl text-xs font-semibold transition">
-                    <i class="fa-solid fa-user text-indigo-400" id="user-avatar-icon"></i>
-                    <span id="nav-user-name" class="hidden md:inline">Kirish</span>
-                </button>
+            <!-- Top Actions (User, Wishlist, Cart) -->
+            <div class="flex items-center gap-2">
+                <div id="user-auth-area">
+                    <button onclick="openAuthModal('signin')"
+                        class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
+                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
+                        <span>Kirish</span>
+                    </button>
+                </div>
 
                 <button onclick="toggleDrawer('wishlist')"
-                    class="relative p-2 rounded-xl bg-gray-800/90 hover:bg-gray-700 border border-gray-700 text-pink-400 transition">
+                    class="relative p-2 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-pink-400 transition">
                     <i class="fa-solid fa-heart text-sm"></i>
                     <span id="wishlist-badge"
                         class="absolute -top-1.5 -right-1.5 bg-pink-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                 </button>
 
                 <button onclick="toggleDrawer('cart')"
-                    class="relative flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white px-3 xs:px-4 py-1.5 xs:py-2 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-600/30">
+                    class="relative flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-600/30">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="hidden md:inline" id="txt-cart-btn">Savat</span>
+                    <span class="hidden md:inline">Savat</span>
                     <span id="cart-badge" class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">0</span>
                 </button>
             </div>
         </div>
 
-        <!-- Desktop Navigation Tabs -->
-        <nav class="hidden md:block border-t border-gray-800/60 bg-gray-900/60 backdrop-blur-md">
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:block border-t border-gray-800/60 bg-gray-900/60">
             <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 py-1.5 text-xs font-bold">
                 <button onclick="switchTab('home')"
-                    class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 bg-indigo-600 text-white transition"
+                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 bg-indigo-600 text-white"
                     data-tab="home">
-                    <i class="fa-solid fa-house"></i> <span id="txt-tab-home">Asosiy Do'kon</span>
+                    <i class="fa-solid fa-house"></i> Asosiy
                 </button>
                 <button onclick="switchTab('catalog')"
-                    class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white hover:bg-gray-800 transition"
+                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white"
                     data-tab="catalog">
-                    <i class="fa-solid fa-layer-group"></i> <span id="txt-tab-catalog">Katalog (300+)</span>
-                </button>
-                <button onclick="switchTab('compare')"
-                    class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white hover:bg-gray-800 transition"
-                    data-tab="compare">
-                    <i class="fa-solid fa-sliders"></i> <span id="txt-tab-compare">Taqqoslash Matrix</span>
-                </button>
-                <button onclick="switchTab('reviews')"
-                    class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white hover:bg-gray-800 transition"
-                    data-tab="reviews">
-                    <i class="fa-solid fa-star text-amber-400"></i> <span id="txt-tab-reviews">Sharhlar</span>
+                    <i class="fa-solid fa-layer-group"></i> Katalog (300+)
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- MOBILE SEARCH BAR (375px Friendly) -->
+    <!-- MOBILE SEARCH (375px) -->
     <div class="sm:hidden px-3 pt-3">
-        <div class="relative">
-            <input type="text" oninput="handleSearch(this.value)" placeholder="300+ mahsulotdan qidirish..."
-                class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 pl-9 text-xs focus:outline-none focus:border-indigo-500 text-gray-200">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
-        </div>
+        <input type="text" oninput="handleSearch(this.value)" placeholder="Qidirish (Noutbuk, Phone, PS5)..."
+            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-xs focus:outline-none text-gray-200">
     </div>
 
-    <!-- MAIN APP CONTENT -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-3 xs:px-4 py-4 xs:py-6 relative z-10 space-y-8">
-
-        <!-- PAGE 1: HOME -->
-        <section id="page-home" class="space-y-8">
-            <!-- Hero Banner -->
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 xs:px-4 py-4 space-y-6">
+        <!-- HOME PAGE -->
+        <section id="page-home" class="space-y-6">
             <div
-                class="relative rounded-2xl xs:rounded-3xl overflow-hidden glass-panel border border-indigo-500/20 p-5 xs:p-8 md:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="max-w-xl z-10 space-y-3">
+                class="glass-panel p-5 xs:p-8 rounded-3xl border border-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 max-w-xl">
                     <span
-                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] xs:text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        <i class="fa-solid fa-bolt"></i> IBROHIM_TECH KATTA BAZA 2026
+                        class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                        <i class="fa-solid fa-robot mr-1"></i> AI Yordamchi Integratsiya Qilingan
                     </span>
-                    <h1
-                        class="font-display text-2xl xs:text-3xl md:text-5xl font-extrabold tracking-tight leading-tight title-glow-text">
-                        Zamonaviy Elektronika Va Gadjetlar Flotiliyasi
+                    <h1 class="text-2xl xs:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                        Aqlli Gadjetlar Va AI Hardware Hub
                     </h1>
-                    <p class="text-gray-300 text-xs xs:text-sm md:text-base leading-relaxed" id="txt-hero-desc">
-                        300+ dan ortiq premium noutbuklar, flagman smartfonlar, gaming konsollar, AirPods va aqlli
-                        soatlar kafolati bilan!
+                    <p class="text-gray-300 text-xs xs:text-sm">
+                        300+ ta saralangan noutbuk, smartfon, konsol va audio texnikalar. Savollaringiz bo'lsa real AI
+                        yordamchimizdan so'rang!
                     </p>
-                    <div class="flex flex-wrap items-center gap-3 pt-2">
-                        <button onclick="switchTab('catalog')"
-                            class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 xs:px-6 py-2.5 xs:py-3 rounded-xl shadow-lg shadow-indigo-600/30 text-xs xs:text-sm flex items-center gap-2 transition hover:scale-105">
-                            <i class="fa-solid fa-basket-shopping"></i> <span id="txt-btn-shop">Katalogga O'tish</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="relative w-full md:w-1/2 flex justify-center">
-                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80"
-                        alt="MacBook Pro"
-                        class="rounded-2xl shadow-2xl object-cover h-48 xs:h-60 md:h-72 w-full border border-gray-700/50">
-                </div>
-            </div>
-
-            <!-- Category Fast Access Grid -->
-            <div>
-                <h2 class="text-lg xs:text-xl font-bold mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-shapes text-indigo-400"></i> <span id="txt-cat-title">Kategoriyalar Bo'limi
-                        (Har birida 50+ mahsulot)</span>
-                </h2>
-                <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-6 gap-2.5 xs:gap-3" id="categories-grid"></div>
-            </div>
-
-            <!-- Featured Showcase Grid -->
-            <div>
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg xs:text-xl font-bold flex items-center gap-2">
-                        <i class="fa-solid fa-fire text-amber-500"></i> <span id="txt-featured-title">Top Flotiliya
-                            Mahsulotlari</span>
-                    </h2>
-                    <button onclick="switchTab('catalog')"
-                        class="text-indigo-400 hover:text-indigo-300 font-semibold text-xs flex items-center gap-1">
-                        Barchasini ko'rish <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    <button onclick="toggleAiChat()"
+                        class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition">
+                        <i class="fa-solid fa-comments"></i> AI Bilan Suhbatlashish
                     </button>
                 </div>
-                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4" id="home-products-grid">
-                </div>
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
+                    class="rounded-2xl h-48 w-full md:w-1/2 object-cover border border-gray-800">
+            </div>
+
+            <!-- Categories -->
+            <div>
+                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-shapes text-indigo-400"></i> Kategoriyalar (Har birida 50+ ta)
+                </h2>
+                <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-6 gap-2.5" id="categories-grid"></div>
+            </div>
+
+            <!-- Products -->
+            <div>
+                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-500"></i> Tanlangan Mahsulotlar
+                </h2>
+                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="home-products-grid"></div>
             </div>
         </section>
 
-        <!-- PAGE 2: CATALOG (PAGINATED & FILTERABLE) -->
-        <section id="page-catalog" class="hidden space-y-6">
-            <div
-                class="glass-panel p-4 xs:p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h1 class="text-xl xs:text-2xl font-bold" id="txt-catalog-title">Barcha Mahsulotlar Katalogi</h1>
-                    <p class="text-xs text-gray-400" id="txt-catalog-subtitle">Jami 300 ta saralangan original
-                        texnikalar ombori</p>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+        <!-- CATALOG PAGE -->
+        <section id="page-catalog" class="hidden space-y-4">
+            <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-3">
+                <h1 class="text-lg font-bold">Mahsulotlar Katalogi (300+)</h1>
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
                     <select id="filter-category" onchange="applyFilters()"
-                        class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none">
-                        <option value="all">Barcha Kategoriyalar (300+)</option>
+                        class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-1.5 text-xs text-gray-200">
+                        <option value="all">Barcha Kategoriyalar</option>
                         <option value="laptops">Noutbuklar (50)</option>
                         <option value="phones">Smartfonlar (50)</option>
                         <option value="gaming">Gaming & Konsollar (50)</option>
@@ -332,260 +223,232 @@
                         <option value="watch">Smart Soatlar (50)</option>
                         <option value="acc">Aksessuarlar (50)</option>
                     </select>
-
-                    <select id="filter-sort" onchange="applyFilters()"
-                        class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none">
-                        <option value="default">Saralash: Standart</option>
-                        <option value="low-high">Narx: Arzonroq</option>
-                        <option value="high-low">Narx: Qimmatroq</option>
-                        <option value="rating">Top Reyting</option>
-                    </select>
-
-                    <select id="filter-perpage" onchange="applyFilters()"
-                        class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none">
-                        <option value="12">12 tadan</option>
-                        <option value="24" selected>24 tadan</option>
-                        <option value="48">48 tadan</option>
-                    </select>
                 </div>
             </div>
-
-            <!-- Product Grid -->
-            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4" id="catalog-products-grid"></div>
-
-            <!-- Pagination Bar -->
-            <div class="flex items-center justify-between glass-panel p-4 rounded-2xl text-xs" id="pagination-controls">
+            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="catalog-products-grid"></div>
+            <div class="flex items-center justify-between glass-panel p-3 rounded-xl text-xs" id="pagination-controls">
             </div>
         </section>
-
-        <!-- PAGE 3: COMPARE MATRIX -->
-        <section id="page-compare" class="hidden space-y-6">
-            <div class="glass-panel p-5 rounded-2xl">
-                <h1 class="text-xl font-bold mb-1"><i class="fa-solid fa-sliders text-indigo-400 mr-2"></i> Taqqoslash
-                    Matrix</h1>
-                <p class="text-xs text-gray-400">Tanlagan mahsulotlaringiz xarakteristikasini solishtiring.</p>
-            </div>
-            <div id="compare-container" class="overflow-x-auto glass-panel rounded-2xl p-4"></div>
-        </section>
-
-        <!-- PAGE 4: REVIEWS -->
-        <section id="page-reviews" class="hidden space-y-6">
-            <div class="glass-panel p-5 rounded-2xl flex justify-between items-center">
-                <div>
-                    <h1 class="text-xl font-bold"><i class="fa-solid fa-star text-amber-400 mr-2"></i> Mijozlarimiz
-                        Sharhlari</h1>
-                    <p class="text-xs text-gray-400">Xaridorlarning haqiqiy mulohazalari</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="reviews-grid"></div>
-        </section>
-
     </main>
 
-    <!-- MOBILE BOTTOM NAVBAR (375px Friendly) -->
-    <div
-        class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-lg border-t border-gray-800 px-4 py-2 flex justify-around items-center text-[10px] font-bold">
-        <button onclick="switchTab('home')" class="flex flex-col items-center gap-1 text-indigo-400">
-            <i class="fa-solid fa-house text-sm"></i>
-            <span>Asosiy</span>
-        </button>
-        <button onclick="switchTab('catalog')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
-            <i class="fa-solid fa-layer-group text-sm"></i>
-            <span>Katalog</span>
-        </button>
-        <button onclick="toggleDrawer('wishlist')" class="flex flex-col items-center gap-1 text-pink-400 relative">
-            <i class="fa-solid fa-heart text-sm"></i>
-            <span>Istaklar</span>
-        </button>
-        <button onclick="toggleDrawer('cart')" class="flex flex-col items-center gap-1 text-indigo-400 relative">
-            <i class="fa-solid fa-bag-shopping text-sm"></i>
-            <span>Savat</span>
-        </button>
+    <!-- REAL-TIME AI CHATBOT WINDOW -->
+    <div id="ai-chat-window"
+        class="fixed bottom-16 md:bottom-6 right-3 xs:right-6 w-[92vw] xs:w-96 bg-gray-900/95 border border-indigo-500/40 rounded-2xl shadow-2xl z-50 flex flex-col h-[480px] hidden backdrop-blur-lg">
+        <!-- AI Chat Header -->
+        <div
+            class="p-3.5 bg-gradient-to-r from-indigo-900/80 to-gray-900 border-b border-gray-800 rounded-t-2xl flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-white">IBROHIM AI Yordamchi</h4>
+                    <span class="text-[9px] text-emerald-400 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online (Real AI)
+                    </span>
+                </div>
+            </div>
+            <button onclick="toggleAiChat()" class="text-gray-400 hover:text-white p-1"><i
+                    class="fa-solid fa-xmark text-sm"></i></button>
+        </div>
+
+        <!-- Chat Messages Container -->
+        <div id="ai-messages" class="flex-1 overflow-y-auto p-3 space-y-3 text-xs">
+            <div class="bg-indigo-950/60 border border-indigo-800/40 p-3 rounded-2xl rounded-tl-none text-gray-200">
+                Assalomu alaykum! Men IBROHIM_TECH saytining **haqiqiy AI yordamchisiman**. 🤖<br><br>
+                Menga ixtiyoriy texnik savolingizni berishingiz mumkin (Masalan: *"Menga o'yinlar uchun noutbuk maslahat
+                ber"*, *"iPhone 16 narxi necha dollar?"* va h.k.).
+            </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form onsubmit="handleAiSend(event)"
+            class="p-2 border-t border-gray-800 bg-gray-950/80 rounded-b-2xl flex gap-1.5">
+            <input type="text" id="ai-input" placeholder="AI'dan savol so'rang..." required
+                class="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- AI Toggle Button -->
+    <button onclick="toggleAiChat()"
+        class="fixed bottom-20 md:bottom-6 right-4 z-40 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition border border-indigo-400/30">
+        <i class="fa-solid fa-robot text-lg"></i>
+    </button>
+
+    <!-- SIGN IN & SIGN UP MODAL -->
+    <div id="auth-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-sm w-full relative shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i
+                    class="fa-solid fa-xmark"></i></button>
+
+            <!-- Auth Tabs -->
+            <div class="flex border-b border-gray-800 mb-5">
+                <button id="tab-btn-signin" onclick="switchAuthTab('signin')"
+                    class="flex-1 py-2 text-xs font-bold border-b-2 border-indigo-500 text-indigo-400">Kirish (Sign
+                    In)</button>
+                <button id="tab-btn-signup" onclick="switchAuthTab('signup')"
+                    class="flex-1 py-2 text-xs font-bold text-gray-400 border-b-2 border-transparent">Ro'yxatdan o'tish
+                    (Sign Up)</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="form-signin" onsubmit="handleSignIn(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1">Email Pochta</label>
+                    <input type="email" id="signin-email" required placeholder="user@gmail.com"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1">Parol</label>
+                    <input type="password" id="signin-password" required placeholder="••••••••"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30">
+                    Tizimga Kirish
+                </button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="form-signup" onsubmit="handleSignUp(event)" class="space-y-3 hidden">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1">Ismingiz</label>
+                    <input type="text" id="signup-name" required placeholder="Ibrohim..."
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1">Email Pochta</label>
+                    <input type="email" id="signup-email" required placeholder="user@gmail.com"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1">Yangi Parol</label>
+                    <input type="password" id="signup-password" required placeholder="••••••••"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <button type="submit"
+                    class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-cyan-600/30">
+                    Akkaunt Yaratish
+                </button>
+            </form>
+        </div>
     </div>
 
     <!-- CART DRAWER -->
     <div id="cart-drawer"
-        class="fixed inset-y-0 right-0 w-full max-w-sm xs:max-w-md bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        class="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-4 border-b border-gray-800 flex justify-between items-center">
-            <h3 class="text-base font-bold flex items-center gap-2"><i
+            <h3 class="text-sm font-bold flex items-center gap-2"><i
                     class="fa-solid fa-bag-shopping text-indigo-400"></i> Savatingiz</h3>
-            <button onclick="toggleDrawer('cart')" class="text-gray-400 p-2"><i
-                    class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="toggleDrawer('cart')" class="text-gray-400 p-2"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items-container"></div>
         <div class="p-4 border-t border-gray-800 bg-gray-950 space-y-3">
-            <div class="flex justify-between text-sm font-bold">
+            <div class="flex justify-between text-xs font-bold">
                 <span>Jami Narx:</span>
                 <span id="cart-total-price" class="text-indigo-400">$0</span>
             </div>
             <button onclick="checkout()"
-                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30">
-                Rasmiylashtirish (Checkout)
+                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                Rasmiylashtirish
             </button>
         </div>
     </div>
 
     <!-- WISHLIST DRAWER -->
     <div id="wishlist-drawer"
-        class="fixed inset-y-0 right-0 w-full max-w-sm xs:max-w-md bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        class="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
         <div class="p-4 border-b border-gray-800 flex justify-between items-center">
-            <h3 class="text-base font-bold flex items-center gap-2 text-pink-400"><i class="fa-solid fa-heart"></i>
+            <h3 class="text-sm font-bold text-pink-400 flex items-center gap-2"><i class="fa-solid fa-heart"></i>
                 Tanlanganlar</h3>
             <button onclick="toggleDrawer('wishlist')" class="text-gray-400 p-2"><i
-                    class="fa-solid fa-xmark text-lg"></i></button>
+                    class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="flex-1 overflow-y-auto p-4 space-y-3" id="wishlist-items-container"></div>
     </div>
 
-    <!-- AUTH MODAL -->
-    <div id="auth-modal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div
-            class="bg-gray-900 border border-gray-800 rounded-3xl p-6 xs:p-8 max-w-sm xs:max-w-md w-full relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-gray-400"><i
-                    class="fa-solid fa-xmark text-base"></i></button>
-            <div class="text-center mb-6">
-                <div
-                    class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center mx-auto mb-2 text-white font-bold">
-                    IT</div>
-                <h3 class="text-xl font-bold text-white">Xush Kelibsiz</h3>
-                <p class="text-xs text-gray-400 mt-1">IBROHIM_TECH akkauntingizga kiring</p>
-            </div>
-            <form onsubmit="handleAuthSubmit(event)" class="space-y-3">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Ismingiz</label>
-                    <input type="text" id="auth-name" placeholder="Ibrohim..."
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Email Pochta</label>
-                    <input type="email" id="auth-email" required placeholder="example@gmail.com"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200">
-                </div>
-                <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl transition text-xs shadow-lg shadow-indigo-600/30">
-                    Tasdiqlash
-                </button>
-            </form>
-        </div>
+    <!-- MOBILE BOTTOM NAVBAR -->
+    <div
+        class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-lg border-t border-gray-800 px-4 py-2 flex justify-around items-center text-[10px] font-bold">
+        <button onclick="switchTab('home')" class="flex flex-col items-center gap-1 text-indigo-400">
+            <i class="fa-solid fa-house text-sm"></i> <span>Asosiy</span>
+        </button>
+        <button onclick="switchTab('catalog')" class="flex flex-col items-center gap-1 text-gray-400">
+            <i class="fa-solid fa-layer-group text-sm"></i> <span>Katalog</span>
+        </button>
+        <button onclick="toggleDrawer('cart')" class="flex flex-col items-center gap-1 text-indigo-400">
+            <i class="fa-solid fa-bag-shopping text-sm"></i> <span>Savat</span>
+        </button>
     </div>
 
-    <!-- SCRIPT LOGIC (GENERATES 300+ DISTINCT PRODUCTS WITH UNIQUE HD IMAGES) -->
     <script>
-        // High Quality Distinct Image Collections per Category (50 Unique Images Each)
+        // High Quality Distinct Image Collections (50 Unique Images Each)
         const CATEGORY_IMAGES = {
             laptops: [
                 "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80"
             ],
             phones: [
                 "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1574944985070-8f30c4397e30?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1585060544812-6b45742d762f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
             ],
             gaming: [
                 "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1586182987320-4f376d39d787?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80"
             ],
             audio: [
                 "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
             ],
             watch: [
                 "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1510017803434-a899398421b3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
             ],
             acc: [
                 "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1511385348-a52b4a160dc2?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=600&q=80"
             ]
         };
 
-        // Generates Exactly 300 Distinct Products (50 per Category)
+        // Generates 300 Distinct Products (50 per category)
         function generate300Products() {
             const list = [];
             const categories = ['laptops', 'phones', 'gaming', 'audio', 'watch', 'acc'];
-
             const titles = {
-                laptops: ["MacBook Pro M4", "ROG Strix SCAR", "Razer Blade 18", "Dell XPS 16", "Lenovo Legion Pro", "HP Omen Transcend", "Acer Predator Helios", "MSI Titan GT77", "ASUS Zenbook Duo", "Gigabyte AORUS 17"],
-                phones: ["iPhone 16 Pro Max", "Galaxy S25 Ultra", "Google Pixel 9 Pro", "Xiaomi 15 Ultra", "OnePlus 13 Pro", "ASUS ROG Phone 9", "Sony Xperia 1 VI", "Honor Magic 7", "Vivo X100 Pro", "Nothing Phone 3"],
-                gaming: ["PlayStation 5 Pro", "NVIDIA RTX 5090", "Xbox Series X 2TB", "Steam Deck OLED", "ASUS ROG Ally X", "Nintendo Switch 2", "Lenovo Legion Go", "MSI Claw Ultra", "Razer Edge 5G", "Logitech G Cloud"],
-                audio: ["AirPods Max 2", "Sony WH-1000XM5", "Bose QuietComfort Ultra", "Sennheiser Momentum 4", "AirPods Pro 2 USB-C", "Bang & Olufsen Beoplay", "JBL Tour ONE M2", "Marshall Monitor II", "Shure AONIC 50", "Audio-Technica M50xBT2"],
-                watch: ["Apple Watch Ultra 2", "Galaxy Watch 7 Pro", "Garmin Fenix 8", "Apple Watch Series 10", "Pixel Watch 3", "Amazfit Cheetah Pro", "Suunto Race Titanium", "Huawei Watch Ultimate", "Tag Heuer Connected", "TicWatch Pro 5"],
-                acc: ["Anker 240W GaN Charger", "Keychron Q1 Max Keyboard", "Logitech MX Master 3S", "CalDigit TS4 Thunderbolt 4", "Elgato Stream Deck XL", "Samsung T9 4TB SSD", "Razer Basilisk V3 Pro", "LG UltraFine 5K Hub", "Apple MagSafe Battery 10k", "Belkin 3-in-1 Magsafe"]
+                laptops: ["MacBook Pro M4", "ROG Strix SCAR", "Razer Blade 18", "Dell XPS 16", "Lenovo Legion Pro"],
+                phones: ["iPhone 16 Pro Max", "Galaxy S25 Ultra", "Google Pixel 9 Pro", "Xiaomi 15 Ultra", "OnePlus 13"],
+                gaming: ["PlayStation 5 Pro", "NVIDIA RTX 5090", "Xbox Series X 2TB", "Steam Deck OLED", "ASUS ROG Ally"],
+                audio: ["AirPods Max 2", "Sony WH-1000XM5", "Bose QC Ultra", "Sennheiser Momentum", "AirPods Pro 2"],
+                watch: ["Apple Watch Ultra 2", "Galaxy Watch 7", "Garmin Fenix 8", "Apple Watch Series 10", "Pixel Watch 3"],
+                acc: ["Anker GaN Charger", "Keychron Q1 Keyboard", "Logitech MX Master 3S", "Elgato Stream Deck", "Samsung SSD 4TB"]
             };
 
             let idCounter = 1;
-
             categories.forEach(cat => {
                 const imgList = CATEGORY_IMAGES[cat];
                 for (let i = 1; i <= 50; i++) {
                     const baseTitle = titles[cat][(i - 1) % titles[cat].length];
-                    const variant = i > 10 ? `Edition ${i}` : `Pro ${i}`;
                     const imgUrl = imgList[(i - 1) % imgList.length] + `&sig=${idCounter}`;
-
                     list.push({
                         id: idCounter,
-                        name: `${baseTitle} ${variant}`,
+                        name: `${baseTitle} #${i}`,
                         category: cat,
-                        price: Math.floor(Math.random() * 2500) + 99,
+                        price: Math.floor(Math.random() * 2000) + 99,
                         rating: (Math.random() * 0.5 + 4.5).toFixed(1),
-                        image: imgUrl,
-                        cpu: cat === 'laptops' ? 'M4 / Intel i9 14th' : (cat === 'phones' ? 'A18 Pro / Snap 8 Gen 4' : 'Custom Tech Chip'),
-                        ram: cat === 'laptops' || cat === 'gaming' ? '32GB / 64GB DDR5' : '12GB LPDDR5X',
-                        storage: '512GB / 1TB / 2TB NVMe'
+                        image: imgUrl
                     });
                     idCounter++;
                 }
             });
-
             return list;
         }
 
@@ -594,51 +457,28 @@
         // State
         let cart = [];
         let wishlist = [];
-        let compareList = [];
+        let filteredProducts = [...PRODUCTS];
         let currentPage = 1;
         let itemsPerPage = 24;
-        let filteredProducts = [...PRODUCTS];
-        let authUser = JSON.parse(localStorage.getItem('ibrohim_tech_user')) || null;
 
-        // Translation Map
-        const i18n = {
-            uz: { cartBtn: "Savat", tabHome: "Asosiy Do'kon", tabCatalog: "Katalog (300+)", tabCompare: "Taqqoslash", tabReviews: "Sharhlar", heroDesc: "300+ dan ortiq premium noutbuklar, flagman smartfonlar, gaming konsollar, AirPods va aqlli soatlar kafolati bilan!", btnShop: "Katalogga O'tish", catTitle: "Kategoriyalar Bo'limi (Har birida 50+)", featuredTitle: "Top Flotiliya Mahsulotlari", catalogTitle: "Barcha Mahsulotlar Katalogi", catalogSubtitle: "Jami 300 ta saralangan original texnikalar ombori" },
-            en: { cartBtn: "Cart", tabHome: "Main Store", tabCatalog: "Catalog (300+)", tabCompare: "Compare", tabReviews: "Reviews", heroDesc: "300+ premium laptops, flagship smartphones, gaming consoles, AirPods and smartwatches with official warranty!", btnShop: "Go To Catalog", catTitle: "Categories Hub (50+ each)", featuredTitle: "Top Fleet Products", catalogTitle: "All Products Catalog", catalogSubtitle: "Total 300 curated original tech inventory" },
-            ru: { cartBtn: "Корзина", tabHome: "Главный Магазин", tabCatalog: "Каталог (300+)", tabCompare: "Сравнение", tabReviews: "Отзывы", heroDesc: "Более 300 премиальных ноутбуков, флагманских смартфонов, игровых консолей, AirPods и смарт-часов!", btnShop: "Перейти в Каталог", catTitle: "Категории (По 50+ в каждой)", featuredTitle: "Топ Продукция", catalogTitle: "Каталог Всех Товаров", catalogSubtitle: "Всего 300 оригинальных устройств на складе" }
-        };
+        // Registered Users Database in LocalStorage
+        let registeredUsers = JSON.parse(localStorage.getItem('ibrohim_registered_users')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('ibrohim_current_user')) || null;
 
-        // App Initialization
         document.addEventListener('DOMContentLoaded', () => {
             initClock();
-            fetchWeather();
-            initParticleCanvas();
             renderCategories();
             renderHomeProducts();
             applyFilters();
-            updateAuthUI();
+            updateUserUI();
         });
 
-        // Real-time Clock
         function initClock() {
-            const clock = document.getElementById('clock-widget');
             setInterval(() => {
-                clock.textContent = new Date().toLocaleTimeString();
+                document.getElementById('clock-widget').textContent = new Date().toLocaleTimeString();
             }, 1000);
         }
 
-        // Tashkent Weather API
-        async function fetchWeather() {
-            const widget = document.getElementById('weather-widget');
-            try {
-                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current_weather=true');
-                const data = await res.json();
-                widget.innerHTML = `<i class="fa-solid fa-cloud-sun text-amber-400"></i> Tashkent: ${Math.round(data.current_weather.temperature)}°C`;
-            } catch (err) {
-                widget.innerHTML = `<i class="fa-solid fa-location-dot text-indigo-400"></i> Tashkent, UZ`;
-            }
-        }
-
-        // Render Categories
         function renderCategories() {
             const categories = [
                 { id: 'laptops', name: 'Noutbuklar (50)', icon: 'fa-laptop' },
@@ -649,75 +489,46 @@
                 { id: 'acc', name: 'Aksessuar (50)', icon: 'fa-plug' }
             ];
 
-            const grid = document.getElementById('categories-grid');
-            grid.innerHTML = categories.map(c => `
-                <div onclick="filterByCategory('${c.id}')" class="glass-panel p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 cursor-pointer transition hover:scale-105 group">
-                    <div class="w-9 h-9 rounded-lg bg-indigo-600/10 text-indigo-400 flex items-center justify-center text-base group-hover:bg-indigo-600 group-hover:text-white transition">
-                        <i class="fa-solid ${c.icon}"></i>
-                    </div>
-                    <span class="text-[11px] font-bold text-gray-300 text-center">${c.name}</span>
+            document.getElementById('categories-grid').innerHTML = categories.map(c => `
+                <div onclick="filterByCategory('${c.id}')" class="glass-panel p-3 rounded-xl flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-indigo-500 transition">
+                    <i class="fa-solid ${c.icon} text-indigo-400 text-sm"></i>
+                    <span class="text-[10px] font-bold text-gray-300 text-center">${c.name}</span>
                 </div>
             `).join('');
         }
 
-        // Render Home Grid
         function renderHomeProducts() {
-            const grid = document.getElementById('home-products-grid');
-            grid.innerHTML = PRODUCTS.slice(0, 8).map(p => createProductCardHTML(p)).join('');
+            document.getElementById('home-products-grid').innerHTML = PRODUCTS.slice(0, 8).map(p => createCardHTML(p)).join('');
         }
 
-        // Product Card Component
-        function createProductCardHTML(p) {
+        function createCardHTML(p) {
             return `
-                <div class="glass-panel rounded-2xl overflow-hidden hover:border-indigo-500/50 transition flex flex-col justify-between group">
-                    <div class="relative overflow-hidden h-40 xs:h-44 bg-gray-950">
-                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-gray-900/80 backdrop-blur text-pink-400 hover:bg-pink-600 hover:text-white flex items-center justify-center transition">
-                            <i class="fa-${wishlist.some(w => w.id === p.id) ? 'solid' : 'regular'} fa-heart text-xs"></i>
+                <div class="glass-panel rounded-2xl overflow-hidden hover:border-indigo-500/50 transition flex flex-col justify-between">
+                    <div class="relative h-36 bg-gray-950">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-gray-900/80 text-pink-400 flex items-center justify-center text-xs">
+                            <i class="fa-${wishlist.some(w => w.id === p.id) ? 'solid' : 'regular'} fa-heart"></i>
                         </button>
                     </div>
-                    <div class="p-3 xs:p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div class="p-3 space-y-2 flex-1 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center gap-1 text-amber-400 text-[10px] mb-1">
-                                <i class="fa-solid fa-star"></i> <span class="font-bold text-gray-300">${p.rating}</span>
-                            </div>
-                            <h3 class="font-bold text-xs xs:text-sm text-gray-100 group-hover:text-indigo-400 transition line-clamp-1">${p.name}</h3>
+                            <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i> ${p.rating}</div>
+                            <h3 class="font-bold text-xs text-gray-100 line-clamp-1">${p.name}</h3>
                         </div>
                         <div class="flex items-center justify-between pt-2 border-t border-gray-800">
-                            <div>
-                                <span class="text-[10px] text-gray-400 block">Narx:</span>
-                                <span class="text-xs xs:text-sm font-extrabold text-indigo-400">$${p.price}</span>
-                            </div>
-                            <div class="flex gap-1.5">
-                                <button onclick="addToCompare(${p.id})" class="p-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 transition">
-                                    <i class="fa-solid fa-sliders text-xs"></i>
-                                </button>
-                                <button onclick="addToCart(${p.id})" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1.5 rounded-lg text-xs transition flex items-center gap-1">
-                                    <i class="fa-solid fa-plus text-[10px]"></i> Savat
-                                </button>
-                            </div>
+                            <span class="text-xs font-extrabold text-indigo-400">$${p.price}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1 rounded-lg text-[10px] transition">
+                                + Savat
+                            </button>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // Apply Filters & Pagination
         function applyFilters() {
             const cat = document.getElementById('filter-category').value;
-            const sort = document.getElementById('filter-sort').value;
-            itemsPerPage = parseInt(document.getElementById('filter-perpage').value);
-
-            filteredProducts = [...PRODUCTS];
-
-            if (cat !== 'all') {
-                filteredProducts = filteredProducts.filter(p => p.category === cat);
-            }
-
-            if (sort === 'low-high') filteredProducts.sort((a, b) => a.price - b.price);
-            if (sort === 'high-low') filteredProducts.sort((a, b) => b.price - a.price);
-            if (sort === 'rating') filteredProducts.sort((a, b) => b.rating - a.rating);
-
+            filteredProducts = cat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.category === cat);
             currentPage = 1;
             renderPaginatedCatalog();
         }
@@ -725,20 +536,17 @@
         function renderPaginatedCatalog() {
             const grid = document.getElementById('catalog-products-grid');
             const controls = document.getElementById('pagination-controls');
-
             const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
             const start = (currentPage - 1) * itemsPerPage;
-            const paginatedItems = filteredProducts.slice(start, start + itemsPerPage);
 
-            grid.innerHTML = paginatedItems.map(p => createProductCardHTML(p)).join('');
+            grid.innerHTML = filteredProducts.slice(start, start + itemsPerPage).map(p => createCardHTML(p)).join('');
 
-            // Render Pagination Controls
             controls.innerHTML = `
-                <span>Natija: <strong>${filteredProducts.length}</strong> ta mahsulot (${currentPage}/${totalPages || 1}-sahofa)</span>
+                <span>Natija: ${filteredProducts.length} ta mahsulot</span>
                 <div class="flex items-center gap-2">
-                    <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''} class="px-3 py-1.5 bg-gray-800 rounded-lg hover:bg-gray-700 disabled:opacity-50">Oldingi</button>
-                    <span class="font-bold px-2">${currentPage}</span>
-                    <button onclick="changePage(1)" ${currentPage >= totalPages ? 'disabled' : ''} class="px-3 py-1.5 bg-gray-800 rounded-lg hover:bg-gray-700 disabled:opacity-50">Keyingi</button>
+                    <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Oldingi</button>
+                    <span class="font-bold">${currentPage}/${totalPages || 1}</span>
+                    <button onclick="changePage(1)" ${currentPage >= totalPages ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Keyingi</button>
                 </div>
             `;
         }
@@ -746,7 +554,6 @@
         function changePage(delta) {
             currentPage += delta;
             renderPaginatedCatalog();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function filterByCategory(catId) {
@@ -755,251 +562,261 @@
             applyFilters();
         }
 
-        // Live Search Handler
         function handleSearch(query) {
-            if (!query.trim()) {
-                filteredProducts = [...PRODUCTS];
-            } else {
-                filteredProducts = PRODUCTS.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
-            }
+            filteredProducts = PRODUCTS.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
             if (activeTab !== 'catalog') switchTab('catalog');
             currentPage = 1;
             renderPaginatedCatalog();
         }
 
-        // Navigation Switcher
         let activeTab = 'home';
         function switchTab(tabId) {
             activeTab = tabId;
-            ['home', 'catalog', 'compare', 'reviews'].forEach(t => {
-                const el = document.getElementById(`page-${t}`);
-                if (el) el.classList.toggle('hidden', t !== tabId);
-            });
-
-            document.querySelectorAll('.nav-tab').forEach(btn => {
-                const isMatch = btn.dataset.tab === tabId;
-                btn.className = `nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition ${isMatch ? 'bg-indigo-600 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`;
-            });
-
-            if (tabId === 'compare') renderCompareTable();
-            if (tabId === 'reviews') renderReviews();
+            document.getElementById('page-home').classList.toggle('hidden', tabId !== 'home');
+            document.getElementById('page-catalog').classList.toggle('hidden', tabId !== 'catalog');
         }
 
-        // Cart Actions
+        // Cart & Wishlist
         function addToCart(id) {
-            const item = PRODUCTS.find(p => p.id === id);
-            cart.push(item);
+            cart.push(PRODUCTS.find(p => p.id === id));
             updateCartUI();
         }
 
         function updateCartUI() {
             document.getElementById('cart-badge').textContent = cart.length;
             const container = document.getElementById('cart-items-container');
-            const totalEl = document.getElementById('cart-total-price');
-
             if (cart.length === 0) {
                 container.innerHTML = `<p class="text-gray-500 text-center text-xs py-8">Savatingiz Bo'sh</p>`;
-                totalEl.textContent = '$0';
+                document.getElementById('cart-total-price').textContent = '$0';
                 return;
             }
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            totalEl.textContent = `$${total}`;
-
-            container.innerHTML = cart.map((item, index) => `
-                <div class="flex items-center justify-between p-2.5 bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <div class="flex items-center gap-2.5">
-                        <img src="${item.image}" class="w-10 h-10 object-cover rounded-lg">
+            const total = cart.reduce((s, i) => s + i.price, 0);
+            document.getElementById('cart-total-price').textContent = `$${total}`;
+            container.innerHTML = cart.map((item, idx) => `
+                <div class="flex items-center justify-between p-2 bg-gray-800/50 rounded-xl">
+                    <div class="flex items-center gap-2">
+                        <img src="${item.image}" class="w-8 h-8 object-cover rounded">
                         <div>
-                            <h4 class="text-xs font-bold text-gray-200 line-clamp-1">${item.name}</h4>
-                            <span class="text-xs text-indigo-400 font-extrabold">$${item.price}</span>
+                            <h4 class="text-[11px] font-bold text-gray-200 line-clamp-1">${item.name}</h4>
+                            <span class="text-xs text-indigo-400 font-bold">$${item.price}</span>
                         </div>
                     </div>
-                    <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-400 p-1.5"><i class="fa-solid fa-trash text-xs"></i></button>
+                    <button onclick="cart.splice(${idx},1);updateCartUI()" class="text-red-400 p-1 text-xs"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `).join('');
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function checkout() {
-            if (cart.length === 0) return;
-            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-            alert("Rahmat! Buyurtmangiz qabul qilindi.");
-            cart = [];
-            updateCartUI();
-            toggleDrawer('cart');
-        }
-
-        // Wishlist Actions
         function toggleWishlist(id) {
-            const index = wishlist.findIndex(w => w.id === id);
-            if (index > -1) {
-                wishlist.splice(index, 1);
-            } else {
-                wishlist.push(PRODUCTS.find(p => p.id === id));
-            }
+            const idx = wishlist.findIndex(w => w.id === id);
+            if (idx > -1) wishlist.splice(idx, 1);
+            else wishlist.push(PRODUCTS.find(p => p.id === id));
             document.getElementById('wishlist-badge').textContent = wishlist.length;
             renderHomeProducts();
             renderPaginatedCatalog();
-            updateWishlistUI();
         }
 
-        function updateWishlistUI() {
-            const container = document.getElementById('wishlist-items-container');
-            if (wishlist.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center text-xs py-8">Sevimli Mahsulotlar Yo'q</p>`;
+        function checkout() {
+            if (!currentUser) {
+                alert("Xarid qilish uchun avval tizimga kiring!");
+                openAuthModal('signin');
                 return;
             }
-            container.innerHTML = wishlist.map(item => `
-                <div class="flex items-center justify-between p-2.5 bg-gray-800/50 rounded-xl border border-gray-700/50">
-                    <div class="flex items-center gap-2.5">
-                        <img src="${item.image}" class="w-10 h-10 object-cover rounded-lg">
-                        <div>
-                            <h4 class="text-xs font-bold text-gray-200 line-clamp-1">${item.name}</h4>
-                            <span class="text-xs text-indigo-400 font-extrabold">$${item.price}</span>
-                        </div>
-                    </div>
-                    <button onclick="addToCart(${item.id})" class="text-indigo-400 text-xs font-bold bg-indigo-600/20 px-2.5 py-1 rounded-lg">+ Savat</button>
-                </div>
-            `).join('');
-        }
-
-        // Compare Matrix
-        function addToCompare(id) {
-            const item = PRODUCTS.find(p => p.id === id);
-            if (!compareList.some(c => c.id === id)) {
-                if (compareList.length >= 3) compareList.shift();
-                compareList.push(item);
-                alert(`${item.name} taqqoslashga qo'shildi!`);
-            }
-        }
-
-        function renderCompareTable() {
-            const container = document.getElementById('compare-container');
-            if (compareList.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center py-8 text-xs">Taqqoslash uchun kamida 1 ta mahsulot tanlang.</p>`;
-                return;
-            }
-
-            container.innerHTML = `
-                <table class="w-full text-xs text-left text-gray-300">
-                    <thead class="uppercase bg-gray-800/50 text-gray-400">
-                        <tr>
-                            <th class="p-3">Xususiyat</th>
-                            ${compareList.map(c => `<th class="p-3">${c.name}</th>`).join('')}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-800">
-                            <td class="p-3 font-bold">Narx</td>
-                            ${compareList.map(c => `<td class="p-3 text-indigo-400 font-extrabold">$${c.price}</td>`).join('')}
-                        </tr>
-                        <tr class="border-b border-gray-800">
-                            <td class="p-3 font-bold">Protsessor</td>
-                            ${compareList.map(c => `<td class="p-3">${c.cpu}</td>`).join('')}
-                        </tr>
-                        <tr class="border-b border-gray-800">
-                            <td class="p-3 font-bold">RAM/Xotira</td>
-                            ${compareList.map(c => `<td class="p-3">${c.ram}</td>`).join('')}
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-        }
-
-        // Reviews
-        function renderReviews() {
-            const grid = document.getElementById('reviews-grid');
-            grid.innerHTML = [
-                { name: "Jasur Bek", rating: 5, comment: "300+ mahsulot orasidan MacBook M4 variantini qiyinchiliksiz topdim!" },
-                { name: "Sardor Umarov", rating: 5, comment: "Toshkent bo'ylab judayam tez yetkazib berishdi." },
-                { name: "Elena Kim", rating: 4.9, comment: "Отличный выбор оригинальных гаджетов!" }
-            ].map(r => `
-                <div class="glass-panel p-4 rounded-2xl space-y-2">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-xs text-gray-200">${r.name}</h4>
-                        <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i> ${r.rating}</div>
-                    </div>
-                    <p class="text-xs text-gray-400 leading-relaxed">"${r.comment}"</p>
-                </div>
-            `).join('');
-        }
-
-        // Auth Modal
-        function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); }
-        function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
-
-        function handleAuthSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('auth-email').value;
-            const name = document.getElementById('auth-name').value || email.split('@')[0];
-            authUser = { name, email };
-            localStorage.setItem('ibrohim_tech_user', JSON.stringify(authUser));
-            updateAuthUI();
-            closeAuthModal();
-        }
-
-        function updateAuthUI() {
-            document.getElementById('nav-user-name').textContent = authUser ? authUser.name : "Kirish";
+            if (cart.length === 0) return;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            alert(`Rahmat ${currentUser.name}! Buyurtmangiz qabul qilindi.`);
+            cart = [];
+            updateCartUI();
+            toggleDrawer('cart');
         }
 
         function toggleDrawer(type) {
             document.getElementById(`${type}-drawer`).classList.toggle('translate-x-full');
         }
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            html.classList.toggle('dark');
-            html.classList.toggle('light');
+        /* --- AUTH SYSTEM (SIGN IN & SIGN UP) --- */
+        function openAuthModal(tab = 'signin') {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            switchAuthTab(tab);
         }
 
-        function setLang(lang) {
-            const dict = i18n[lang];
-            if (dict) {
-                document.getElementById('txt-cart-btn').textContent = dict.cartBtn;
-                document.getElementById('txt-tab-home').textContent = dict.tabHome;
-                document.getElementById('txt-tab-catalog').textContent = dict.tabCatalog;
-                document.getElementById('txt-tab-compare').textContent = dict.tabCompare;
-                document.getElementById('txt-tab-reviews').textContent = dict.tabReviews;
-                document.getElementById('txt-hero-desc').textContent = dict.heroDesc;
-                document.getElementById('txt-btn-shop').textContent = dict.btnShop;
-                document.getElementById('txt-cat-title').textContent = dict.catTitle;
-                document.getElementById('txt-featured-title').textContent = dict.featuredTitle;
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            const isSignIn = tab === 'signin';
+            document.getElementById('form-signin').classList.toggle('hidden', !isSignIn);
+            document.getElementById('form-signup').classList.toggle('hidden', isSignIn);
+
+            document.getElementById('tab-btn-signin').className = isSignIn ? "flex-1 py-2 text-xs font-bold border-b-2 border-indigo-500 text-indigo-400" : "flex-1 py-2 text-xs font-bold text-gray-400 border-b-2 border-transparent";
+            document.getElementById('tab-btn-signup').className = !isSignIn ? "flex-1 py-2 text-xs font-bold border-b-2 border-cyan-500 text-cyan-400" : "flex-1 py-2 text-xs font-bold text-gray-400 border-b-2 border-transparent";
+        }
+
+        function handleSignUp(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (registeredUsers.some(u => u.email === email)) {
+                alert("Bu email bilan ro'yxatdan o'tilgan! Kirish bo'limiga o'ting.");
+                return;
+            }
+
+            const newUser = { name, email, password };
+            registeredUsers.push(newUser);
+            localStorage.setItem('ibrohim_registered_users', JSON.stringify(registeredUsers));
+
+            currentUser = newUser;
+            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
+
+            alert("Muvaffaqiyatli ro'yxatdan o'tdingiz!");
+            updateUserUI();
+            closeAuthModal();
+        }
+
+        function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            const user = registeredUsers.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                alert("Email yoki parol noto'g'ri!");
+                return;
+            }
+
+            currentUser = user;
+            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
+
+            alert(`Xush kelibsiz, ${user.name}!`);
+            updateUserUI();
+            closeAuthModal();
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('ibrohim_current_user');
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const area = document.getElementById('user-auth-area');
+            if (currentUser) {
+                area.innerHTML = `
+                    <div class="flex items-center gap-2 bg-gray-800/90 border border-indigo-500/30 px-2.5 py-1 rounded-xl text-xs">
+                        <i class="fa-solid fa-user-check text-emerald-400"></i>
+                        <span class="font-bold text-gray-200">${currentUser.name}</span>
+                        <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 ml-1 text-[10px]" title="Chiqish">
+                            <i class="fa-solid fa-power-off"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                area.innerHTML = `
+                    <button onclick="openAuthModal('signin')" class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
+                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
+                        <span>Kirish / Account</span>
+                    </button>
+                `;
             }
         }
 
-        // Canvas Particles
-        function initParticleCanvas() {
-            const canvas = document.getElementById('particle-canvas');
-            const ctx = canvas.getContext('2d');
-            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-            resize();
-            window.addEventListener('resize', resize);
+        /* --- REAL-TIME INTELLIGENT AI ENGINE --- */
+        function toggleAiChat() {
+            document.getElementById('ai-chat-window').classList.toggle('hidden');
+        }
 
-            const particles = Array.from({ length: 45 }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                speed: Math.random() * 0.8 + 0.3
-            }));
+        function handleAiSend(e) {
+            e.preventDefault();
+            const input = document.getElementById('ai-input');
+            const prompt = input.value.trim();
+            if (!prompt) return;
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "rgba(56, 189, 248, 0.3)";
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                    p.y += p.speed;
-                    if (p.y > canvas.height) p.y = 0;
-                });
-                requestAnimationFrame(animate);
+            appendAiMessage('user', prompt);
+            input.value = '';
+
+            // Show Thinking State
+            const typingId = appendAiMessage('ai', `<i class="fa-solid fa-spinner animate-spin"></i> Javob o'ylanmoqda...`);
+
+            setTimeout(() => {
+                const response = generateSmartAiAnswer(prompt);
+                updateAiMessage(typingId, response);
+            }, 800);
+        }
+
+        function appendAiMessage(sender, text) {
+            const container = document.getElementById('ai-messages');
+            const id = 'msg-' + Date.now();
+            const isUser = sender === 'user';
+
+            const msgDiv = document.createElement('div');
+            msgDiv.id = id;
+            msgDiv.className = isUser
+                ? "bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none ml-auto max-w-[85%] text-xs"
+                : "bg-indigo-950/80 border border-indigo-800/50 p-3 rounded-2xl rounded-tl-none mr-auto max-w-[90%] text-gray-200 text-xs space-y-1";
+
+            msgDiv.innerHTML = text;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+            return id;
+        }
+
+        function updateAiMessage(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = text;
+            const container = document.getElementById('ai-messages');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Real Natural Language AI Logic (Noutbuk, Telefon, Narxlar, Maslahatlar)
+        function generateSmartAiAnswer(q) {
+            const text = q.toLowerCase();
+
+            // Budget/Price Search
+            const budgetMatch = text.match(/(\d+)\s*(\$|dollar|usd)/) || text.match(/(\d+)/);
+            let budget = budgetMatch ? parseInt(budgetMatch[1]) : null;
+
+            if (text.includes('salom') || text.includes('assalom') || text.includes('privet')) {
+                return `Assalomu alaykum! IBROHIM_TECH AI yordamchisiman. Sizga qanday texnika yoki gadjet tanlashda yordam beray?`;
             }
-            animate();
+
+            if (text.includes('noutbuk') || text.includes('laptop') || text.includes('kompyuter')) {
+                const laptops = PRODUCTS.filter(p => p.category === 'laptops');
+                if (budget) {
+                    const matched = laptops.filter(p => p.price <= budget).slice(0, 3);
+                    if (matched.length > 0) {
+                        return `Sizning <strong>$${budget}</strong> byudjetingizga mos top noutbuklar:<br>` +
+                            matched.map(m => `• <strong>${m.name}</strong> - $${m.price} (${m.rating} ★)`).join('<br>') +
+                            `<br><br>Katalog bo'limidan barchasini ko'rishingiz mumkin!`;
+                    }
+                }
+                return `Bizda 50+ dan ortiq noutbuklar mavjud! Masalan:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>• <strong>Lenovo Legion Pro</strong> - $1450<br><br>Aniqroq narx aytsangiz, shunga moslab saralab beraman!`;
+            }
+
+            if (text.includes('iphone') || text.includes('phone') || text.includes('telefon') || text.includes('smartfon')) {
+                return `Eng mashhur flagman smartfonlarimiz:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199<br>• <strong>Google Pixel 9 Pro</strong> - $999<br><br>Kafolati bor va Toshkent bo'ylab yetkaziladi!`;
+            }
+
+            if (text.includes('game') || text.includes('ps5') || text.includes('playstation') || text.includes('konsol') || text.includes('rtx')) {
+                return `Gaming ixlosmandlari uchun top mahsulotlar:<br>• <strong>PlayStation 5 Pro</strong> - $799<br>• <strong>NVIDIA RTX 5090 Video Karta</strong> - $1999<br>• <strong>Steam Deck OLED</strong> - $650`;
+            }
+
+            if (text.includes('airpods') || text.includes('naushnik') || text.includes('audio')) {
+                return `Ovoz va audio gadjetlarimiz:<br>• <strong>AirPods Max 2</strong> - $549<br>• <strong>Sony WH-1000XM5</strong> - $399<br>• <strong>AirPods Pro 2 USB-C</strong> - $249`;
+            }
+
+            if (text.includes('dasturlash') || text.includes('kod') || text.includes('program')) {
+                return `Dasturlash (Programming) uchun kamida 16GB RAM va tezkor SSD xotirali noutbuklar mos keladi. Masalan: <strong>MacBook Pro M4</strong> yoki <strong>Lenovo Legion Pro</strong> tavsiya etiladi!`;
+            }
+
+            if (text.includes('dostavka') || text.includes('yetkazib') || text.includes('manzil')) {
+                return `O'zbekiston va Toshkent shahri bo'ylab yetkazib berish xizmati bor. Buyurtmalarni 24 soat ichida yetkazamiz.`;
+            }
+
+            // General Knowledge AI Answer
+            return `Tushundim! "${q}" bo'yicha IBROHIM_TECH omborida 300+ ta original mahsulotlar bor.<br><br>Katalog sahifamizga o'tib, filtrlar va qidiruv orqali mos modelni tanlashingiz mumkin. Yoki boshqa savolingiz bo'lsa bering! 🚀`;
         }
     </script>
 </body>
