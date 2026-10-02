@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IBROHIM_TECH - Premium Texnikalar Sayti</title>
+    <title>AURA ELECTRONICS - IBROHIM_TECH</title>
     <style>
         :root {
             --bg-color: #0b0f19;
-            --card-bg: rgba(22, 31, 48, 0.7);
+            --card-bg: rgba(22, 31, 48, 0.75);
             --text-color: #f1f5f9;
             --text-secondary: #94a3b8;
             --accent-color: #6366f1;
@@ -18,8 +18,8 @@
         }
 
         .light-mode {
-            --bg-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text-color: #0f172a;
             --text-secondary: #64748b;
             --border-color: rgba(0, 0, 0, 0.1);
@@ -42,7 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* Weather Canvas Effects */
         #weather-canvas {
             position: fixed;
             top: 0;
@@ -53,7 +52,6 @@
             z-index: 1;
         }
 
-        /* App Container */
         .app-container {
             position: relative;
             z-index: 2;
@@ -62,14 +60,14 @@
             padding: 0 20px 40px;
         }
 
-        /* Top Bar & Header */
+        /* Header Navigation */
         header {
             display: flex;
             flex-direction: column;
             gap: 15px;
             padding: 20px 0;
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .top-nav {
@@ -85,6 +83,7 @@
             font-weight: 800;
             color: var(--accent-color);
             letter-spacing: 1px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -98,9 +97,6 @@
         }
 
         .phone-contact {
-            display: flex;
-            align-items: center;
-            gap: 6px;
             color: var(--accent-color);
             font-weight: 600;
             text-decoration: none;
@@ -120,7 +116,7 @@
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn {
@@ -132,9 +128,6 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             transition: all 0.2s;
         }
 
@@ -153,23 +146,53 @@
             background: var(--accent-hover);
         }
 
+        /* Nav links for multi-page view */
+        .page-tabs {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* Pages */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
         /* Hero Banner */
         .hero-banner {
             margin: 25px 0;
             padding: 50px 20px;
             border-radius: 24px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(192, 132, 252, 0.1));
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(192, 132, 252, 0.1));
             border: 1px solid var(--border-color);
             text-align: center;
             backdrop-filter: blur(12px);
         }
 
         .hero-banner h1 {
-            font-size: 42px;
+            font-size: 40px;
             font-weight: 900;
             margin-bottom: 12px;
             color: var(--text-color);
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
@@ -180,7 +203,7 @@
             margin: 0 auto;
         }
 
-        /* Controls & Filter Section */
+        /* Search & Categories Filter */
         .controls-bar {
             display: flex;
             justify-content: space-between;
@@ -193,7 +216,6 @@
         .search-box {
             flex: 1;
             min-width: 280px;
-            position: relative;
         }
 
         .search-box input {
@@ -232,10 +254,10 @@
             border-color: var(--accent-color);
         }
 
-        /* Grid Products */
+        /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -243,7 +265,7 @@
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            padding: 15px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -259,11 +281,10 @@
         .product-img {
             width: 100%;
             height: 180px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 12px;
             margin-bottom: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .product-title {
@@ -286,7 +307,7 @@
         }
 
         .product-price {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
             color: #10b981;
         }
@@ -360,7 +381,8 @@
         .cart-item img {
             width: 50px;
             height: 50px;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .cart-details {
@@ -379,7 +401,7 @@
 
         @media (max-width: 768px) {
             .hero-banner h1 {
-                font-size: 28px;
+                font-size: 26px;
             }
         }
     </style>
@@ -392,42 +414,78 @@
     <div class="app-container">
         <header>
             <div class="top-nav">
-                <div class="logo">⚡ IBROHIM_TECH</div>
+                <div class="logo" onclick="switchPage('home')">⚡ AURA ELECTRONICS</div>
                 <div class="top-info">
                     <a href="tel:+998901234567" class="phone-contact">📞 +998 90 123 45 67</a>
-                    <div class="weather-badge" id="weather-info">🌙 Toshkent: +18°C (Qor yog'moqda)</div>
+                    <div class="weather-badge" id="weather-info">🌙 Toshkent: +18°C (Qor)</div>
                 </div>
                 <div class="nav-controls">
                     <button class="btn" id="theme-toggle">🌙 Tun</button>
-                    <button class="btn" onclick="openModal('signin-modal')">Kirish</button>
-                    <button class="btn btn-primary" onclick="openModal('signup-modal')">Ro'yxatdan o'tish</button>
+                    <button class="btn" onclick="openModal('signin-modal')">Sign In</button>
+                    <button class="btn btn-primary" onclick="openModal('signup-modal')">Sign Up</button>
                     <button class="btn btn-primary" onclick="openModal('cart-modal')">
                         🛒 Savat (<span id="cart-count">0</span>)
                     </button>
                 </div>
             </div>
+
+            <div class="page-tabs">
+                <button class="tab-btn active" onclick="switchPage('home')">Bosh sahifa</button>
+                <button class="tab-btn" onclick="switchPage('catalog')">Katalog</button>
+                <button class="tab-btn" onclick="switchPage('about')">Biz haqimizda</button>
+                <button class="tab-btn" onclick="switchPage('contact')">Aloqa</button>
+            </div>
         </header>
 
-        <section class="hero-banner">
-            <h1>IBROHIM_TECH SAYTIGA XUSH KELIBSISIZ!</h1>
-            <p>Eng zamonaviy telefonlar, noutbuklar, dronlar hamda maishiy texnologiyalarning premium to'plami</p>
-        </section>
+        <!-- PAGE 1: HOME -->
+        <div id="page-home" class="page-content active">
+            <section class="hero-banner">
+                <h1>IBROHIM_TECH SAYTIGA XUSH KELIBSISIZ!</h1>
+                <p>Eng zamonaviy va yuqori sifatli 50+ dan ortiq original texnikalar va smart gadjetlar to'plami</p>
+            </section>
 
-        <div class="controls-bar">
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Mahsulotlarni qidirish..." oninput="renderProducts()">
+            <div class="controls-bar">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Mahsulotlarni izlash..."
+                        oninput="renderProducts()">
+                </div>
+                <div class="category-scroll" id="categories-container"></div>
             </div>
-            <div class="category-scroll" id="categories-container">
-                <!-- Dynamic Categories -->
+
+            <div class="products-grid" id="products-grid"></div>
+        </div>
+
+        <!-- PAGE 2: CATALOG -->
+        <div id="page-catalog" class="page-content">
+            <h2 style="margin: 25px 0 15px;">Barcha Texnikalar Katalogi</h2>
+            <div class="products-grid" id="catalog-grid"></div>
+        </div>
+
+        <!-- PAGE 3: ABOUT -->
+        <div id="page-about" class="page-content">
+            <div class="hero-banner" style="text-align: left; padding: 40px;">
+                <h2>Biz haqimizda - AURA ELECTRONICS (IBROHIM_TECH)</h2>
+                <br>
+                <p>AURA ELECTRONICS – O'zbekistondagi eng yetakchi texnika brendlaridan biri bo'lib, xaridorlarga eng
+                    so'nggi rusumdagi maishiy texnikalar, smartfonlar va noutbuklarni kafolati bilan yetkazib beradi.
+                </p>
             </div>
         </div>
 
-        <div class="products-grid" id="products-grid">
-            <!-- Dynamic 50+ Products -->
+        <!-- PAGE 4: CONTACT -->
+        <div id="page-contact" class="page-content">
+            <div class="hero-banner" style="text-align: left; padding: 40px; max-width: 600px; margin: 25px auto;">
+                <h2>Biz bilan bog'lanish</h2>
+                <br>
+                <p><b>Telefon:</b> +998 90 123 45 67</p>
+                <p><b>Manzil:</b> Toshkent shahri, Chilonzor tumani, IBROHIM_TECH markazi</p>
+                <p><b>Ish vaqti:</b> 24/7 Onlayn xizmat</p>
+            </div>
         </div>
 
         <footer>
-            <p>© 2026 IBROHIM_TECH. Barcha huquqlar himoyalangan. Murojaat uchun: +998 90 123 45 67</p>
+            <p>© 2026 AURA ELECTRONICS (IBROHIM_TECH). Barcha huquqlar himoyalangan. Murojaat uchun: +998 90 123 45 67
+            </p>
         </footer>
     </div>
 
@@ -435,8 +493,8 @@
     <div class="modal" id="signin-modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('signin-modal')">&times;</span>
-            <h2>Tizimga Kirish</h2>
-            <form onsubmit="handleAuth(event, 'Kirish muvaffaqiyatli!')">
+            <h2>Sign In (Kirish)</h2>
+            <form onsubmit="handleAuth(event, 'Tizimga muvaffaqiyatli kirdingiz!')">
                 <div class="form-group">
                     <label>Telefon raqam yoki Email</label>
                     <input type="text" required placeholder="+998 90 123 45 67">
@@ -454,8 +512,8 @@
     <div class="modal" id="signup-modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('signup-modal')">&times;</span>
-            <h2>Ro'yxatdan o'tish</h2>
-            <form onsubmit="handleAuth(event, 'Ro\'yxatdan o\'tdingiz!')">
+            <h2>Sign Up (Ro'yxatdan o'tish)</h2>
+            <form onsubmit="handleAuth(event, 'Ro\'yxatdan muvaffaqiyatli o\'tdingiz!')">
                 <div class="form-group">
                     <label>Ism Familiya</label>
                     <input type="text" required placeholder="Ismingizni kiriting">
@@ -478,17 +536,15 @@
         <div class="modal-content" style="max-width: 550px;">
             <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
             <h2>Savatingiz</h2>
-            <div id="cart-items-container" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;">
-                <!-- Cart list -->
-            </div>
-            <div style="font-weight: bold; margin-bottom: 15px;">
-                Jami: $<span id="cart-total-price">0</span>
+            <div id="cart-items-container" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <div style="font-weight: bold; margin-bottom: 15px; font-size: 18px;">
+                Jami summasi: $<span id="cart-total-price">0</span>
             </div>
             <hr style="border-color: var(--border-color); margin-bottom: 15px;">
             <h3>Buyurtmani rasmiylashtirish</h3>
             <form onsubmit="handleCheckout(event)">
                 <div class="form-group">
-                    <label>To'liq Ismingiz</label>
+                    <label>Ism va Familiyangiz</label>
                     <input type="text" id="checkout-name" required placeholder="Ism Familiya">
                 </div>
                 <div class="form-group">
@@ -496,7 +552,7 @@
                     <input type="tel" id="checkout-phone" required placeholder="+998 90 123 45 67">
                 </div>
                 <div class="form-group">
-                    <label>Yetkazib berish manzili</label>
+                    <label>Manzilingiz</label>
                     <input type="text" id="checkout-address" required placeholder="Toshkent sh, Chilonzor tumani...">
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%">Buyurtmani tasdiqlash</button>
@@ -505,39 +561,83 @@
     </div>
 
     <script>
-        // Data & Products (Har bir turdagi kamida 50+ mahsulotlar)
-        const categories = ["Barchasi", "Telefonlar", "Noutbuklar", "Dronlar", "iPadlar", "Televizorlar", "Xolodilniklar", "Kir moshinalar", "Gaz plitalar", "Mikroto'lqinli pechlar"];
+        // 50 TA MUTLAQ HAR XIL VA REAL TEXNIKALAR
+        const products = [
+            // TELEFONLAR
+            { id: 1, name: "iPhone 16 Pro Max 512GB", cat: "Telefonlar", price: 1450, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" },
+            { id: 2, name: "Samsung Galaxy S25 Ultra", cat: "Telefonlar", price: 1350, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" },
+            { id: 3, name: "Google Pixel 9 Pro XL", cat: "Telefonlar", price: 1099, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400" },
+            { id: 4, name: "Xiaomi 14 Ultra Ceramic", cat: "Telefonlar", price: 999, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" },
+            { id: 5, name: "OnePlus 12 5G Emerald", cat: "Telefonlar", price: 850, img: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400" },
+
+            // NOUTBUKLAR
+            { id: 6, name: "MacBook Pro 16 M3 Max", cat: "Noutbuklar", price: 2899, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
+            { id: 7, name: "ASUS ROG Strix SCAR 18", cat: "Noutbuklar", price: 2599, img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400" },
+            { id: 8, name: "Dell XPS 16 Touch OLED", cat: "Noutbuklar", price: 2199, img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400" },
+            { id: 9, name: "Lenovo Legion Pro 7i", cat: "Noutbuklar", price: 1999, img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400" },
+            { id: 10, name: "HP Spectre x360 2-in-1", cat: "Noutbuklar", price: 1499, img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400" },
+
+            // DRONLAR
+            { id: 11, name: "DJI Mavic 3 Pro Cine", cat: "Dronlar", price: 2399, img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400" },
+            { id: 12, name: "DJI Air 3 Fly More Combo", cat: "Dronlar", price: 1349, img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=400" },
+            { id: 13, name: "DJI Mini 4 Pro 4K", cat: "Dronlar", price: 899, img: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=400" },
+            { id: 14, name: "Autel Robotics EVO Lite+", cat: "Dronlar", price: 1199, img: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=400" },
+            { id: 15, name: "DJI Avata 2 FPV Drone", cat: "Dronlar", price: 999, img: "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=400" },
+
+            // IPADLAR VA TABLETLAR
+            { id: 16, name: "iPad Pro 13 M4 Nano-Texture", cat: "iPadlar", price: 1299, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
+            { id: 17, name: "Samsung Galaxy Tab S9 Ultra", cat: "iPadlar", price: 1199, img: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400" },
+            { id: 18, name: "iPad Air 11 M2 256GB", cat: "iPadlar", price: 699, img: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400" },
+            { id: 19, name: "Xiaomi Pad 6 Max 14", cat: "iPadlar", price: 599, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=400" },
+            { id: 20, name: "iPad Mini 6 Cellular", cat: "iPadlar", price: 549, img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400" },
+
+            // TELEVIZORLAR
+            { id: 21, name: "LG OLED evo G4 65 inch 4K", cat: "Televizorlar", price: 2499, img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400" },
+            { id: 22, name: "Samsung Neo QLED 8K 75 inch", cat: "Televizorlar", price: 3299, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400" },
+            { id: 23, name: "Sony BRAVIA XR A95L OLED", cat: "Televizorlar", price: 2799, img: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400" },
+            { id: 24, name: "TCL 85 inch Mini-LED 4K TV", cat: "Televizorlar", price: 1899, img: "https://images.unsplash.com/photo-1571415060414-07f90f230206?w=400" },
+            { id: 25, name: "Hisense U8N QLED Smart TV", cat: "Televizorlar", price: 1299, img: "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=400" },
+
+            // XOLODILNIKLAR
+            { id: 26, name: "LG InstaView Door-in-Door Smart", cat: "Xolodilniklar", price: 2199, img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400" },
+            { id: 27, name: "Samsung Family Hub French Door", cat: "Xolodilniklar", price: 2499, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" },
+            { id: 28, name: "Bosch Serie 8 NoFrost MultiAir", cat: "Xolodilniklar", price: 1599, img: "https://images.unsplash.com/photo-1536353284924-9220c421d1cd?w=400" },
+            { id: 29, name: "Haier Side-by-Side Inverter", cat: "Xolodilniklar", price: 1199, img: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400" },
+            { id: 30, name: "Beko HarvestFresh Smart Refrig", cat: "Xolodilniklar", price: 899, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
+
+            // KIR YUVISH MASHINALARI
+            { id: 31, name: "Bosch Series 8 HomeConnect 10kg", cat: "Kir moshinalar", price: 950, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
+            { id: 32, name: "LG AI DD DirectDrive 10.5kg", cat: "Kir moshinalar", price: 850, img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400" },
+            { id: 33, name: "Samsung EcoBubble AI Control", cat: "Kir moshinalar", price: 780, img: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400" },
+            { id: 34, name: "Whirlpool Supreme Care Steam", cat: "Kir moshinalar", price: 690, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
+            { id: 35, name: "Indesit MyTime Fast Wash 8kg", cat: "Kir moshinalar", price: 490, img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400" },
+
+            // GAZ PLITALAR
+            { id: 36, name: "Hansa Smart Touch Gas Stove", cat: "Gaz plitalar", price: 580, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
+            { id: 37, name: "Bosch FlameSelect Gas Hob 5", cat: "Gaz plitalar", price: 720, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
+            { id: 38, name: "Gorenje Chef's Gas Cooker", cat: "Gaz plitalar", price: 620, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
+            { id: 39, name: "Artel Grand Electric-Gas Stove", cat: "Gaz plitalar", price: 350, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
+            { id: 40, name: "Electrolux Intuitive Gas Range", cat: "Gaz plitalar", price: 640, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
+
+            // MIKROTO'LQINLI PECHLAR
+            { id: 41, name: "Panasonic Inverter Genius Grill", cat: "Mikroto'lqinli pechlar", price: 230, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
+            { id: 42, name: "Samsung HotBlast Convection", cat: "Mikroto'lqinli pechlar", price: 260, img: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=400" },
+            { id: 43, name: "LG NeoChef Smart Inverter 30L", cat: "Mikroto'lqinli pechlar", price: 210, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
+            { id: 44, name: "Bosch Serie 6 Built-in Oven", cat: "Mikroto'lqinli pechlar", price: 420, img: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=400" },
+            { id: 45, name: "Whirlpool Jet Chef Steam Pek", cat: "Mikroto'lqinli pechlar", price: 290, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
+
+            // QO'SHIMCHA MAISHIY SMART TEXNIKALAR (50 TA TO'LISHI UCHUN)
+            { id: 46, name: "Dyson V15 Detect Vacuum", cat: "Aqlli Uy", price: 749, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400" },
+            { id: 47, name: "iRobot Roomba j7+ Robot", cat: "Aqlli Uy", price: 699, img: "https://images.unsplash.com/photo-1618103138281-99609303353b?w=400" },
+            { id: 48, name: "Apple HomePod 2nd Gen", cat: "Aqlli Uy", price: 299, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400" },
+            { id: 49, name: "Sony PlayStation 5 Slim 1TB", cat: "O'yinlar", price: 499, img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" },
+            { id: 50, name: "Meta Quest 3 VR Headset 512GB", cat: "O'yinlar", price: 649, img: "https://images.unsplash.com/photo-1622979135225-d2ba269bc1bd?w=400" }
+        ];
+
+        const categories = ["Barchasi", "Telefonlar", "Noutbuklar", "Dronlar", "iPadlar", "Televizorlar", "Xolodilniklar", "Kir moshinalar", "Gaz plitalar", "Mikroto'lqinli pechlar", "Aqlli Uy", "O'yinlar"];
         let currentCategory = "Barchasi";
         let cart = [];
         let isNight = true;
-
-        const baseProducts = [
-            { id: 1, name: "iPhone 16 Pro Max", cat: "Telefonlar", price: 1399, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" },
-            { id: 2, name: "Samsung Galaxy S25 Ultra", cat: "Telefonlar", price: 1299, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" },
-            { id: 3, name: "MacBook Pro 16 M3 Max", cat: "Noutbuklar", price: 2499, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
-            { id: 4, name: "DJI Mavic 3 Pro Drone", cat: "Dronlar", price: 1899, img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400" },
-            { id: 5, name: "iPad Pro 13 M4", cat: "iPadlar", price: 1199, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
-            { id: 6, name: "Samsung Neo QLED 8K TV", cat: "Televizorlar", price: 2199, img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400" },
-            { id: 7, name: "LG Smart Refrigerator", cat: "Xolodilniklar", price: 1599, img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400" },
-            { id: 8, name: "Bosch Series 8 Kir Yuvish Moshinasi", cat: "Kir moshinalar", price: 799, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
-            { id: 9, name: "Hansa Smart Gaz Plita", cat: "Gaz plitalar", price: 499, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
-            { id: 10, name: "Panasonic Inverter Pek", cat: "Mikroto'lqinli pechlar", price: 199, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" }
-        ];
-
-        // Generator for 50+ total products across all categories
-        let products = [];
-        let count = 1;
-        for (let i = 0; i < 5; i++) {
-            baseProducts.forEach(item => {
-                products.push({
-                    ...item,
-                    id: count,
-                    name: `${item.name} ${count > 10 ? 'Edition #' + count : ''}`,
-                    price: item.price + (count * 3)
-                });
-                count++;
-            });
-        }
 
         // Render Categories
         const catContainer = document.getElementById("categories-container");
@@ -554,11 +654,14 @@
             catContainer.appendChild(chip);
         });
 
-        // Render Products Grid
+        // Render Products
         function renderProducts() {
             const grid = document.getElementById("products-grid");
+            const catalogGrid = document.getElementById("catalog-grid");
             const search = document.getElementById("search-input").value.toLowerCase();
+
             grid.innerHTML = "";
+            catalogGrid.innerHTML = "";
 
             const filtered = products.filter(p => {
                 const matchesCat = currentCategory === "Barchasi" || p.cat === currentCategory;
@@ -567,9 +670,7 @@
             });
 
             filtered.forEach(p => {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.innerHTML = `
+                const cardHtml = `
                     <img src="${p.img}" class="product-img" alt="${p.name}">
                     <div>
                         <div class="product-category">${p.cat}</div>
@@ -580,11 +681,20 @@
                         <button class="btn btn-primary" onclick="addToCart(${p.id})">+ Savat</button>
                     </div>
                 `;
-                grid.appendChild(card);
+
+                const card1 = document.createElement("div");
+                card1.className = "product-card";
+                card1.innerHTML = cardHtml;
+                grid.appendChild(card1);
+
+                const card2 = document.createElement("div");
+                card2.className = "product-card";
+                card2.innerHTML = cardHtml;
+                catalogGrid.appendChild(card2);
             });
         }
 
-        // Cart Actions
+        // Cart Functions
         function addToCart(id) {
             const prod = products.find(p => p.id === id);
             cart.push(prod);
@@ -621,6 +731,15 @@
             updateCart();
         }
 
+        // Navigation (Multi-Page SPA)
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(`page-${pageId}`).classList.add('active');
+            event.target.classList.add('active');
+        }
+
         // Modals
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -638,22 +757,22 @@
                 alert("Savatingiz bo'sh!");
                 return;
             }
-            alert("Rahmat! Buyurtmangiz qabul qilindi. Operatorlarimiz siz bilan bog'lanishadi.");
+            alert("Rahmat! Buyurtmangiz qabul qilindi. Operatorlarimiz tez orada siz bilan bog'lanishadi.");
             cart = [];
             updateCart();
             closeModal('cart-modal');
         }
 
-        // Theme Toggle & Weather Animation
+        // Real-Time Theme & Weather
         const themeBtn = document.getElementById("theme-toggle");
         themeBtn.onclick = () => {
             isNight = !isNight;
             document.body.classList.toggle("light-mode", !isNight);
-            themeBtn.innerText = isNight ? "🌙 Tun" : "☀️ Kun";
+            themeBtn.innerText = isNight ? "🌙 Tun" : "☀️️ Kun";
             document.getElementById("weather-info").innerText = isNight ? "🌙 Toshkent: +18°C (Qor yog'moqda)" : "☀️ Toshkent: +24°C (Quyoshli)";
         };
 
-        // Canvas Effect (Snow for Night, Sun Glow for Day)
+        // Weather Canvas Effect (Snow for Night, Sun for Day)
         const canvas = document.getElementById("weather-canvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
@@ -677,7 +796,6 @@
         function drawWeather() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (isNight) {
-                // Draw Snow
                 ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
                 ctx.beginPath();
                 particles.forEach(p => {
@@ -688,16 +806,15 @@
                 });
                 ctx.fill();
             } else {
-                // Draw Sun Glow
-                ctx.fillStyle = "rgba(255, 223, 0, 0.2)";
+                ctx.fillStyle = "rgba(255, 215, 0, 0.25)";
                 ctx.beginPath();
-                ctx.arc(canvas.width - 120, 100, 130, 0, Math.PI * 2);
+                ctx.arc(canvas.width - 100, 100, 120, 0, Math.PI * 2);
                 ctx.fill();
             }
             requestAnimationFrame(drawWeather);
         }
 
-        // Initialize
+        // Start App
         renderProducts();
         drawWeather();
     </script>
