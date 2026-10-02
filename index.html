@@ -1,1678 +1,698 @@
 <!DOCTYPE html>
-<html lang="uz" class="dark">
+<html lang="uz">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IBROHIM_TECH - Premium Texnika & Gadjetlar Store</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Google Fonts (Plus Jakarta Sans & Outfit) -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        outfit: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        techDark: '#070913',
-                        techCard: '#0f172a',
-                        techBorder: '#1e293b',
-                        neonBlue: '#3b82f6',
-                        neonCyan: '#06b6d4',
-                        neonPurple: '#8b5cf6',
-                        neonGold: '#f59e0b',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
-                        'spin-slow': 'spin 20s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-12px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(99,102,241,0.5))' },
-                            '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 30px rgba(168,85,247,0.8))' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>AURA ELECTRONICS - Premium Gadget & Home Tech</title>
     <style>
+        :root {
+            --bg-color: #0d0f17;
+            --card-bg: rgba(22, 27, 46, 0.7);
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --modal-bg: #131722;
+        }
+
+        .light-mode {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-color: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --modal-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
         body {
-            transition: background-color 0.5s ease, color 0.5s ease;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* Glassmorphism Styles */
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .light .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        .glass-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-        }
-
-        .light .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #070913;
-        }
-
-        .light ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-
-        /* Glow Text & Borders */
-        .neon-text {
-            text-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
-        }
-
-        .gold-glow {
-            text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
-        }
-
-        /* Particles Overlay Canvas */
-        #fxCanvas {
+        /* Weather Canvas Effects */
+        #weather-canvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Card Hover Effects */
+        /* App Container */
+        .app-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        /* Top Bar & Header */
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .phone-contact {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .weather-badge {
+            background: var(--card-bg);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            margin: 25px 0;
+            padding: 40px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(192, 132, 252, 0.05));
+            border: 1px solid var(--border-color);
+            text-align: center;
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-banner h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .hero-banner p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        /* Controls & Filter Section */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            outline: none;
+            font-size: 14px;
+        }
+
+        .category-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            width: 100%;
+            scrollbar-width: thin;
+        }
+
+        .cat-chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .cat-chip.active {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+
+        /* Grid Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
         .product-card {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .product-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 25px 2px rgba(99, 102, 241, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
         }
 
-        /* Sun Rays Animation for Day Mode */
-        @keyframes sunGlow {
-            0% {
-                transform: rotate(0deg) scale(1);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: rotate(180deg) scale(1.1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: rotate(360deg) scale(1);
-                opacity: 0.8;
-            }
+        .product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px;
         }
 
-        .sun-rays {
-            animation: sunGlow 25s linear infinite;
+        .product-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
-        /* Hide scrollbars for category tabs */
-        .no-scrollbar::-webkit-scrollbar {
+        .product-category {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Modals */
+        .modal {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .modal-content {
+            background: var(--modal-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 450px;
+            padding: 25px;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            outline: none;
+        }
+
+        /* Cart Drawer / Items */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .cart-details {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
         }
     </style>
 </head>
 
-<body
-    class="bg-[#070913] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white relative">
+<body>
 
-    <!-- Background Canvas for Real-time Weather Effects (Snow / Sun / Stars / Rain) -->
-    <canvas id="fxCanvas"></canvas>
+    <canvas id="weather-canvas"></canvas>
 
-    <!-- Ambient Atmospheric Glow Lights -->
-    <div
-        class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none z-0">
-    </div>
-    <div
-        class="fixed bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none z-0">
-    </div>
-    <div
-        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/10 rounded-full blur-[180px] pointer-events-none z-0">
-    </div>
-
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20 gap-4">
-
-                <!-- Logo -->
-                <div onclick="resetFilters()" class="flex items-center gap-3 cursor-pointer group">
-                    <div
-                        class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-0.5 shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
-                        <div
-                            class="w-full h-full bg-[#070913] dark:bg-[#070913] rounded-[14px] flex items-center justify-center">
-                            <i
-                                class="fa-solid fa-bolt text-indigo-400 text-xl group-hover:text-amber-400 transition-colors"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1.5">
-                            <span
-                                class="font-outfit text-2xl font-black tracking-wider bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent dark:from-white dark:to-indigo-300">IBROHIM</span>
-                            <span class="font-outfit text-2xl font-black text-indigo-500">_TECH</span>
-                        </div>
-                        <p class="text-[10px] text-indigo-400 font-semibold tracking-widest uppercase">Next-Gen
-                            Electronics</p>
-                    </div>
+    <div class="app-container">
+        <header>
+            <div class="top-nav">
+                <div class="logo">⚡ AURA ELECTRONICS</div>
+                <div class="top-info">
+                    <a href="tel:+998901234567" class="phone-contact">📞 +998 90 123 45 67</a>
+                    <div class="weather-badge" id="weather-info">☀️ Toshkent: +24°C</div>
                 </div>
-
-                <!-- Live Weather & Real-Time Clock Badge -->
-                <div
-                    class="hidden lg:flex items-center gap-4 px-4 py-2 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur">
-                    <div
-                        class="flex items-center gap-2 text-xs font-semibold text-slate-300 border-r border-slate-800 pr-3">
-                        <i id="weatherModeIcon" class="fa-solid fa-moon text-amber-400 text-sm"></i>
-                        <span id="weatherStatusText">Tungi Yulduzlar & Qor</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-xs font-mono font-bold text-indigo-400">
-                        <i class="fa-regular fa-clock text-indigo-400"></i>
-                        <span id="liveClockDisplay">00:00:00</span>
-                    </div>
-                </div>
-
-                <!-- Instant Search Bar (Desktop) -->
-                <div class="hidden md:flex flex-1 max-w-md relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="searchInput" oninput="handleSearch()"
-                        placeholder="Katalogdan mahsulot topish (iPhone, ROG, LG...)"
-                        class="w-full bg-slate-900/80 dark:bg-slate-900/90 text-sm text-slate-100 placeholder:text-slate-500 pl-11 pr-10 py-2.5 rounded-2xl border border-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all">
-                    <button onclick="clearSearch()" id="clearSearchBtn"
-                        class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-
-                <!-- Control Icons & Actions -->
-                <div class="flex items-center gap-3">
-
-                    <!-- Weather / Atmospheric Mode Switcher Button -->
-                    <button onclick="cycleWeatherEffect()" title="Ob-havo effektini o'zgartirish"
-                        class="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-400/50 transition-all flex items-center justify-center relative group">
-                        <i id="weatherBtnIcon" class="fa-solid fa-cloud-snowflake text-base"></i>
-                        <span
-                            class="absolute -bottom-8 scale-0 group-hover:scale-100 transition-all bg-slate-900 text-[10px] text-slate-200 px-2 py-1 rounded-md whitespace-nowrap border border-slate-800 pointer-events-none">Effektni
-                            almashtirish</span>
-                    </button>
-
-                    <!-- Day / Night Theme Toggle -->
-                    <button onclick="toggleDayNightMode()" title="Kunduzgi/Tungi rejim"
-                        class="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-indigo-400 hover:border-indigo-500/50 transition-all">
-                        <i id="themeToggleIcon" class="fa-solid fa-sun text-amber-400 text-base"></i>
-                    </button>
-
-                    <!-- Wishlist / Favorites -->
-                    <button onclick="toggleFavoritesOnlyFilter()" id="favNavBtn"
-                        class="relative p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-pink-500 hover:border-pink-500/50 transition-all">
-                        <i class="fa-solid fa-heart text-base"></i>
-                        <span id="favBadge"
-                            class="hidden absolute -top-1.5 -right-1.5 bg-pink-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#070913]">0</span>
-                    </button>
-
-                    <!-- Cart Drawer Trigger Button -->
-                    <button onclick="openCartDrawer()"
-                        class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 text-white font-bold text-sm hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-600/30 active:scale-95">
-                        <i class="fa-solid fa-bag-shopping text-base"></i>
-                        <span class="hidden sm:inline font-outfit tracking-wide">Savat</span>
-                        <span id="cartBadge"
-                            class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full font-black">0</span>
+                <div class="nav-controls">
+                    <button class="btn" id="theme-toggle">🌙 Tun</button>
+                    <button class="btn" onclick="openModal('signin-modal')">Kirish</button>
+                    <button class="btn btn-primary" onclick="openModal('signup-modal')">Ruyxatdan o'tish</button>
+                    <button class="btn btn-primary" onclick="openModal('cart-modal')">
+                        🛒 Savat (<span id="cart-count">0</span>)
                     </button>
                 </div>
             </div>
+        </header>
 
-            <!-- Mobile Search Bar -->
-            <div class="pb-3 md:hidden">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="mobileSearchInput" oninput="syncMobileSearch(this.value)"
-                        placeholder="Qidiruv..."
-                        class="w-full bg-slate-900 text-sm text-slate-200 pl-11 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-indigo-500">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content Body -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full z-10 relative">
-
-        <!-- Welcome Banner Section -->
-        <section
-            class="relative rounded-3xl overflow-hidden glass-panel border border-indigo-500/20 p-6 sm:p-10 mb-10 glow-effect">
-            <!-- Animated Background Glow Gradients inside Banner -->
-            <div
-                class="absolute -right-20 -top-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none">
-            </div>
-            <div
-                class="absolute -left-20 -bottom-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none">
-            </div>
-
-            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
-
-                <div class="space-y-4 text-center lg:text-left max-w-2xl">
-                    <div
-                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold tracking-wider uppercase backdrop-blur">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        Rasmiy Kafolatli Texnikalar Store
-                    </div>
-
-                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-outfit tracking-tight leading-tight">
-                        <span
-                            class="bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">IBROHIM_TECH</span>
-                        <br>
-                        <span
-                            class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">saytiga
-                            xush kelibsiz!</span>
-                    </h1>
-
-                    <p class="text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
-                        Dunyoning eng yetakchi brendlaridan 50+ dan ortiq eng so'nggi rusumdagi smartfonlar, noutbuklar,
-                        dronlar, maishiy texnika va aqlli gadjetlar kolleksiyasi.
-                    </p>
-
-                    <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <a href="#catalog"
-                            class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition-all flex items-center gap-2 active:scale-95">
-                            <span>Katalogga O'tish</span>
-                            <i class="fa-solid fa-arrow-down-long"></i>
-                        </a>
-                        <button onclick="cycleWeatherEffect()"
-                            class="px-5 py-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
-                            <span id="bannerFxLabel">Effekt: Qor Yog'ishi</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Animated Floating Hero Illustration Badge -->
-                <div class="relative w-full max-w-xs lg:max-w-sm flex items-center justify-center">
-                    <div
-                        class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl bg-gradient-to-tr from-indigo-500/20 via-purple-500/30 to-pink-500/20 border border-white/10 p-6 flex flex-col justify-between backdrop-blur-xl shadow-2xl animate-float">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-mono font-bold text-indigo-300">PREMIUM EDITION</span>
-                            <i class="fa-solid fa-microchip text-2xl text-amber-400"></i>
-                        </div>
-                        <div class="text-center my-auto space-y-2">
-                            <div
-                                class="w-16 h-16 mx-auto rounded-2xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-3xl text-indigo-300">
-                                <i class="fa-solid fa-cubes"></i>
-                            </div>
-                            <h3 class="text-xl font-extrabold text-white">50+ Kategoriya</h3>
-                            <p class="text-xs text-slate-400">iPhone 16 Pro, M3 MacBook, DJI Inspire & Maishiy Texnika
-                            </p>
-                        </div>
-                        <div
-                            class="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-slate-300">
-                            <span><i class="fa-solid fa-truck-fast text-emerald-400 mr-1"></i> Tezkor Bepul
-                                Xizmat</span>
-                            <span class="text-amber-400 font-bold">100% Original</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <section class="hero-banner">
+            <h1>AURA ELECTRONICS saytiga xush kelibsiz!</h1>
+            <p>Eng so'nggi va eng sifatli smartfonlar, noutbuklar, maishiy va aqlli texnikalar dunyosi</p>
         </section>
 
-        <!-- Filter & Search Toolbar Section -->
-        <section id="catalog" class="space-y-6 mb-10">
-
-            <!-- Category Pills Filter Bar -->
-            <div>
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-lg font-bold text-slate-200 flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group text-indigo-400"></i>
-                        <span>Kategoriyalar</span>
-                    </h2>
-                    <span id="productCounterBadge"
-                        class="text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">50
-                        ta Mahsulot</span>
-                </div>
-
-                <div class="flex items-center gap-2 overflow-x-auto pb-3 no-scrollbar" id="categoryTabs">
-                    <!-- Dynamic JavaScript Generated Category Buttons -->
-                </div>
+        <div class="controls-bar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Mahsulotlarni qidirish..." oninput="renderProducts()">
             </div>
-
-            <!-- Sorting & Active Filters Toolbar -->
-            <div
-                class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 glass-card p-4 rounded-2xl border border-slate-800">
-                <div class="flex items-center gap-2 text-xs text-slate-400 font-medium">
-                    <span>Hozirgi holat:</span>
-                    <span id="activeFilterLabel" class="text-indigo-400 font-bold">Barcha Mahsulotlar</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <label for="sortSelect" class="text-xs font-bold text-slate-400 whitespace-nowrap">
-                        <i class="fa-solid fa-arrow-down-short-wide text-indigo-400 mr-1"></i>Saralash:
-                    </label>
-                    <select id="sortSelect" onchange="renderProducts()"
-                        class="bg-slate-900 text-slate-200 text-xs font-semibold rounded-xl px-3 py-2 border border-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer">
-                        <option value="default">Sukut bo'yicha</option>
-                        <option value="price-low">Narx: Arzondan qimmatga</option>
-                        <option value="price-high">Narx: Qimmatdan arzonga</option>
-                        <option value="rating">Reyting: Eng yuqorilar</option>
-                        <option value="name">Nomi bo'yicha (A-Z)</option>
-                    </select>
-                </div>
+            <div class="category-scroll" id="categories-container">
+                <!-- Dynamic Categories -->
             </div>
-        </section>
-
-        <!-- Products Grid Container -->
-        <section>
-            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Dynamically Inserted 50+ Products via JavaScript -->
-            </div>
-
-            <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-20 glass-card rounded-3xl space-y-4 my-8">
-                <div
-                    class="w-20 h-20 bg-slate-800/80 rounded-full flex items-center justify-center mx-auto text-slate-500 text-3xl">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <h3 class="text-xl font-bold text-slate-200">Xuddi shunday mahsulot topilmadi</h3>
-                <p class="text-slate-400 text-sm max-w-md mx-auto">Qidiruv so'zini o'zgartirib ko'ring yoki boshqa
-                    kategoriyani tanlang.</p>
-                <button onclick="resetFilters()"
-                    class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all">
-                    Filtrlarni tiklash
-                </button>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Shopping Cart Drawer & Backdrop -->
-    <div id="cartOverlay"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"
-        onclick="closeCartDrawer()"></div>
-
-    <div id="cartDrawer"
-        class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-[#0b0f19] border-l border-slate-800 z-50 translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl">
-
-        <!-- Cart Header -->
-        <div class="p-5 border-b border-slate-800 flex items-center justify-between glass-panel">
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white text-base">Xarid Savatchasi</h3>
-                    <p class="text-xs text-slate-400" id="drawerItemCount">0 ta mahsulot</p>
-                </div>
-            </div>
-            <button onclick="closeCartDrawer()"
-                class="w-9 h-9 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center transition-all">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
         </div>
 
-        <!-- Cart Scrollable Items -->
-        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
-            <!-- Dynamic Cart Items Rendered Here -->
+        <div class="products-grid" id="products-grid">
+            <!-- Dynamic 50+ Products -->
         </div>
 
-        <!-- Cart Summary & Checkout -->
-        <div class="p-5 border-t border-slate-800 bg-[#070913] space-y-4">
-            <div class="space-y-2 text-sm">
-                <div class="flex justify-between text-slate-400">
-                    <span>Oraliq jami:</span>
-                    <span id="cartSubtotal">$0</span>
-                </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Yetkazib berish (O'zbekiston):</span>
-                    <span class="text-emerald-400 font-semibold">BEPUL</span>
-                </div>
-                <div class="flex justify-between text-lg font-black text-white pt-2 border-t border-slate-800">
-                    <span>Umumiy narx:</span>
-                    <span id="cartTotal" class="text-emerald-400 font-outfit">$0</span>
-                </div>
-            </div>
+        <footer>
+            <p>© 2026 AURA ELECTRONICS. Barcha huquqlar himoyalangan. Murojaat uchun: +998 90 123 45 67</p>
+        </footer>
+    </div>
 
-            <button onclick="processCheckout()"
-                class="w-full py-3.5 bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-sm rounded-2xl shadow-xl shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 active:scale-95">
-                <span>BUYURTMANI RASMIYLASHTIRISH</span>
-                <i class="fa-solid fa-check-circle"></i>
-            </button>
+    <!-- Sign In Modal -->
+    <div class="modal" id="signin-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('signin-modal')">&times;</span>
+            <h2>Tizimga Kirish</h2>
+            <form onsubmit="handleAuth(event, 'Kirish muvaffaqiyatli!')">
+                <div class="form-group">
+                    <label>Telefon raqam yoki Email</label>
+                    <input type="text" required placeholder="+998 90 123 45 67">
+                </div>
+                <div class="form-group">
+                    <label>Parol</label>
+                    <input type="password" required placeholder="******">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Kirish</button>
+            </form>
         </div>
     </div>
 
-    <!-- Product Details Modal -->
-    <div id="productModalOverlay"
-        class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div
-            class="bg-[#0f172a] border border-slate-800 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl relative animate-float flex flex-col md:flex-row max-h-[90vh]">
-
-            <button onclick="closeProductModal()"
-                class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/80 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- Product Modal Image Section -->
-            <div class="w-full md:w-1/2 h-64 md:h-auto bg-slate-950 relative flex items-center justify-center p-6">
-                <img id="modalImage" src="" alt=""
-                    class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl">
-                <span id="modalCategoryBadge"
-                    class="absolute top-4 left-4 text-[10px] font-bold text-indigo-300 bg-indigo-600/30 border border-indigo-500/40 px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur">
-                    Kategoriya
-                </span>
-            </div>
-
-            <!-- Product Details Info Section -->
-            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto space-y-4">
-                <div class="space-y-3">
-                    <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
-                        <div class="flex items-center" id="modalStars"></div>
-                        <span id="modalRatingText" class="text-slate-300">5.0</span>
-                    </div>
-
-                    <h2 id="modalTitle" class="text-2xl font-black text-white font-outfit">Mahsulot Nomi</h2>
-                    <p id="modalBrand" class="text-xs text-indigo-400 font-bold uppercase tracking-widest">Brend</p>
-                    <p id="modalDesc" class="text-slate-300 text-xs leading-relaxed">Mahsulot haqida batafsil tavsif va
-                        xususiyatlar.</p>
-
-                    <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 space-y-1 text-xs">
-                        <div class="flex justify-between text-slate-400">
-                            <span>Kafolat:</span>
-                            <span class="text-white font-semibold">12 Oylik Rasmiy</span>
-                        </div>
-                        <div class="flex justify-between text-slate-400">
-                            <span>Omborda:</span>
-                            <span class="text-emerald-400 font-semibold">Mavjud (Aktiv)</span>
-                        </div>
-                    </div>
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('signup-modal')">&times;</span>
+            <h2>Ro'yxatdan o'tish</h2>
+            <form onsubmit="handleAuth(event, 'Ro\'yxatdan o\'tdingiz!')">
+                <div class="form-group">
+                    <label>Ism Familiya</label>
+                    <input type="text" required placeholder="Ismingizni kiriting">
                 </div>
-
-                <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-4">
-                    <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-bold">Maxsus Narx</p>
-                        <p id="modalPrice" class="text-2xl font-black text-emerald-400 font-outfit">$0</p>
-                    </div>
-
-                    <button id="modalAddToCartBtn"
-                        class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
-                        <i class="fa-solid fa-cart-plus"></i>
-                        <span>Savatga Qo'shish</span>
-                    </button>
+                <div class="form-group">
+                    <label>Telefon raqam</label>
+                    <input type="tel" required placeholder="+998 90 123 45 67">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Parol</label>
+                    <input type="password" required placeholder="******">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Ro'yxatdan o'tish</button>
+            </form>
         </div>
     </div>
 
-    <!-- Toast Notification Popup -->
-    <div id="toast"
-        class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-indigo-500/50 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300">
-        <div id="toastIcon"
-            class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
-            <i class="fa-solid fa-check"></i>
+    <!-- Cart Modal & Checkout -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content" style="max-width: 550px;">
+            <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
+            <h2>Savatingiz</h2>
+            <div id="cart-items-container" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;">
+                <!-- Cart list -->
+            </div>
+            <div style="font-weight: bold; margin-bottom: 15px;">
+                Jami: $<span id="cart-total-price">0</span>
+            </div>
+            <hr style="border-color: var(--border-color); margin-bottom: 15px;">
+            <h3>Buyurtmani rasmiylashtirish</h3>
+            <form onsubmit="handleCheckout(event)">
+                <div class="form-group">
+                    <label>To'liq Ismingiz</label>
+                    <input type="text" id="checkout-name" required placeholder="Ism Familiya">
+                </div>
+                <div class="form-group">
+                    <label>Telefon Raqamingiz</label>
+                    <input type="tel" id="checkout-phone" required placeholder="+998 90 123 45 67">
+                </div>
+                <div class="form-group">
+                    <label>Yetkazib berish manzili</label>
+                    <input type="text" id="checkout-address" required placeholder="Toshkent sh, Chilonzor tumani...">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Buyurtmani tasdiqlash</button>
+            </form>
         </div>
-        <p id="toastMessage" class="text-xs font-bold">Xabarnoma</p>
     </div>
 
     <script>
-        /* ==========================================================================
-           1. MASTER PRODUCT CATALOG DATA STORE (50+ High Quality Items)
-           ========================================================================== */
-        const productCatalog = [
-            // --- TELEFONLAR (1-8) ---
-            {
-                id: 1,
-                name: "iPhone 16 Pro Max 1TB",
-                category: "Telefonlar",
-                brand: "Apple",
-                price: 1599,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80",
-                desc: "Apple A18 Pro chip, Titanium korpus, 48MP Fusion kamera va Dynamic Island."
-            },
-            {
-                id: 2,
-                name: "Samsung Galaxy S25 Ultra",
-                category: "Telefonlar",
-                brand: "Samsung",
-                price: 1399,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
-                desc: "Snapdragon 8 Gen 4, Galaxy AI, 200MP kamera va o'rnatilgan S-Pen qalami."
-            },
-            {
-                id: 3,
-                name: "Google Pixel 9 Pro XL",
-                category: "Telefonlar",
-                brand: "Google",
-                price: 1199,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
-                desc: "Google Tensor G4, Gemini AI integratsiyasi va eng mukammal tungi tasvir texnologiyasi."
-            },
-            {
-                id: 4,
-                name: "Xiaomi 14 Ultra Leica",
-                category: "Telefonlar",
-                brand: "Xiaomi",
-                price: 1099,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
-                desc: "Leica Summilux 1-dyuymli professional linzalar va 90W o'ta tezkor quvvatlash."
-            },
-            {
-                id: 5,
-                name: "OnePlus 12 5G 512GB",
-                category: "Telefonlar",
-                brand: "OnePlus",
-                price: 899,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
-                desc: "Hasselblad 4-avlod kamerasi, 100W SUPERVOOC va Snapdragon 8 Gen 3."
-            },
-            {
-                id: 6,
-                name: "ASUS ROG Phone 8 Pro",
-                category: "Telefonlar",
-                brand: "ASUS",
-                price: 1299,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=600&auto=format&fit=crop&q=80",
-                desc: "Geymerlar uchun 165Hz AMOLED displey, AniMe Vision va AirTrigger tugmalari."
-            },
-            {
-                id: 7,
-                name: "iPhone 16 Plus 256GB",
-                category: "Telefonlar",
-                brand: "Apple",
-                price: 999,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=80",
-                desc: "Action Button, A18 chipset va ulkan 48 soatlik batareya quvvati."
-            },
-            {
-                id: 8,
-                name: "Samsung Galaxy Z Fold 6",
-                category: "Telefonlar",
-                brand: "Samsung",
-                price: 1899,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
-                desc: "Egiluvchan 7.6-dyuymli Dynamic AMOLED 2X displey va ultra ingichka dizayn."
-            },
+        // Data & Products (50 items generation)
+        const categories = ["Barchasi", "Telefonlar", "Noutbuklar", "Dronlar", "iPadlar", "Televizorlar", "Xolodilniklar", "Kir moshinalar", "Gaz plitalar", "Mikroto'lqinli pechlar"];
+        let currentCategory = "Barchasi";
+        let cart = [];
+        let isNight = true;
 
-            // --- NOUTBUKLAR (9-14) ---
-            {
-                id: 9,
-                name: "MacBook Pro 16 M3 Max",
-                category: "Noutbuklar",
-                brand: "Apple",
-                price: 3499,
-                rating: 5.0,
-                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80",
-                desc: "16-Cores CPU, 40-Cores GPU, 48GB Unifed Xotira va Liquid Retina XDR displey."
-            },
-            {
-                id: 10,
-                name: "ASUS ROG Strix SCAR 18",
-                category: "Noutbuklar",
-                brand: "ASUS",
-                price: 3899,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=80",
-                desc: "Intel i9-14900HX, RTX 4090 16GB, 240Hz Nebula HDR displey va RGB klaviatura."
-            },
-            {
-                id: 11,
-                name: "Dell XPS 16 OLED Touch",
-                category: "Noutbuklar",
-                brand: "Dell",
-                price: 2799,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&auto=format&fit=crop&q=80",
-                desc: "Intel Core Ultra 9, RTX 4070 va sensorli 4K InfinityEdge OLED displey."
-            },
-            {
-                id: 12,
-                name: "Lenovo Legion Pro 7i",
-                category: "Noutbuklar",
-                brand: "Lenovo",
-                price: 2499,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
-                desc: "Lenovo AI Engine+ chip, RTX 4080 va Coldfront 5.0 sovutish tizimi."
-            },
-            {
-                id: 13,
-                name: "MacBook Air 15 M3",
-                category: "Noutbuklar",
-                brand: "Apple",
-                price: 1299,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&auto=format&fit=crop&q=80",
-                desc: "O'ta yengil ventilyatorsiz dizayn, 18 soatlik avtonomiya va M3 unumdorligi."
-            },
-            {
-                id: 14,
-                name: "HP Spectre x360 Convertible",
-                category: "Noutbuklar",
-                brand: "HP",
-                price: 1599,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&auto=format&fit=crop&q=80",
-                desc: "360-darajaga bukiluvchi 2-in-1 sensorli noutbuk, HP Stylus Pen bilan."
-            },
-
-            // --- DRONLAR (15-19) ---
-            {
-                id: 15,
-                name: "DJI Inspire 3 Cinema Drone",
-                category: "Dronlar",
-                brand: "DJI",
-                price: 12499,
-                rating: 5.0,
-                image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&auto=format&fit=crop&q=80",
-                desc: "8K Zenmuse X9-8K Air full-frame kamera va RTK yuqori aniqlikdagi pozitsiyalash."
-            },
-            {
-                id: 16,
-                name: "DJI Mavic 3 Pro Cine",
-                category: "Dronlar",
-                brand: "DJI",
-                price: 2999,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&auto=format&fit=crop&q=80",
-                desc: "Uchta Hasselblad kamerasi (4/3 CMOS), ProRes format va 43 minut parvoz."
-            },
-            {
-                id: 17,
-                name: "DJI Mini 4 Pro Fly More",
-                category: "Dronlar",
-                brand: "DJI",
-                price: 1099,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&auto=format&fit=crop&q=80",
-                desc: "249-grammdan kam og'irlik, 4K/60fps HDR video va to'siqlarni avto-aniqlash."
-            },
-            {
-                id: 18,
-                name: "Autel EVO II Pro V3 6K",
-                category: "Dronlar",
-                brand: "Autel",
-                price: 2299,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=600&auto=format&fit=crop&q=80",
-                desc: "1-dyuymli CMOS sensori, 6K piksellar soni va 40 minutlik davomiylik."
-            },
-            {
-                id: 19,
-                name: "DJI Avata 2 FPV Explorer",
-                category: "Dronlar",
-                brand: "DJI",
-                price: 999,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=600&auto=format&fit=crop&q=80",
-                desc: "FPV kozoynaklari bilan virtual parvoz va 155-darajali ultra-keng kamera."
-            },
-
-            // --- PLANSHETLAR (20-24) ---
-            {
-                id: 20,
-                name: "iPad Pro 13-inch M4 1TB",
-                category: "Planshetlar",
-                brand: "Apple",
-                price: 1899,
-                rating: 5.0,
-                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&auto=format&fit=crop&q=80",
-                desc: "Ultra Retina XDR Tandem OLED displey, M4 chip va atigi 5.1mm qalinlik."
-            },
-            {
-                id: 21,
-                name: "Samsung Galaxy Tab S9 Ultra",
-                category: "Planshetlar",
-                brand: "Samsung",
-                price: 1199,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&auto=format&fit=crop&q=80",
-                desc: "14.6-dyuymli Dynamic AMOLED 2X, IP68 suvdan himoya va S-Pen qalam."
-            },
-            {
-                id: 22,
-                name: "iPad Air 11-inch M2",
-                category: "Planshetlar",
-                brand: "Apple",
-                price: 699,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&auto=format&fit=crop&q=80",
-                desc: "Apple M2 chipseti, Liquid Retina displey va Apple Pencil Pro qo'llab-quvvatlash."
-            },
-            {
-                id: 23,
-                name: "Xiaomi Pad 6 Max 14",
-                category: "Planshetlar",
-                brand: "Xiaomi",
-                price: 649,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=600&auto=format&fit=crop&q=80",
-                desc: "14-dyuymli 2.8K 120Hz displey, 8 ta karnay va Snapdragon 8+ Gen 1."
-            },
-            {
-                id: 24,
-                name: "Microsoft Surface Pro 10 AI",
-                category: "Planshetlar",
-                brand: "Microsoft",
-                price: 1499,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=600&auto=format&fit=crop&q=80",
-                desc: "Intel Core Ultra AI protsessori, Windows 11 va yechiluvchi klaviatura."
-            },
-
-            // --- TELEVIZORLAR (25-29) ---
-            {
-                id: 25,
-                name: "Samsung 85\" Neo QLED 8K",
-                category: "Televizorlar",
-                brand: "Samsung",
-                price: 4999,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&auto=format&fit=crop&q=80",
-                desc: "NQ8 AI Gen3 protsessori, Quantum Matrix Pro va Dolby Atmos ovoz tizimi."
-            },
-            {
-                id: 26,
-                name: "LG OLED EVO G4 77-inch",
-                category: "Televizorlar",
-                brand: "LG",
-                price: 3499,
-                rating: 5.0,
-                image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=600&auto=format&fit=crop&q=80",
-                desc: "Alpha 11 AI protsessor, 144Hz o'yin rejimi va Brightness Booster Max."
-            },
-            {
-                id: 27,
-                name: "Sony BRAVIA XR Mini LED 75\"",
-                category: "Televizorlar",
-                brand: "Sony",
-                price: 2799,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1577979749830-f1d742b96791?w=600&auto=format&fit=crop&q=80",
-                desc: "Cognitive Processor XR, Acoustic Multi-Audio va PlayStation 5 uchun ideal moslik."
-            },
-            {
-                id: 28,
-                name: "TCL 85\" QD-OLED 4K Smart",
-                category: "Televizorlar",
-                brand: "TCL",
-                price: 1899,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=600&auto=format&fit=crop&q=80",
-                desc: "Google TV operatsion tizimi, 120Hz ekran chastotasi va Onkyo dinamiklari."
-            },
-            {
-                id: 29,
-                name: "Xiaomi TV Max 86-inch 4K",
-                category: "Televizorlar",
-                brand: "Xiaomi",
-                price: 1599,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&auto=format&fit=crop&q=80",
-                desc: "Ulkan 86-dyuymli ramkasiz panel, Dolby Vision IQ va MEMC tezlashtirish."
-            },
-
-            // --- MUZLATGICHLAR / XOLODELNIK (30-34) ---
-            {
-                id: 30,
-                name: "Samsung Bespoke Family Hub",
-                category: "Muzlatgichlar",
-                brand: "Samsung",
-                price: 3299,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
-                desc: "32-dyuymli sensorli aqlli ekran, ichki kameralar va tayyorlanadigan muz generatori."
-            },
-            {
-                id: 31,
-                name: "LG InstaView Door-in-Door",
-                category: "Muzlatgichlar",
-                brand: "LG",
-                price: 2699,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&auto=format&fit=crop&q=80",
-                desc: "Oynani ikki marta urganingizda ichi yorishuvchi shaffof eshik va UVnano tozalagich."
-            },
-            {
-                id: 32,
-                name: "Bosch Series 8 NoFrost Smart",
-                category: "Muzlatgichlar",
-                brand: "Bosch",
-                price: 1899,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
-                desc: "VitaFresh Pro mahsulotlar yangiligini 3 barobar uzoqroq saqlovchi maxsus hudud."
-            },
-            {
-                id: 33,
-                name: "Haier French Door 4-Door",
-                category: "Muzlatgichlar",
-                brand: "Haier",
-                price: 1599,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&auto=format&fit=crop&q=80",
-                desc: "ABT antibakterial ultrabinafsha tozalash va alohida Harorat Zonasi."
-            },
-            {
-                id: 34,
-                name: "Whirlpool Side-by-Side 600L",
-                category: "Muzlatgichlar",
-                brand: "Whirlpool",
-                price: 1399,
-                rating: 4.5,
-                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
-                desc: "6th Sense datchiklari bilan avtomatik harorat va namlik nazorati."
-            },
-
-            // --- KIR YUVISH MASHINALARI (35-39) ---
-            {
-                id: 35,
-                name: "LG AI DD Washer & Dryer 12kg",
-                category: "Kir yuvish mashinalari",
-                brand: "LG",
-                price: 1199,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
-                desc: "AI DD sun'iy intellekti mato turini aniqlaydi, bug'da yuvish (Steam+) funksiyasi."
-            },
-            {
-                id: 36,
-                name: "Samsung Bespoke AI Washer 11kg",
-                category: "Kir yuvish mashinalari",
-                brand: "Samsung",
-                price: 1099,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&auto=format&fit=crop&q=80",
-                desc: "EcoBubble ko'pik generatori va AI Ecobubble aqlli dozalash tizimi."
-            },
-            {
-                id: 37,
-                name: "Bosch Series 6 HomeConnect",
-                category: "Kir yuvish mashinalari",
-                brand: "Bosch",
-                price: 899,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
-                desc: "EcoSilence Drive o'ta jim motor va AntiStain dog'larni avto yoqotish."
-            },
-            {
-                id: 38,
-                name: "Electrolux PerfectCare 800",
-                category: "Kir yuvish mashinalari",
-                brand: "Electrolux",
-                price: 799,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&auto=format&fit=crop&q=80",
-                desc: "UltraCare tizimi kiyim tolalarini asraydi, SteamCare g'ijimlarni kamaytiradi."
-            },
-            {
-                id: 39,
-                name: "Indesit Inverter Pro 8kg",
-                category: "Kir yuvish mashinalari",
-                brand: "Indesit",
-                price: 499,
-                rating: 4.5,
-                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
-                desc: "Push & Go texnologiyasi - bir tugma bilan 45 minutlik mukammal yuvish."
-            },
-
-            // --- GAZ PLITALAR / STOVE (40-43) ---
-            {
-                id: 40,
-                name: "Bosch Series 8 Induction Cooktop",
-                category: "Gaz plitalari",
-                brand: "Bosch",
-                price: 1399,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
-                desc: "FlexInduction birlashuvchi zonalar va PerfectFry pishirish sensorlari."
-            },
-            {
-                id: 41,
-                name: "Smeg Victoria Gas Range Stove",
-                category: "Gaz plitalari",
-                brand: "Smeg",
-                price: 3299,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=600&auto=format&fit=crop&q=80",
-                desc: "Italiya premium retro dizayni, 5 ta gaz gorelka va ikki qavatli elektr duxovka."
-            },
-            {
-                id: 42,
-                name: "Electrolux Dual Fuel Gas/Electric",
-                category: "Gaz plitalari",
-                brand: "Electrolux",
-                price: 899,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
-                desc: "Wok gorelkasi, gaz-kontrol xavfsizlik tizimi va kadrli taymer."
-            },
-            {
-                id: 43,
-                name: "Gorenje Chef's Gas Range",
-                category: "Gaz plitalari",
-                brand: "Gorenje",
-                price: 649,
-                rating: 4.6,
-                image: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=600&auto=format&fit=crop&q=80",
-                desc: "HomeMade duxovka shakli, Chuyan mustahkam panjaralar va avto-o't oldirgich."
-            },
-
-            // --- MIKROTO'LQINLI PECHLAR (44-47) ---
-            {
-                id: 44,
-                name: "Samsung Smart Oven Convection",
-                category: "Mikroto'lqinli pechlar",
-                brand: "Samsung",
-                price: 349,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop&q=80",
-                desc: "HotBlast texnologiyasi, Slim Fry yog'siz qovurish va biokeramik qoplama."
-            },
-            {
-                id: 45,
-                name: "Panasonic Inverter Grill Oven",
-                category: "Mikroto'lqinli pechlar",
-                brand: "Panasonic",
-                price: 289,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80",
-                desc: "Inverter uzluksiz issiqlik, kvarsli grill va 32 litr keng hajm."
-            },
-            {
-                id: 46,
-                name: "LG NeoChef Smart Inverter",
-                category: "Mikroto'lqinli pechlar",
-                brand: "LG",
-                price: 229,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop&q=80",
-                desc: "Anti-Bacterial EasyClean tozalash va barqaror quvvatli eritish."
-            },
-            {
-                id: 47,
-                name: "Sharp Smart Touch Microwave",
-                category: "Mikroto'lqinli pechlar",
-                brand: "Sharp",
-                price: 159,
-                rating: 4.5,
-                image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80",
-                desc: "Sensorli boshqaruv paneli, 10 xil avto-dastur va LED yoritgich."
-            },
-
-            // --- AQLLI TEXNIKALAR & GADJETLAR (48-52) ---
-            {
-                id: 48,
-                name: "Apple Vision Pro Spatial Computer",
-                category: "Aqlli texnikalar",
-                brand: "Apple",
-                price: 3499,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600&auto=format&fit=crop&q=80",
-                desc: "Fazo kompyuteri, dual micro-OLED 4K displeylar va R1 + M2 chipilari."
-            },
-            {
-                id: 49,
-                name: "Apple Watch Ultra 2 GPS Titanium",
-                category: "Aqlli texnikalar",
-                brand: "Apple",
-                price: 799,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1510017803434-a899398421b3?w=600&auto=format&fit=crop&q=80",
-                desc: "3000 nits disley, S9 SiP chip, Double Tap ishora boshqaruvi va 100m suv chidamlilik."
-            },
-            {
-                id: 50,
-                name: "Sony WH-1000XM5 Noise-Canceling",
-                category: "Aqlli texnikalar",
-                brand: "Sony",
-                price: 399,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
-                desc: "Sanoatdagi eng yaxshi shovqin bosuvchi (ANC) simsiz quloqchinlar."
-            },
-            {
-                id: 51,
-                name: "PlayStation 5 Pro Console",
-                category: "Aqlli texnikalar",
-                brand: "Sony",
-                price: 699,
-                rating: 5.0,
-                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600&auto=format&fit=crop&q=80",
-                desc: "PSSR AI Ray-Tracing tezlatgichi, 2TB SSD va 120fps 4K o'yinlar."
-            },
-            {
-                id: 52,
-                name: "Dyson Airwrap Multi-Styler",
-                category: "Aqlli texnikalar",
-                brand: "Dyson",
-                price: 599,
-                rating: 4.9,
-                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
-                desc: "Coanda havo oqimi yordamida sochlarni shikastlamasdan uslub berish."
-            }
+        const baseProducts = [
+            { id: 1, name: "iPhone 16 Pro Max", cat: "Telefonlar", price: 1399, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" },
+            { id: 2, name: "Samsung Galaxy S25 Ultra", cat: "Telefonlar", price: 1299, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" },
+            { id: 3, name: "MacBook Pro 16 M3 Max", cat: "Noutbuklar", price: 2499, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
+            { id: 4, name: "DJI Mavic 3 Pro Drone", cat: "Dronlar", price: 1899, img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400" },
+            { id: 5, name: "iPad Pro 13 M4", cat: "iPadlar", price: 1199, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
+            { id: 6, name: "Samsung Neo QLED 8K TV", cat: "Televizorlar", price: 2199, img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400" },
+            { id: 7, name: "LG Smart Refrigerator", cat: "Xolodilniklar", price: 1599, img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400" },
+            { id: 8, name: "Bosch Series 8 Kir Yuvish Moshinasi", cat: "Kir moshinalar", price: 799, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
+            { id: 9, name: "Hansa Smart Gaz Plita", cat: "Gaz plitalar", price: 499, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
+            { id: 10, name: "Panasonic Inverter Pek", cat: "Mikroto'lqinli pechlar", price: 199, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" }
         ];
 
-        /* ==========================================================================
-           2. GLOBAL STATE VARIABLES
-           ========================================================================== */
-        let cart = JSON.parse(localStorage.getItem('ibrohim_cart')) || [];
-        let favorites = JSON.parse(localStorage.getItem('ibrohim_favorites')) || [];
-        let selectedCategory = 'Barchasi';
-        let showOnlyFavs = false;
-        let isDayMode = false; // Default: Dark Night Mode
+        // Dynamic 50 Products list generation
+        let products = [];
+        let count = 1;
+        for (let i = 0; i < 5; i++) {
+            baseProducts.forEach(item => {
+                products.push({
+                    ...item,
+                    id: count,
+                    name: `${item.name} ${count > 10 ? '#' + count : ''}`,
+                    price: item.price + (count * 2)
+                });
+                count++;
+            });
+        }
 
-        // Weather Atmospheric Animation Effects System
-        // Modes: 'snow' (qor), 'sun' (quyosh), 'stars' (yulduzlar), 'rain' (yomg'ir)
-        let currentWeatherFx = 'snow';
-
-        const categories = [
-            'Barchasi',
-            'Telefonlar',
-            'Noutbuklar',
-            'Dronlar',
-            'Planshetlar',
-            'Televizorlar',
-            'Muzlatgichlar',
-            'Kir yuvish mashinalari',
-            'Gaz plitalari',
-            'Mikroto\'lqinli pechlar',
-            'Aqlli texnikalar'
-        ];
-
-        /* ==========================================================================
-           3. INITIALIZATION & EVEN LISTENERS
-           ========================================================================== */
-        window.addEventListener('DOMContentLoaded', () => {
-            initClock();
-            initCategoryTabs();
-            renderProducts();
-            updateCartUI();
-            updateFavBadge();
-            setupCanvasFx();
+        // Render Categories
+        const catContainer = document.getElementById("categories-container");
+        categories.forEach(cat => {
+            const chip = document.createElement("div");
+            chip.className = `cat-chip ${cat === 'Barchasi' ? 'active' : ''}`;
+            chip.innerText = cat;
+            chip.onclick = () => {
+                document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentCategory = cat;
+                renderProducts();
+            };
+            catContainer.appendChild(chip);
         });
 
-        /* ==========================================================================
-           4. REAL-TIME CLOCK & DAY/NIGHT ENGINE
-           ========================================================================== */
-        function initClock() {
-            function updateTime() {
-                const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const seconds = String(now.getSeconds()).padStart(2, '0');
-
-                const clockEl = document.getElementById('liveClockDisplay');
-                if (clockEl) clockEl.textContent = `${hours}:${minutes}:${seconds}`;
-            }
-            updateTime();
-            setInterval(updateTime, 1000);
-        }
-
-        // Toggle Day / Night UI Theme Mode
-        function toggleDayNightMode() {
-            isDayMode = !isDayMode;
-            const body = document.documentElement;
-            const icon = document.getElementById('themeToggleIcon');
-
-            if (isDayMode) {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                icon.className = 'fa-solid fa-moon text-indigo-600 text-base';
-                currentWeatherFx = 'sun';
-                updateWeatherBadgeUI('Quyoshli Kunduz', 'fa-sun text-amber-500');
-            } else {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                icon.className = 'fa-solid fa-sun text-amber-400 text-base';
-                currentWeatherFx = 'snow';
-                updateWeatherBadgeUI('Tungi Yulduzlar & Qor', 'fa-snowflake text-indigo-400');
-            }
-        }
-
-        // Cycle through dynamic weather particles on background canvas
-        function cycleWeatherEffect() {
-            const effects = ['snow', 'stars', 'sun', 'rain'];
-            let nextIndex = (effects.indexOf(currentWeatherFx) + 1) % effects.length;
-            currentWeatherFx = effects[nextIndex];
-
-            const labels = {
-                'snow': { text: "Effekt: Qor Yog'ishi", badge: "Qor va Salqin", icon: "fa-snowflake text-blue-400" },
-                'stars': { text: "Effekt: Tungi Yulduzlar", badge: "Tungi Tinch Yulduzlar", icon: "fa-star text-amber-300" },
-                'sun': { text: "Effekt: Quyosh Nuri", badge: "Yorqin Quyosh Nuri", icon: "fa-sun text-amber-500" },
-                'rain': { text: "Effekt: Texno Yomg'ir", badge: "Texno Yomg'ir Effect", icon: "fa-cloud-showers-heavy text-cyan-400" }
-            };
-
-            const current = labels[currentWeatherFx];
-            document.getElementById('bannerFxLabel').textContent = current.text;
-            updateWeatherBadgeUI(current.badge, current.icon);
-            showToast(`${current.badge} effekti yoqildi`, "info");
-        }
-
-        function updateWeatherBadgeUI(text, iconClass) {
-            document.getElementById('weatherStatusText').textContent = text;
-            document.getElementById('weatherModeIcon').className = `fa-solid ${iconClass}`;
-        }
-
-        /* ==========================================================================
-           5. CANVAS BACKGROUND ATMOSPHERIC WEATHER PARTICLES
-           ========================================================================== */
-        function setupCanvasFx() {
-            const canvas = document.getElementById('fxCanvas');
-            const ctx = canvas.getContext('2d');
-            let width = canvas.width = window.innerWidth;
-            let height = canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            });
-
-            // Particles Array
-            let particles = [];
-            const numParticles = 80;
-
-            for (let i = 0; i < numParticles; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 3 + 1,
-                    speedY: Math.random() * 1.5 + 0.5,
-                    speedX: Math.random() * 0.5 - 0.25,
-                    opacity: Math.random() * 0.8 + 0.2
-                });
-            }
-
-            function animateFx() {
-                ctx.clearRect(0, 0, width, height);
-
-                particles.forEach(p => {
-                    ctx.beginPath();
-
-                    if (currentWeatherFx === 'snow') {
-                        // Falling White Flakes
-                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-                        ctx.fill();
-
-                        p.y += p.speedY;
-                        p.x += Math.sin(p.y * 0.01) * 0.5;
-
-                    } else if (currentWeatherFx === 'stars') {
-                        // Twinkling Night Stars
-                        ctx.arc(p.x, p.y, p.radius * 0.8, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(251, 191, 36, ${Math.abs(Math.sin(Date.now() * 0.002 + p.x))})`;
-                        ctx.fill();
-
-                    } else if (currentWeatherFx === 'sun') {
-                        // Floating Golden Dust Particles in Sun Rays
-                        ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(245, 158, 11, ${p.opacity * 0.4})`;
-                        ctx.fill();
-
-                        p.y -= p.speedY * 0.3;
-
-                    } else if (currentWeatherFx === 'rain') {
-                        // Cyan Tech Rain Streaks
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${p.opacity * 0.6})`;
-                        ctx.lineWidth = 1.5;
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p.x + p.speedX, p.y + p.speedY * 8);
-                        ctx.stroke();
-
-                        p.y += p.speedY * 4;
-                    }
-
-                    // Wrap around boundaries
-                    if (p.y > height) { p.y = -10; p.x = Math.random() * width; }
-                    if (p.y < -10) { p.y = height; p.x = Math.random() * width; }
-                });
-
-                requestAnimationFrame(animateFx);
-            }
-
-            animateFx();
-        }
-
-        /* ==========================================================================
-           6. CATEGORIES & RENDERING CATALOG
-           ========================================================================== */
-        function initCategoryTabs() {
-            const container = document.getElementById('categoryTabs');
-
-            container.innerHTML = categories.map(cat => {
-                const count = cat === 'Barchasi' ? productCatalog.length : productCatalog.filter(p => p.category === cat).length;
-                return `
-                    <button onclick="selectCategory('${cat}')" 
-                            data-cat="${cat}" 
-                            class="cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border ${cat === 'Barchasi' ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/25' : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'}">
-                        <span>${cat}</span>
-                        <span class="text-[10px] px-2 py-0.5 rounded-full ${cat === 'Barchasi' ? 'bg-white/20 text-white' : 'bg-slate-800 text-indigo-400'}">${count}</span>
-                    </button>
-                `;
-            }).join('');
-        }
-
-        function selectCategory(cat) {
-            selectedCategory = cat;
-            showOnlyFavs = false;
-
-            // Update UI buttons
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                if (btn.dataset.cat === cat) {
-                    btn.className = "cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/25";
-                } else {
-                    btn.className = "cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700";
-                }
-            });
-
-            document.getElementById('favNavBtn').classList.remove('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
-            document.getElementById('activeFilterLabel').textContent = cat === 'Barchasi' ? 'Barcha Mahsulotlar' : cat;
-            renderProducts();
-        }
-
+        // Render Products Grid
         function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            const emptyState = document.getElementById('emptyState');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
-            const sortVal = document.getElementById('sortSelect').value;
+            const grid = document.getElementById("products-grid");
+            const search = document.getElementById("search-input").value.toLowerCase();
+            grid.innerHTML = "";
 
-            // Filter logic
-            let items = productCatalog.filter(p => {
-                const matchesCat = selectedCategory === 'Barchasi' || p.category === selectedCategory;
-                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.brand.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal);
-                const matchesFav = !showOnlyFavs || favorites.includes(p.id);
-                return matchesCat && matchesSearch && matchesFav;
+            const filtered = products.filter(p => {
+                const matchesCat = currentCategory === "Barchasi" || p.cat === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(search);
+                return matchesCat && matchesSearch;
             });
 
-            // Sorting logic
-            if (sortVal === 'price-low') items.sort((a, b) => a.price - b.price);
-            else if (sortVal === 'price-high') items.sort((a, b) => b.price - a.price);
-            else if (sortVal === 'rating') items.sort((a, b) => b.rating - a.rating);
-            else if (sortVal === 'name') items.sort((a, b) => a.name.localeCompare(b.name));
-
-            document.getElementById('productCounterBadge').textContent = `${items.length} ta Mahsulot`;
-
-            if (items.length === 0) {
-                grid.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-            }
-
-            // Render Product Cards
-            grid.innerHTML = items.map(product => {
-                const isFav = favorites.includes(product.id);
-                return `
-                <div class="glass-card rounded-3xl overflow-hidden product-card border border-slate-800/90 flex flex-col justify-between group relative">
-                    
-                    <!-- Top Image Area -->
-                    <div class="relative h-56 bg-slate-950/60 p-4 flex items-center justify-center overflow-hidden border-b border-slate-800/60">
-                        
-                        <!-- Category Tag -->
-                        <span class="absolute top-3 left-3 bg-slate-900/90 border border-slate-700/80 text-indigo-300 text-[10px] font-bold px-2.5 py-1 rounded-xl backdrop-blur z-20">
-                            ${product.category}
-                        </span>
-
-                        <!-- Favorite Button -->
-                        <button onclick="toggleFavorite(${product.id})" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-400 hover:text-pink-500 transition-all active:scale-90">
-                            <i class="${isFav ? 'fa-solid text-pink-500' : 'fa-regular'} fa-heart text-sm"></i>
-                        </button>
-
-                        <!-- Product Image with Error Fallback -->
-                        <img src="${product.image}" 
-                             alt="${product.name}" 
-                             loading="lazy"
-                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=600&auto=format&fit=crop&q=80';" 
-                             class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-lg cursor-pointer"
-                             onclick="openProductModal(${product.id})">
+            filtered.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                    <img src="${p.img}" class="product-img" alt="${p.name}">
+                    <div>
+                        <div class="product-category">${p.cat}</div>
+                        <div class="product-title">${p.name}</div>
                     </div>
-
-                    <!-- Card Details -->
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                        <div class="space-y-1.5">
-                            
-                            <!-- Brand & Rating -->
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-indigo-400 font-bold uppercase tracking-wider text-[10px]">${product.brand}</span>
-                                <div class="flex items-center gap-1 text-amber-400 font-bold">
-                                    <i class="fa-solid fa-star text-[10px]"></i>
-                                    <span>${product.rating.toFixed(1)}</span>
-                                </div>
-                            </div>
-
-                            <!-- Name -->
-                            <h3 onclick="openProductModal(${product.id})" class="font-bold text-slate-100 text-sm leading-snug group-hover:text-indigo-400 transition-colors cursor-pointer line-clamp-2">
-                                ${product.name}
-                            </h3>
-
-                            <p class="text-xs text-slate-400 line-clamp-2 font-normal">${product.desc}</p>
-                        </div>
-
-                        <!-- Price & Actions -->
-                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                            <div>
-                                <p class="text-[9px] text-slate-400 uppercase font-bold tracking-wider">Narxi</p>
-                                <p class="text-lg font-black text-white font-outfit tracking-tight">$${product.price.toLocaleString()}</p>
-                            </div>
-
-                            <div class="flex items-center gap-1.5">
-                                <button onclick="openProductModal(${product.id})" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all">
-                                    <i class="fa-solid fa-eye text-xs"></i>
-                                </button>
-                                <button onclick="addToCart(${product.id})" class="px-3.5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all shadow-md shadow-indigo-600/20 active:scale-90 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-plus text-[10px]"></i>
-                                    <span>Savat</span>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="product-bottom">
+                        <div class="product-price">$${p.price}</div>
+                        <button class="btn btn-primary" onclick="addToCart(${p.id})">+ Savat</button>
                     </div>
-                </div>
                 `;
-            }).join('');
+                grid.appendChild(card);
+            });
         }
 
-        /* ==========================================================================
-           7. SEARCH & FAVORITES HANDLERS
-           ========================================================================== */
-        function handleSearch() {
-            const val = document.getElementById('searchInput').value;
-            const clearBtn = document.getElementById('clearSearchBtn');
-            if (val.length > 0) clearBtn.classList.remove('hidden');
-            else clearBtn.classList.add('hidden');
-            renderProducts();
-        }
-
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('mobileSearchInput').value = '';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
-            renderProducts();
-        }
-
-        function syncMobileSearch(val) {
-            document.getElementById('searchInput').value = val;
-            renderProducts();
-        }
-
-        function toggleFavorite(id) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(item => item !== id);
-                showToast("Saralanganlardan olib tashlandi", "info");
-            } else {
-                favorites.push(id);
-                showToast("Saralanganlarga qo'shildi", "success");
-            }
-            localStorage.setItem('ibrohim_favorites', JSON.stringify(favorites));
-            updateFavBadge();
-            renderProducts();
-        }
-
-        function updateFavBadge() {
-            const badge = document.getElementById('favBadge');
-            if (favorites.length > 0) {
-                badge.textContent = favorites.length;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-
-        function toggleFavoritesOnlyFilter() {
-            showOnlyFavs = !showOnlyFavs;
-            const btn = document.getElementById('favNavBtn');
-
-            if (showOnlyFavs) {
-                btn.classList.add('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
-                document.getElementById('activeFilterLabel').textContent = "Saralangan Mahsulotlar";
-            } else {
-                btn.classList.remove('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
-                document.getElementById('activeFilterLabel').textContent = selectedCategory;
-            }
-            renderProducts();
-        }
-
-        function resetFilters() {
-            selectedCategory = 'Barchasi';
-            showOnlyFavs = false;
-            clearSearch();
-            selectCategory('Barchasi');
-        }
-
-        /* ==========================================================================
-           8. PRODUCT DETAILS MODAL
-           ========================================================================== */
-        function openProductModal(id) {
-            const product = productCatalog.find(p => p.id === id);
-            if (!product) return;
-
-            document.getElementById('modalImage').src = product.image;
-            document.getElementById('modalCategoryBadge').textContent = product.category;
-            document.getElementById('modalTitle').textContent = product.name;
-            document.getElementById('modalBrand').textContent = `Brend: ${product.brand}`;
-            document.getElementById('modalDesc').textContent = product.desc;
-            document.getElementById('modalPrice').textContent = `$${product.price.toLocaleString()}`;
-            document.getElementById('modalRatingText').textContent = product.rating.toFixed(1);
-
-            // Stars
-            const starsContainer = document.getElementById('modalStars');
-            starsContainer.innerHTML = Array.from({ length: 5 }, (_, i) => `
-                <i class="fa-solid fa-star ${i < Math.floor(product.rating) ? 'text-amber-400' : 'text-slate-700'}"></i>
-            `).join('');
-
-            const addBtn = document.getElementById('modalAddToCartBtn');
-            addBtn.onclick = () => {
-                addToCart(product.id);
-                closeProductModal();
-            };
-
-            document.getElementById('productModalOverlay').classList.remove('hidden');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModalOverlay').classList.add('hidden');
-        }
-
-        /* ==========================================================================
-           9. SHOPPING CART ENGINE
-           ========================================================================== */
+        // Cart Actions
         function addToCart(id) {
-            const product = productCatalog.find(p => p.id === id);
-            const existing = cart.find(item => item.id === id);
-
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
-            updateCartUI();
-            showToast(`${product.name} savatga qo'shildi!`, "cart");
+            const prod = products.find(p => p.id === id);
+            cart.push(prod);
+            updateCart();
+            alert(`${prod.name} savatga qo'shildi!`);
         }
 
-        function removeFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
-            updateCartUI();
-        }
+        function updateCart() {
+            document.getElementById("cart-count").innerText = cart.length;
+            const container = document.getElementById("cart-items-container");
+            container.innerHTML = "";
+            let total = 0;
 
-        function updateCartQuantity(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    removeFromCart(id);
-                } else {
-                    localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
-                    updateCartUI();
-                }
-            }
-        }
-
-        function updateCartUI() {
-            const badge = document.getElementById('cartBadge');
-            const container = document.getElementById('cartItemsContainer');
-            const subtotalEl = document.getElementById('cartSubtotal');
-            const totalEl = document.getElementById('cartTotal');
-            const drawerCount = document.getElementById('drawerItemCount');
-
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            badge.textContent = totalItems;
-            drawerCount.textContent = `${totalItems} ta mahsulot`;
-            subtotalEl.textContent = `$${totalPrice.toLocaleString()}`;
-            totalEl.textContent = `$${totalPrice.toLocaleString()}`;
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-16 space-y-3">
-                        <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-600 text-2xl">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
-                        <p class="text-slate-400 font-semibold text-sm">Savatingiz hozircha bo'sh</p>
-                        <p class="text-xs text-slate-500">Katalogdan o'zingizga yoqqan texnikani tanlang</p>
+            cart.forEach((item, index) => {
+                total += item.price;
+                const div = document.createElement("div");
+                div.className = "cart-item";
+                div.innerHTML = `
+                    <img src="${item.img}">
+                    <div class="cart-details">
+                        <div><b>${item.name}</b></div>
+                        <div>$${item.price}</div>
                     </div>
+                    <button class="btn" onclick="removeFromCart(${index})">❌</button>
                 `;
-                return;
-            }
+                container.appendChild(div);
+            });
 
-            container.innerHTML = cart.map(item => `
-                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between gap-3">
-                    <img src="${item.image}" alt="" class="w-12 h-12 object-contain bg-slate-950 p-1 rounded-xl border border-slate-800">
-                    
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
-                        <p class="text-xs text-emerald-400 font-black mt-0.5">$${(item.price * item.quantity).toLocaleString()}</p>
-                    </div>
-
-                    <div class="flex items-center gap-2">
-                        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
-                            <button onclick="updateCartQuantity(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:text-white">
-                                <i class="fa-solid fa-minus text-[10px]"></i>
-                            </button>
-                            <span class="w-6 text-center text-xs font-bold text-white">${item.quantity}</span>
-                            <button onclick="updateCartQuantity(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:text-white">
-                                <i class="fa-solid fa-plus text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <button onclick="removeFromCart(${item.id})" class="text-slate-500 hover:text-red-400 p-1 transition-colors">
-                            <i class="fa-solid fa-trash-can text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById("cart-total-price").innerText = total;
         }
 
-        function openCartDrawer() {
-            document.getElementById('cartDrawer').classList.remove('translate-x-full');
-            document.getElementById('cartOverlay').classList.remove('opacity-0', 'pointer-events-none');
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
         }
 
-        function closeCartDrawer() {
-            document.getElementById('cartDrawer').classList.add('translate-x-full');
-            document.getElementById('cartOverlay').classList.add('opacity-0', 'pointer-events-none');
+        // Modals
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function handleAuth(e, msg) {
+            e.preventDefault();
+            alert(msg);
+            closeModal('signin-modal');
+            closeModal('signup-modal');
         }
 
-        function processCheckout() {
+        function handleCheckout(e) {
+            e.preventDefault();
             if (cart.length === 0) {
-                showToast("Savatingiz bo'sh!", "info");
+                alert("Savatingiz bo'sh!");
                 return;
             }
-            showToast("Buyurtmangiz qabul qilindi! Operatorimiz bog'lanadi.", "success");
+            alert("Rahmat! Buyurtmangiz qabul qilindi. Operatorlarimiz tez orada siz bilan bog'lanishadi.");
             cart = [];
-            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
-            updateCartUI();
-            closeCartDrawer();
+            updateCart();
+            closeModal('cart-modal');
         }
 
-        /* ==========================================================================
-           10. TOAST NOTIFICATION SYSTEM
-           ========================================================================== */
-        function showToast(message, type = "success") {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            const toastIcon = document.getElementById('toastIcon');
+        // Theme Toggle & Weather Animation
+        const themeBtn = document.getElementById("theme-toggle");
+        themeBtn.onclick = () => {
+            isNight = !isNight;
+            document.body.classList.toggle("light-mode", !isNight);
+            themeBtn.innerText = isNight ? "🌙 Tun" : "☀️ Kun";
+            document.getElementById("weather-info").innerText = isNight ? "🌙 Toshkent: +18°C (Qor)" : "☀️ Toshkent: +24°C (Quyoshli)";
+        };
 
-            toastMessage.textContent = message;
+        // Canvas Effect (Snow for Night, Sun Glow for Day)
+        const canvas = document.getElementById("weather-canvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
 
-            if (type === "cart") {
-                toastIcon.innerHTML = `<i class="fa-solid fa-cart-plus text-indigo-400"></i>`;
-            } else if (type === "info") {
-                toastIcon.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i>`;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = resizeCanvas;
+        resizeCanvas();
+
+        for (let i = 0; i < 60; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 3 + 1,
+                d: Math.random() * 1 + 0.5
+            });
+        }
+
+        function drawWeather() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (isNight) {
+                // Draw Snow
+                ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+                ctx.beginPath();
+                particles.forEach(p => {
+                    ctx.moveTo(p.x, p.y);
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    p.y += p.d;
+                    if (p.y > canvas.height) p.y = 0;
+                });
+                ctx.fill();
             } else {
-                toastIcon.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
+                // Draw Sun Glow
+                ctx.fillStyle = "rgba(255, 223, 0, 0.15)";
+                ctx.beginPath();
+                ctx.arc(canvas.width - 100, 100, 120, 0, Math.PI * 2);
+                ctx.fill();
             }
-
-            toast.classList.remove('translate-y-24', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0');
-            }, 3000);
+            requestAnimationFrame(drawWeather);
         }
+
+        // Initialize
+        renderProducts();
+        drawWeather();
     </script>
 </body>
 
