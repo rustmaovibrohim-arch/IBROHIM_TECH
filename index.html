@@ -3,878 +3,1675 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IBROHIM_TECH | AI Multilingual Hardware Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBROHIM_TECH - Premium Texnika & Gadjetlar Store</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts (Plus Jakarta Sans & Outfit) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                screens: {
-                    'xs': '375px',
-                    'sm': '640px',
-                    'md': '768px',
-                    'lg': '1024px',
-                    'xl': '1280px',
-                },
                 extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
                     colors: {
-                        brand: {
-                            Primary: '#6366f1',
-                            Accent: '#38bdf8',
-                            DarkBg: '#090d16',
+                        techDark: '#070913',
+                        techCard: '#0f172a',
+                        techBorder: '#1e293b',
+                        neonBlue: '#3b82f6',
+                        neonCyan: '#06b6d4',
+                        neonPurple: '#8b5cf6',
+                        neonGold: '#f59e0b',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 15px rgba(99,102,241,0.5))' },
+                            '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 30px rgba(168,85,247,0.8))' },
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts & Icons -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         body {
+            transition: background-color 0.5s ease, color 0.5s ease;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #090d16;
-            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
 
-        .brand-glow-text {
-            color: #38bdf8;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 22px rgba(99, 102, 241, 0.4);
-        }
-
+        /* Glassmorphism Styles */
         .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
+            background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+        }
+
+        .light .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #090d16;
+            background: #070913;
+        }
+
+        .light ::-webkit-scrollbar-track {
+            background: #f1f5f9;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
+            background: #334155;
             border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Glow Text & Borders */
+        .neon-text {
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+        }
+
+        .gold-glow {
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+        }
+
+        /* Particles Overlay Canvas */
+        #fxCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Card Hover Effects */
+        .product-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 25px 2px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Sun Rays Animation for Day Mode */
+        @keyframes sunGlow {
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .sun-rays {
+            animation: sunGlow 25s linear infinite;
+        }
+
+        /* Hide scrollbars for category tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
 
-<body class="bg-[#090d16] text-gray-100 min-h-screen flex flex-col relative overflow-x-hidden pb-16 md:pb-0">
+<body
+    class="bg-[#070913] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white relative">
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-gray-800/80 shadow-2xl">
-        <!-- Live Header Bar -->
-        <div class="bg-indigo-950/40 text-[11px] xs:text-xs py-1.5 px-3 md:px-6 border-b border-indigo-900/30">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <span class="text-indigo-300 font-medium" id="weather-widget">Tashkent: 24°C</span>
-                    <span class="text-gray-600">|</span>
-                    <span class="text-gray-300 font-mono" id="clock-widget">00:00:00</span>
+    <!-- Background Canvas for Real-time Weather Effects (Snow / Sun / Stars / Rain) -->
+    <canvas id="fxCanvas"></canvas>
+
+    <!-- Ambient Atmospheric Glow Lights -->
+    <div
+        class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none z-0">
+    </div>
+    <div
+        class="fixed bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none z-0">
+    </div>
+    <div
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/10 rounded-full blur-[180px] pointer-events-none z-0">
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+
+                <!-- Logo -->
+                <div onclick="resetFilters()" class="flex items-center gap-3 cursor-pointer group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-0.5 shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
+                        <div
+                            class="w-full h-full bg-[#070913] dark:bg-[#070913] rounded-[14px] flex items-center justify-center">
+                            <i
+                                class="fa-solid fa-bolt text-indigo-400 text-xl group-hover:text-amber-400 transition-colors"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span
+                                class="font-outfit text-2xl font-black tracking-wider bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent dark:from-white dark:to-indigo-300">IBROHIM</span>
+                            <span class="font-outfit text-2xl font-black text-indigo-500">_TECH</span>
+                        </div>
+                        <p class="text-[10px] text-indigo-400 font-semibold tracking-widest uppercase">Next-Gen
+                            Electronics</p>
+                    </div>
                 </div>
-                <!-- LANGUAGE SWITCHER -->
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-globe text-indigo-400"></i>
-                    <select id="lang-selector" onchange="changeLanguage(this.value)"
-                        class="bg-gray-900 border border-indigo-500/30 text-indigo-300 font-bold text-[11px] rounded-lg px-2 py-0.5 focus:outline-none cursor-pointer">
-                        <option value="uz">UZ (O'zbek)</option>
-                        <option value="en">EN (English)</option>
-                        <option value="ru">RU (Русский)</option>
+
+                <!-- Live Weather & Real-Time Clock Badge -->
+                <div
+                    class="hidden lg:flex items-center gap-4 px-4 py-2 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur">
+                    <div
+                        class="flex items-center gap-2 text-xs font-semibold text-slate-300 border-r border-slate-800 pr-3">
+                        <i id="weatherModeIcon" class="fa-solid fa-moon text-amber-400 text-sm"></i>
+                        <span id="weatherStatusText">Tungi Yulduzlar & Qor</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-mono font-bold text-indigo-400">
+                        <i class="fa-regular fa-clock text-indigo-400"></i>
+                        <span id="liveClockDisplay">00:00:00</span>
+                    </div>
+                </div>
+
+                <!-- Instant Search Bar (Desktop) -->
+                <div class="hidden md:flex flex-1 max-w-md relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()"
+                        placeholder="Katalogdan mahsulot topish (iPhone, ROG, LG...)"
+                        class="w-full bg-slate-900/80 dark:bg-slate-900/90 text-sm text-slate-100 placeholder:text-slate-500 pl-11 pr-10 py-2.5 rounded-2xl border border-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all">
+                    <button onclick="clearSearch()" id="clearSearchBtn"
+                        class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Control Icons & Actions -->
+                <div class="flex items-center gap-3">
+
+                    <!-- Weather / Atmospheric Mode Switcher Button -->
+                    <button onclick="cycleWeatherEffect()" title="Ob-havo effektini o'zgartirish"
+                        class="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-400/50 transition-all flex items-center justify-center relative group">
+                        <i id="weatherBtnIcon" class="fa-solid fa-cloud-snowflake text-base"></i>
+                        <span
+                            class="absolute -bottom-8 scale-0 group-hover:scale-100 transition-all bg-slate-900 text-[10px] text-slate-200 px-2 py-1 rounded-md whitespace-nowrap border border-slate-800 pointer-events-none">Effektni
+                            almashtirish</span>
+                    </button>
+
+                    <!-- Day / Night Theme Toggle -->
+                    <button onclick="toggleDayNightMode()" title="Kunduzgi/Tungi rejim"
+                        class="p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-indigo-400 hover:border-indigo-500/50 transition-all">
+                        <i id="themeToggleIcon" class="fa-solid fa-sun text-amber-400 text-base"></i>
+                    </button>
+
+                    <!-- Wishlist / Favorites -->
+                    <button onclick="toggleFavoritesOnlyFilter()" id="favNavBtn"
+                        class="relative p-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-pink-500 hover:border-pink-500/50 transition-all">
+                        <i class="fa-solid fa-heart text-base"></i>
+                        <span id="favBadge"
+                            class="hidden absolute -top-1.5 -right-1.5 bg-pink-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#070913]">0</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger Button -->
+                    <button onclick="openCartDrawer()"
+                        class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 text-white font-bold text-sm hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-600/30 active:scale-95">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span class="hidden sm:inline font-outfit tracking-wide">Savat</span>
+                        <span id="cartBadge"
+                            class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full font-black">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="pb-3 md:hidden">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="mobileSearchInput" oninput="syncMobileSearch(this.value)"
+                        placeholder="Qidiruv..."
+                        class="w-full bg-slate-900 text-sm text-slate-200 pl-11 pr-4 py-2.5 rounded-xl border border-slate-800 focus:outline-none focus:border-indigo-500">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full z-10 relative">
+
+        <!-- Welcome Banner Section -->
+        <section
+            class="relative rounded-3xl overflow-hidden glass-panel border border-indigo-500/20 p-6 sm:p-10 mb-10 glow-effect">
+            <!-- Animated Background Glow Gradients inside Banner -->
+            <div
+                class="absolute -right-20 -top-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute -left-20 -bottom-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+
+                <div class="space-y-4 text-center lg:text-left max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold tracking-wider uppercase backdrop-blur">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Rasmiy Kafolatli Texnikalar Store
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black font-outfit tracking-tight leading-tight">
+                        <span
+                            class="bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">IBROHIM_TECH</span>
+                        <br>
+                        <span
+                            class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">saytiga
+                            xush kelibsiz!</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
+                        Dunyoning eng yetakchi brendlaridan 50+ dan ortiq eng so'nggi rusumdagi smartfonlar, noutbuklar,
+                        dronlar, maishiy texnika va aqlli gadjetlar kolleksiyasi.
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <a href="#catalog"
+                            class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition-all flex items-center gap-2 active:scale-95">
+                            <span>Katalogga O'tish</span>
+                            <i class="fa-solid fa-arrow-down-long"></i>
+                        </a>
+                        <button onclick="cycleWeatherEffect()"
+                            class="px-5 py-3 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                            <span id="bannerFxLabel">Effekt: Qor Yog'ishi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Animated Floating Hero Illustration Badge -->
+                <div class="relative w-full max-w-xs lg:max-w-sm flex items-center justify-center">
+                    <div
+                        class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl bg-gradient-to-tr from-indigo-500/20 via-purple-500/30 to-pink-500/20 border border-white/10 p-6 flex flex-col justify-between backdrop-blur-xl shadow-2xl animate-float">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-indigo-300">PREMIUM EDITION</span>
+                            <i class="fa-solid fa-microchip text-2xl text-amber-400"></i>
+                        </div>
+                        <div class="text-center my-auto space-y-2">
+                            <div
+                                class="w-16 h-16 mx-auto rounded-2xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-3xl text-indigo-300">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-white">50+ Kategoriya</h3>
+                            <p class="text-xs text-slate-400">iPhone 16 Pro, M3 MacBook, DJI Inspire & Maishiy Texnika
+                            </p>
+                        </div>
+                        <div
+                            class="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-slate-300">
+                            <span><i class="fa-solid fa-truck-fast text-emerald-400 mr-1"></i> Tezkor Bepul
+                                Xizmat</span>
+                            <span class="text-amber-400 font-bold">100% Original</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Filter & Search Toolbar Section -->
+        <section id="catalog" class="space-y-6 mb-10">
+
+            <!-- Category Pills Filter Bar -->
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-lg font-bold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-indigo-400"></i>
+                        <span>Kategoriyalar</span>
+                    </h2>
+                    <span id="productCounterBadge"
+                        class="text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">50
+                        ta Mahsulot</span>
+                </div>
+
+                <div class="flex items-center gap-2 overflow-x-auto pb-3 no-scrollbar" id="categoryTabs">
+                    <!-- Dynamic JavaScript Generated Category Buttons -->
+                </div>
+            </div>
+
+            <!-- Sorting & Active Filters Toolbar -->
+            <div
+                class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 glass-card p-4 rounded-2xl border border-slate-800">
+                <div class="flex items-center gap-2 text-xs text-slate-400 font-medium">
+                    <span>Hozirgi holat:</span>
+                    <span id="activeFilterLabel" class="text-indigo-400 font-bold">Barcha Mahsulotlar</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <label for="sortSelect" class="text-xs font-bold text-slate-400 whitespace-nowrap">
+                        <i class="fa-solid fa-arrow-down-short-wide text-indigo-400 mr-1"></i>Saralash:
+                    </label>
+                    <select id="sortSelect" onchange="renderProducts()"
+                        class="bg-slate-900 text-slate-200 text-xs font-semibold rounded-xl px-3 py-2 border border-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer">
+                        <option value="default">Sukut bo'yicha</option>
+                        <option value="price-low">Narx: Arzondan qimmatga</option>
+                        <option value="price-high">Narx: Qimmatdan arzonga</option>
+                        <option value="rating">Reyting: Eng yuqorilar</option>
+                        <option value="name">Nomi bo'yicha (A-Z)</option>
                     </select>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Main Nav Header -->
-        <div class="max-w-7xl mx-auto px-3 xs:px-4 py-2.5 flex items-center justify-between gap-2">
-            <!-- Brand Logo -->
-            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 group shrink-0">
+        <!-- Products Grid Container -->
+        <section>
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamically Inserted 50+ Products via JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-20 glass-card rounded-3xl space-y-4 my-8">
                 <div
-                    class="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                    <i class="fa-solid fa-bolt text-white text-lg"></i>
+                    class="w-20 h-20 bg-slate-800/80 rounded-full flex items-center justify-center mx-auto text-slate-500 text-3xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <div>
-                    <span
-                        class="font-display font-extrabold text-lg xs:text-xl tracking-wide brand-glow-text">IBROHIM_TECH</span>
-                </div>
-            </a>
-
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-md relative hidden sm:block">
-                <input type="text" id="main-search" oninput="handleSearch(this.value)" data-i18n-placeholder="search_ph"
-                    placeholder="Qidirish..."
-                    class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2 pl-10 text-xs focus:outline-none focus:border-indigo-500 text-gray-100">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
-            </div>
-
-            <!-- Top Actions -->
-            <div class="flex items-center gap-2">
-                <div id="user-auth-area">
-                    <button onclick="openAuthModal('signin')"
-                        class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
-                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
-                        <span data-i18n="login">Kirish</span>
-                    </button>
-                </div>
-
-                <button onclick="toggleDrawer('wishlist')"
-                    class="relative p-2 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-pink-400 transition">
-                    <i class="fa-solid fa-heart text-sm"></i>
-                    <span id="wishlist-badge"
-                        class="absolute -top-1.5 -right-1.5 bg-pink-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                <h3 class="text-xl font-bold text-slate-200">Xuddi shunday mahsulot topilmadi</h3>
+                <p class="text-slate-400 text-sm max-w-md mx-auto">Qidiruv so'zini o'zgartirib ko'ring yoki boshqa
+                    kategoriyani tanlang.</p>
+                <button onclick="resetFilters()"
+                    class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all">
+                    Filtrlarni tiklash
                 </button>
-
-                <button onclick="toggleDrawer('cart')"
-                    class="relative flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-600/30">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="hidden md:inline" data-i18n="cart">Savat</span>
-                    <span id="cart-badge" class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">0</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <nav class="hidden md:block border-t border-gray-800/60 bg-gray-900/60">
-            <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 py-1.5 text-xs font-bold">
-                <button onclick="switchTab('home')"
-                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 bg-indigo-600 text-white"
-                    data-tab="home">
-                    <i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Asosiy</span>
-                </button>
-                <button onclick="switchTab('catalog')"
-                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white"
-                    data-tab="catalog">
-                    <i class="fa-solid fa-layer-group"></i> <span data-i18n="nav_catalog">Katalog</span>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- MOBILE SEARCH (375px) -->
-    <div class="sm:hidden px-3 pt-3">
-        <input type="text" oninput="handleSearch(this.value)" data-i18n-placeholder="search_ph"
-            placeholder="Qidirish..."
-            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-xs focus:outline-none text-gray-200">
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-3 xs:px-4 py-4 space-y-6">
-        <!-- HOME PAGE -->
-        <section id="page-home" class="space-y-6">
-            <div
-                class="glass-panel p-5 xs:p-8 rounded-3xl border border-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="space-y-3 max-w-xl">
-                    <span
-                        class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        <i class="fa-solid fa-robot mr-1"></i> AI Multi-Language
-                    </span>
-                    <h1 class="text-2xl xs:text-4xl font-extrabold tracking-tight text-white leading-tight"
-                        data-i18n="hero_title">
-                        Aqlli Gadjetlar Va AI Hardware Hub
-                    </h1>
-                    <p class="text-gray-300 text-xs xs:text-sm" data-i18n="hero_desc">
-                        Saralangan noutbuk, smartfon va boshqa texnikalar. O'zbek, Ingliz va Rus tillarida AI bilan
-                        suhbatlashing!
-                    </p>
-                    <button onclick="toggleAiChat()"
-                        class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition">
-                        <i class="fa-solid fa-comments"></i> <span data-i18n="ai_button">AI Bilan Suhbat</span>
-                    </button>
-                </div>
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
-                    class="rounded-2xl h-48 w-full md:w-1/2 object-cover border border-gray-800">
-            </div>
-
-            <!-- Categories -->
-            <div>
-                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-shapes text-indigo-400"></i> <span data-i18n="cat_title">Kategoriyalar</span>
-                </h2>
-                <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-6 gap-2.5" id="categories-grid"></div>
-            </div>
-
-            <!-- Products -->
-            <div>
-                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-amber-500"></i> <span data-i18n="top_products">Tanlangan
-                        Mahsulotlar</span>
-                </h2>
-                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="home-products-grid"></div>
             </div>
         </section>
 
-        <!-- CATALOG PAGE -->
-        <section id="page-catalog" class="hidden space-y-4">
-            <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-3">
-                <h1 class="text-lg font-bold" data-i18n="catalog_header">Mahsulotlar Katalogi</h1>
-                <select id="filter-category" onchange="applyFilters()"
-                    class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-1.5 text-xs text-gray-200">
-                    <option value="all" data-i18n="cat_all">Barcha Kategoriyalar</option>
-                    <option value="laptops" data-i18n="cat_laptops">Noutbuklar</option>
-                    <option value="phones" data-i18n="cat_phones">Smartfonlar</option>
-                    <option value="gaming" data-i18n="cat_gaming">Gaming</option>
-                    <option value="audio" data-i18n="cat_audio">Audio</option>
-                    <option value="watch" data-i18n="cat_watch">Smart Soatlar</option>
-                    <option value="acc" data-i18n="cat_acc">Aksessuarlar</option>
-                </select>
-            </div>
-            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="catalog-products-grid"></div>
-            <div class="flex items-center justify-between glass-panel p-3 rounded-xl text-xs" id="pagination-controls">
-            </div>
-        </section>
     </main>
 
-    <!-- REAL-TIME AI CHATBOT WINDOW -->
-    <div id="ai-chat-window"
-        class="fixed bottom-16 md:bottom-6 right-3 xs:right-6 w-[92vw] xs:w-96 bg-gray-900/95 border border-indigo-500/40 rounded-2xl shadow-2xl z-50 flex flex-col h-[480px] hidden backdrop-blur-lg">
-        <div
-            class="p-3.5 bg-gradient-to-r from-indigo-900/80 to-gray-900 border-b border-gray-800 rounded-t-2xl flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs">
-                    <i class="fa-solid fa-robot"></i>
+    <!-- Shopping Cart Drawer & Backdrop -->
+    <div id="cartOverlay"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+        onclick="closeCartDrawer()"></div>
+
+    <div id="cartDrawer"
+        class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-[#0b0f19] border-l border-slate-800 z-50 translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between shadow-2xl">
+
+        <!-- Cart Header -->
+        <div class="p-5 border-b border-slate-800 flex items-center justify-between glass-panel">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-cart-shopping"></i>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold text-white">IBROHIM AI (3 Languages)</h4>
-                    <span class="text-[9px] text-emerald-400 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online
-                    </span>
+                    <h3 class="font-bold text-white text-base">Xarid Savatchasi</h3>
+                    <p class="text-xs text-slate-400" id="drawerItemCount">0 ta mahsulot</p>
                 </div>
             </div>
-            <button onclick="toggleAiChat()" class="text-gray-400 hover:text-white p-1"><i
-                    class="fa-solid fa-xmark text-sm"></i></button>
-        </div>
-
-        <div id="ai-messages" class="flex-1 overflow-y-auto p-3 space-y-3 text-xs">
-            <div class="bg-indigo-950/60 border border-indigo-800/40 p-3 rounded-2xl rounded-tl-none text-gray-200"
-                id="ai-welcome-msg">
-                <!-- Welcome text injected dynamically -->
-            </div>
-        </div>
-
-        <form onsubmit="handleAiSend(event)"
-            class="p-2 border-t border-gray-800 bg-gray-950/80 rounded-b-2xl flex gap-1.5">
-            <input type="text" id="ai-input" data-i18n-placeholder="ai_input_ph"
-                placeholder="Savol berishingiz mumkin..." required
-                class="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
-            <button type="submit"
-                class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition">
-                <i class="fa-solid fa-paper-plane"></i>
+            <button onclick="closeCartDrawer()"
+                class="w-9 h-9 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-        </form>
+        </div>
+
+        <!-- Cart Scrollable Items -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
+            <!-- Dynamic Cart Items Rendered Here -->
+        </div>
+
+        <!-- Cart Summary & Checkout -->
+        <div class="p-5 border-t border-slate-800 bg-[#070913] space-y-4">
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between text-slate-400">
+                    <span>Oraliq jami:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Yetkazib berish (O'zbekiston):</span>
+                    <span class="text-emerald-400 font-semibold">BEPUL</span>
+                </div>
+                <div class="flex justify-between text-lg font-black text-white pt-2 border-t border-slate-800">
+                    <span>Umumiy narx:</span>
+                    <span id="cartTotal" class="text-emerald-400 font-outfit">$0</span>
+                </div>
+            </div>
+
+            <button onclick="processCheckout()"
+                class="w-full py-3.5 bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-sm rounded-2xl shadow-xl shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 active:scale-95">
+                <span>BUYURTMANI RASMIYLASHTIRISH</span>
+                <i class="fa-solid fa-check-circle"></i>
+            </button>
+        </div>
     </div>
 
-    <!-- AI Toggle Button -->
-    <button onclick="toggleAiChat()"
-        class="fixed bottom-20 md:bottom-6 right-4 z-40 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition border border-indigo-400/30">
-        <i class="fa-solid fa-robot text-lg"></i>
-    </button>
-
-    <!-- SIGN IN & SIGN UP MODAL -->
-    <div id="auth-modal"
+    <!-- Product Details Modal -->
+    <div id="productModalOverlay"
         class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-sm w-full relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i
-                    class="fa-solid fa-xmark"></i></button>
+        <div
+            class="bg-[#0f172a] border border-slate-800 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl relative animate-float flex flex-col md:flex-row max-h-[90vh]">
 
-            <div class="flex border-b border-gray-800 mb-5">
-                <button id="tab-btn-signin" onclick="switchAuthTab('signin')"
-                    class="flex-1 py-2 text-xs font-bold border-b-2 border-indigo-500 text-indigo-400"
-                    data-i18n="signin_tab">Sign In</button>
-                <button id="tab-btn-signup" onclick="switchAuthTab('signup')"
-                    class="flex-1 py-2 text-xs font-bold text-gray-400 border-b-2 border-transparent"
-                    data-i18n="signup_tab">Sign Up</button>
-            </div>
-
-            <form id="form-signin" onsubmit="handleSignIn(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
-                        data-i18n="email_label">Email</label>
-                    <input type="email" id="signin-email" required placeholder="user@gmail.com"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
-                        data-i18n="pass_label">Parol</label>
-                    <input type="password" id="signin-password" required placeholder="••••••••"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
-                </div>
-                <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30"
-                    data-i18n="btn_signin">
-                    Kirish
-                </button>
-            </form>
-
-            <form id="form-signup" onsubmit="handleSignUp(event)" class="space-y-3 hidden">
-                <div>
-                    <label class="block text-[11px] font-semibold text-gray-400 mb-1" data-i18n="name_label">Ism</label>
-                    <input type="text" id="signup-name" required placeholder="Ibrohim..."
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
-                        data-i18n="email_label">Email</label>
-                    <input type="email" id="signup-email" required placeholder="user@gmail.com"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
-                        data-i18n="pass_label">Parol</label>
-                    <input type="password" id="signup-password" required placeholder="••••••••"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
-                </div>
-                <button type="submit"
-                    class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-cyan-600/30"
-                    data-i18n="btn_signup">
-                    Ro'yxatdan o'tish
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- CART & WISHLIST DRAWERS -->
-    <div id="cart-drawer"
-        class="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="p-4 border-b border-gray-800 flex justify-between items-center">
-            <h3 class="text-sm font-bold flex items-center gap-2" data-i18n="cart_title"><i
-                    class="fa-solid fa-bag-shopping text-indigo-400"></i> Savat</h3>
-            <button onclick="toggleDrawer('cart')" class="text-gray-400 p-2"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items-container"></div>
-        <div class="p-4 border-t border-gray-800 bg-gray-950 space-y-3">
-            <div class="flex justify-between text-xs font-bold">
-                <span data-i18n="total_price">Jami:</span>
-                <span id="cart-total-price" class="text-indigo-400">$0</span>
-            </div>
-            <button onclick="checkout()"
-                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition"
-                data-i18n="checkout">
-                Rasmiylashtirish
+            <button onclick="closeProductModal()"
+                class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-900/80 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
+
+            <!-- Product Modal Image Section -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto bg-slate-950 relative flex items-center justify-center p-6">
+                <img id="modalImage" src="" alt=""
+                    class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl">
+                <span id="modalCategoryBadge"
+                    class="absolute top-4 left-4 text-[10px] font-bold text-indigo-300 bg-indigo-600/30 border border-indigo-500/40 px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur">
+                    Kategoriya
+                </span>
+            </div>
+
+            <!-- Product Details Info Section -->
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto space-y-4">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
+                        <div class="flex items-center" id="modalStars"></div>
+                        <span id="modalRatingText" class="text-slate-300">5.0</span>
+                    </div>
+
+                    <h2 id="modalTitle" class="text-2xl font-black text-white font-outfit">Mahsulot Nomi</h2>
+                    <p id="modalBrand" class="text-xs text-indigo-400 font-bold uppercase tracking-widest">Brend</p>
+                    <p id="modalDesc" class="text-slate-300 text-xs leading-relaxed">Mahsulot haqida batafsil tavsif va
+                        xususiyatlar.</p>
+
+                    <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 space-y-1 text-xs">
+                        <div class="flex justify-between text-slate-400">
+                            <span>Kafolat:</span>
+                            <span class="text-white font-semibold">12 Oylik Rasmiy</span>
+                        </div>
+                        <div class="flex justify-between text-slate-400">
+                            <span>Omborda:</span>
+                            <span class="text-emerald-400 font-semibold">Mavjud (Aktiv)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-4">
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-bold">Maxsus Narx</p>
+                        <p id="modalPrice" class="text-2xl font-black text-emerald-400 font-outfit">$0</p>
+                    </div>
+
+                    <button id="modalAddToCartBtn"
+                        class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <span>Savatga Qo'shish</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- TRANSLATIONS DICTIONARY -->
+    <!-- Toast Notification Popup -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-indigo-500/50 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300">
+        <div id="toastIcon"
+            class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <p id="toastMessage" class="text-xs font-bold">Xabarnoma</p>
+    </div>
+
     <script>
-        const I18N = {
-            uz: {
-                search_ph: "300+ mahsulotdan qidirish...",
-                login: "Kirish",
-                cart: "Savat",
-                nav_home: "Asosiy",
-                nav_catalog: "Katalog",
-                hero_title: "Aqlli Gadjetlar Va AI Hardware Hub",
-                hero_desc: "Saralangan noutbuk, smartfon va boshqa texnikalar. O'zbek, Ingliz va Rus tillarida AI bilan suhbatlashing!",
-                ai_button: "AI Bilan Suhbat",
-                cat_title: "Kategoriyalar",
-                top_products: "Tanlangan Mahsulotlar",
-                catalog_header: "Mahsulotlar Katalogi",
-                cat_all: "Barcha Kategoriyalar",
-                cat_laptops: "Noutbuklar",
-                cat_phones: "Smartfonlar",
-                cat_gaming: "Gaming",
-                cat_audio: "Audio",
-                cat_watch: "Smart Soatlar",
-                cat_acc: "Aksessuarlar",
-                ai_input_ph: "AI'dan ixtiyoriy tilda savol so'rang...",
-                signin_tab: "Kirish (Sign In)",
-                signup_tab: "Ro'yxatdan o'tish (Sign Up)",
-                email_label: "Email Pochta",
-                pass_label: "Parol",
-                name_label: "Ismingiz",
-                btn_signin: "Tizimga Kirish",
-                btn_signup: "Akkaunt Yaratish",
-                cart_title: "Savatingiz",
-                total_price: "Jami Narx:",
-                checkout: "Rasmiylashtirish",
-                add_to_cart: "+ Savat",
-                ai_welcome: "Assalomu alaykum! Men IBROHIM_TECH saytining **ko'p tilli AI yordamchisiman**. Menga O'zbek, Ingliz yoki Rus tillarida savol berishingiz mumkin!"
+        /* ==========================================================================
+           1. MASTER PRODUCT CATALOG DATA STORE (50+ High Quality Items)
+           ========================================================================== */
+        const productCatalog = [
+            // --- TELEFONLAR (1-8) ---
+            {
+                id: 1,
+                name: "iPhone 16 Pro Max 1TB",
+                category: "Telefonlar",
+                brand: "Apple",
+                price: 1599,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80",
+                desc: "Apple A18 Pro chip, Titanium korpus, 48MP Fusion kamera va Dynamic Island."
             },
-            en: {
-                search_ph: "Search 300+ products...",
-                login: "Sign In",
-                cart: "Cart",
-                nav_home: "Home",
-                nav_catalog: "Catalog",
-                hero_title: "Smart Gadgets & AI Hardware Hub",
-                hero_desc: "Handpicked laptops, smartphones, and gear. Chat with real AI in English, Uzbek, or Russian!",
-                ai_button: "Chat with AI",
-                cat_title: "Categories",
-                top_products: "Featured Products",
-                catalog_header: "Products Catalog",
-                cat_all: "All Categories",
-                cat_laptops: "Laptops",
-                cat_phones: "Smartphones",
-                cat_gaming: "Gaming",
-                cat_audio: "Audio",
-                cat_watch: "Smart Watches",
-                cat_acc: "Accessories",
-                ai_input_ph: "Ask AI any question in any language...",
-                signin_tab: "Sign In",
-                signup_tab: "Sign Up",
-                email_label: "Email Address",
-                pass_label: "Password",
-                name_label: "Your Name",
-                btn_signin: "Sign In Now",
-                btn_signup: "Create Account",
-                cart_title: "Shopping Cart",
-                total_price: "Total Price:",
-                checkout: "Checkout",
-                add_to_cart: "+ Add Cart",
-                ai_welcome: "Hello! I am IBROHIM_TECH **Multilingual AI Assistant**. Feel free to ask me questions in English, Uzbek, or Russian!"
+            {
+                id: 2,
+                name: "Samsung Galaxy S25 Ultra",
+                category: "Telefonlar",
+                brand: "Samsung",
+                price: 1399,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+                desc: "Snapdragon 8 Gen 4, Galaxy AI, 200MP kamera va o'rnatilgan S-Pen qalami."
             },
-            ru: {
-                search_ph: "Поиск из 300+ товаров...",
-                login: "Войти",
-                cart: "Корзина",
-                nav_home: "Главная",
-                nav_catalog: "Каталог",
-                hero_title: "Умные гаджеты и AI Hardware Hub",
-                hero_desc: "Отборные ноутбуки, смартфоны и техника. Общайтесь с AI на узбекском, английском и русском языках!",
-                ai_button: "Чат с AI",
-                cat_title: "Категории",
-                top_products: "Популярные Товары",
-                catalog_header: "Каталог Товаров",
-                cat_all: "Все Категории",
-                cat_laptops: "Ноутбуки",
-                cat_phones: "Смартфоны",
-                cat_gaming: "Гейминг",
-                cat_audio: "Аудио",
-                cat_watch: "Смарт-часы",
-                cat_acc: "Аксессуары",
-                ai_input_ph: "Задайте вопрос ИИ на любом языке...",
-                signin_tab: "Вход (Sign In)",
-                signup_tab: "Регистрация (Sign Up)",
-                email_label: "Эл. Почта",
-                pass_label: "Пароль",
-                name_label: "Ваше Имя",
-                btn_signin: "Войти в систему",
-                btn_signup: "Создать аккаунт",
-                cart_title: "Ваша Корзина",
-                total_price: "Итого:",
-                checkout: "Оформить заказ",
-                add_to_cart: "+ В корзину",
-                ai_welcome: "Здравствуйте! Я **многоязычный ИИ-помощник** IBROHIM_TECH. Вы можете задавать мне вопросы на узбекском, английском или русском языке!"
+            {
+                id: 3,
+                name: "Google Pixel 9 Pro XL",
+                category: "Telefonlar",
+                brand: "Google",
+                price: 1199,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+                desc: "Google Tensor G4, Gemini AI integratsiyasi va eng mukammal tungi tasvir texnologiyasi."
+            },
+            {
+                id: 4,
+                name: "Xiaomi 14 Ultra Leica",
+                category: "Telefonlar",
+                brand: "Xiaomi",
+                price: 1099,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+                desc: "Leica Summilux 1-dyuymli professional linzalar va 90W o'ta tezkor quvvatlash."
+            },
+            {
+                id: 5,
+                name: "OnePlus 12 5G 512GB",
+                category: "Telefonlar",
+                brand: "OnePlus",
+                price: 899,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+                desc: "Hasselblad 4-avlod kamerasi, 100W SUPERVOOC va Snapdragon 8 Gen 3."
+            },
+            {
+                id: 6,
+                name: "ASUS ROG Phone 8 Pro",
+                category: "Telefonlar",
+                brand: "ASUS",
+                price: 1299,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=600&auto=format&fit=crop&q=80",
+                desc: "Geymerlar uchun 165Hz AMOLED displey, AniMe Vision va AirTrigger tugmalari."
+            },
+            {
+                id: 7,
+                name: "iPhone 16 Plus 256GB",
+                category: "Telefonlar",
+                brand: "Apple",
+                price: 999,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=80",
+                desc: "Action Button, A18 chipset va ulkan 48 soatlik batareya quvvati."
+            },
+            {
+                id: 8,
+                name: "Samsung Galaxy Z Fold 6",
+                category: "Telefonlar",
+                brand: "Samsung",
+                price: 1899,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+                desc: "Egiluvchan 7.6-dyuymli Dynamic AMOLED 2X displey va ultra ingichka dizayn."
+            },
+
+            // --- NOUTBUKLAR (9-14) ---
+            {
+                id: 9,
+                name: "MacBook Pro 16 M3 Max",
+                category: "Noutbuklar",
+                brand: "Apple",
+                price: 3499,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80",
+                desc: "16-Cores CPU, 40-Cores GPU, 48GB Unifed Xotira va Liquid Retina XDR displey."
+            },
+            {
+                id: 10,
+                name: "ASUS ROG Strix SCAR 18",
+                category: "Noutbuklar",
+                brand: "ASUS",
+                price: 3899,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=80",
+                desc: "Intel i9-14900HX, RTX 4090 16GB, 240Hz Nebula HDR displey va RGB klaviatura."
+            },
+            {
+                id: 11,
+                name: "Dell XPS 16 OLED Touch",
+                category: "Noutbuklar",
+                brand: "Dell",
+                price: 2799,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&auto=format&fit=crop&q=80",
+                desc: "Intel Core Ultra 9, RTX 4070 va sensorli 4K InfinityEdge OLED displey."
+            },
+            {
+                id: 12,
+                name: "Lenovo Legion Pro 7i",
+                category: "Noutbuklar",
+                brand: "Lenovo",
+                price: 2499,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
+                desc: "Lenovo AI Engine+ chip, RTX 4080 va Coldfront 5.0 sovutish tizimi."
+            },
+            {
+                id: 13,
+                name: "MacBook Air 15 M3",
+                category: "Noutbuklar",
+                brand: "Apple",
+                price: 1299,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&auto=format&fit=crop&q=80",
+                desc: "O'ta yengil ventilyatorsiz dizayn, 18 soatlik avtonomiya va M3 unumdorligi."
+            },
+            {
+                id: 14,
+                name: "HP Spectre x360 Convertible",
+                category: "Noutbuklar",
+                brand: "HP",
+                price: 1599,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&auto=format&fit=crop&q=80",
+                desc: "360-darajaga bukiluvchi 2-in-1 sensorli noutbuk, HP Stylus Pen bilan."
+            },
+
+            // --- DRONLAR (15-19) ---
+            {
+                id: 15,
+                name: "DJI Inspire 3 Cinema Drone",
+                category: "Dronlar",
+                brand: "DJI",
+                price: 12499,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&auto=format&fit=crop&q=80",
+                desc: "8K Zenmuse X9-8K Air full-frame kamera va RTK yuqori aniqlikdagi pozitsiyalash."
+            },
+            {
+                id: 16,
+                name: "DJI Mavic 3 Pro Cine",
+                category: "Dronlar",
+                brand: "DJI",
+                price: 2999,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&auto=format&fit=crop&q=80",
+                desc: "Uchta Hasselblad kamerasi (4/3 CMOS), ProRes format va 43 minut parvoz."
+            },
+            {
+                id: 17,
+                name: "DJI Mini 4 Pro Fly More",
+                category: "Dronlar",
+                brand: "DJI",
+                price: 1099,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&auto=format&fit=crop&q=80",
+                desc: "249-grammdan kam og'irlik, 4K/60fps HDR video va to'siqlarni avto-aniqlash."
+            },
+            {
+                id: 18,
+                name: "Autel EVO II Pro V3 6K",
+                category: "Dronlar",
+                brand: "Autel",
+                price: 2299,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=600&auto=format&fit=crop&q=80",
+                desc: "1-dyuymli CMOS sensori, 6K piksellar soni va 40 minutlik davomiylik."
+            },
+            {
+                id: 19,
+                name: "DJI Avata 2 FPV Explorer",
+                category: "Dronlar",
+                brand: "DJI",
+                price: 999,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=600&auto=format&fit=crop&q=80",
+                desc: "FPV kozoynaklari bilan virtual parvoz va 155-darajali ultra-keng kamera."
+            },
+
+            // --- PLANSHETLAR (20-24) ---
+            {
+                id: 20,
+                name: "iPad Pro 13-inch M4 1TB",
+                category: "Planshetlar",
+                brand: "Apple",
+                price: 1899,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&auto=format&fit=crop&q=80",
+                desc: "Ultra Retina XDR Tandem OLED displey, M4 chip va atigi 5.1mm qalinlik."
+            },
+            {
+                id: 21,
+                name: "Samsung Galaxy Tab S9 Ultra",
+                category: "Planshetlar",
+                brand: "Samsung",
+                price: 1199,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&auto=format&fit=crop&q=80",
+                desc: "14.6-dyuymli Dynamic AMOLED 2X, IP68 suvdan himoya va S-Pen qalam."
+            },
+            {
+                id: 22,
+                name: "iPad Air 11-inch M2",
+                category: "Planshetlar",
+                brand: "Apple",
+                price: 699,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&auto=format&fit=crop&q=80",
+                desc: "Apple M2 chipseti, Liquid Retina displey va Apple Pencil Pro qo'llab-quvvatlash."
+            },
+            {
+                id: 23,
+                name: "Xiaomi Pad 6 Max 14",
+                category: "Planshetlar",
+                brand: "Xiaomi",
+                price: 649,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=600&auto=format&fit=crop&q=80",
+                desc: "14-dyuymli 2.8K 120Hz displey, 8 ta karnay va Snapdragon 8+ Gen 1."
+            },
+            {
+                id: 24,
+                name: "Microsoft Surface Pro 10 AI",
+                category: "Planshetlar",
+                brand: "Microsoft",
+                price: 1499,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=600&auto=format&fit=crop&q=80",
+                desc: "Intel Core Ultra AI protsessori, Windows 11 va yechiluvchi klaviatura."
+            },
+
+            // --- TELEVIZORLAR (25-29) ---
+            {
+                id: 25,
+                name: "Samsung 85\" Neo QLED 8K",
+                category: "Televizorlar",
+                brand: "Samsung",
+                price: 4999,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&auto=format&fit=crop&q=80",
+                desc: "NQ8 AI Gen3 protsessori, Quantum Matrix Pro va Dolby Atmos ovoz tizimi."
+            },
+            {
+                id: 26,
+                name: "LG OLED EVO G4 77-inch",
+                category: "Televizorlar",
+                brand: "LG",
+                price: 3499,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=600&auto=format&fit=crop&q=80",
+                desc: "Alpha 11 AI protsessor, 144Hz o'yin rejimi va Brightness Booster Max."
+            },
+            {
+                id: 27,
+                name: "Sony BRAVIA XR Mini LED 75\"",
+                category: "Televizorlar",
+                brand: "Sony",
+                price: 2799,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1577979749830-f1d742b96791?w=600&auto=format&fit=crop&q=80",
+                desc: "Cognitive Processor XR, Acoustic Multi-Audio va PlayStation 5 uchun ideal moslik."
+            },
+            {
+                id: 28,
+                name: "TCL 85\" QD-OLED 4K Smart",
+                category: "Televizorlar",
+                brand: "TCL",
+                price: 1899,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=600&auto=format&fit=crop&q=80",
+                desc: "Google TV operatsion tizimi, 120Hz ekran chastotasi va Onkyo dinamiklari."
+            },
+            {
+                id: 29,
+                name: "Xiaomi TV Max 86-inch 4K",
+                category: "Televizorlar",
+                brand: "Xiaomi",
+                price: 1599,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&auto=format&fit=crop&q=80",
+                desc: "Ulkan 86-dyuymli ramkasiz panel, Dolby Vision IQ va MEMC tezlashtirish."
+            },
+
+            // --- MUZLATGICHLAR / XOLODELNIK (30-34) ---
+            {
+                id: 30,
+                name: "Samsung Bespoke Family Hub",
+                category: "Muzlatgichlar",
+                brand: "Samsung",
+                price: 3299,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
+                desc: "32-dyuymli sensorli aqlli ekran, ichki kameralar va tayyorlanadigan muz generatori."
+            },
+            {
+                id: 31,
+                name: "LG InstaView Door-in-Door",
+                category: "Muzlatgichlar",
+                brand: "LG",
+                price: 2699,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&auto=format&fit=crop&q=80",
+                desc: "Oynani ikki marta urganingizda ichi yorishuvchi shaffof eshik va UVnano tozalagich."
+            },
+            {
+                id: 32,
+                name: "Bosch Series 8 NoFrost Smart",
+                category: "Muzlatgichlar",
+                brand: "Bosch",
+                price: 1899,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
+                desc: "VitaFresh Pro mahsulotlar yangiligini 3 barobar uzoqroq saqlovchi maxsus hudud."
+            },
+            {
+                id: 33,
+                name: "Haier French Door 4-Door",
+                category: "Muzlatgichlar",
+                brand: "Haier",
+                price: 1599,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&auto=format&fit=crop&q=80",
+                desc: "ABT antibakterial ultrabinafsha tozalash va alohida Harorat Zonasi."
+            },
+            {
+                id: 34,
+                name: "Whirlpool Side-by-Side 600L",
+                category: "Muzlatgichlar",
+                brand: "Whirlpool",
+                price: 1399,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&auto=format&fit=crop&q=80",
+                desc: "6th Sense datchiklari bilan avtomatik harorat va namlik nazorati."
+            },
+
+            // --- KIR YUVISH MASHINALARI (35-39) ---
+            {
+                id: 35,
+                name: "LG AI DD Washer & Dryer 12kg",
+                category: "Kir yuvish mashinalari",
+                brand: "LG",
+                price: 1199,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
+                desc: "AI DD sun'iy intellekti mato turini aniqlaydi, bug'da yuvish (Steam+) funksiyasi."
+            },
+            {
+                id: 36,
+                name: "Samsung Bespoke AI Washer 11kg",
+                category: "Kir yuvish mashinalari",
+                brand: "Samsung",
+                price: 1099,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&auto=format&fit=crop&q=80",
+                desc: "EcoBubble ko'pik generatori va AI Ecobubble aqlli dozalash tizimi."
+            },
+            {
+                id: 37,
+                name: "Bosch Series 6 HomeConnect",
+                category: "Kir yuvish mashinalari",
+                brand: "Bosch",
+                price: 899,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
+                desc: "EcoSilence Drive o'ta jim motor va AntiStain dog'larni avto yoqotish."
+            },
+            {
+                id: 38,
+                name: "Electrolux PerfectCare 800",
+                category: "Kir yuvish mashinalari",
+                brand: "Electrolux",
+                price: 799,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&auto=format&fit=crop&q=80",
+                desc: "UltraCare tizimi kiyim tolalarini asraydi, SteamCare g'ijimlarni kamaytiradi."
+            },
+            {
+                id: 39,
+                name: "Indesit Inverter Pro 8kg",
+                category: "Kir yuvish mashinalari",
+                brand: "Indesit",
+                price: 499,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=600&auto=format&fit=crop&q=80",
+                desc: "Push & Go texnologiyasi - bir tugma bilan 45 minutlik mukammal yuvish."
+            },
+
+            // --- GAZ PLITALAR / STOVE (40-43) ---
+            {
+                id: 40,
+                name: "Bosch Series 8 Induction Cooktop",
+                category: "Gaz plitalari",
+                brand: "Bosch",
+                price: 1399,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
+                desc: "FlexInduction birlashuvchi zonalar va PerfectFry pishirish sensorlari."
+            },
+            {
+                id: 41,
+                name: "Smeg Victoria Gas Range Stove",
+                category: "Gaz plitalari",
+                brand: "Smeg",
+                price: 3299,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=600&auto=format&fit=crop&q=80",
+                desc: "Italiya premium retro dizayni, 5 ta gaz gorelka va ikki qavatli elektr duxovka."
+            },
+            {
+                id: 42,
+                name: "Electrolux Dual Fuel Gas/Electric",
+                category: "Gaz plitalari",
+                brand: "Electrolux",
+                price: 899,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
+                desc: "Wok gorelkasi, gaz-kontrol xavfsizlik tizimi va kadrli taymer."
+            },
+            {
+                id: 43,
+                name: "Gorenje Chef's Gas Range",
+                category: "Gaz plitalari",
+                brand: "Gorenje",
+                price: 649,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=600&auto=format&fit=crop&q=80",
+                desc: "HomeMade duxovka shakli, Chuyan mustahkam panjaralar va avto-o't oldirgich."
+            },
+
+            // --- MIKROTO'LQINLI PECHLAR (44-47) ---
+            {
+                id: 44,
+                name: "Samsung Smart Oven Convection",
+                category: "Mikroto'lqinli pechlar",
+                brand: "Samsung",
+                price: 349,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop&q=80",
+                desc: "HotBlast texnologiyasi, Slim Fry yog'siz qovurish va biokeramik qoplama."
+            },
+            {
+                id: 45,
+                name: "Panasonic Inverter Grill Oven",
+                category: "Mikroto'lqinli pechlar",
+                brand: "Panasonic",
+                price: 289,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80",
+                desc: "Inverter uzluksiz issiqlik, kvarsli grill va 32 litr keng hajm."
+            },
+            {
+                id: 46,
+                name: "LG NeoChef Smart Inverter",
+                category: "Mikroto'lqinli pechlar",
+                brand: "LG",
+                price: 229,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop&q=80",
+                desc: "Anti-Bacterial EasyClean tozalash va barqaror quvvatli eritish."
+            },
+            {
+                id: 47,
+                name: "Sharp Smart Touch Microwave",
+                category: "Mikroto'lqinli pechlar",
+                brand: "Sharp",
+                price: 159,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80",
+                desc: "Sensorli boshqaruv paneli, 10 xil avto-dastur va LED yoritgich."
+            },
+
+            // --- AQLLI TEXNIKALAR & GADJETLAR (48-52) ---
+            {
+                id: 48,
+                name: "Apple Vision Pro Spatial Computer",
+                category: "Aqlli texnikalar",
+                brand: "Apple",
+                price: 3499,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600&auto=format&fit=crop&q=80",
+                desc: "Fazo kompyuteri, dual micro-OLED 4K displeylar va R1 + M2 chipilari."
+            },
+            {
+                id: 49,
+                name: "Apple Watch Ultra 2 GPS Titanium",
+                category: "Aqlli texnikalar",
+                brand: "Apple",
+                price: 799,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1510017803434-a899398421b3?w=600&auto=format&fit=crop&q=80",
+                desc: "3000 nits disley, S9 SiP chip, Double Tap ishora boshqaruvi va 100m suv chidamlilik."
+            },
+            {
+                id: 50,
+                name: "Sony WH-1000XM5 Noise-Canceling",
+                category: "Aqlli texnikalar",
+                brand: "Sony",
+                price: 399,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+                desc: "Sanoatdagi eng yaxshi shovqin bosuvchi (ANC) simsiz quloqchinlar."
+            },
+            {
+                id: 51,
+                name: "PlayStation 5 Pro Console",
+                category: "Aqlli texnikalar",
+                brand: "Sony",
+                price: 699,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600&auto=format&fit=crop&q=80",
+                desc: "PSSR AI Ray-Tracing tezlatgichi, 2TB SSD va 120fps 4K o'yinlar."
+            },
+            {
+                id: 52,
+                name: "Dyson Airwrap Multi-Styler",
+                category: "Aqlli texnikalar",
+                brand: "Dyson",
+                price: 599,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
+                desc: "Coanda havo oqimi yordamida sochlarni shikastlamasdan uslub berish."
             }
-        };
+        ];
 
-        let currentLang = 'uz';
+        /* ==========================================================================
+           2. GLOBAL STATE VARIABLES
+           ========================================================================== */
+        let cart = JSON.parse(localStorage.getItem('ibrohim_cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('ibrohim_favorites')) || [];
+        let selectedCategory = 'Barchasi';
+        let showOnlyFavs = false;
+        let isDayMode = false; // Default: Dark Night Mode
 
-        function changeLanguage(lang) {
-            currentLang = lang;
+        // Weather Atmospheric Animation Effects System
+        // Modes: 'snow' (qor), 'sun' (quyosh), 'stars' (yulduzlar), 'rain' (yomg'ir)
+        let currentWeatherFx = 'snow';
 
-            // Update Text Elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (I18N[lang][key]) el.textContent = I18N[lang][key];
-            });
+        const categories = [
+            'Barchasi',
+            'Telefonlar',
+            'Noutbuklar',
+            'Dronlar',
+            'Planshetlar',
+            'Televizorlar',
+            'Muzlatgichlar',
+            'Kir yuvish mashinalari',
+            'Gaz plitalari',
+            'Mikroto\'lqinli pechlar',
+            'Aqlli texnikalar'
+        ];
 
-            // Update Placeholders
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (I18N[lang][key]) el.placeholder = I18N[lang][key];
-            });
-
-            document.getElementById('ai-welcome-msg').innerHTML = I18N[lang].ai_welcome;
-            renderHomeProducts();
-            renderPaginatedCatalog();
-        }
-
-        /* ACCURATE & DYNAMIC IMAGES GENERATION (NO DUPLICATES) */
-        const KEYWORDS_MAP = {
-            laptops: ["laptop", "macbook", "notebook-computer", "computer-tech"],
-            phones: ["smartphone", "iphone", "mobile-phone", "cellphone"],
-            gaming: ["gaming-console", "playstation", "graphics-card", "gaming-pc"],
-            audio: ["headphones", "earphones", "audio-headset", "studio-headphones"],
-            watch: ["smartwatch", "apple-watch", "digital-watch", "wrist-watch"],
-            acc: ["keyboard", "computer-mouse", "charger", "gadget-accessory"]
-        };
-
-        function getDynamicImage(category, index) {
-            const keywords = KEYWORDS_MAP[category] || ["technology"];
-            const kw = keywords[index % keywords.length];
-            // Unsplash source URL with exact search query and unique sig to prevent duplicate images
-            return `https://source.unsplash.com/featured/600x400/?${kw}&sig=${category}-${index}`;
-        }
-
-        function generateProducts() {
-            const list = [];
-            const categories = ['laptops', 'phones', 'gaming', 'audio', 'watch', 'acc'];
-            const titles = {
-                laptops: ["MacBook Pro M4", "ROG Strix SCAR", "Razer Blade 18", "Dell XPS 16", "Lenovo Legion Pro"],
-                phones: ["iPhone 16 Pro Max", "Galaxy S25 Ultra", "Google Pixel 9 Pro", "Xiaomi 14 Ultra"],
-                gaming: ["PlayStation 5 Pro", "NVIDIA RTX 5090", "Xbox Series X", "Steam Deck OLED"],
-                audio: ["AirPods Max 2", "Sony WH-1000XM5", "Bose QC Ultra", "Sennheiser Momentum 4"],
-                watch: ["Apple Watch Ultra 2", "Galaxy Watch 7", "Garmin Fenix 8", "Pixel Watch 3"],
-                acc: ["Anker GaN Charger", "Keychron Q1 Keyboard", "Logitech MX Master 3S", "Elgato Stream Deck"]
-            };
-
-            let idCounter = 1;
-            categories.forEach(cat => {
-                for (let i = 1; i <= 50; i++) {
-                    const baseTitle = titles[cat][(i - 1) % titles[cat].length];
-                    list.push({
-                        id: idCounter,
-                        name: `${baseTitle} #${i}`,
-                        category: cat,
-                        price: Math.floor(Math.random() * 1500) + 120,
-                        rating: (Math.random() * 0.5 + 4.5).toFixed(1),
-                        image: getDynamicImage(cat, i)
-                    });
-                    idCounter++;
-                }
-            });
-            return list;
-        }
-
-        const PRODUCTS = generateProducts();
-        let cart = [];
-        let wishlist = [];
-        let filteredProducts = [...PRODUCTS];
-        let currentPage = 1;
-        let itemsPerPage = 24;
-
-        let registeredUsers = JSON.parse(localStorage.getItem('ibrohim_registered_users')) || [];
-        let currentUser = JSON.parse(localStorage.getItem('ibrohim_current_user')) || null;
-
-        document.addEventListener('DOMContentLoaded', () => {
+        /* ==========================================================================
+           3. INITIALIZATION & EVEN LISTENERS
+           ========================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
             initClock();
-            renderCategories();
-            changeLanguage('uz');
-            updateUserUI();
+            initCategoryTabs();
+            renderProducts();
+            updateCartUI();
+            updateFavBadge();
+            setupCanvasFx();
         });
 
+        /* ==========================================================================
+           4. REAL-TIME CLOCK & DAY/NIGHT ENGINE
+           ========================================================================== */
         function initClock() {
-            setInterval(() => {
-                document.getElementById('clock-widget').textContent = new Date().toLocaleTimeString();
-            }, 1000);
+            function updateTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                const clockEl = document.getElementById('liveClockDisplay');
+                if (clockEl) clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
         }
 
-        function renderCategories() {
-            const categories = [
-                { id: 'laptops', nameKey: 'cat_laptops', icon: 'fa-laptop' },
-                { id: 'phones', nameKey: 'cat_phones', icon: 'fa-mobile-screen-button' },
-                { id: 'gaming', nameKey: 'cat_gaming', icon: 'fa-gamepad' },
-                { id: 'audio', nameKey: 'cat_audio', icon: 'fa-headphones' },
-                { id: 'watch', nameKey: 'cat_watch', icon: 'fa-stopwatch' },
-                { id: 'acc', nameKey: 'cat_acc', icon: 'fa-plug' }
-            ];
+        // Toggle Day / Night UI Theme Mode
+        function toggleDayNightMode() {
+            isDayMode = !isDayMode;
+            const body = document.documentElement;
+            const icon = document.getElementById('themeToggleIcon');
 
-            document.getElementById('categories-grid').innerHTML = categories.map(c => `
-                <div onclick="filterByCategory('${c.id}')" class="glass-panel p-3 rounded-xl flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-indigo-500 transition">
-                    <i class="fa-solid ${c.icon} text-indigo-400 text-sm"></i>
-                    <span class="text-[10px] font-bold text-gray-300 text-center" data-i18n="${c.nameKey}">...</span>
-                </div>
-            `).join('');
+            if (isDayMode) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                icon.className = 'fa-solid fa-moon text-indigo-600 text-base';
+                currentWeatherFx = 'sun';
+                updateWeatherBadgeUI('Quyoshli Kunduz', 'fa-sun text-amber-500');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-amber-400 text-base';
+                currentWeatherFx = 'snow';
+                updateWeatherBadgeUI('Tungi Yulduzlar & Qor', 'fa-snowflake text-indigo-400');
+            }
         }
 
-        function renderHomeProducts() {
-            document.getElementById('home-products-grid').innerHTML = PRODUCTS.slice(0, 8).map(p => createCardHTML(p)).join('');
+        // Cycle through dynamic weather particles on background canvas
+        function cycleWeatherEffect() {
+            const effects = ['snow', 'stars', 'sun', 'rain'];
+            let nextIndex = (effects.indexOf(currentWeatherFx) + 1) % effects.length;
+            currentWeatherFx = effects[nextIndex];
+
+            const labels = {
+                'snow': { text: "Effekt: Qor Yog'ishi", badge: "Qor va Salqin", icon: "fa-snowflake text-blue-400" },
+                'stars': { text: "Effekt: Tungi Yulduzlar", badge: "Tungi Tinch Yulduzlar", icon: "fa-star text-amber-300" },
+                'sun': { text: "Effekt: Quyosh Nuri", badge: "Yorqin Quyosh Nuri", icon: "fa-sun text-amber-500" },
+                'rain': { text: "Effekt: Texno Yomg'ir", badge: "Texno Yomg'ir Effect", icon: "fa-cloud-showers-heavy text-cyan-400" }
+            };
+
+            const current = labels[currentWeatherFx];
+            document.getElementById('bannerFxLabel').textContent = current.text;
+            updateWeatherBadgeUI(current.badge, current.icon);
+            showToast(`${current.badge} effekti yoqildi`, "info");
         }
 
-        function createCardHTML(p) {
-            return `
-                <div class="glass-panel rounded-2xl overflow-hidden hover:border-indigo-500/50 transition flex flex-col justify-between">
-                    <div class="relative h-36 bg-gray-950">
-                        <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover">
-                        <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-gray-900/80 text-pink-400 flex items-center justify-center text-xs">
-                            <i class="fa-${wishlist.some(w => w.id === p.id) ? 'solid' : 'regular'} fa-heart"></i>
+        function updateWeatherBadgeUI(text, iconClass) {
+            document.getElementById('weatherStatusText').textContent = text;
+            document.getElementById('weatherModeIcon').className = `fa-solid ${iconClass}`;
+        }
+
+        /* ==========================================================================
+           5. CANVAS BACKGROUND ATMOSPHERIC WEATHER PARTICLES
+           ========================================================================== */
+        function setupCanvasFx() {
+            const canvas = document.getElementById('fxCanvas');
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            // Particles Array
+            let particles = [];
+            const numParticles = 80;
+
+            for (let i = 0; i < numParticles; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 3 + 1,
+                    speedY: Math.random() * 1.5 + 0.5,
+                    speedX: Math.random() * 0.5 - 0.25,
+                    opacity: Math.random() * 0.8 + 0.2
+                });
+            }
+
+            function animateFx() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    ctx.beginPath();
+
+                    if (currentWeatherFx === 'snow') {
+                        // Falling White Flakes
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                        ctx.fill();
+
+                        p.y += p.speedY;
+                        p.x += Math.sin(p.y * 0.01) * 0.5;
+
+                    } else if (currentWeatherFx === 'stars') {
+                        // Twinkling Night Stars
+                        ctx.arc(p.x, p.y, p.radius * 0.8, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(251, 191, 36, ${Math.abs(Math.sin(Date.now() * 0.002 + p.x))})`;
+                        ctx.fill();
+
+                    } else if (currentWeatherFx === 'sun') {
+                        // Floating Golden Dust Particles in Sun Rays
+                        ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(245, 158, 11, ${p.opacity * 0.4})`;
+                        ctx.fill();
+
+                        p.y -= p.speedY * 0.3;
+
+                    } else if (currentWeatherFx === 'rain') {
+                        // Cyan Tech Rain Streaks
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${p.opacity * 0.6})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p.x + p.speedX, p.y + p.speedY * 8);
+                        ctx.stroke();
+
+                        p.y += p.speedY * 4;
+                    }
+
+                    // Wrap around boundaries
+                    if (p.y > height) { p.y = -10; p.x = Math.random() * width; }
+                    if (p.y < -10) { p.y = height; p.x = Math.random() * width; }
+                });
+
+                requestAnimationFrame(animateFx);
+            }
+
+            animateFx();
+        }
+
+        /* ==========================================================================
+           6. CATEGORIES & RENDERING CATALOG
+           ========================================================================== */
+        function initCategoryTabs() {
+            const container = document.getElementById('categoryTabs');
+
+            container.innerHTML = categories.map(cat => {
+                const count = cat === 'Barchasi' ? productCatalog.length : productCatalog.filter(p => p.category === cat).length;
+                return `
+                    <button onclick="selectCategory('${cat}')" 
+                            data-cat="${cat}" 
+                            class="cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border ${cat === 'Barchasi' ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/25' : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700'}">
+                        <span>${cat}</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full ${cat === 'Barchasi' ? 'bg-white/20 text-white' : 'bg-slate-800 text-indigo-400'}">${count}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectCategory(cat) {
+            selectedCategory = cat;
+            showOnlyFavs = false;
+
+            // Update UI buttons
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/25";
+                } else {
+                    btn.className = "cat-btn px-4 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700";
+                }
+            });
+
+            document.getElementById('favNavBtn').classList.remove('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
+            document.getElementById('activeFilterLabel').textContent = cat === 'Barchasi' ? 'Barcha Mahsulotlar' : cat;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sortSelect').value;
+
+            // Filter logic
+            let items = productCatalog.filter(p => {
+                const matchesCat = selectedCategory === 'Barchasi' || p.category === selectedCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.brand.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal);
+                const matchesFav = !showOnlyFavs || favorites.includes(p.id);
+                return matchesCat && matchesSearch && matchesFav;
+            });
+
+            // Sorting logic
+            if (sortVal === 'price-low') items.sort((a, b) => a.price - b.price);
+            else if (sortVal === 'price-high') items.sort((a, b) => b.price - a.price);
+            else if (sortVal === 'rating') items.sort((a, b) => b.rating - a.rating);
+            else if (sortVal === 'name') items.sort((a, b) => a.name.localeCompare(b.name));
+
+            document.getElementById('productCounterBadge').textContent = `${items.length} ta Mahsulot`;
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            // Render Product Cards
+            grid.innerHTML = items.map(product => {
+                const isFav = favorites.includes(product.id);
+                return `
+                <div class="glass-card rounded-3xl overflow-hidden product-card border border-slate-800/90 flex flex-col justify-between group relative">
+                    
+                    <!-- Top Image Area -->
+                    <div class="relative h-56 bg-slate-950/60 p-4 flex items-center justify-center overflow-hidden border-b border-slate-800/60">
+                        
+                        <!-- Category Tag -->
+                        <span class="absolute top-3 left-3 bg-slate-900/90 border border-slate-700/80 text-indigo-300 text-[10px] font-bold px-2.5 py-1 rounded-xl backdrop-blur z-20">
+                            ${product.category}
+                        </span>
+
+                        <!-- Favorite Button -->
+                        <button onclick="toggleFavorite(${product.id})" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-center text-slate-400 hover:text-pink-500 transition-all active:scale-90">
+                            <i class="${isFav ? 'fa-solid text-pink-500' : 'fa-regular'} fa-heart text-sm"></i>
                         </button>
+
+                        <!-- Product Image with Error Fallback -->
+                        <img src="${product.image}" 
+                             alt="${product.name}" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=600&auto=format&fit=crop&q=80';" 
+                             class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-lg cursor-pointer"
+                             onclick="openProductModal(${product.id})">
                     </div>
-                    <div class="p-3 space-y-2 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i> ${p.rating}</div>
-                            <h3 class="font-bold text-xs text-gray-100 line-clamp-1">${p.name}</h3>
+
+                    <!-- Card Details -->
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-1.5">
+                            
+                            <!-- Brand & Rating -->
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-indigo-400 font-bold uppercase tracking-wider text-[10px]">${product.brand}</span>
+                                <div class="flex items-center gap-1 text-amber-400 font-bold">
+                                    <i class="fa-solid fa-star text-[10px]"></i>
+                                    <span>${product.rating.toFixed(1)}</span>
+                                </div>
+                            </div>
+
+                            <!-- Name -->
+                            <h3 onclick="openProductModal(${product.id})" class="font-bold text-slate-100 text-sm leading-snug group-hover:text-indigo-400 transition-colors cursor-pointer line-clamp-2">
+                                ${product.name}
+                            </h3>
+
+                            <p class="text-xs text-slate-400 line-clamp-2 font-normal">${product.desc}</p>
                         </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-gray-800">
-                            <span class="text-xs font-extrabold text-indigo-400">$${p.price}</span>
-                            <button onclick="addToCart(${p.id})" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1 rounded-lg text-[10px] transition">
-                                ${I18N[currentLang].add_to_cart}
-                            </button>
+
+                        <!-- Price & Actions -->
+                        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+                            <div>
+                                <p class="text-[9px] text-slate-400 uppercase font-bold tracking-wider">Narxi</p>
+                                <p class="text-lg font-black text-white font-outfit tracking-tight">$${product.price.toLocaleString()}</p>
+                            </div>
+
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="openProductModal(${product.id})" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all">
+                                    <i class="fa-solid fa-eye text-xs"></i>
+                                </button>
+                                <button onclick="addToCart(${product.id})" class="px-3.5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all shadow-md shadow-indigo-600/20 active:scale-90 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-plus text-[10px]"></i>
+                                    <span>Savat</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            `;
+                `;
+            }).join('');
         }
 
-        function applyFilters() {
-            const cat = document.getElementById('filter-category').value;
-            filteredProducts = cat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.category === cat);
-            currentPage = 1;
-            renderPaginatedCatalog();
+        /* ==========================================================================
+           7. SEARCH & FAVORITES HANDLERS
+           ========================================================================== */
+        function handleSearch() {
+            const val = document.getElementById('searchInput').value;
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (val.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+            renderProducts();
         }
 
-        function renderPaginatedCatalog() {
-            const grid = document.getElementById('catalog-products-grid');
-            const controls = document.getElementById('pagination-controls');
-            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-            const start = (currentPage - 1) * itemsPerPage;
-
-            grid.innerHTML = filteredProducts.slice(start, start + itemsPerPage).map(p => createCardHTML(p)).join('');
-
-            controls.innerHTML = `
-                <span>${filteredProducts.length} items</span>
-                <div class="flex items-center gap-2">
-                    <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Prev</button>
-                    <span class="font-bold">${currentPage}/${totalPages || 1}</span>
-                    <button onclick="changePage(1)" ${currentPage >= totalPages ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Next</button>
-                </div>
-            `;
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderProducts();
         }
 
-        function changePage(delta) {
-            currentPage += delta;
-            renderPaginatedCatalog();
+        function syncMobileSearch(val) {
+            document.getElementById('searchInput').value = val;
+            renderProducts();
         }
 
-        function filterByCategory(catId) {
-            switchTab('catalog');
-            document.getElementById('filter-category').value = catId;
-            applyFilters();
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(item => item !== id);
+                showToast("Saralanganlardan olib tashlandi", "info");
+            } else {
+                favorites.push(id);
+                showToast("Saralanganlarga qo'shildi", "success");
+            }
+            localStorage.setItem('ibrohim_favorites', JSON.stringify(favorites));
+            updateFavBadge();
+            renderProducts();
         }
 
-        function handleSearch(query) {
-            filteredProducts = PRODUCTS.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
-            switchTab('catalog');
-            currentPage = 1;
-            renderPaginatedCatalog();
+        function updateFavBadge() {
+            const badge = document.getElementById('favBadge');
+            if (favorites.length > 0) {
+                badge.textContent = favorites.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
         }
 
-        function switchTab(tabId) {
-            document.getElementById('page-home').classList.toggle('hidden', tabId !== 'home');
-            document.getElementById('page-catalog').classList.toggle('hidden', tabId !== 'catalog');
+        function toggleFavoritesOnlyFilter() {
+            showOnlyFavs = !showOnlyFavs;
+            const btn = document.getElementById('favNavBtn');
+
+            if (showOnlyFavs) {
+                btn.classList.add('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
+                document.getElementById('activeFilterLabel').textContent = "Saralangan Mahsulotlar";
+            } else {
+                btn.classList.remove('border-pink-500', 'text-pink-500', 'bg-pink-500/10');
+                document.getElementById('activeFilterLabel').textContent = selectedCategory;
+            }
+            renderProducts();
         }
 
+        function resetFilters() {
+            selectedCategory = 'Barchasi';
+            showOnlyFavs = false;
+            clearSearch();
+            selectCategory('Barchasi');
+        }
+
+        /* ==========================================================================
+           8. PRODUCT DETAILS MODAL
+           ========================================================================== */
+        function openProductModal(id) {
+            const product = productCatalog.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalCategoryBadge').textContent = product.category;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalBrand').textContent = `Brend: ${product.brand}`;
+            document.getElementById('modalDesc').textContent = product.desc;
+            document.getElementById('modalPrice').textContent = `$${product.price.toLocaleString()}`;
+            document.getElementById('modalRatingText').textContent = product.rating.toFixed(1);
+
+            // Stars
+            const starsContainer = document.getElementById('modalStars');
+            starsContainer.innerHTML = Array.from({ length: 5 }, (_, i) => `
+                <i class="fa-solid fa-star ${i < Math.floor(product.rating) ? 'text-amber-400' : 'text-slate-700'}"></i>
+            `).join('');
+
+            const addBtn = document.getElementById('modalAddToCartBtn');
+            addBtn.onclick = () => {
+                addToCart(product.id);
+                closeProductModal();
+            };
+
+            document.getElementById('productModalOverlay').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModalOverlay').classList.add('hidden');
+        }
+
+        /* ==========================================================================
+           9. SHOPPING CART ENGINE
+           ========================================================================== */
         function addToCart(id) {
-            cart.push(PRODUCTS.find(p => p.id === id));
+            const product = productCatalog.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
             updateCartUI();
+            showToast(`${product.name} savatga qo'shildi!`, "cart");
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
+                    updateCartUI();
+                }
+            }
         }
 
         function updateCartUI() {
-            document.getElementById('cart-badge').textContent = cart.length;
-            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cartBadge');
+            const container = document.getElementById('cartItemsContainer');
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const totalEl = document.getElementById('cartTotal');
+            const drawerCount = document.getElementById('drawerItemCount');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            badge.textContent = totalItems;
+            drawerCount.textContent = `${totalItems} ta mahsulot`;
+            subtotalEl.textContent = `$${totalPrice.toLocaleString()}`;
+            totalEl.textContent = `$${totalPrice.toLocaleString()}`;
+
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center text-xs py-8">Empty Cart</p>`;
-                document.getElementById('cart-total-price').textContent = '$0';
+                container.innerHTML = `
+                    <div class="text-center py-16 space-y-3">
+                        <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto text-slate-600 text-2xl">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+                        <p class="text-slate-400 font-semibold text-sm">Savatingiz hozircha bo'sh</p>
+                        <p class="text-xs text-slate-500">Katalogdan o'zingizga yoqqan texnikani tanlang</p>
+                    </div>
+                `;
                 return;
             }
-            const total = cart.reduce((s, i) => s + i.price, 0);
-            document.getElementById('cart-total-price').textContent = `$${total}`;
-            container.innerHTML = cart.map((item, idx) => `
-                <div class="flex items-center justify-between p-2 bg-gray-800/50 rounded-xl">
-                    <div class="flex items-center gap-2">
-                        <img src="${item.image}" class="w-8 h-8 object-cover rounded">
-                        <div>
-                            <h4 class="text-[11px] font-bold text-gray-200 line-clamp-1">${item.name}</h4>
-                            <span class="text-xs text-indigo-400 font-bold">$${item.price}</span>
-                        </div>
+
+            container.innerHTML = cart.map(item => `
+                <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between gap-3">
+                    <img src="${item.image}" alt="" class="w-12 h-12 object-contain bg-slate-950 p-1 rounded-xl border border-slate-800">
+                    
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                        <p class="text-xs text-emerald-400 font-black mt-0.5">$${(item.price * item.quantity).toLocaleString()}</p>
                     </div>
-                    <button onclick="cart.splice(${idx},1);updateCartUI()" class="text-red-400 p-1 text-xs"><i class="fa-solid fa-trash"></i></button>
+
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                            <button onclick="updateCartQuantity(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:text-white">
+                                <i class="fa-solid fa-minus text-[10px]"></i>
+                            </button>
+                            <span class="w-6 text-center text-xs font-bold text-white">${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-400 hover:text-white">
+                                <i class="fa-solid fa-plus text-[10px]"></i>
+                            </button>
+                        </div>
+
+                        <button onclick="removeFromCart(${item.id})" class="text-slate-500 hover:text-red-400 p-1 transition-colors">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
         }
 
-        function toggleWishlist(id) {
-            const idx = wishlist.findIndex(w => w.id === id);
-            if (idx > -1) wishlist.splice(idx, 1);
-            else wishlist.push(PRODUCTS.find(p => p.id === id));
-            document.getElementById('wishlist-badge').textContent = wishlist.length;
-            renderHomeProducts();
-            renderPaginatedCatalog();
+        function openCartDrawer() {
+            document.getElementById('cartDrawer').classList.remove('translate-x-full');
+            document.getElementById('cartOverlay').classList.remove('opacity-0', 'pointer-events-none');
         }
 
-        function checkout() {
-            if (!currentUser) {
-                alert("Please sign in first!");
-                openAuthModal('signin');
+        function closeCartDrawer() {
+            document.getElementById('cartDrawer').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                showToast("Savatingiz bo'sh!", "info");
                 return;
             }
-            if (cart.length === 0) return;
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            alert(`Thank you ${currentUser.name}! Order placed.`);
+            showToast("Buyurtmangiz qabul qilindi! Operatorimiz bog'lanadi.", "success");
             cart = [];
+            localStorage.setItem('ibrohim_cart', JSON.stringify(cart));
             updateCartUI();
-            toggleDrawer('cart');
+            closeCartDrawer();
         }
 
-        function toggleDrawer(type) {
-            document.getElementById(`${type}-drawer`).classList.toggle('translate-x-full');
-        }
+        /* ==========================================================================
+           10. TOAST NOTIFICATION SYSTEM
+           ========================================================================== */
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
 
-        /* AUTH LOGIC */
-        function openAuthModal(tab = 'signin') {
-            document.getElementById('auth-modal').classList.remove('hidden');
-            switchAuthTab(tab);
-        }
+            toastMessage.textContent = message;
 
-        function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
-        }
-
-        function switchAuthTab(tab) {
-            const isSignIn = tab === 'signin';
-            document.getElementById('form-signin').classList.toggle('hidden', !isSignIn);
-            document.getElementById('form-signup').classList.toggle('hidden', isSignIn);
-        }
-
-        function handleSignUp(e) {
-            e.preventDefault();
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-
-            if (registeredUsers.some(u => u.email === email)) {
-                alert("Email registered already!");
-                return;
-            }
-
-            const newUser = { name, email, password };
-            registeredUsers.push(newUser);
-            localStorage.setItem('ibrohim_registered_users', JSON.stringify(registeredUsers));
-
-            currentUser = newUser;
-            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
-
-            alert("Account created successfully!");
-            updateUserUI();
-            closeAuthModal();
-        }
-
-        function handleSignIn(e) {
-            e.preventDefault();
-            const email = document.getElementById('signin-email').value;
-            const password = document.getElementById('signin-password').value;
-
-            const user = registeredUsers.find(u => u.email === email && u.password === password);
-
-            if (!user) {
-                alert("Invalid email or password!");
-                return;
-            }
-
-            currentUser = user;
-            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
-
-            alert(`Welcome back, ${user.name}!`);
-            updateUserUI();
-            closeAuthModal();
-        }
-
-        function handleLogout() {
-            currentUser = null;
-            localStorage.removeItem('ibrohim_current_user');
-            updateUserUI();
-        }
-
-        function updateUserUI() {
-            const area = document.getElementById('user-auth-area');
-            if (currentUser) {
-                area.innerHTML = `
-                    <div class="flex items-center gap-2 bg-gray-800/90 border border-indigo-500/30 px-2.5 py-1 rounded-xl text-xs">
-                        <i class="fa-solid fa-user-check text-emerald-400"></i>
-                        <span class="font-bold text-gray-200">${currentUser.name}</span>
-                        <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 ml-1 text-[10px]">
-                            <i class="fa-solid fa-power-off"></i>
-                        </button>
-                    </div>
-                `;
+            if (type === "cart") {
+                toastIcon.innerHTML = `<i class="fa-solid fa-cart-plus text-indigo-400"></i>`;
+            } else if (type === "info") {
+                toastIcon.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i>`;
             } else {
-                area.innerHTML = `
-                    <button onclick="openAuthModal('signin')" class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
-                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
-                        <span data-i18n="login">Kirish</span>
-                    </button>
-                `;
+                toastIcon.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
             }
-        }
 
-        /* MULTILINGUAL AI ENGINE */
-        function toggleAiChat() {
-            document.getElementById('ai-chat-window').classList.toggle('hidden');
-        }
-
-        function handleAiSend(e) {
-            e.preventDefault();
-            const input = document.getElementById('ai-input');
-            const prompt = input.value.trim();
-            if (!prompt) return;
-
-            appendAiMessage('user', prompt);
-            input.value = '';
-
-            const typingId = appendAiMessage('ai', `<i class="fa-solid fa-spinner animate-spin"></i> ...`);
-
+            toast.classList.remove('translate-y-24', 'opacity-0');
             setTimeout(() => {
-                const response = generateSmartAiAnswer(prompt);
-                updateAiMessage(typingId, response);
-            }, 700);
-        }
-
-        function appendAiMessage(sender, text) {
-            const container = document.getElementById('ai-messages');
-            const id = 'msg-' + Date.now();
-            const isUser = sender === 'user';
-
-            const msgDiv = document.createElement('div');
-            msgDiv.id = id;
-            msgDiv.className = isUser
-                ? "bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none ml-auto max-w-[85%] text-xs"
-                : "bg-indigo-950/80 border border-indigo-800/50 p-3 rounded-2xl rounded-tl-none mr-auto max-w-[90%] text-gray-200 text-xs space-y-1";
-
-            msgDiv.innerHTML = text;
-            container.appendChild(msgDiv);
-            container.scrollTop = container.scrollHeight;
-            return id;
-        }
-
-        function updateAiMessage(id, text) {
-            const el = document.getElementById(id);
-            if (el) el.innerHTML = text;
-            document.getElementById('ai-messages').scrollTop = document.getElementById('ai-messages').scrollHeight;
-        }
-
-        function generateSmartAiAnswer(q) {
-            const text = q.toLowerCase();
-
-            if (/[a-z]/.test(text) && (text.includes('hello') || text.includes('laptop') || text.includes('phone') || text.includes('price') || text.includes('recommend'))) {
-                if (text.includes('laptop')) {
-                    return `Top laptops in store:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Check out our catalog!`;
-                }
-                if (text.includes('phone') || text.includes('iphone')) {
-                    return `Top phones available:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
-                }
-                return `I am IBROHIM_TECH AI. I can help you find hardware or answer tech questions in English, Uzbek, or Russian!`;
-            }
-
-            if (/[а-я]/.test(text)) {
-                if (text.includes('ноутбук') || text.includes('компьютер')) {
-                    return `Лучшие ноутбуки в наличии:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Смотрите больше в каталоге!`;
-                }
-                if (text.includes('телефон') || text.includes('айфон') || text.includes('iphone')) {
-                    return `Флагманские телефоны:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
-                }
-                return `Здравствуйте! Я ИИ-помощник. Чем могу помочь вам в выборе техники?`;
-            }
-
-            if (text.includes('noutbuk') || text.includes('laptop')) {
-                return `Bizdagi top noutbuklar:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Katalogdan batafsil ko'rishingiz mumkin!`;
-            }
-            if (text.includes('phone') || text.includes('iphone') || text.includes('telefon')) {
-                return `Mashhur smartfonlar:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
-            }
-
-            return `Tushundim! "${q}" bo'yicha do'konimizda 300+ ta original mahsulot bor. Katalog sahifamizdan topishingiz mumkin!`;
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
         }
     </script>
 </body>
