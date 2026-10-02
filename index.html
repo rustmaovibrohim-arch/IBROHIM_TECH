@@ -2,1350 +2,892 @@
 <html lang="uz" class="dark">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IBROHIM_TECH — Premier Electronics Store</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IBROHIM_TECH | AI Multilingual Hardware Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome & Google Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
+                screens: {
+                    'xs': '375px',
+                    'sm': '640px',
+                    'md': '768px',
+                    'lg': '1024px',
+                    'xl': '1280px',
+                },
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0f3ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            accent: '#06b6d4'
-                        },
-                        darkbg: '#0b0f19',
-                        cardbg: '#111827',
-                        glass: 'rgba(17, 24, 39, 0.75)'
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                            Primary: '#6366f1',
+                            Accent: '#38bdf8',
+                            DarkBg: '#090d16',
+                        }
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
-            color: #f3f4f6;
-            overflow-x: hidden;
+            background-color: #090d16;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .brand-glow-text {
+            color: #38bdf8;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 22px rgba(99, 102, 241, 0.4);
         }
 
         .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
+            background: rgba(17, 24, 39, 0.85);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .glass-nav {
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
         }
 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+        ::-webkit-scrollbar-track {
+            background: #090d16;
         }
 
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(99, 102, 241, 0.4);
-            border-radius: 9999px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(99, 102, 241, 0.8);
-        }
-
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
-        }
-
-        @keyframes pulseGlow {
-
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 0.8;
-            }
-        }
-
-        .glow-effect {
-            animation: pulseGlow 4s infinite ease-in-out;
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
         }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between custom-scrollbar bg-[#0b0f19]">
+<body class="bg-[#090d16] text-gray-100 min-h-screen flex flex-col relative overflow-x-hidden pb-16 md:pb-0">
 
-    <!-- Background Animated Lights -->
-    <div
-        class="fixed top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full filter blur-[120px] pointer-events-none glow-effect z-0">
-    </div>
-    <div
-        class="fixed bottom-10 right-10 w-96 h-96 bg-brand-accent/10 rounded-full filter blur-[120px] pointer-events-none glow-effect z-0">
-    </div>
-
-    <header class="sticky top-0 z-40 glass-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-
-                <!-- Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
-                    <div
-                        class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/30">
-                        <i class="fa-solid font-bold text-xl text-white fa-microchip"></i>
-                    </div>
-                    <div>
-                        <span
-                            class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-brand-500">
-                            IBROHIM<span class="text-brand-accent">_TECH</span>
-                        </span>
-                        <p class="text-[10px] text-gray-400 tracking-wider font-semibold uppercase -mt-1">Hardware Hub
-                        </p>
-                    </div>
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-gray-800/80 shadow-2xl">
+        <!-- Live Header Bar -->
+        <div class="bg-indigo-950/40 text-[11px] xs:text-xs py-1.5 px-3 md:px-6 border-b border-indigo-900/30">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="text-indigo-300 font-medium" id="weather-widget">Tashkent: 24°C</span>
+                    <span class="text-gray-600">|</span>
+                    <span class="text-gray-300 font-mono" id="clock-widget">00:00:00</span>
                 </div>
-
-                <!-- Live Clock & Weather Widget -->
-                <div
-                    class="hidden lg:flex items-center space-x-4 glass-panel px-4 py-2 rounded-2xl text-xs font-medium text-gray-300">
-                    <div class="flex items-center space-x-2 border-r border-gray-700 pr-3">
-                        <i class="fa-solid fa-clock text-brand-accent"></i>
-                        <span id="liveClock">00:00:00</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-cloud-sun text-yellow-400"></i>
-                        <span>Toshkent +24°C</span>
-                    </div>
-                </div>
-
-                <!-- Search Bar -->
-                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="searchInput"
-                        placeholder="Mahsulotlarni izlash (masalan: RTX 4090, iPhone 15, Keyboard)..."
-                        class="w-full bg-gray-900/80 border border-gray-700/80 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
-                        oninput="handleSearch()" />
-                    <button id="clearSearchBtn" onclick="clearSearch()"
-                        class="hidden absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-
-                <!-- Header Controls (User, Wishlist, Cart) -->
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <!-- Auth User Button -->
-                    <button id="userAuthBtn" onclick="openAuthModal()"
-                        class="flex items-center space-x-2 px-3 py-2 rounded-xl bg-gray-800/80 hover:bg-gray-700 border border-gray-700 text-xs font-semibold text-gray-200 transition-all">
-                        <i class="fa-regular fa-user text-brand-accent text-sm"></i>
-                        <span id="userNameDisplay" class="hidden sm:inline">Kirish</span>
-                    </button>
-
-                    <!-- Wishlist Toggle -->
-                    <button onclick="toggleWishlistDrawer()"
-                        class="relative p-2.5 rounded-xl bg-gray-800/80 hover:bg-gray-700 border border-gray-700 text-gray-300 hover:text-red-400 transition-all">
-                        <i class="fa-regular fa-heart text-base"></i>
-                        <span id="wishlistBadge"
-                            class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center opacity-0 scale-0 transition-all duration-300">0</span>
-                    </button>
-
-                    <!-- Cart Drawer Toggle -->
-                    <button onclick="toggleCartDrawer()"
-                        class="relative p-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-lg shadow-brand-500/20 hover:opacity-95 transition-all">
-                        <i class="fa-solid fa-cart-shopping text-base"></i>
-                        <span id="cartBadge"
-                            class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-brand-accent text-gray-950 text-[10px] font-bold flex items-center justify-center opacity-0 scale-0 transition-all duration-300">0</span>
-                    </button>
-                </div>
-
-            </div>
-
-            <!-- Mobile Search Bar -->
-            <div class="md:hidden pb-4">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="mobileSearchInput" placeholder="Qidiruv..."
-                        class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-11 pr-4 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500"
-                        oninput="handleMobileSearch()" />
+                <!-- LANGUAGE SWITCHER -->
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-globe text-indigo-400"></i>
+                    <select id="lang-selector" onchange="changeLanguage(this.value)"
+                        class="bg-gray-900 border border-indigo-500/30 text-indigo-300 font-bold text-[11px] rounded-lg px-2 py-0.5 focus:outline-none cursor-pointer">
+                        <option value="uz">UZ (O'zbek)</option>
+                        <option value="en">EN (English)</option>
+                        <option value="ru">RU (Русский)</option>
+                    </select>
                 </div>
             </div>
         </div>
+
+        <!-- Main Nav Header -->
+        <div class="max-w-7xl mx-auto px-3 xs:px-4 py-2.5 flex items-center justify-between gap-2">
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 group shrink-0">
+                <div
+                    class="w-9 h-9 xs:w-10 xs:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-bolt text-white text-lg"></i>
+                </div>
+                <div>
+                    <span
+                        class="font-display font-extrabold text-lg xs:text-xl tracking-wide brand-glow-text">IBROHIM_TECH</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-md relative hidden sm:block">
+                <input type="text" id="main-search" oninput="handleSearch(this.value)" data-i18n-placeholder="search_ph"
+                    placeholder="Qidirish..."
+                    class="w-full bg-gray-900/90 border border-gray-700/80 rounded-xl px-4 py-2 pl-10 text-xs focus:outline-none focus:border-indigo-500 text-gray-100">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
+            </div>
+
+            <!-- Top Actions -->
+            <div class="flex items-center gap-2">
+                <div id="user-auth-area">
+                    <button onclick="openAuthModal('signin')"
+                        class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
+                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
+                        <span data-i18n="login">Kirish</span>
+                    </button>
+                </div>
+
+                <button onclick="toggleDrawer('wishlist')"
+                    class="relative p-2 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-pink-400 transition">
+                    <i class="fa-solid fa-heart text-sm"></i>
+                    <span id="wishlist-badge"
+                        class="absolute -top-1.5 -right-1.5 bg-pink-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <button onclick="toggleDrawer('cart')"
+                    class="relative flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-600/30">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden md:inline" data-i18n="cart">Savat</span>
+                    <span id="cart-badge" class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:block border-t border-gray-800/60 bg-gray-900/60">
+            <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 py-1.5 text-xs font-bold">
+                <button onclick="switchTab('home')"
+                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 bg-indigo-600 text-white"
+                    data-tab="home">
+                    <i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Asosiy</span>
+                </button>
+                <button onclick="switchTab('catalog')"
+                    class="nav-tab px-3 py-1.5 rounded-lg flex items-center gap-2 text-gray-400 hover:text-white"
+                    data-tab="catalog">
+                    <i class="fa-solid fa-layer-group"></i> <span data-i18n="nav_catalog">Katalog</span>
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-        <div class="relative rounded-3xl overflow-hidden glass-panel p-6 sm:p-10 border border-gray-800">
+    <!-- MOBILE SEARCH (375px) -->
+    <div class="sm:hidden px-3 pt-3">
+        <input type="text" oninput="handleSearch(this.value)" data-i18n-placeholder="search_ph"
+            placeholder="Qidirish..."
+            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-xs focus:outline-none text-gray-200">
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 xs:px-4 py-4 space-y-6">
+        <!-- HOME PAGE -->
+        <section id="page-home" class="space-y-6">
             <div
-                class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-600/30 rounded-full blur-3xl pointer-events-none">
-            </div>
-            <div class="relative z-10 max-w-2xl">
-                <span
-                    class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-accent text-xs font-semibold uppercase tracking-wider mb-4">
-                    <i class="fa-solid fa-bolt text-yellow-400"></i>
-                    <span>Eksklyuziv Texnik Gadjetlar 2026</span>
-                </span>
-                <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
-                    Zamonaviy Kompyuter va Smart Gadjetlar Olami
-                </h1>
-                <p class="text-sm sm:text-base text-gray-400 mb-6 leading-relaxed">
-                    IBROHIM_TECH bilan eng so'nggi noutbuklar, flagman smartfonlar, professional kompyuter qismlari va
-                    aksessuarlarni tezkor yetkazib berish bilan xarid qiling.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="scrollToCatalog()"
-                        class="px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold text-sm shadow-xl shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center space-x-2">
-                        <span>Katalogga o'tish</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <button onclick="openAiChatModal()"
-                        class="px-6 py-3 rounded-2xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 font-semibold text-sm transition-all flex items-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles text-brand-accent"></i>
-                        <span>AI Yordamchi bilan Maslahat</span>
+                class="glass-panel p-5 xs:p-8 rounded-3xl border border-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 max-w-xl">
+                    <span
+                        class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                        <i class="fa-solid fa-robot mr-1"></i> AI Multi-Language
+                    </span>
+                    <h1 class="text-2xl xs:text-4xl font-extrabold tracking-tight text-white leading-tight"
+                        data-i18n="hero_title">
+                        Aqlli Gadjetlar Va AI Hardware Hub
+                    </h1>
+                    <p class="text-gray-300 text-xs xs:text-sm" data-i18n="hero_desc">
+                        Saralangan noutbuk, smartfon va boshqa texnikalar. O'zbek, Ingliz va Rus tillarida AI bilan
+                        suhbatlashing!
+                    </p>
+                    <button onclick="toggleAiChat()"
+                        class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition">
+                        <i class="fa-solid fa-comments"></i> <span data-i18n="ai_button">AI Bilan Suhbat</span>
                     </button>
                 </div>
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
+                    class="rounded-2xl h-48 w-full md:w-1/2 object-cover border border-gray-800">
             </div>
-        </div>
-    </section>
 
-    <!-- Categories Filter Navigation -->
-    <section id="catalogSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="flex items-center justify-between mb-6">
+            <!-- Categories -->
             <div>
-                <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Mahsulotlar Katalogi</h2>
-                <p id="catalogSubtitle" class="text-xs sm:text-sm text-gray-400">Jami <span id="totalProductCount"
-                        class="text-brand-accent font-semibold">300+</span> ta gadjet mavjud</p>
+                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-shapes text-indigo-400"></i> <span data-i18n="cat_title">Kategoriyalar</span>
+                </h2>
+                <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-6 gap-2.5" id="categories-grid"></div>
             </div>
 
-            <!-- Sort Option -->
-            <div class="flex items-center space-x-2">
-                <label for="sortSelect" class="hidden sm:inline text-xs text-gray-400 font-medium">Saralash:</label>
-                <select id="sortSelect" onchange="applySortAndFilter()"
-                    class="bg-gray-900 border border-gray-800 rounded-xl px-3 py-2 text-xs font-semibold text-gray-300 focus:outline-none focus:border-brand-500">
-                    <option value="default">Saralash (Tavsiya etilgan)</option>
-                    <option value="price-asc">Narxi: Arzonroq</option>
-                    <option value="price-desc">Narxi: Qimmatroq</option>
-                    <option value="rating-desc">Reyting bo'yicha</option>
+            <!-- Products -->
+            <div>
+                <h2 class="text-base xs:text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-500"></i> <span data-i18n="top_products">Tanlangan
+                        Mahsulotlar</span>
+                </h2>
+                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="home-products-grid"></div>
+            </div>
+        </section>
+
+        <!-- CATALOG PAGE -->
+        <section id="page-catalog" class="hidden space-y-4">
+            <div class="glass-panel p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-3">
+                <h1 class="text-lg font-bold" data-i18n="catalog_header">Mahsulotlar Katalogi</h1>
+                <select id="filter-category" onchange="applyFilters()"
+                    class="bg-gray-900 border border-gray-700 rounded-xl px-3 py-1.5 text-xs text-gray-200">
+                    <option value="all" data-i18n="cat_all">Barcha Kategoriyalar</option>
+                    <option value="laptops" data-i18n="cat_laptops">Noutbuklar</option>
+                    <option value="phones" data-i18n="cat_phones">Smartfonlar</option>
+                    <option value="gaming" data-i18n="cat_gaming">Gaming</option>
+                    <option value="audio" data-i18n="cat_audio">Audio</option>
+                    <option value="watch" data-i18n="cat_watch">Smart Soatlar</option>
+                    <option value="acc" data-i18n="cat_acc">Aksessuarlar</option>
                 </select>
             </div>
-        </div>
-
-        <!-- Category Tabs -->
-        <div class="flex items-center space-x-2 overflow-x-auto pb-4 custom-scrollbar" id="categoryContainer">
-            <!-- Generated via JS -->
-        </div>
-    </section>
-
-    <!-- Product Grid Section -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 flex-grow">
-
-        <!-- Active Search/Filter Bar Notification -->
-        <div id="activeFilterNotice"
-            class="hidden mb-6 flex items-center justify-between p-4 rounded-2xl bg-brand-500/10 border border-brand-500/30 text-sm">
-            <span id="activeFilterText" class="text-gray-300"></span>
-            <button onclick="resetFilters()" class="text-xs text-brand-accent font-semibold hover:underline">Filtrlarni
-                tozalash</button>
-        </div>
-
-        <!-- Grid -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Dynamic Products Inserted Here -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-20 text-center">
-            <div
-                class="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center text-gray-500 text-3xl mb-4">
-                <i class="fa-solid fa-box-open"></i>
+            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3" id="catalog-products-grid"></div>
+            <div class="flex items-center justify-between glass-panel p-3 rounded-xl text-xs" id="pagination-controls">
             </div>
-            <h3 class="text-lg font-bold text-white mb-2">Hech narsa topilmadi</h3>
-            <p class="text-sm text-gray-400 max-w-md mb-6">Kechirasiz, so'rovingiz bo'yicha mahsulot topilmadi. Kalit
-                so'zini o'zgartirib ko'ring yoki barcha filtrni tozalang.</p>
-            <button onclick="resetFilters()"
-                class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition-all">
-                Barcha mahsulotlarni ko'rish
-            </button>
-        </div>
-
-        <!-- Pagination Controls -->
-        <div id="paginationContainer" class="flex items-center justify-center space-x-2 mt-12">
-            <!-- Dynamic Pagination -->
-        </div>
+        </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="glass-panel border-t border-gray-800 py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-                            <i class="fa-solid fa-microchip"></i>
-                        </div>
-                        <span class="text-lg font-bold text-white">IBROHIM_TECH</span>
-                    </div>
-                    <p class="text-xs text-gray-400 leading-relaxed mb-4">
-                        O'zbekistondagi yetakchi zamonaviy apparatura va kompyuter gadjetlari do'koni. Sifat va kafolat
-                        bizning ustuvorligimiz.
-                    </p>
-                    <div class="flex space-x-3 text-gray-400 text-sm">
-                        <a href="#"
-                            class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all"><i
-                                class="fa-brands fa-telegram"></i></a>
-                        <a href="#"
-                            class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all"><i
-                                class="fa-brands fa-instagram"></i></a>
-                        <a href="#"
-                            class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all"><i
-                                class="fa-brands fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-bold text-white mb-4">Kategoriyalar</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li><a href="#" onclick="filterByCategory('laptops')"
-                                class="hover:text-brand-accent transition-all">Noutbuklar & PC</a></li>
-                        <li><a href="#" onclick="filterByCategory('phones')"
-                                class="hover:text-brand-accent transition-all">Smartfonlar & Planshetlar</a></li>
-                        <li><a href="#" onclick="filterByCategory('gaming')"
-                                class="hover:text-brand-accent transition-all">Gaming Qurilmalar</a></li>
-                        <li><a href="#" onclick="filterByCategory('audio')"
-                                class="hover:text-brand-accent transition-all">Audio va Quloqchinlar</a></li>
-                        <li><a href="#" onclick="filterByCategory('storage')"
-                                class="hover:text-brand-accent transition-all">Xotira & SSD qurilmalari</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-bold text-white mb-4">Mijozlarga Yordam</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li><a href="#" onclick="openAiChatModal()" class="hover:text-brand-accent transition-all">AI
-                                Onlayn Konsultatsiya</a></li>
-                        <li><a href="#" class="hover:text-brand-accent transition-all">Yetkazib berish va to'lov</a>
-                        </li>
-                        <li><a href="#" class="hover:text-brand-accent transition-all">Kafolat va qaytarish</a></li>
-                        <li><a href="#" class="hover:text-brand-accent transition-all">Ko'p beriladigan savollar</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-bold text-white mb-4">Bog'lanish</h4>
-                    <div class="space-y-3 text-xs text-gray-400">
-                        <p class="flex items-start space-x-2">
-                            <i class="fa-solid fa-location-dot mt-0.5 text-brand-accent"></i>
-                            <span>Toshkent sh., Yunusobod tumani, Amir Temur ko'chasi 107-uy</span>
-                        </p>
-                        <p class="flex items-center space-x-2">
-                            <i class="fa-solid fa-phone text-brand-accent"></i>
-                            <span>+998 (90) 123-45-67</span>
-                        </p>
-                        <p class="flex items-center space-x-2">
-                            <i class="fa-solid fa-envelope text-brand-accent"></i>
-                            <span>support@ibrohimtech.uz</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
-                &copy; 2026 IBROHIM_TECH Store. Barcha huquqlar himoyalangan.
-            </div>
-        </div>
-    </footer>
-
-    <!-- ================= AUTH MODAL ================= -->
-    <div id="authModal"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-6 border border-gray-800 relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- User Logged In State View -->
-            <div id="userLoggedInView" class="hidden text-center py-4">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-brand-600 to-brand-accent mx-auto flex items-center justify-center text-2xl text-white font-bold mb-4 shadow-lg shadow-brand-500/30"
-                    id="userAvatar">
-                    U
-                </div>
-                <h3 class="text-xl font-bold text-white" id="userProfileName">Mijoz Profili</h3>
-                <p class="text-xs text-gray-400 mb-6" id="userProfileEmail">user@example.com</p>
-
-                <div class="bg-gray-900/80 rounded-2xl p-4 mb-6 text-left border border-gray-800 text-xs space-y-2">
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">Status:</span>
-                        <span class="text-green-400 font-semibold">Faol VIP xaridor</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">Bonus bal:</span>
-                        <span class="text-brand-accent font-semibold">150,000 UZS</span>
-                    </div>
-                </div>
-
-                <button onclick="handleLogout()"
-                    class="w-full py-3 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-semibold transition-all">
-                    Tizimdan chiqish
-                </button>
-            </div>
-
-            <!-- Auth Form Tabs -->
-            <div id="authFormView">
-                <div class="flex border-b border-gray-800 mb-6">
-                    <button id="tabSignIn" onclick="switchAuthTab('signin')"
-                        class="flex-1 pb-3 text-sm font-bold border-b-2 border-brand-500 text-brand-accent transition-all">Kirish</button>
-                    <button id="tabSignUp" onclick="switchAuthTab('signup')"
-                        class="flex-1 pb-3 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-white transition-all">Ro'yxatdan
-                        o'tish</button>
-                </div>
-
-                <form id="authForm" onsubmit="handleAuthSubmit(event)">
-                    <div id="nameField" class="hidden mb-4">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Ism va Familiya</label>
-                        <input type="text" id="authName" placeholder="Ibrohim Ismoilov"
-                            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:border-brand-500 focus:outline-none" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Email manzil</label>
-                        <input type="email" id="authEmail" required placeholder="nomi@domain.uz"
-                            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:border-brand-500 focus:outline-none" />
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Parol</label>
-                        <input type="password" id="authPassword" required placeholder="••••••••"
-                            class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:border-brand-500 focus:outline-none" />
-                    </div>
-
-                    <button type="submit" id="authSubmitBtn"
-                        class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold text-xs shadow-lg shadow-brand-500/25 hover:opacity-95 transition-all">
-                        Tizimga Kirish
-                    </button>
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ================= SHOPPING CART DRAWER ================= -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 flex justify-end pointer-events-none">
-        <div id="cartOverlay" onclick="toggleCartDrawer()"
-            class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        </div>
-        <div id="cartPanel"
-            class="relative w-full max-w-md bg-cardbg border-l border-gray-800 h-full flex flex-col justify-between transform translate-x-full pointer-events-auto transition-transform duration-300 shadow-2xl z-10">
-
-            <!-- Cart Header -->
-            <div class="p-5 border-b border-gray-800 flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-cart-shopping text-brand-accent"></i>
-                    <h3 class="text-base font-bold text-white">Xarid Savatchasi</h3>
-                </div>
-                <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <!-- Cart Items Container -->
-            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <!-- JS Dynamic Cart Items -->
-            </div>
-
-            <!-- Cart Footer / Summary -->
-            <div class="p-5 border-t border-gray-800 bg-gray-900/60">
-                <div class="space-y-2 mb-4 text-xs">
-                    <div class="flex justify-between text-gray-400">
-                        <span>Mahsulotlar summasi:</span>
-                        <span id="cartSubtotal" class="text-white font-semibold">$0</span>
-                    </div>
-                    <div class="flex justify-between text-gray-400">
-                        <span>Yetkazib berish (Toshkent bo'ylab):</span>
-                        <span class="text-green-400 font-semibold">BEPUL</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-white font-bold pt-2 border-t border-gray-800">
-                        <span>Jami:</span>
-                        <span id="cartTotal" class="text-brand-accent">$0</span>
-                    </div>
-                </div>
-
-                <button onclick="simulateCheckout()" id="checkoutBtn"
-                    class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-bold text-xs shadow-lg shadow-brand-500/25 hover:opacity-95 transition-all flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-credit-card"></i>
-                    <span>Buyurtmani rasmiylashtirish</span>
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ================= WISHLIST DRAWER ================= -->
-    <div id="wishlistDrawer" class="fixed inset-0 z-50 flex justify-end pointer-events-none">
-        <div id="wishlistOverlay" onclick="toggleWishlistDrawer()"
-            class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        </div>
-        <div id="wishlistPanel"
-            class="relative w-full max-w-md bg-cardbg border-l border-gray-800 h-full flex flex-col justify-between transform translate-x-full pointer-events-auto transition-transform duration-300 shadow-2xl z-10">
-
-            <!-- Wishlist Header -->
-            <div class="p-5 border-b border-gray-800 flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-heart text-red-500"></i>
-                    <h3 class="text-base font-bold text-white">Istaklar Ro'yxati</h3>
-                </div>
-                <button onclick="toggleWishlistDrawer()" class="text-gray-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <!-- Wishlist Items -->
-            <div id="wishlistItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <!-- JS Dynamic Wishlist Items -->
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ================= AI CHATBOT WIDGET ================= -->
-    <div id="aiChatWidget" class="fixed bottom-6 right-6 z-40">
-        <!-- Trigger Floating Button -->
-        <button onclick="openAiChatModal()"
-            class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-brand-accent text-white shadow-2xl shadow-brand-500/50 flex items-center justify-center hover:scale-105 transition-all">
-            <i class="fa-solid fa-robot text-2xl"></i>
-        </button>
-    </div>
-
-    <!-- AI Chat Window -->
-    <div id="aiChatModal"
-        class="fixed bottom-6 right-6 sm:right-10 z-50 w-[calc(100vw-3rem)] sm:w-96 h-[500px] glass-panel rounded-3xl border border-gray-800 shadow-2xl flex flex-col hidden opacity-0 transition-all duration-300 transform scale-95">
-
-        <!-- Chat Header -->
-        <div class="p-4 border-b border-gray-800 bg-gray-900/80 rounded-t-3xl flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div
-                    class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center text-white text-base font-bold">
-                    <i class="fa-solid fa-sparkles"></i>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-white">IBROHIM_TECH AI Yordamchi</h4>
-                    <p class="text-[10px] text-green-400 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-ping"></span> Onlayn (Gemini 3 Flash)
-                    </p>
-                </div>
-            </div>
-            <button onclick="closeAiChatModal()" class="text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-
-        <!-- Chat Messages -->
-        <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar text-xs">
-            <div class="flex items-start space-x-2">
-                <div
-                    class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs shrink-0">
+    <!-- REAL-TIME AI CHATBOT WINDOW -->
+    <div id="ai-chat-window"
+        class="fixed bottom-16 md:bottom-6 right-3 xs:right-6 w-[92vw] xs:w-96 bg-gray-900/95 border border-indigo-500/40 rounded-2xl shadow-2xl z-50 flex flex-col h-[480px] hidden backdrop-blur-lg">
+        <div
+            class="p-3.5 bg-gradient-to-r from-indigo-900/80 to-gray-900 border-b border-gray-800 rounded-t-2xl flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs">
                     <i class="fa-solid fa-robot"></i>
                 </div>
-                <div
-                    class="bg-gray-800/90 text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] border border-gray-700/50">
-                    Assalomu alaykum! Men IBROHIM_TECH aqlli maslahatdoshingizman. Qaysi noutbuk, telefon yoki gadjet
-                    bo'yicha yordam bera olaman?
+                <div>
+                    <h4 class="text-xs font-bold text-white">IBROHIM AI (3 Languages)</h4>
+                    <span class="text-[9px] text-emerald-400 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online
+                    </span>
                 </div>
+            </div>
+            <button onclick="toggleAiChat()" class="text-gray-400 hover:text-white p-1"><i
+                    class="fa-solid fa-xmark text-sm"></i></button>
+        </div>
+
+        <div id="ai-messages" class="flex-1 overflow-y-auto p-3 space-y-3 text-xs">
+            <div class="bg-indigo-950/60 border border-indigo-800/40 p-3 rounded-2xl rounded-tl-none text-gray-200"
+                id="ai-welcome-msg">
+                <!-- Welcome text injected dynamically -->
             </div>
         </div>
 
-        <!-- Chat Input -->
-        <div class="p-3 border-t border-gray-800 bg-gray-900/90 rounded-b-3xl">
-            <form onsubmit="handleChatSubmit(event)" class="flex space-x-2">
-                <input type="text" id="chatInput" placeholder="Savolingizni yozing..."
-                    class="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-500" />
+        <form onsubmit="handleAiSend(event)"
+            class="p-2 border-t border-gray-800 bg-gray-950/80 rounded-b-2xl flex gap-1.5">
+            <input type="text" id="ai-input" data-i18n-placeholder="ai_input_ph"
+                placeholder="Savol berishingiz mumkin..." required
+                class="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+            <button type="submit"
+                class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- AI Toggle Button -->
+    <button onclick="toggleAiChat()"
+        class="fixed bottom-20 md:bottom-6 right-4 z-40 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition border border-indigo-400/30">
+        <i class="fa-solid fa-robot text-lg"></i>
+    </button>
+
+    <!-- SIGN IN & SIGN UP MODAL -->
+    <div id="auth-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-sm w-full relative shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i
+                    class="fa-solid fa-xmark"></i></button>
+
+            <div class="flex border-b border-gray-800 mb-5">
+                <button id="tab-btn-signin" onclick="switchAuthTab('signin')"
+                    class="flex-1 py-2 text-xs font-bold border-b-2 border-indigo-500 text-indigo-400"
+                    data-i18n="signin_tab">Sign In</button>
+                <button id="tab-btn-signup" onclick="switchAuthTab('signup')"
+                    class="flex-1 py-2 text-xs font-bold text-gray-400 border-b-2 border-transparent"
+                    data-i18n="signup_tab">Sign Up</button>
+            </div>
+
+            <form id="form-signin" onsubmit="handleSignIn(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
+                        data-i18n="email_label">Email</label>
+                    <input type="email" id="signin-email" required placeholder="user@gmail.com"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
+                        data-i18n="pass_label">Parol</label>
+                    <input type="password" id="signin-password" required placeholder="••••••••"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
                 <button type="submit"
-                    class="p-2.5 rounded-xl bg-brand-600 text-white hover:bg-brand-500 transition-all">
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-indigo-600/30"
+                    data-i18n="btn_signin">
+                    Kirish
+                </button>
+            </form>
+
+            <form id="form-signup" onsubmit="handleSignUp(event)" class="space-y-3 hidden">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1" data-i18n="name_label">Ism</label>
+                    <input type="text" id="signup-name" required placeholder="Ibrohim..."
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
+                        data-i18n="email_label">Email</label>
+                    <input type="email" id="signup-email" required placeholder="user@gmail.com"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 mb-1"
+                        data-i18n="pass_label">Parol</label>
+                    <input type="password" id="signup-password" required placeholder="••••••••"
+                        class="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-indigo-500">
+                </div>
+                <button type="submit"
+                    class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg shadow-cyan-600/30"
+                    data-i18n="btn_signup">
+                    Ro'yxatdan o'tish
                 </button>
             </form>
         </div>
-
     </div>
 
-    <!-- Toast Notifications Container -->
-    <div id="toastContainer" class="fixed top-24 right-6 z-50 space-y-2 pointer-events-none"></div>
+    <!-- CART & WISHLIST DRAWERS -->
+    <div id="cart-drawer"
+        class="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-900 border-l border-gray-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-4 border-b border-gray-800 flex justify-between items-center">
+            <h3 class="text-sm font-bold flex items-center gap-2" data-i18n="cart_title"><i
+                    class="fa-solid fa-bag-shopping text-indigo-400"></i> Savat</h3>
+            <button onclick="toggleDrawer('cart')" class="text-gray-400 p-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items-container"></div>
+        <div class="p-4 border-t border-gray-800 bg-gray-950 space-y-3">
+            <div class="flex justify-between text-xs font-bold">
+                <span data-i18n="total_price">Jami:</span>
+                <span id="cart-total-price" class="text-indigo-400">$0</span>
+            </div>
+            <button onclick="checkout()"
+                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-xs transition"
+                data-i18n="checkout">
+                Rasmiylashtirish
+            </button>
+        </div>
+    </div>
 
-    <!-- MAIN JAVASCRIPT LOGIC -->
+    <!-- TRANSLATIONS DICTIONARY -->
     <script>
+        const I18N = {
+            uz: {
+                search_ph: "300+ mahsulotdan qidirish...",
+                login: "Kirish",
+                cart: "Savat",
+                nav_home: "Asosiy",
+                nav_catalog: "Katalog",
+                hero_title: "Aqlli Gadjetlar Va AI Hardware Hub",
+                hero_desc: "Saralangan noutbuk, smartfon va boshqa texnikalar. O'zbek, Ingliz va Rus tillarida AI bilan suhbatlashing!",
+                ai_button: "AI Bilan Suhbat",
+                cat_title: "Kategoriyalar",
+                top_products: "Tanlangan Mahsulotlar",
+                catalog_header: "Mahsulotlar Katalogi",
+                cat_all: "Barcha Kategoriyalar",
+                cat_laptops: "Noutbuklar",
+                cat_phones: "Smartfonlar",
+                cat_gaming: "Gaming",
+                cat_audio: "Audio",
+                cat_watch: "Smart Soatlar",
+                cat_acc: "Aksessuarlar",
+                ai_input_ph: "AI'dan ixtiyoriy tilda savol so'rang...",
+                signin_tab: "Kirish (Sign In)",
+                signup_tab: "Ro'yxatdan o'tish (Sign Up)",
+                email_label: "Email Pochta",
+                pass_label: "Parol",
+                name_label: "Ismingiz",
+                btn_signin: "Tizimga Kirish",
+                btn_signup: "Akkaunt Yaratish",
+                cart_title: "Savatingiz",
+                total_price: "Jami Narx:",
+                checkout: "Rasmiylashtirish",
+                add_to_cart: "+ Savat",
+                ai_welcome: "Assalomu alaykum! Men IBROHIM_TECH saytining **ko'p tilli AI yordamchisiman**. Menga O'zbek, Ingliz yoki Rus tillarida savol berishingiz mumkin!"
+            },
+            en: {
+                search_ph: "Search 300+ products...",
+                login: "Sign In",
+                cart: "Cart",
+                nav_home: "Home",
+                nav_catalog: "Catalog",
+                hero_title: "Smart Gadgets & AI Hardware Hub",
+                hero_desc: "Handpicked laptops, smartphones, and gear. Chat with real AI in English, Uzbek, or Russian!",
+                ai_button: "Chat with AI",
+                cat_title: "Categories",
+                top_products: "Featured Products",
+                catalog_header: "Products Catalog",
+                cat_all: "All Categories",
+                cat_laptops: "Laptops",
+                cat_phones: "Smartphones",
+                cat_gaming: "Gaming",
+                cat_audio: "Audio",
+                cat_watch: "Smart Watches",
+                cat_acc: "Accessories",
+                ai_input_ph: "Ask AI any question in any language...",
+                signin_tab: "Sign In",
+                signup_tab: "Sign Up",
+                email_label: "Email Address",
+                pass_label: "Password",
+                name_label: "Your Name",
+                btn_signin: "Sign In Now",
+                btn_signup: "Create Account",
+                cart_title: "Shopping Cart",
+                total_price: "Total Price:",
+                checkout: "Checkout",
+                add_to_cart: "+ Add Cart",
+                ai_welcome: "Hello! I am IBROHIM_TECH **Multilingual AI Assistant**. Feel free to ask me questions in English, Uzbek, or Russian!"
+            },
+            ru: {
+                search_ph: "Поиск из 300+ товаров...",
+                login: "Войти",
+                cart: "Корзина",
+                nav_home: "Главная",
+                nav_catalog: "Каталог",
+                hero_title: "Умные гаджеты и AI Hardware Hub",
+                hero_desc: "Отборные ноутбуки, смартфоны и техника. Общайтесь с AI на узбекском, английском и русском языках!",
+                ai_button: "Чат с AI",
+                cat_title: "Категории",
+                top_products: "Популярные Товары",
+                catalog_header: "Каталог Товаров",
+                cat_all: "Все Категории",
+                cat_laptops: "Ноутбуки",
+                cat_phones: "Смартфоны",
+                cat_gaming: "Гейминг",
+                cat_audio: "Аудио",
+                cat_watch: "Смарт-часы",
+                cat_acc: "Аксессуары",
+                ai_input_ph: "Задайте вопрос ИИ на любом языке...",
+                signin_tab: "Вход (Sign In)",
+                signup_tab: "Регистрация (Sign Up)",
+                email_label: "Эл. Почта",
+                pass_label: "Пароль",
+                name_label: "Ваше Имя",
+                btn_signin: "Войти в систему",
+                btn_signup: "Создать аккаунт",
+                cart_title: "Ваша Корзина",
+                total_price: "Итого:",
+                checkout: "Оформить заказ",
+                add_to_cart: "+ В корзину",
+                ai_welcome: "Здравствуйте! Я **многоязычный ИИ-помощник** IBROHIM_TECH. Вы можете задавать мне вопросы на узбекском, английском или русском языке!"
+            }
+        };
 
-        // Accurate Unsplash Image URLs matching specific categories exactly
-        const PRODUCT_IMAGES = {
+        let currentLang = 'uz';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+
+            // Update Text Elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (I18N[lang][key]) el.textContent = I18N[lang][key];
+            });
+
+            // Update Placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (I18N[lang][key]) el.placeholder = I18N[lang][key];
+            });
+
+            document.getElementById('ai-welcome-msg').innerHTML = I18N[lang].ai_welcome;
+            renderHomeProducts();
+            renderPaginatedCatalog();
+        }
+
+        /* ACCURATE PRODUCTS DATA ENGINE */
+        const ACCURATE_IMAGES = {
             laptops: [
                 "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80"
             ],
             phones: [
-                "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
             ],
             gaming: [
-                "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80"
             ],
             audio: [
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=600&q=80"
+                "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80"
             ],
-            storage: [
-                "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=600&q=80"
+            watch: [
+                "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80"
             ],
-            accessories: [
-                "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80"
+            acc: [
+                "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80"
             ]
         };
 
-        const CATEGORIES = [
-            { id: 'all', name: 'Barcha gadjetlar', icon: 'fa-layer-group' },
-            { id: 'laptops', name: 'Noutbuklar & PC', icon: 'fa-laptop' },
-            { id: 'phones', name: 'Smartfonlar', icon: 'fa-mobile-screen-button' },
-            { id: 'gaming', name: 'Gaming Hub', icon: 'fa-gamepad' },
-            { id: 'audio', name: 'Audio Qurilmalar', icon: 'fa-headphones' },
-            { id: 'storage', name: 'Xotira & SSD', icon: 'fa-hard-drive' },
-            { id: 'accessories', name: 'Aksessuarlar', icon: 'fa-keyboard' },
-        ];
+        function generateProducts() {
+            const list = [];
+            const categories = ['laptops', 'phones', 'gaming', 'audio', 'watch', 'acc'];
+            const titles = {
+                laptops: ["MacBook Pro M4", "ROG Strix SCAR", "Razer Blade 18", "Dell XPS 16"],
+                phones: ["iPhone 16 Pro Max", "Galaxy S25 Ultra", "Google Pixel 9 Pro"],
+                gaming: ["PlayStation 5 Pro", "NVIDIA RTX 5090", "Xbox Series X"],
+                audio: ["AirPods Max 2", "Sony WH-1000XM5", "Bose QC Ultra"],
+                watch: ["Apple Watch Ultra 2", "Galaxy Watch 7", "Garmin Fenix 8"],
+                acc: ["Anker GaN Charger", "Keychron Q1 Keyboard", "Logitech MX Master 3S"]
+            };
 
-        // GENERATE 300+ Products Programmatically with PERFECT Matching Category Imagery
-        const ALL_PRODUCTS = [];
-
-        const laptopModels = ["MacBook Pro 16 M3 Max", "ROG Strix SCAR 18", "Dell XPS 15 Touch", "Lenovo Legion Pro 7i", "Razer Blade 16", "HP Omen Transcend 14", "Acer Predator Helios 18", "MSI Titan GT77 HX"];
-        const phoneModels = ["iPhone 15 Pro Max 1TB", "Samsung Galaxy S24 Ultra", "Google Pixel 8 Pro", "Xiaomi 14 Ultra", "OnePlus 12", "Asus ROG Phone 8 Pro", "Nothing Phone (2)"];
-        const gamingModels = ["PlayStation 5 Slim 1TB", "Xbox Series X 1TB", "Nintendo Switch OLED", "Steam Deck OLED 1TB", "ASUS ROG Ally Z1 Extreme", "Logitech G Pro X Superlight 2"];
-        const audioModels = ["Sony WH-1000XM5", "AirPods Max USB-C", "Sennheiser Momentum 4", "Bose QuietComfort Ultra", "JBL Tour ONE M2", "SteelSeries Arctis Nova Pro"];
-        const storageModels = ["Samsung 990 PRO NVMe 4TB", "WD_BLACK SN850X 2TB", "Crucial T700 PCIe 5.0 2TB", "Kingston FURY Renegade 2TB", "SanDisk Extreme Portable SSD 4TB"];
-        const accessoryModels = ["Keychron Q1 Max Custom", "Elgato Stream Deck MK.2", "Anker Prime 20,000mAh GaN Charger", "Logitech MX Master 3S", "Razer Huntsman V3 Pro"];
-
-        let globalIdCounter = 1;
-
-        function generateCatalogData() {
-            // Create 320 items total distributed across categories
-            const categorySpecs = [
-                { cat: 'laptops', models: laptopModels, basePrice: 1200, count: 55 },
-                { cat: 'phones', models: phoneModels, basePrice: 600, count: 55 },
-                { cat: 'gaming', models: gamingModels, basePrice: 350, count: 55 },
-                { cat: 'audio', models: audioModels, basePrice: 120, count: 50 },
-                { cat: 'storage', models: storageModels, basePrice: 80, count: 55 },
-                { cat: 'accessories', models: accessoryModels, basePrice: 40, count: 50 }
-            ];
-
-            categorySpecs.forEach(spec => {
-                const imgs = PRODUCT_IMAGES[spec.cat];
-                for (let i = 1; i <= spec.count; i++) {
-                    const modelName = spec.models[i % spec.models.length];
-                    const imgUrl = imgs[i % imgs.length];
-                    const calculatedPrice = spec.basePrice + (i * 12) + Math.floor(Math.random() * 50);
-                    const rating = (4.3 + (Math.random() * 0.7)).toFixed(1);
-
-                    ALL_PRODUCTS.push({
-                        id: globalIdCounter++,
-                        name: `${modelName} #${i}`,
-                        category: spec.cat,
-                        price: calculatedPrice,
-                        rating: parseFloat(rating),
-                        reviewsCount: 12 + Math.floor(Math.random() * 180),
-                        image: imgUrl,
-                        inStock: true
+            let idCounter = 1;
+            categories.forEach(cat => {
+                const imgList = ACCURATE_IMAGES[cat];
+                for (let i = 1; i <= 50; i++) {
+                    const baseTitle = titles[cat][(i - 1) % titles[cat].length];
+                    list.push({
+                        id: idCounter,
+                        name: `${baseTitle} #${i}`,
+                        category: cat,
+                        price: Math.floor(Math.random() * 1500) + 120,
+                        rating: (Math.random() * 0.5 + 4.5).toFixed(1),
+                        image: imgList[(i - 1) % imgList.length]
                     });
+                    idCounter++;
                 }
             });
+            return list;
         }
 
-        generateCatalogData();
-
-        // App State Variables
-        let currentCategory = 'all';
-        let searchQuery = '';
-        let currentSort = 'default';
+        const PRODUCTS = generateProducts();
+        let cart = [];
+        let wishlist = [];
+        let filteredProducts = [...PRODUCTS];
         let currentPage = 1;
-        const itemsPerPage = 12;
+        let itemsPerPage = 24;
 
-        let cartState = JSON.parse(localStorage.getItem('ibrohim_cart') || '[]');
-        let wishlistState = JSON.parse(localStorage.getItem('ibrohim_wishlist') || '[]');
-        let userState = JSON.parse(localStorage.getItem('ibrohim_user') || 'null');
+        let registeredUsers = JSON.parse(localStorage.getItem('ibrohim_registered_users')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('ibrohim_current_user')) || null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            initLiveClock();
-            renderCategoryTabs();
-            updateUserHeaderUI();
-            updateCartBadge();
-            updateWishlistBadge();
-            renderProducts();
+            initClock();
+            renderCategories();
+            changeLanguage('uz');
+            updateUserUI();
         });
 
-        // Clock Function
-        function initLiveClock() {
+        function initClock() {
             setInterval(() => {
-                const now = new Date();
-                document.getElementById('liveClock').textContent = now.toLocaleTimeString('uz-UZ');
+                document.getElementById('clock-widget').textContent = new Date().toLocaleTimeString();
             }, 1000);
         }
 
-        // Category Tabs Render
-        function renderCategoryTabs() {
-            const container = document.getElementById('categoryContainer');
-            container.innerHTML = CATEGORIES.map(cat => {
-                const isActive = cat.id === currentCategory;
-                const btnClass = isActive
-                    ? 'bg-gradient-to-r from-brand-600 to-brand-accent text-white shadow-lg shadow-brand-500/25 border-brand-500'
-                    : 'bg-gray-900/80 text-gray-400 hover:text-white border-gray-800 hover:bg-gray-800';
+        function renderCategories() {
+            const categories = [
+                { id: 'laptops', nameKey: 'cat_laptops', icon: 'fa-laptop' },
+                { id: 'phones', nameKey: 'cat_phones', icon: 'fa-mobile-screen-button' },
+                { id: 'gaming', nameKey: 'cat_gaming', icon: 'fa-gamepad' },
+                { id: 'audio', nameKey: 'cat_audio', icon: 'fa-headphones' },
+                { id: 'watch', nameKey: 'cat_watch', icon: 'fa-stopwatch' },
+                { id: 'acc', nameKey: 'cat_acc', icon: 'fa-plug' }
+            ];
 
-                return `
-          <button 
-            onclick="filterByCategory('${cat.id}')"
-            class="px-4 py-2.5 rounded-2xl border text-xs font-semibold shrink-0 flex items-center space-x-2 transition-all ${btnClass}">
-            <i class="fa-solid ${cat.icon}"></i>
-            <span>${cat.name}</span>
-          </button>
-        `;
-            }).join('');
-        }
-
-        // Filter By Category
-        function filterByCategory(catId) {
-            currentCategory = catId;
-            currentPage = 1;
-            renderCategoryTabs();
-            renderProducts();
-        }
-
-        // Search Handler
-        function handleSearch() {
-            const input = document.getElementById('searchInput');
-            searchQuery = input.value.trim().toLowerCase();
-            document.getElementById('clearSearchBtn').classList.toggle('hidden', searchQuery === '');
-            currentPage = 1;
-            renderProducts();
-        }
-
-        function handleMobileSearch() {
-            const input = document.getElementById('mobileSearchInput');
-            searchQuery = input.value.trim().toLowerCase();
-            currentPage = 1;
-            renderProducts();
-        }
-
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('mobileSearchInput').value = '';
-            searchQuery = '';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
-            currentPage = 1;
-            renderProducts();
-        }
-
-        function resetFilters() {
-            currentCategory = 'all';
-            searchQuery = '';
-            currentSort = 'default';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('mobileSearchInput').value = '';
-            document.getElementById('sortSelect').value = 'default';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
-            currentPage = 1;
-            renderCategoryTabs();
-            renderProducts();
-        }
-
-        function applySortAndFilter() {
-            currentSort = document.getElementById('sortSelect').value;
-            renderProducts();
-        }
-
-        function renderProducts() {
-            let filtered = ALL_PRODUCTS.filter(item => {
-                const matchesCategory = (currentCategory === 'all') || (item.category === currentCategory);
-                const matchesSearch = item.name.toLowerCase().includes(searchQuery);
-                return matchesCategory && matchesSearch;
-            });
-
-            // Sorting
-            if (currentSort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
-            else if (currentSort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
-            else if (currentSort === 'rating-desc') filtered.sort((a, b) => b.rating - a.rating);
-
-            const totalItems = filtered.length;
-            document.getElementById('totalProductCount').textContent = totalItems;
-
-            // Active Filter Notice Bar UI
-            const notice = document.getElementById('activeFilterNotice');
-            if (currentCategory !== 'all' || searchQuery !== '') {
-                notice.classList.remove('hidden');
-                document.getElementById('activeFilterText').innerHTML = `
-          Natijalar: <strong>${totalItems} ta</strong> 
-          ${currentCategory !== 'all' ? `| Kategoriya: <span class="capitalize text-brand-accent">${currentCategory}</span>` : ''} 
-          ${searchQuery !== '' ? `| Qidiruv: "${searchQuery}"` : ''}
-        `;
-            } else {
-                notice.classList.add('hidden');
-            }
-
-            const grid = document.getElementById('productGrid');
-            const emptyState = document.getElementById('emptyState');
-            const paginationContainer = document.getElementById('paginationContainer');
-
-            if (totalItems === 0) {
-                grid.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                paginationContainer.innerHTML = '';
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-            }
-
-            // Pagination Calculation
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            if (currentPage > totalPages) currentPage = totalPages;
-
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const paginatedItems = filtered.slice(startIndex, startIndex + itemsPerPage);
-
-            // Render Cards HTML
-            grid.innerHTML = paginatedItems.map(item => {
-                const isWishlisted = wishlistState.some(w => w.id === item.id);
-                const isInCart = cartState.some(c => c.id === item.id);
-
-                return `
-          <div class="product-card glass-panel rounded-3xl p-4 flex flex-col justify-between border border-gray-800/80 group">
-            <div>
-              <!-- Product Image Container -->
-              <div class="relative w-full h-48 rounded-2xl overflow-hidden bg-gray-900/90 mb-4 flex items-center justify-center">
-                <img 
-                  src="${item.image}" 
-                  alt="${item.name}" 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  onerror="this.src='https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600'"
-                />
-                <button 
-                  onclick="toggleWishlist(${item.id})" 
-                  class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-gray-900/80 backdrop-blur-md flex items-center justify-center text-gray-300 hover:text-red-500 transition-all ${isWishlisted ? 'text-red-500' : ''}">
-                  <i class="${isWishlisted ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
-                </button>
-              </div>
-
-              <!-- Rating & Stock -->
-              <div class="flex items-center justify-between text-xs mb-2">
-                <div class="flex items-center space-x-1 text-yellow-400 font-semibold">
-                  <i class="fa-solid fa-star text-[11px]"></i>
-                  <span>${item.rating}</span>
-                  <span class="text-gray-500 font-normal">(${item.reviewsCount})</span>
+            document.getElementById('categories-grid').innerHTML = categories.map(c => `
+                <div onclick="filterByCategory('${c.id}')" class="glass-panel p-3 rounded-xl flex flex-col items-center justify-center gap-1 cursor-pointer hover:border-indigo-500 transition">
+                    <i class="fa-solid ${c.icon} text-indigo-400 text-sm"></i>
+                    <span class="text-[10px] font-bold text-gray-300 text-center" data-i18n="${c.nameKey}">...</span>
                 </div>
-                <span class="text-[10px] px-2 py-0.5 rounded-md bg-green-500/10 text-green-400 font-semibold border border-green-500/20">
-                  Mavjud
-                </span>
-              </div>
-
-              <!-- Title -->
-              <h3 class="text-sm font-bold text-white mb-2 line-clamp-2 hover:text-brand-accent transition-colors">
-                ${item.name}
-              </h3>
-            </div>
-
-            <!-- Price and Action -->
-            <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between mt-2">
-              <div>
-                <span class="text-[10px] text-gray-400 block uppercase font-medium">Narxi</span>
-                <span class="text-base font-extrabold text-white">${item.price} UZS</span>
-              </div>
-
-              <button 
-                onclick="addToCart(${item.id})"
-                class="px-4 py-2 rounded-xl ${isInCart ? 'bg-green-600 text-white' : 'bg-gradient-to-r from-brand-600 to-brand-accent text-white hover:opacity-95'} font-semibold text-xs transition-all flex items-center space-x-1 shadow-md shadow-brand-500/20">
-                <i class="fa-solid ${isInCart ? 'fa-check' : 'fa-cart-plus'}"></i>
-                <span>${isInCart ? 'Savatda' : '+ Savat'}</span>
-              </button>
-            </div>
-          </div>
-        `;
-            }).join('');
-
-            // Render Pagination Buttons
-            renderPaginationControls(totalPages);
+            `).join('');
         }
 
-        function renderPaginationControls(totalPages) {
-            if (totalPages <= 1) {
-                document.getElementById('paginationContainer').innerHTML = '';
+        function renderHomeProducts() {
+            document.getElementById('home-products-grid').innerHTML = PRODUCTS.slice(0, 8).map(p => createCardHTML(p)).join('');
+        }
+
+        function createCardHTML(p) {
+            return `
+                <div class="glass-panel rounded-2xl overflow-hidden hover:border-indigo-500/50 transition flex flex-col justify-between">
+                    <div class="relative h-36 bg-gray-950">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-gray-900/80 text-pink-400 flex items-center justify-center text-xs">
+                            <i class="fa-${wishlist.some(w => w.id === p.id) ? 'solid' : 'regular'} fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 space-y-2 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-amber-400 text-[10px]"><i class="fa-solid fa-star"></i> ${p.rating}</div>
+                            <h3 class="font-bold text-xs text-gray-100 line-clamp-1">${p.name}</h3>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-800">
+                            <span class="text-xs font-extrabold text-indigo-400">$${p.price}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-2.5 py-1 rounded-lg text-[10px] transition">
+                                ${I18N[currentLang].add_to_cart}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function applyFilters() {
+            const cat = document.getElementById('filter-category').value;
+            filteredProducts = cat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.category === cat);
+            currentPage = 1;
+            renderPaginatedCatalog();
+        }
+
+        function renderPaginatedCatalog() {
+            const grid = document.getElementById('catalog-products-grid');
+            const controls = document.getElementById('pagination-controls');
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage;
+
+            grid.innerHTML = filteredProducts.slice(start, start + itemsPerPage).map(p => createCardHTML(p)).join('');
+
+            controls.innerHTML = `
+                <span>${filteredProducts.length} items</span>
+                <div class="flex items-center gap-2">
+                    <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Prev</button>
+                    <span class="font-bold">${currentPage}/${totalPages || 1}</span>
+                    <button onclick="changePage(1)" ${currentPage >= totalPages ? 'disabled' : ''} class="px-2.5 py-1 bg-gray-800 rounded disabled:opacity-50">Next</button>
+                </div>
+            `;
+        }
+
+        function changePage(delta) {
+            currentPage += delta;
+            renderPaginatedCatalog();
+        }
+
+        function filterByCategory(catId) {
+            switchTab('catalog');
+            document.getElementById('filter-category').value = catId;
+            applyFilters();
+        }
+
+        function handleSearch(query) {
+            filteredProducts = PRODUCTS.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+            switchTab('catalog');
+            currentPage = 1;
+            renderPaginatedCatalog();
+        }
+
+        function switchTab(tabId) {
+            document.getElementById('page-home').classList.toggle('hidden', tabId !== 'home');
+            document.getElementById('page-catalog').classList.toggle('hidden', tabId !== 'catalog');
+        }
+
+        function addToCart(id) {
+            cart.push(PRODUCTS.find(p => p.id === id));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-badge').textContent = cart.length;
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-gray-500 text-center text-xs py-8">Empty Cart</p>`;
+                document.getElementById('cart-total-price').textContent = '$0';
                 return;
             }
-
-            let html = `
-        <button 
-          onclick="changePage(${currentPage - 1})" 
-          ${currentPage === 1 ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-2 rounded-xl bg-gray-900 border border-gray-800 text-xs text-gray-500"' : 'class="px-3 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 text-xs text-gray-300 font-semibold transition-all"'}>
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-      `;
-
-            for (let p = 1; p <= totalPages; p++) {
-                if (p === 1 || p === totalPages || (p >= currentPage - 1 && p <= currentPage + 1)) {
-                    const isActive = p === currentPage;
-                    html += `
-            <button 
-              onclick="changePage(${p})" 
-              class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${isActive ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/30' : 'bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-400'}">
-              ${p}
-            </button>
-          `;
-                } else if (p === currentPage - 2 || p === currentPage + 2) {
-                    html += `<span class="text-gray-600 text-xs">...</span>`;
-                }
-            }
-
-            html += `
-        <button 
-          onclick="changePage(${currentPage + 1})" 
-          ${currentPage === totalPages ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-2 rounded-xl bg-gray-900 border border-gray-800 text-xs text-gray-500"' : 'class="px-3 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 text-xs text-gray-300 font-semibold transition-all"'}>
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      `;
-
-            document.getElementById('paginationContainer').innerHTML = html;
+            const total = cart.reduce((s, i) => s + i.price, 0);
+            document.getElementById('cart-total-price').textContent = `$${total}`;
+            container.innerHTML = cart.map((item, idx) => `
+                <div class="flex items-center justify-between p-2 bg-gray-800/50 rounded-xl">
+                    <div class="flex items-center gap-2">
+                        <img src="${item.image}" class="w-8 h-8 object-cover rounded">
+                        <div>
+                            <h4 class="text-[11px] font-bold text-gray-200 line-clamp-1">${item.name}</h4>
+                            <span class="text-xs text-indigo-400 font-bold">$${item.price}</span>
+                        </div>
+                    </div>
+                    <button onclick="cart.splice(${idx},1);updateCartUI()" class="text-red-400 p-1 text-xs"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
         }
 
-        function changePage(page) {
-            currentPage = page;
-            renderProducts();
-            scrollToCatalog();
+        function toggleWishlist(id) {
+            const idx = wishlist.findIndex(w => w.id === id);
+            if (idx > -1) wishlist.splice(idx, 1);
+            else wishlist.push(PRODUCTS.find(p => p.id === id));
+            document.getElementById('wishlist-badge').textContent = wishlist.length;
+            renderHomeProducts();
+            renderPaginatedCatalog();
         }
 
-        function scrollToCatalog() {
-            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Add / Remove Wishlist
-        function toggleWishlist(productId) {
-            const index = wishlistState.findIndex(w => w.id === productId);
-            const product = ALL_PRODUCTS.find(p => p.id === productId);
-
-            if (index > -1) {
-                wishlistState.splice(index, 1);
-                showToast(`"${product.name}" istaklar ro'yxatidan olib tashlandi`, 'info');
-            } else {
-                wishlistState.push(product);
-                showToast(`"${product.name}" istaklarga qo'shildi!`, 'success');
-            }
-
-            localStorage.setItem('ibrohim_wishlist', JSON.stringify(wishlistState));
-            updateWishlistBadge();
-            renderWishlistDrawerItems();
-            renderProducts();
-        }
-
-        function updateWishlistBadge() {
-            const badge = document.getElementById('wishlistBadge');
-            badge.textContent = wishlistState.length;
-            if (wishlistState.length > 0) {
-                badge.classList.remove('opacity-0', 'scale-0');
-            } else {
-                badge.classList.add('opacity-0', 'scale-0');
-            }
-        }
-
-        function toggleWishlistDrawer() {
-            const drawer = document.getElementById('wishlistDrawer');
-            const overlay = document.getElementById('wishlistOverlay');
-            const panel = document.getElementById('wishlistPanel');
-
-            const isHidden = panel.classList.contains('translate-x-full');
-
-            if (isHidden) {
-                drawer.classList.remove('pointer-events-none');
-                overlay.classList.remove('opacity-0', 'pointer-events-none');
-                panel.classList.remove('translate-x-full');
-                renderWishlistDrawerItems();
-            } else {
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-                panel.classList.add('translate-x-full');
-                setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
-            }
-        }
-
-        function renderWishlistDrawerItems() {
-            const container = document.getElementById('wishlistItemsContainer');
-            if (wishlistState.length === 0) {
-                container.innerHTML = `
-          <div class="text-center py-12 text-gray-500">
-            <i class="fa-regular fa-heart text-4xl mb-3 block"></i>
-            <p class="text-xs">Istaklar ro'yxatingiz bo'sh</p>
-          </div>
-        `;
+        function checkout() {
+            if (!currentUser) {
+                alert("Please sign in first!");
+                openAuthModal('signin');
                 return;
             }
-
-            container.innerHTML = wishlistState.map(item => `
-        <div class="flex items-center space-x-3 p-3 bg-gray-900/80 rounded-2xl border border-gray-800">
-          <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl shrink-0" />
-          <div class="flex-1 min-w-0">
-            <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
-            <p class="text-xs text-brand-accent font-semibold">$${item.price}</p>
-          </div>
-          <button onclick="addToCart(${item.id})" class="p-2 bg-brand-600/20 text-brand-accent rounded-xl hover:bg-brand-600 hover:text-white transition-all text-xs">
-            <i class="fa-solid fa-cart-plus"></i>
-          </button>
-          <button onclick="toggleWishlist(${item.id})" class="p-2 text-gray-500 hover:text-red-500 transition-all text-xs">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-      `).join('');
+            if (cart.length === 0) return;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            alert(`Thank you ${currentUser.name}! Order placed.`);
+            cart = [];
+            updateCartUI();
+            toggleDrawer('cart');
         }
 
-        // Shopping Cart Methods
-        function addToCart(productId) {
-            const existing = cartState.find(c => c.id === productId);
-            const product = ALL_PRODUCTS.find(p => p.id === productId);
-
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                cartState.push({ ...product, qty: 1 });
-            }
-
-            localStorage.setItem('ibrohim_cart', JSON.stringify(cartState));
-            updateCartBadge();
-            showToast(`"${product.name}" savatga qo'shildi!`, 'success');
-            renderProducts();
+        function toggleDrawer(type) {
+            document.getElementById(`${type}-drawer`).classList.toggle('translate-x-full');
         }
 
-        function updateCartQty(productId, delta) {
-            const item = cartState.find(c => c.id === productId);
-            if (!item) return;
-
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cartState = cartState.filter(c => c.id !== productId);
-            }
-
-            localStorage.setItem('ibrohim_cart', JSON.stringify(cartState));
-            updateCartBadge();
-            renderCartDrawerItems();
-            renderProducts();
-        }
-
-        function updateCartBadge() {
-            const badge = document.getElementById('cartBadge');
-            const totalCount = cartState.reduce((sum, item) => sum + item.qty, 0);
-            badge.textContent = totalCount;
-            if (totalCount > 0) {
-                badge.classList.remove('opacity-0', 'scale-0');
-            } else {
-                badge.classList.add('opacity-0', 'scale-0');
-            }
-        }
-
-        function toggleCartDrawer() {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('cartOverlay');
-            const panel = document.getElementById('cartPanel');
-
-            const isHidden = panel.classList.contains('translate-x-full');
-
-            if (isHidden) {
-                drawer.classList.remove('pointer-events-none');
-                overlay.classList.remove('opacity-0', 'pointer-events-none');
-                panel.classList.remove('translate-x-full');
-                renderCartDrawerItems();
-            } else {
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-                panel.classList.add('translate-x-full');
-                setTimeout(() => drawer.classList.add('pointer-events-none'), 300);
-            }
-        }
-
-        function renderCartDrawerItems() {
-            const container = document.getElementById('cartItemsContainer');
-            const subtotalEl = document.getElementById('cartSubtotal');
-            const totalEl = document.getElementById('cartTotal');
-
-            if (cartState.length === 0) {
-                container.innerHTML = `
-          <div class="text-center py-16 text-gray-500">
-            <i class="fa-solid fa-basket-shopping text-4xl mb-3 block"></i>
-            <p class="text-xs">Savatingiz hali bo'sh</p>
-          </div>
-        `;
-                subtotalEl.textContent = '$0';
-                totalEl.textContent = '$0';
-                return;
-            }
-
-            let subtotal = 0;
-            container.innerHTML = cartState.map(item => {
-                const itemTotal = item.price * item.qty;
-                subtotal += itemTotal;
-
-                return `
-          <div class="flex items-center space-x-3 p-3 bg-gray-900/80 rounded-2xl border border-gray-800">
-            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl shrink-0" />
-            <div class="flex-1 min-w-0">
-              <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
-              <p class="text-xs text-brand-accent font-semibold">$${item.price}</p>
-            </div>
-            
-            <div class="flex items-center space-x-2 bg-gray-800 rounded-xl px-2 py-1 border border-gray-700">
-              <button onclick="updateCartQty(${item.id}, -1)" class="text-gray-400 hover:text-white text-xs px-1">-</button>
-              <span class="text-xs font-bold text-white">${item.qty}</span>
-              <button onclick="updateCartQty(${item.id}, 1)" class="text-gray-400 hover:text-white text-xs px-1">+</button>
-            </div>
-          </div>
-        `;
-            }).join('');
-
-            subtotalEl.textContent = `$${subtotal}`;
-            totalEl.textContent = `$${subtotal}`;
-        }
-
-        function simulateCheckout() {
-            if (cartState.length === 0) {
-                showToast("Xarid qilish uchun savatga mahsulot qo'shing!", 'error');
-                return;
-            }
-
-            showToast("Buyurtmangiz qabul qilindi! Operatorimiz tez orada bog'lanadi.", 'success');
-            cartState = [];
-            localStorage.removeItem('ibrohim_cart');
-            updateCartBadge();
-            renderCartDrawerItems();
-            toggleCartDrawer();
-            renderProducts();
-        }
-
-        let authMode = 'signin';
-
-        function openAuthModal() {
-            const modal = document.getElementById('authModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
-            checkUserAuthState();
+        /* AUTH LOGIC */
+        function openAuthModal(tab = 'signin') {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            switchAuthTab(tab);
         }
 
         function closeAuthModal() {
-            const modal = document.getElementById('authModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+            document.getElementById('auth-modal').classList.add('hidden');
         }
 
-        function switchAuthTab(mode) {
-            authMode = mode;
-            const tabSignIn = document.getElementById('tabSignIn');
-            const tabSignUp = document.getElementById('tabSignUp');
-            const nameField = document.getElementById('nameField');
-            const submitBtn = document.getElementById('authSubmitBtn');
-
-            if (mode === 'signin') {
-                tabSignIn.className = "flex-1 pb-3 text-sm font-bold border-b-2 border-brand-500 text-brand-accent transition-all";
-                tabSignUp.className = "flex-1 pb-3 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-white transition-all";
-                nameField.classList.add('hidden');
-                submitBtn.textContent = "Tizimga Kirish";
-            } else {
-                tabSignUp.className = "flex-1 pb-3 text-sm font-bold border-b-2 border-brand-500 text-brand-accent transition-all";
-                tabSignIn.className = "flex-1 pb-3 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-white transition-all";
-                nameField.classList.remove('hidden');
-                submitBtn.textContent = "Ro'yxatdan o'tish";
-            }
+        function switchAuthTab(tab) {
+            const isSignIn = tab === 'signin';
+            document.getElementById('form-signin').classList.toggle('hidden', !isSignIn);
+            document.getElementById('form-signup').classList.toggle('hidden', isSignIn);
         }
 
-        function handleAuthSubmit(e) {
+        function handleSignUp(e) {
             e.preventDefault();
-            const email = document.getElementById('authEmail').value;
-            const name = document.getElementById('authName').value || email.split('@')[0];
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
 
-            userState = {
-                name: name,
-                email: email
-            };
+            if (registeredUsers.some(u => u.email === email)) {
+                alert("Email registered already!");
+                return;
+            }
 
-            localStorage.setItem('ibrohim_user', JSON.stringify(userState));
-            updateUserHeaderUI();
+            const newUser = { name, email, password };
+            registeredUsers.push(newUser);
+            localStorage.setItem('ibrohim_registered_users', JSON.stringify(registeredUsers));
+
+            currentUser = newUser;
+            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
+
+            alert("Account created successfully!");
+            updateUserUI();
             closeAuthModal();
-            showToast(`Xush kelibsiz, ${name}!`, 'success');
+        }
+
+        function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            const user = registeredUsers.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                alert("Invalid email or password!");
+                return;
+            }
+
+            currentUser = user;
+            localStorage.setItem('ibrohim_current_user', JSON.stringify(currentUser));
+
+            alert(`Welcome back, ${user.name}!`);
+            updateUserUI();
+            closeAuthModal();
         }
 
         function handleLogout() {
-            userState = null;
-            localStorage.removeItem('ibrohim_user');
-            updateUserHeaderUI();
-            closeAuthModal();
-            showToast("Tizimdan muvaffaqiyatli chiqdingiz", 'info');
+            currentUser = null;
+            localStorage.removeItem('ibrohim_current_user');
+            updateUserUI();
         }
 
-        function checkUserAuthState() {
-            const loggedInView = document.getElementById('userLoggedInView');
-            const formView = document.getElementById('authFormView');
-
-            if (userState) {
-                loggedInView.classList.remove('hidden');
-                formView.classList.add('hidden');
-                document.getElementById('userProfileName').textContent = userState.name;
-                document.getElementById('userProfileEmail').textContent = userState.email;
-                document.getElementById('userAvatar').textContent = userState.name.charAt(0).toUpperCase();
+        function updateUserUI() {
+            const area = document.getElementById('user-auth-area');
+            if (currentUser) {
+                area.innerHTML = `
+                    <div class="flex items-center gap-2 bg-gray-800/90 border border-indigo-500/30 px-2.5 py-1 rounded-xl text-xs">
+                        <i class="fa-solid fa-user-check text-emerald-400"></i>
+                        <span class="font-bold text-gray-200">${currentUser.name}</span>
+                        <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 ml-1 text-[10px]">
+                            <i class="fa-solid fa-power-off"></i>
+                        </button>
+                    </div>
+                `;
             } else {
-                loggedInView.classList.add('hidden');
-                formView.classList.remove('hidden');
+                area.innerHTML = `
+                    <button onclick="openAuthModal('signin')" class="flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
+                        <i class="fa-solid fa-right-to-bracket text-indigo-400"></i>
+                        <span data-i18n="login">Kirish</span>
+                    </button>
+                `;
             }
         }
 
-        function updateUserHeaderUI() {
-            const btnText = document.getElementById('userNameDisplay');
-            if (userState) {
-                btnText.textContent = userState.name;
-            } else {
-                btnText.textContent = "Kirish";
-            }
+        /* MULTILINGUAL AI ENGINE */
+        function toggleAiChat() {
+            document.getElementById('ai-chat-window').classList.toggle('hidden');
         }
 
-        function openAiChatModal() {
-            const modal = document.getElementById('aiChatModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0', 'scale-95');
-            }, 10);
-        }
-
-        function closeAiChatModal() {
-            const modal = document.getElementById('aiChatModal');
-            modal.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
-
-        async function handleChatSubmit(e) {
+        function handleAiSend(e) {
             e.preventDefault();
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if (!text) return;
+            const input = document.getElementById('ai-input');
+            const prompt = input.value.trim();
+            if (!prompt) return;
 
+            appendAiMessage('user', prompt);
             input.value = '';
-            appendChatMessage('user', text);
 
-            // Typing indicator
-            const typingId = appendChatMessage('ai', '<i class="fa-solid fa-circle-notch animate-spin"></i> O"ylamoqda...');
+            const typingId = appendAiMessage('ai', `<i class="fa-solid fa-spinner animate-spin"></i> ...`);
 
-            try {
-                const apiKey = ""; // Canvas runtime injection
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-                const systemPrompt = `Siz IBROHIM_TECH nomli O'zbekistondagi zamonaviy elektronikalar do'konining professional AI texnik maslahatchisisiz. 
-        Mijozlarga o'zbek tilida do'stona va aniq javob bering. 
-        Katalogimizda Laptops, Smartfonlar, Gaming qurilmalar, Audio va SSD xotiralar mavjud. 
-        Mijoz so'ragan gadjetlarga qarab to'g'ri maslahatlar va tavsiyalar bering. Javobingiz ixcham va foydali bo'lsin.`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: text }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
-
-                const data = await response.json();
-                const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Kechirasiz, javob tayyorlashda xatolik yuz berdi.";
-
-                updateChatMessage(typingId, reply);
-            } catch (err) {
-                updateChatMessage(typingId, "Xatolik yuz berdi. Iltimos internet aloqasini tekshiring.");
-            }
+            setTimeout(() => {
+                const response = generateSmartAiAnswer(prompt);
+                updateAiMessage(typingId, response);
+            }, 700);
         }
 
-        let msgCounter = 0;
-        function appendChatMessage(sender, text) {
-            const container = document.getElementById('chatMessages');
-            msgCounter++;
-            const msgId = `msg-${msgCounter}`;
-
+        function appendAiMessage(sender, text) {
+            const container = document.getElementById('ai-messages');
+            const id = 'msg-' + Date.now();
             const isUser = sender === 'user';
-            const html = `
-        <div id="${msgId}" class="flex items-start space-x-2 ${isUser ? 'justify-end' : ''}">
-          ${!isUser ? `<div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>` : ''}
-          <div class="${isUser ? 'bg-brand-600 text-white rounded-tr-none' : 'bg-gray-800/90 text-gray-200 rounded-tl-none border border-gray-700/50'} p-3 rounded-2xl max-w-[80%]">
-            ${text}
-          </div>
-        </div>
-      `;
 
-            container.insertAdjacentHTML('beforeend', html);
+            const msgDiv = document.createElement('div');
+            msgDiv.id = id;
+            msgDiv.className = isUser
+                ? "bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none ml-auto max-w-[85%] text-xs"
+                : "bg-indigo-950/80 border border-indigo-800/50 p-3 rounded-2xl rounded-tl-none mr-auto max-w-[90%] text-gray-200 text-xs space-y-1";
+
+            msgDiv.innerHTML = text;
+            container.appendChild(msgDiv);
             container.scrollTop = container.scrollHeight;
-            return msgId;
+            return id;
         }
 
-        function updateChatMessage(msgId, text) {
-            const msgEl = document.getElementById(msgId);
-            if (msgEl) {
-                const bubble = msgEl.querySelector('div:last-child');
-                if (bubble) bubble.innerHTML = text;
+        function updateAiMessage(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = text;
+            document.getElementById('ai-messages').scrollTop = document.getElementById('ai-messages').scrollHeight;
+        }
+
+        function generateSmartAiAnswer(q) {
+            const text = q.toLowerCase();
+
+            // Detect English
+            if (/[a-z]/.test(text) && (text.includes('hello') || text.includes('laptop') || text.includes('phone') || text.includes('price') || text.includes('recommend'))) {
+                if (text.includes('laptop')) {
+                    return `Top laptops in store:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Check out our catalog!`;
+                }
+                if (text.includes('phone') || text.includes('iphone')) {
+                    return `Top phones available:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
+                }
+                return `I am IBROHIM_TECH AI. I can help you find hardware or answer tech questions in English, Uzbek, or Russian!`;
             }
-        }
 
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
+            // Detect Russian
+            if (/[а-я]/.test(text)) {
+                if (text.includes('ноутбук') || text.includes('компьютер')) {
+                    return `Лучшие ноутбуки в наличии:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Смотрите больше в каталоге!`;
+                }
+                if (text.includes('телефон') || text.includes('айфон') || text.includes('iphone')) {
+                    return `Флагманские телефоны:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
+                }
+                return `Здравствуйте! Я ИИ-помощник. Чем могу помочь вам в выборе техники?`;
+            }
 
-            const bgClass = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-brand-600';
-            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+            // Uzbek Default
+            if (text.includes('noutbuk') || text.includes('laptop')) {
+                return `Bizdagi top noutbuklar:<br>• <strong>MacBook Pro M4</strong> - $1850<br>• <strong>ROG Strix SCAR</strong> - $2100<br>Katalogdan batafsil ko'rishingiz mumkin!`;
+            }
+            if (text.includes('phone') || text.includes('iphone') || text.includes('telefon')) {
+                return `Mashhur smartfonlar:<br>• <strong>iPhone 16 Pro Max</strong> - $1299<br>• <strong>Galaxy S25 Ultra</strong> - $1199`;
+            }
 
-            toast.className = `flex items-center space-x-2 px-4 py-3 rounded-2xl ${bgClass} text-white text-xs font-bold shadow-2xl transition-all duration-300 transform translate-x-10 opacity-0 pointer-events-auto`;
-            toast.innerHTML = `
-        <i class="fa-solid ${icon} text-sm"></i>
-        <span>${message}</span>
-      `;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.remove('translate-x-10', 'opacity-0');
-            }, 10);
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-x-10');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            return `Tushundim! "${q}" bo'yicha do'konimizda 300+ ta original mahsulot bor. Katalog sahifamizdan topishingiz mumkin!`;
         }
     </script>
 </body>
