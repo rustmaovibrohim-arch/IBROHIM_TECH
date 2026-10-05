@@ -1,3 +1,230 @@
+/* =========================================================
+   NOVA X — PREMIUM ENGINE
+   550+ PRODUCTS
+   3 LANGUAGES
+   DAY / NIGHT
+   SNOW / CLOUDS
+   LIVE CLOCK
+   LIVE WEATHER
+   PRODUCT IMAGES
+   CART
+   AUTH
+   FOOTBALL
+========================================================= */
+
+const LANGS = {
+
+    uz: {
+        home: "Bosh sahifa",
+        store: "Do‘kon",
+        football: "Futbol",
+        about: "Biz haqimizda",
+
+        search: "Qidirish",
+        account: "Hisob",
+        bag: "Savat",
+
+        discover: "KEYINGI QURILMANGIZNI TOPING",
+        everything: "Hammasi.",
+        onePlace: "Bitta joyda.",
+
+        searchPlaceholder: "Mahsulot qidiring...",
+
+        filters: "Filtrlar",
+        products: "mahsulot",
+
+        featured: "Tavsiya etilgan",
+        low: "Narx: arzon → qimmat",
+        high: "Narx: qimmat → arzon",
+        name: "Nomi A → Z",
+
+        catalog: "Katalogni ko‘rish",
+        arena: "Football Arena",
+
+        footballTitle: "Football",
+        footballSub: "Penalty Arena.",
+
+        direction: "Yo‘nalishni tanlang va zarba bering.",
+        shoot: "ZARBA",
+
+        left: "CHAP",
+        center: "MARKAZ",
+        right: "O‘NG",
+
+        how: "QANDAY O‘YNALADI",
+        five: "5 ta penalti.",
+        who: "Kim kuchli?",
+
+        goal: "GOOOAL! ⚡ Darvozabon aldandi.",
+        save: "SAVE! 🧤 Darvozabon zarbani qaytardi.",
+
+        restart: "O‘yinni qayta boshlash",
+
+        best: "ENG YAXSHI NATIJA",
+
+        weather: "Ob-havo",
+        live: "JONLI",
+
+        signin: "Kirish",
+        signup: "Ro‘yxatdan o‘tish",
+
+        nameLabel: "Ism",
+        password: "Parol",
+
+        login: "Kirish",
+        create: "Account yaratish",
+
+        demo: "Demo kirish",
+
+        logout: "Chiqish",
+
+        day: "Kunduz",
+        night: "Tun"
+    },
+
+    ru: {
+        home: "Главная",
+        store: "Магазин",
+        football: "Футбол",
+        about: "О нас",
+
+        search: "Поиск",
+        account: "Аккаунт",
+        bag: "Корзина",
+
+        discover: "НАЙДИТЕ СВОЁ УСТРОЙСТВО",
+        everything: "Всё.",
+        onePlace: "В одном месте.",
+
+        searchPlaceholder: "Поиск товара...",
+
+        filters: "Фильтры",
+        products: "товаров",
+
+        featured: "Рекомендуемые",
+        low: "Цена: по возрастанию",
+        high: "Цена: по убыванию",
+        name: "Название А → Я",
+
+        catalog: "Смотреть каталог",
+        arena: "Football Arena",
+
+        footballTitle: "Football",
+        footballSub: "Penalty Arena.",
+
+        direction: "Выберите направление и бейте.",
+        shoot: "УДАР",
+
+        left: "ЛЕВО",
+        center: "ЦЕНТР",
+        right: "ПРАВО",
+
+        how: "КАК ИГРАТЬ",
+        five: "5 пенальти.",
+        who: "Кто сильнее?",
+
+        goal: "ГООООЛ! ⚡ Вратарь обманут.",
+        save: "SAVE! 🧤 Вратарь отбил удар.",
+
+        restart: "Начать заново",
+
+        best: "ЛУЧШИЙ РЕЗУЛЬТАТ",
+
+        weather: "Погода",
+        live: "LIVE",
+
+        signin: "Войти",
+        signup: "Регистрация",
+
+        nameLabel: "Имя",
+        password: "Пароль",
+
+        login: "Войти",
+        create: "Создать аккаунт",
+
+        demo: "Демо вход",
+
+        logout: "Выйти",
+
+        day: "День",
+        night: "Ночь"
+    },
+
+    en: {
+        home: "Home",
+        store: "Store",
+        football: "Football",
+        about: "About",
+
+        search: "Search",
+        account: "Account",
+        bag: "Bag",
+
+        discover: "DISCOVER YOUR NEXT DEVICE",
+        everything: "Everything.",
+        onePlace: "In one place.",
+
+        searchPlaceholder: "Search products...",
+
+        filters: "Filters",
+        products: "products",
+
+        featured: "Featured",
+        low: "Price: Low → High",
+        high: "Price: High → Low",
+        name: "Name A → Z",
+
+        catalog: "Explore catalog",
+        arena: "Football Arena",
+
+        footballTitle: "Football",
+        footballSub: "Penalty Arena.",
+
+        direction: "Choose a direction and shoot.",
+        shoot: "SHOOT",
+
+        left: "LEFT",
+        center: "CENTER",
+        right: "RIGHT",
+
+        how: "HOW TO PLAY",
+        five: "5 penalties.",
+        who: "Who is stronger?",
+
+        goal: "GOOOAL! ⚡ The keeper was fooled.",
+        save: "SAVE! 🧤 The keeper stopped it.",
+
+        restart: "Restart Match",
+
+        best: "PERSONAL BEST",
+
+        weather: "Weather",
+        live: "LIVE",
+
+        signin: "Sign In",
+        signup: "Sign Up",
+
+        nameLabel: "Name",
+        password: "Password",
+
+        login: "Sign In",
+        create: "Create account",
+
+        demo: "Demo access",
+
+        logout: "Log out",
+
+        day: "Day",
+        night: "Night"
+    }
+
+};
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
 const CATEGORIES = [
     "Telefonlar",
     "Noutbuklar",
@@ -12,132 +239,331 @@ const CATEGORIES = [
     "O‘yinlar"
 ];
 
-const CAT_META = {
+
+const CATEGORY_NAMES = {
+
+    uz: {
+        "Telefonlar": "Telefonlar",
+        "Noutbuklar": "Noutbuklar",
+        "Dronlar": "Dronlar",
+        "iPadlar": "iPadlar",
+        "Televizorlar": "Televizorlar",
+        "Xolodilniklar": "Xolodilniklar",
+        "Kir moshinalar": "Kir moshinalar",
+        "Gaz plitalar": "Gaz plitalar",
+        "Mikroto‘lqinli pechlar": "Mikroto‘lqinli pechlar",
+        "Aqlli Uy": "Aqlli Uy",
+        "O‘yinlar": "O‘yinlar"
+    },
+
+    ru: {
+        "Telefonlar": "Телефоны",
+        "Noutbuklar": "Ноутбуки",
+        "Dronlar": "Дроны",
+        "iPadlar": "iPad",
+        "Televizorlar": "Телевизоры",
+        "Xolodilniklar": "Холодильники",
+        "Kir moshinalar": "Стиральные машины",
+        "Gaz plitalar": "Газовые плиты",
+        "Mikroto‘lqinli pechlar": "Микроволновки",
+        "Aqlli Uy": "Умный дом",
+        "O‘yinlar": "Игры"
+    },
+
+    en: {
+        "Telefonlar": "Phones",
+        "Noutbuklar": "Laptops",
+        "Dronlar": "Drones",
+        "iPadlar": "iPads",
+        "Televizorlar": "TVs",
+        "Xolodilniklar": "Refrigerators",
+        "Kir moshinalar": "Washing Machines",
+        "Gaz plitalar": "Gas Stoves",
+        "Mikroto‘lqinli pechlar": "Microwaves",
+        "Aqlli Uy": "Smart Home",
+        "O‘yinlar": "Gaming"
+    }
+
+};
+
+
+/* =========================================================
+   PRODUCT DATA
+========================================================= */
+
+const META = {
+
     "Telefonlar": {
         icon: "📱",
-        color: "#6f66ff",
-        brands: ["Apple", "Samsung", "Google", "Xiaomi", "OnePlus"],
-        base: 499,
-        models: ["Pro Max", "Ultra", "Air", "Plus", "Edge", "Max"]
+        query: "smartphone",
+        brands: [
+            "Apple",
+            "Samsung",
+            "Google",
+            "Xiaomi",
+            "OnePlus"
+        ],
+        models: [
+            "Pro Max",
+            "Ultra",
+            "Air",
+            "Plus",
+            "Edge",
+            "Max"
+        ],
+        base: 499
     },
 
     "Noutbuklar": {
         icon: "💻",
-        color: "#3f9cff",
-        brands: ["Apple", "ASUS", "Lenovo", "Dell", "HP"],
-        base: 799,
-        models: ["Pro", "Air", "X", "G16", "Carbon", "Studio"]
+        query: "laptop",
+        brands: [
+            "Apple",
+            "ASUS",
+            "Lenovo",
+            "Dell",
+            "HP"
+        ],
+        models: [
+            "Pro",
+            "Air",
+            "X",
+            "G16",
+            "Carbon",
+            "Studio"
+        ],
+        base: 799
     },
 
     "Dronlar": {
         icon: "🚁",
-        color: "#49d7b0",
-        brands: ["DJI", "Autel", "HoverAir", "Skydio", "Potensic"],
-        base: 399,
-        models: ["Fly", "Pro", "Air", "Vision", "Explorer", "Mini"]
+        query: "drone",
+        brands: [
+            "DJI",
+            "Autel",
+            "HoverAir",
+            "Skydio",
+            "Potensic"
+        ],
+        models: [
+            "Fly",
+            "Pro",
+            "Air",
+            "Vision",
+            "Explorer",
+            "Mini"
+        ],
+        base: 399
     },
 
     "iPadlar": {
         icon: "▣",
-        color: "#a26cff",
+        query: "ipad tablet",
         brands: ["Apple"],
-        base: 599,
-        models: ["Pro", "Air", "Mini", "Studio", "Max", "Creator"]
+        models: [
+            "Pro",
+            "Air",
+            "Mini",
+            "Studio",
+            "Max",
+            "Creator"
+        ],
+        base: 599
     },
 
     "Televizorlar": {
         icon: "📺",
-        color: "#ff6b91",
-        brands: ["Sony", "Samsung", "LG", "TCL", "Hisense"],
-        base: 599,
-        models: ["OLED", "Neo QLED", "Mini LED", "Bravia", "Cinema", "Ultra"]
+        query: "smart tv television",
+        brands: [
+            "Sony",
+            "Samsung",
+            "LG",
+            "TCL",
+            "Hisense"
+        ],
+        models: [
+            "OLED",
+            "Neo QLED",
+            "Mini LED",
+            "Bravia",
+            "Cinema",
+            "Ultra"
+        ],
+        base: 599
     },
 
     "Xolodilniklar": {
         icon: "🧊",
-        color: "#52c7ff",
-        brands: ["Samsung", "LG", "Bosch", "Haier", "Artel"],
-        base: 699,
-        models: ["Family Hub", "Fresh", "Inverter", "French Door", "Smart", "Prime"]
+        query: "refrigerator",
+        brands: [
+            "Samsung",
+            "LG",
+            "Bosch",
+            "Haier",
+            "Artel"
+        ],
+        models: [
+            "Family Hub",
+            "Fresh",
+            "Inverter",
+            "French Door",
+            "Smart",
+            "Prime"
+        ],
+        base: 699
     },
 
     "Kir moshinalar": {
         icon: "🫧",
-        color: "#4ee0d0",
-        brands: ["LG", "Samsung", "Bosch", "Beko", "Haier"],
-        base: 449,
-        models: ["AI Wash", "Steam", "Pro", "Eco", "Turbo", "Smart"]
+        query: "washing machine",
+        brands: [
+            "LG",
+            "Samsung",
+            "Bosch",
+            "Beko",
+            "Haier"
+        ],
+        models: [
+            "AI Wash",
+            "Steam",
+            "Pro",
+            "Eco",
+            "Turbo",
+            "Smart"
+        ],
+        base: 449
     },
 
     "Gaz plitalar": {
         icon: "🔥",
-        color: "#ff9b55",
-        brands: ["Artel", "Bosch", "Gorenje", "Beko", "Hansa"],
-        base: 299,
-        models: ["Chef", "Flame", "Pro", "Steel", "Smart", "Master"]
+        query: "gas stove kitchen",
+        brands: [
+            "Artel",
+            "Bosch",
+            "Gorenje",
+            "Beko",
+            "Hansa"
+        ],
+        models: [
+            "Chef",
+            "Flame",
+            "Pro",
+            "Steel",
+            "Smart",
+            "Master"
+        ],
+        base: 299
     },
 
     "Mikroto‘lqinli pechlar": {
         icon: "◉",
-        color: "#ffce58",
-        brands: ["Samsung", "LG", "Panasonic", "Bosch", "Artel"],
-        base: 149,
-        models: ["Grill", "Chef", "Smart", "Quick", "Pro", "Heat"]
+        query: "microwave oven",
+        brands: [
+            "Samsung",
+            "LG",
+            "Panasonic",
+            "Bosch",
+            "Artel"
+        ],
+        models: [
+            "Grill",
+            "Chef",
+            "Smart",
+            "Quick",
+            "Pro",
+            "Heat"
+        ],
+        base: 149
     },
 
     "Aqlli Uy": {
         icon: "⌂",
-        color: "#9c88ff",
-        brands: ["Google", "Apple", "Xiaomi", "Philips", "Aqara"],
-        base: 79,
-        models: ["Hub", "Sense", "Home", "Cam", "Light", "Secure"]
+        query: "smart home",
+        brands: [
+            "Google",
+            "Apple",
+            "Xiaomi",
+            "Philips",
+            "Aqara"
+        ],
+        models: [
+            "Hub",
+            "Sense",
+            "Home",
+            "Cam",
+            "Light",
+            "Secure"
+        ],
+        base: 79
     },
 
     "O‘yinlar": {
         icon: "🎮",
-        color: "#ff6c7d",
-        brands: ["PlayStation", "Xbox", "Nintendo", "Meta", "Razer"],
-        base: 199,
-        models: ["Pro", "Elite", "Next", "Series", "VR", "Ultimate"]
+        query: "gaming console",
+        brands: [
+            "PlayStation",
+            "Xbox",
+            "Nintendo",
+            "Meta",
+            "Razer"
+        ],
+        models: [
+            "Pro",
+            "Elite",
+            "Next",
+            "Series",
+            "VR",
+            "Ultimate"
+        ],
+        base: 199
     }
+
 };
 
 
-/* =========================================
-   550 PRODUCTS
-========================================= */
+/*
+  Har bir productga alohida lock beriladi.
+  Shu sababli 550 ta mahsulotning image URL'i
+  bir-biridan farq qiladi.
+*/
 
 const products = [];
 
-let id = 1;
+let productId = 1;
 
-CATEGORIES.forEach((cat) => {
+CATEGORIES.forEach(category => {
 
-    const m = CAT_META[cat];
+    const m = META[category];
 
     for (let i = 0; i < 50; i++) {
 
         const brand =
-            m.brands[i % m.brands.length];
+            m.brands[
+            i % m.brands.length
+            ];
 
         const model =
-            m.models[i % m.models.length];
-
-        const tier =
-            (i % 6) + 1;
+            m.models[
+            i % m.models.length
+            ];
 
         const price =
             Math.round(
-                (
-                    m.base +
-                    tier * 83 +
-                    (i * 37) % 170
-                ) * 1.0
+                m.base +
+                ((i + 1) * 47) % 900
             );
 
+
+        const image =
+            `https://loremflickr.com/900/900/${encodeURIComponent(m.query)}?lock=${productId}`;
+
+
         products.push({
-            id: id++,
-            cat,
+
+            id: productId,
+
+            category,
+
             brand,
 
             name:
@@ -145,28 +571,39 @@ CATEGORIES.forEach((cat) => {
 
             price,
 
-            icon: m.icon,
-            color: m.color,
+            image,
 
-            desc:
-                `Premium ${cat.toLowerCase()} • Nova Edition • Smart technology`,
+            icon: m.icon,
 
             tag:
-                i % 7 === 0
+                i % 9 === 0
                     ? "NOVA PICK"
                     : i % 5 === 0
                         ? "NEW"
                         : "PREMIUM"
+
         });
+
+
+        productId++;
     }
+
 });
 
 
-/* =========================================
+/* =========================================================
    STATE
-========================================= */
+========================================================= */
 
 let state = {
+
+    language:
+        localStorage.getItem("novaLanguage") ||
+        "uz",
+
+    theme:
+        localStorage.getItem("novaTheme") ||
+        "night",
 
     category: "Barchasi",
 
@@ -184,255 +621,1216 @@ let state = {
 
     cart:
         JSON.parse(
-            localStorage.getItem("novaXCart") || "[]"
+            localStorage.getItem("novaCart") ||
+            "[]"
+        ),
+
+    favorites:
+        JSON.parse(
+            localStorage.getItem("novaFavorites") ||
+            "[]"
         ),
 
     selectedDir: "center",
 
-    shot: 1,
-
     score: 0,
 
-    opp: 0,
+    opponent: 0,
+
+    shot: 1,
 
     best:
         Number(
-            localStorage.getItem("novaXBest") || 0
+            localStorage.getItem(
+                "novaBest"
+            ) || 0
         )
+
 };
 
 
-/* =========================================
+/* =========================================================
    HELPERS
-========================================= */
+========================================================= */
 
 const $ =
-    selector =>
-        document.querySelector(selector);
+    s =>
+        document.querySelector(s);
 
 const $$ =
-    selector =>
-        document.querySelectorAll(selector);
-
-const money =
-    n =>
-        "$" +
-        n.toLocaleString("en-US");
+    s =>
+        document.querySelectorAll(s);
 
 
-/* =========================================
-   TOAST
-========================================= */
+function money(n) {
 
-function toast(msg) {
-
-    const t = $("#toast");
-
-    t.textContent = msg;
-
-    t.classList.add("show");
-
-    clearTimeout(window.__toast);
-
-    window.__toast =
-        setTimeout(
-            () => t.classList.remove("show"),
-            2200
+    return "$" +
+        n.toLocaleString(
+            "en-US"
         );
+
 }
 
 
-/* =========================================
+function t(key) {
+
+    return (
+        LANGS[state.language] ||
+        LANGS.uz
+    )[key] || key;
+
+}
+
+
+function categoryName(cat) {
+
+    return (
+        CATEGORY_NAMES[state.language] ||
+        CATEGORY_NAMES.uz
+    )[cat] || cat;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message) {
+
+    const box =
+        $("#toast");
+
+    if (!box) return;
+
+    box.textContent =
+        message;
+
+    box.classList.add("show");
+
+    clearTimeout(
+        window.__novaToast
+    );
+
+    window.__novaToast =
+        setTimeout(
+            () =>
+                box.classList.remove("show"),
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   WEATHER UI
+========================================================= */
+
+function createWeatherUI() {
+
+    if (!$("#weatherLayer")) {
+
+        const layer =
+            document.createElement("div");
+
+        layer.id =
+            "weatherLayer";
+
+        document.body
+            .prepend(layer);
+
+    }
+
+
+    if (!$("#liveBar")) {
+
+        const bar =
+            document.createElement("div");
+
+        bar.id =
+            "liveBar";
+
+        bar.className =
+            "live-bar";
+
+        bar.innerHTML = `
+
+      <span class="live-dot"></span>
+
+      <span
+        id="liveTime"
+        class="live-time"
+      >
+        --:--:--
+      </span>
+
+      <span
+        id="liveWeather"
+        class="live-weather"
+      >
+        --
+      </span>
+
+      <span
+        id="liveCity"
+        class="live-city"
+      >
+        TASHKENT
+      </span>
+
+    `;
+
+        document.body
+            .append(bar);
+
+    }
+
+
+    if (!$("#weatherPanel")) {
+
+        const panel =
+            document.createElement("div");
+
+        panel.id =
+            "weatherPanel";
+
+        panel.className =
+            "weather-panel";
+
+        panel.innerHTML = `
+
+      <span
+        id="weatherIcon"
+        class="weather-icon"
+      >
+        ☁️
+      </span>
+
+      <div>
+
+        <div
+          id="weatherTemp"
+          class="weather-temp"
+        >
+          --°C
+        </div>
+
+        <div
+          id="weatherText"
+          class="weather-text"
+        >
+          ${t("weather")}
+        </div>
+
+        <div
+          id="weatherUpdate"
+          class="weather-update"
+        >
+          LIVE
+        </div>
+
+      </div>
+
+    `;
+
+        document.body
+            .append(panel);
+
+    }
+
+
+    if (!$("#modeBtn")) {
+
+        const button =
+            document.createElement("button");
+
+        button.id =
+            "modeBtn";
+
+        button.className =
+            "mode-btn";
+
+        button.title =
+            "Theme";
+
+        button.textContent =
+            state.theme === "night"
+                ? "☀"
+                : "🌙";
+
+
+        button.onclick =
+            toggleTheme;
+
+
+        const header =
+            $(".header-actions");
+
+        if (header) {
+
+            header.prepend(
+                button
+            );
+
+        }
+
+    }
+
+
+    if (!$("#languageSelect")) {
+
+        const select =
+            document.createElement("select");
+
+        select.id =
+            "languageSelect";
+
+        select.className =
+            "language-select";
+
+        select.innerHTML = `
+
+      <option value="uz">
+        UZ
+      </option>
+
+      <option value="ru">
+        RU
+      </option>
+
+      <option value="en">
+        EN
+      </option>
+
+    `;
+
+        select.value =
+            state.language;
+
+        select.onchange =
+            () => {
+
+                state.language =
+                    select.value;
+
+                localStorage.setItem(
+                    "novaLanguage",
+                    state.language
+                );
+
+                applyLanguage();
+
+                renderCategories();
+
+                renderProducts();
+
+            };
+
+
+        const header =
+            $(".header-actions");
+
+        if (header) {
+
+            header.prepend(
+                select
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   DAY / NIGHT
+========================================================= */
+
+function createSnow() {
+
+    const layer =
+        $("#weatherLayer");
+
+    if (!layer) return;
+
+    layer
+        .querySelectorAll(".snowflake")
+        .forEach(
+            x => x.remove()
+        );
+
+
+    if (state.theme !== "night")
+        return;
+
+
+    for (
+        let i = 0;
+        i < 65;
+        i++
+    ) {
+
+        const snow =
+            document.createElement("span");
+
+        snow.className =
+            "snowflake";
+
+        snow.style.left =
+            Math.random() * 100 + "%";
+
+        snow.style.width =
+            (Math.random() * 3 + 2) + "px";
+
+        snow.style.height =
+            snow.style.width;
+
+        snow.style.opacity =
+            .3 + Math.random() * .6;
+
+        snow.style.animationDuration =
+            (7 + Math.random() * 10) + "s";
+
+        snow.style.animationDelay =
+            (-Math.random() * 15) + "s";
+
+
+        layer.appendChild(
+            snow
+        );
+
+    }
+
+}
+
+
+function createClouds() {
+
+    const layer =
+        $("#weatherLayer");
+
+    if (!layer) return;
+
+
+    layer
+        .querySelectorAll(".weather-cloud")
+        .forEach(
+            x => x.remove()
+        );
+
+
+    if (state.theme !== "day")
+        return;
+
+
+    ["c1", "c2", "c3"]
+        .forEach(cls => {
+
+            const cloud =
+                document.createElement("span");
+
+            cloud.className =
+                "weather-cloud " +
+                cls;
+
+            layer.appendChild(
+                cloud
+            );
+
+        });
+
+}
+
+
+function toggleTheme() {
+
+    state.theme =
+        state.theme === "night"
+            ? "day"
+            : "night";
+
+
+    localStorage.setItem(
+        "novaTheme",
+        state.theme
+    );
+
+
+    applyTheme();
+
+}
+
+
+function applyTheme() {
+
+    document.body
+        .classList
+        .toggle(
+            "day-mode",
+            state.theme === "day"
+        );
+
+
+    const button =
+        $("#modeBtn");
+
+    if (button) {
+
+        button.textContent =
+            state.theme === "night"
+                ? "☀"
+                : "🌙";
+
+    }
+
+
+    createSnow();
+
+    createClouds();
+
+}
+
+
+/* =========================================================
+   REAL TIME
+========================================================= */
+
+function updateClock() {
+
+    const now =
+        new Date();
+
+
+    const time =
+        now.toLocaleTimeString(
+            "en-GB",
+            {
+                timeZone: "Asia/Tashkent",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+
+    if ($("#liveTime")) {
+
+        $("#liveTime")
+            .textContent =
+            time;
+
+    }
+
+}
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =========================================================
+   REAL WEATHER
+   Open-Meteo — API KEY KERAK EMAS
+========================================================= */
+
+async function loadWeather() {
+
+    try {
+
+        const response =
+            await fetch(
+                "https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current=temperature_2m,weather_code,wind_speed_10m&timezone=Asia%2FTashkent"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        const current =
+            data.current;
+
+
+        const temp =
+            Math.round(
+                current.temperature_2m
+            );
+
+
+        const code =
+            current.weather_code;
+
+
+        const weather =
+            weatherDescription(
+                code
+            );
+
+
+        if ($("#weatherTemp"))
+            $("#weatherTemp")
+                .textContent =
+                `${temp}°C`;
+
+
+        if ($("#weatherText"))
+            $("#weatherText")
+                .textContent =
+                weather.text;
+
+
+        if ($("#weatherIcon"))
+            $("#weatherIcon")
+                .textContent =
+                weather.icon;
+
+
+        if ($("#liveWeather"))
+            $("#liveWeather")
+                .textContent =
+                `${weather.icon} ${temp}°C`;
+
+
+        if ($("#weatherUpdate"))
+            $("#weatherUpdate")
+                .textContent =
+                `${t("live")} • TASHKENT`;
+
+    }
+    catch (error) {
+
+        console.log(
+            "Weather error:",
+            error
+        );
+
+    }
+
+}
+
+
+function weatherDescription(code) {
+
+    if (code === 0)
+        return {
+            icon: "☀️",
+            text:
+                state.language === "ru"
+                    ? "Ясно"
+                    : state.language === "en"
+                        ? "Clear"
+                        : "Ochiq"
+        };
+
+
+    if (
+        [1, 2, 3].includes(code)
+    )
+        return {
+            icon: "⛅",
+            text:
+                state.language === "ru"
+                    ? "Облачно"
+                    : state.language === "en"
+                        ? "Cloudy"
+                        : "Bulutli"
+        };
+
+
+    if (
+        [45, 48].includes(code)
+    )
+        return {
+            icon: "🌫️",
+            text:
+                state.language === "ru"
+                    ? "Туман"
+                    : state.language === "en"
+                        ? "Fog"
+                        : "Tuman"
+        };
+
+
+    if (
+        [51, 53, 55, 56, 57].includes(code)
+    )
+        return {
+            icon: "🌦️",
+            text:
+                state.language === "ru"
+                    ? "Морось"
+                    : state.language === "en"
+                        ? "Drizzle"
+                        : "Mayda yomg‘ir"
+        };
+
+
+    if (
+        [61, 63, 65, 80, 81, 82].includes(code)
+    )
+        return {
+            icon: "🌧️",
+            text:
+                state.language === "ru"
+                    ? "Дождь"
+                    : state.language === "en"
+                        ? "Rain"
+                        : "Yomg‘ir"
+        };
+
+
+    if (
+        [71, 73, 75, 77, 85, 86].includes(code)
+    )
+        return {
+            icon: "❄️",
+            text:
+                state.language === "ru"
+                    ? "Снег"
+                    : state.language === "en"
+                        ? "Snow"
+                        : "Qor"
+        };
+
+
+    if (
+        [95, 96, 99].includes(code)
+    )
+        return {
+            icon: "⛈️",
+            text:
+                state.language === "ru"
+                    ? "Гроза"
+                    : state.language === "en"
+                        ? "Thunderstorm"
+                        : "Momaqaldiroq"
+        };
+
+
+    return {
+        icon: "🌤️",
+        text: "Weather"
+    };
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function applyLanguage() {
+
+    const lang =
+        state.language;
+
+
+    const nav =
+        $$(".nav-link");
+
+
+    if (nav[0])
+        nav[0].textContent =
+            t("home");
+
+
+    if (nav[1])
+        nav[1].textContent =
+            t("store");
+
+
+    if (nav[2])
+        nav[2].textContent =
+            t("football");
+
+
+    if (nav[3])
+        nav[3].textContent =
+            t("about");
+
+
+    if ($("#userLabel"))
+        $("#userLabel")
+            .textContent =
+            t("account");
+
+
+    if ($("#cartBtn")) {
+
+        const b =
+            $("#cartCount")
+                ?.outerHTML || "";
+
+        $("#cartBtn")
+            .innerHTML =
+            `${t("bag")} ${b}`;
+
+    }
+
+
+    if ($("#productSearch"))
+        $("#productSearch")
+            .placeholder =
+            t("searchPlaceholder");
+
+
+    if ($("#globalSearch"))
+        $("#globalSearch")
+            .placeholder =
+            t("searchPlaceholder");
+
+
+    const select =
+        $("#sortSelect");
+
+    if (select) {
+
+        select.options[0]
+            .textContent =
+            t("featured");
+
+        select.options[1]
+            .textContent =
+            t("low");
+
+        select.options[2]
+            .textContent =
+            t("high");
+
+        select.options[3]
+            .textContent =
+            t("name");
+
+    }
+
+
+    if ($("#openFilters"))
+        $("#openFilters").innerHTML =
+            `${t("filters")} <span>☷</span>`;
+
+
+    if ($(".hero-copy .eyebrow"))
+        $(".hero-copy .eyebrow")
+            .textContent =
+            "NOVA X EXPERIENCE";
+
+
+    if ($(".hero-copy h2"))
+        $(".hero-copy h2").innerHTML =
+            `${t("everything")}<br><em>${t("onePlace")}</em>`;
+
+
+    if ($(".hero-actions .primary-btn"))
+        $(".hero-actions .primary-btn")
+            .innerHTML =
+            `${t("catalog")} <span>↗</span>`;
+
+
+    if ($(".hero-actions .ghost-btn"))
+        $(".hero-actions .ghost-btn")
+            .textContent =
+            "⚽ " + t("arena");
+
+
+    if ($(".football-head h3"))
+        $(".football-head h3").innerHTML =
+            `${t("footballTitle")}<br><em>${t("footballSub")}</em>`;
+
+
+    if ($("#gameMessage"))
+        $("#gameMessage")
+            .textContent =
+            t("direction");
+
+
+    if ($("#shootBtn"))
+        $("#shootBtn").innerHTML =
+            `${t("shoot")} <span>⚡</span>`;
+
+
+    const buttons =
+        $$(".shot-btn");
+
+
+    if (buttons[0])
+        buttons[0].innerHTML =
+            `↙<small>${t("left")}</small>`;
+
+
+    if (buttons[1])
+        buttons[1].innerHTML =
+            `↑<small>${t("center")}</small>`;
+
+
+    if (buttons[2])
+        buttons[2].innerHTML =
+            `↘<small>${t("right")}</small>`;
+
+
+    if ($(".info-card .mini-label"))
+        $(".info-card .mini-label")
+            .textContent =
+            t("how");
+
+
+    if ($(".info-card h4"))
+        $(".info-card h4").innerHTML =
+            `${t("five")}<br>${t("who")}`;
+
+
+    if ($("#restartGame"))
+        $("#restartGame")
+            .textContent =
+            t("restart");
+
+
+    if ($(".leader-card span"))
+        $(".leader-card span")
+            .textContent =
+            t("best");
+
+
+    if ($("#logoutBtn"))
+        $("#logoutBtn")
+            .textContent =
+            t("logout");
+
+
+    if ($("#weatherText"))
+        $("#weatherText")
+            .textContent =
+            t("weather");
+
+
+    loadWeather();
+
+}
+
+
+/* =========================================================
    CART
-========================================= */
+========================================================= */
 
 function saveCart() {
 
     localStorage.setItem(
-        "novaXCart",
-        JSON.stringify(state.cart)
+        "novaCart",
+        JSON.stringify(
+            state.cart
+        )
     );
 
-    updateCartUI();
+    updateCart();
+
 }
 
 
-function updateCartUI() {
+function updateCart() {
 
     const count =
         state.cart.reduce(
-            (a, x) => a + x.qty,
+            (sum, item) =>
+                sum + item.qty,
             0
         );
 
-    $("#cartCount").textContent =
-        count;
 
-    if ($("#drawerBag")) {
-        $("#drawerBag").textContent =
+    if ($("#cartCount"))
+        $("#cartCount")
+            .textContent =
             count;
-    }
+
+
+    if ($("#drawerBag"))
+        $("#drawerBag")
+            .textContent =
+            count;
+
 }
 
 
-function addToCart(productId) {
+function addToCart(id) {
 
-    const found =
+    const item =
         state.cart.find(
-            x => x.id === productId
+            x => x.id === id
         );
 
-    if (found) {
 
-        found.qty++;
+    if (item) {
+
+        item.qty++;
 
     } else {
 
         state.cart.push({
-            id: productId,
+            id,
             qty: 1
         });
+
     }
+
 
     saveCart();
 
     toast(
-        "Mahsulot bag’ga qo‘shildi ✦"
+        state.language === "ru"
+            ? "Товар добавлен в корзину ✦"
+            : state.language === "en"
+                ? "Product added to bag ✦"
+                : "Mahsulot savatga qo‘shildi ✦"
     );
+
 }
 
 
-/* =========================================
-   FILTER
-========================================= */
+/* =========================================================
+   FAVORITES
+========================================================= */
 
-function filtered() {
+function toggleFavorite(id, button) {
 
-    let arr =
-        products.filter(
-            p =>
+    const index =
+        state.favorites
+            .indexOf(id);
 
-                (
-                    state.category === "Barchasi" ||
-                    p.cat === state.category
-                )
 
-                &&
+    if (index >= 0) {
 
+        state.favorites
+            .splice(index, 1);
+
+        button.textContent =
+            "♡";
+
+    } else {
+
+        state.favorites
+            .push(id);
+
+        button.textContent =
+            "♥";
+
+        button.style.color =
+            "#ff6680";
+
+    }
+
+
+    localStorage.setItem(
+        "novaFavorites",
+        JSON.stringify(
+            state.favorites
+        )
+    );
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+function filteredProducts() {
+
+    let list =
+        products.filter(p => {
+
+            const categoryMatch =
+                state.category === "Barchasi" ||
+                p.category === state.category;
+
+
+            const query =
+                state.query
+                    .toLowerCase();
+
+
+            const queryMatch =
+                !query ||
                 p.name
                     .toLowerCase()
-                    .includes(
-                        state.query.toLowerCase()
-                    )
+                    .includes(query) ||
+                p.brand
+                    .toLowerCase()
+                    .includes(query) ||
+                p.category
+                    .toLowerCase()
+                    .includes(query);
 
-                &&
 
-                p.price >= state.min
-
-                &&
-
+            return (
+                categoryMatch &&
+                queryMatch &&
+                p.price >= state.min &&
                 p.price <= state.max
-        );
+            );
+
+        });
 
 
     if (state.sort === "low") {
 
-        arr.sort(
+        list.sort(
             (a, b) =>
                 a.price - b.price
         );
 
     }
 
+
     if (state.sort === "high") {
 
-        arr.sort(
+        list.sort(
             (a, b) =>
                 b.price - a.price
         );
 
     }
 
+
     if (state.sort === "name") {
 
-        arr.sort(
+        list.sort(
             (a, b) =>
-                a.name.localeCompare(b.name)
+                a.name.localeCompare(
+                    b.name
+                )
         );
 
     }
 
 
-    return arr;
+    return list;
+
 }
 
 
-/* =========================================
-   CATEGORIES
-========================================= */
-
 function renderCategories() {
 
-    const wrap =
+    const box =
         $("#categoryStrip");
 
-    wrap.innerHTML = "";
+    if (!box) return;
 
 
-    [
-        "Barchasi",
-        ...CATEGORIES
-    ].forEach(c => {
-
-        const b =
-            document.createElement("button");
-
-        b.className =
-            "category-pill" +
-            (
-                state.category === c
-                    ? " active"
-                    : ""
-            );
-
-        b.textContent = c;
+    box.innerHTML = "";
 
 
-        b.onclick = () => {
+    const all =
+        document.createElement("button");
 
-            state.category = c;
+
+    all.className =
+        "category-pill" +
+        (
+            state.category === "Barchasi"
+                ? " active"
+                : ""
+        );
+
+
+    all.textContent =
+        state.language === "ru"
+            ? "Все"
+            : state.language === "en"
+                ? "All"
+                : "Barchasi";
+
+
+    all.onclick =
+        () => {
+
+            state.category =
+                "Barchasi";
 
             state.page = 1;
 
             renderCategories();
 
             renderProducts();
+
         };
 
 
-        wrap.appendChild(b);
+    box.appendChild(all);
+
+
+    CATEGORIES.forEach(category => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "category-pill" +
+            (
+                state.category === category
+                    ? " active"
+                    : ""
+            );
+
+
+        button.textContent =
+            categoryName(
+                category
+            );
+
+
+        button.onclick =
+            () => {
+
+                state.category =
+                    category;
+
+                state.page = 1;
+
+                renderCategories();
+
+                renderProducts();
+
+            };
+
+
+        box.appendChild(
+            button
+        );
 
     });
+
 }
 
 
-/* =========================================
-   PRODUCTS RENDER
-========================================= */
-
 function renderProducts() {
 
-    const arr =
-        filtered();
+    const box =
+        $("#productGrid");
 
-    const total =
-        arr.length;
+    if (!box) return;
+
+
+    const list =
+        filteredProducts();
+
+
+    if ($("#productCount")) {
+
+        $("#productCount")
+            .textContent =
+            `${list.length} ${t("products")}`;
+
+    }
+
 
     const pages =
         Math.max(
             1,
             Math.ceil(
-                total / state.perPage
+                list.length /
+                state.perPage
             )
         );
 
@@ -444,273 +1842,206 @@ function renderProducts() {
         );
 
 
-    const slice =
-        arr.slice(
-            (state.page - 1) *
-            state.perPage,
+    const start =
+        (
+            state.page - 1
+        ) *
+        state.perPage;
 
-            state.page *
-            state.perPage
+
+    const visible =
+        list.slice(
+            start,
+            start + state.perPage
         );
 
 
-    $("#productCount").textContent =
-        `${total} products`;
+    box.innerHTML =
+        visible
+            .map(product => {
+
+                const fav =
+                    state.favorites
+                        .includes(
+                            product.id
+                        );
 
 
-    $("#productGrid").innerHTML =
-        slice.map(
-            p => `
+                return `
 
-      <article class="product-card">
-
-        <div
-          class="product-art"
-          style="--pcolor:${p.color}"
-        >
-
-          <span class="badge">
-            ${p.tag}
-          </span>
-
-          <button
-            class="heart"
-            onclick="toggleHeart(this)"
+          <article
+            class="product-card"
           >
-            ♡
-          </button>
 
-          <div class="product-icon">
-            ${p.icon}
-          </div>
-
-        </div>
-
-
-        <div class="product-info">
-
-          <span class="product-category">
-            ${p.cat.toUpperCase()}
-          </span>
-
-          <div class="product-name">
-            ${p.name}
-          </div>
-
-          <div class="product-desc">
-            ${p.desc}
-          </div>
-
-
-          <div class="product-bottom">
-
-            <span class="price">
-              ${money(p.price)}
-            </span>
-
-            <button
-              class="add-btn"
-              onclick="addToCart(${p.id})"
+            <div
+              class="product-art"
             >
-              +
-            </button>
 
-          </div>
+              <span class="badge">
+                ${product.tag}
+              </span>
 
-        </div>
+              <button
+                class="heart"
+                onclick="
+                  toggleFavorite(
+                    ${product.id},
+                    this
+                  )
+                "
+                style="
+                  color:
+                  ${fav
+                        ? "#ff6680"
+                        : ""
+                    }
+                "
+              >
+                ${fav ? "♥" : "♡"}
+              </button>
 
-      </article>
+              <img
+                src="${product.image}"
+                alt="${product.name}"
+                loading="lazy"
+                onerror="
+                  this.src=
+                  'https://loremflickr.com/900/900/technology?lock=${product.id}'
+                "
+              >
 
-      `
-        ).join("");
+            </div>
 
 
-    $("#pagination").innerHTML =
+            <div class="product-info">
+
+              <span class="product-category">
+                ${categoryName(
+                        product.category
+                    ).toUpperCase()}
+              </span>
+
+              <div class="product-name">
+                ${product.name}
+              </div>
+
+              <div class="product-desc">
+                ${product.brand}
+                • NOVA Premium Edition
+              </div>
+
+
+              <div class="product-bottom">
+
+                <span class="price">
+                  ${money(
+                        product.price
+                    )}
+                </span>
+
+                <button
+                  class="add-btn"
+                  onclick="
+                    addToCart(
+                      ${product.id}
+                    )
+                  "
+                >
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `;
+
+            })
+            .join("");
+
+
+    renderPagination(
+        pages
+    );
+
+}
+
+
+function renderPagination(pages) {
+
+    const box =
+        $("#pagination");
+
+    if (!box) return;
+
+
+    box.innerHTML =
         Array
             .from(
                 {
-                    length: Math.min(pages, 9)
+                    length:
+                        Math.min(
+                            pages,
+                            9
+                        )
                 },
-                (_, i) => i + 1
+                (_, i) =>
+                    i + 1
             )
             .map(
-                n => `
+                page => `
 
-        <button
-          class="page-btn ${n === state.page
+          <button
+            class="
+              page-btn
+              ${page === state.page
                         ? "active"
                         : ""
-                    }"
-          onclick="goPage(${n})"
-        >
-          ${n}
-        </button>
+                    }
+            "
+            onclick="
+              changePage(
+                ${page}
+              )
+            "
+          >
+            ${page}
+          </button>
 
         `
             )
             .join("");
+
 }
 
 
-/* =========================================
-   PAGINATION
-========================================= */
+function changePage(page) {
 
-function goPage(n) {
-
-    state.page = n;
+    state.page =
+        page;
 
     renderProducts();
 
-    $("#store").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    $("#store")
+        ?.scrollIntoView({
+            behavior: "smooth"
+        });
+
 }
 
 
-/* =========================================
-   FAVORITE
-========================================= */
-
-function toggleHeart(el) {
-
-    el.textContent =
-        el.textContent === "♡"
-            ? "♥"
-            : "♡";
-
-    el.style.color =
-        el.textContent === "♥"
-            ? "#ff6b91"
-            : "";
-}
-
-
-/* =========================================
-   MODALS
-========================================= */
-
-function openModal(id) {
-
-    $("#" + id)
-        .classList
-        .remove("hidden");
-}
-
-
-function closeModal(id) {
-
-    $("#" + id)
-        .classList
-        .add("hidden");
-}
-
-
-/* =========================================
-   PROFILE
-========================================= */
-
-function openProfile() {
-
-    const u =
-        JSON.parse(
-            localStorage.getItem(
-                "novaXUser"
-            ) || "{}"
-        );
-
-
-    $("#drawerName").textContent =
-        u.name || "Account";
-
-    $("#drawerEmail").textContent =
-        u.email || "Guest";
-
-
-    const letter =
-        (
-            u.name || "N"
-        )
-            .slice(0, 1)
-            .toUpperCase();
-
-
-    $("#drawerAvatar").textContent =
-        letter;
-
-    $("#avatar").textContent =
-        letter;
-
-    $("#userLabel").textContent =
-        u.name || "Account";
-
-
-    $("#drawerOrders").textContent =
-        JSON.parse(
-            localStorage.getItem(
-                "novaXOrders"
-            ) || "[]"
-        ).length;
-
-
-    openModal(
-        "profileDrawer"
-    );
-}
-
-
-/* =========================================
-   ENTER APP
-========================================= */
-
-function enterApp(user) {
-
-    localStorage.setItem(
-        "novaXUser",
-        JSON.stringify(user)
-    );
-
-
-    $("#authGate")
-        .classList
-        .add("hidden");
-
-    $("#app")
-        .classList
-        .remove("hidden");
-
-
-    openProfile();
-
-    closeModal(
-        "profileDrawer"
-    );
-
-
-    updateCartUI();
-
-    renderCategories();
-
-    renderProducts();
-
-    window.scrollTo(
-        0,
-        0
-    );
-}
-
-
-/* =========================================
+/* =========================================================
    AUTH
-========================================= */
+========================================================= */
 
 function initAuth() {
 
-    const users =
+    let users =
         JSON.parse(
             localStorage.getItem(
-                "novaXUsers"
+                "novaUsers"
             ) || "[]"
         );
 
@@ -731,783 +2062,1021 @@ function initAuth() {
 
 
         localStorage.setItem(
-            "novaXUsers",
+            "novaUsers",
             JSON.stringify(users)
         );
+
     }
 
 
     const saved =
         JSON.parse(
             localStorage.getItem(
-                "novaXUser"
+                "novaUser"
             ) || "null"
         );
 
 
     if (saved) {
 
-        enterApp(saved);
+        enterApp(
+            saved
+        );
+
     }
 
 
-    /* TABS */
-
     $$(".auth-tab")
-        .forEach(btn => {
+        .forEach(tab => {
 
-            btn.onclick = () => {
+            tab.onclick =
+                () => {
 
-                $$(".auth-tab")
-                    .forEach(
-                        x =>
-                            x.classList
-                                .remove("active")
+                    $$(".auth-tab")
+                        .forEach(
+                            x =>
+                                x.classList
+                                    .remove(
+                                        "active"
+                                    )
+                        );
+
+
+                    tab.classList.add(
+                        "active"
                     );
 
 
-                btn.classList.add(
-                    "active"
-                );
+                    const signin =
+                        tab.dataset.auth ===
+                        "signin";
 
 
-                const type =
-                    btn.dataset.auth;
+                    $("#signinForm")
+                        ?.classList
+                        .toggle(
+                            "active",
+                            signin
+                        );
 
 
-                $("#signinForm")
-                    .classList
-                    .toggle(
-                        "active",
-                        type === "signin"
-                    );
+                    $("#signupForm")
+                        ?.classList
+                        .toggle(
+                            "active",
+                            !signin
+                        );
 
-
-                $("#signupForm")
-                    .classList
-                    .toggle(
-                        "active",
-                        type === "signup"
-                    );
-            };
+                };
 
         });
 
-
-    /* PASSWORD */
 
     $$(".eye")
-        .forEach(b => {
+        .forEach(button => {
 
-            b.onclick = () => {
+            button.onclick =
+                () => {
 
-                const x =
-                    $("#" + b.dataset.target);
+                    const input =
+                        $("#" +
+                            button.dataset.target
+                        );
 
-                x.type =
-                    x.type === "password"
-                        ? "text"
-                        : "password";
-            };
+
+                    if (!input)
+                        return;
+
+
+                    input.type =
+                        input.type ===
+                            "password"
+                            ? "text"
+                            : "password";
+
+                };
 
         });
 
 
-    /* DEMO LOGIN */
+    $("#demoLogin")
+        ?.addEventListener(
+            "click",
+            () => {
 
-    $("#demoLogin").onclick =
-        () => {
+                $("#loginEmail").value =
+                    "demo@nova.uz";
 
-            $("#loginEmail").value =
-                "demo@nova.uz";
+                $("#loginPassword").value =
+                    "123456";
 
-            $("#loginPassword").value =
-                "123456";
+                $("#signinForm")
+                    .requestSubmit();
 
-            $("#signinForm")
-                .requestSubmit();
-        };
-
-
-    /* LOGIN */
-
-    $("#signinForm").onsubmit =
-        e => {
-
-            e.preventDefault();
-
-
-            const email =
-                $("#loginEmail")
-                    .value
-                    .trim()
-                    .toLowerCase();
-
-
-            const pass =
-                $("#loginPassword")
-                    .value;
-
-
-            const us =
-                JSON.parse(
-                    localStorage.getItem(
-                        "novaXUsers"
-                    ) || "[]"
-                );
-
-
-            const u =
-                us.find(
-                    x =>
-                        x.email === email &&
-                        x.password === pass
-                );
-
-
-            if (!u) {
-
-                return toast(
-                    "Email yoki password noto‘g‘ri"
-                );
             }
+        );
 
 
-            enterApp(u);
-        };
+    $("#signinForm")
+        ?.addEventListener(
+            "submit",
+            e => {
+
+                e.preventDefault();
 
 
-    /* REGISTER */
-
-    $("#signupForm").onsubmit =
-        e => {
-
-            e.preventDefault();
-
-
-            const name =
-                $("#signupName")
-                    .value
-                    .trim();
+                const email =
+                    $("#loginEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
 
 
-            const email =
-                $("#signupEmail")
-                    .value
-                    .trim()
-                    .toLowerCase();
+                const password =
+                    $("#loginPassword")
+                        .value;
 
 
-            const password =
-                $("#signupPassword")
-                    .value;
+                const users =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "novaUsers"
+                        ) || "[]"
+                    );
 
 
-            if (password.length < 6) {
+                const user =
+                    users.find(
+                        u =>
+                            u.email ===
+                            email &&
+                            u.password ===
+                            password
+                    );
 
-                return toast(
-                    "Password kamida 6 belgi bo‘lsin"
+
+                if (!user) {
+
+                    toast(
+                        state.language === "ru"
+                            ? "Неверный email или пароль"
+                            : state.language === "en"
+                                ? "Wrong email or password"
+                                : "Email yoki parol noto‘g‘ri"
+                    );
+
+                    return;
+
+                }
+
+
+                enterApp(
+                    user
                 );
+
             }
+        );
 
 
-            let us =
-                JSON.parse(
-                    localStorage.getItem(
-                        "novaXUsers"
-                    ) || "[]"
+    $("#signupForm")
+        ?.addEventListener(
+            "submit",
+            e => {
+
+                e.preventDefault();
+
+
+                const name =
+                    $("#signupName")
+                        .value
+                        .trim();
+
+
+                const email =
+                    $("#signupEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    $("#signupPassword")
+                        .value;
+
+
+                if (
+                    password.length < 6
+                ) {
+
+                    toast(
+                        "Password kamida 6 belgi"
+                    );
+
+                    return;
+
+                }
+
+
+                let users =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "novaUsers"
+                        ) || "[]"
+                    );
+
+
+                if (
+                    users.some(
+                        u =>
+                            u.email ===
+                            email
+                    )
+                ) {
+
+                    toast(
+                        "Bu email mavjud"
+                    );
+
+                    return;
+
+                }
+
+
+                const user = {
+                    name,
+                    email,
+                    password
+                };
+
+
+                users.push(
+                    user
                 );
 
 
-            if (
-                us.some(
-                    x => x.email === email
-                )
-            ) {
-
-                return toast(
-                    "Bu email allaqachon mavjud"
+                localStorage.setItem(
+                    "novaUsers",
+                    JSON.stringify(users)
                 );
+
+
+                enterApp(
+                    user
+                );
+
+
+                toast(
+                    "Account yaratildi ✦"
+                );
+
             }
+        );
 
-
-            const u = {
-                name,
-                email,
-                password
-            };
-
-
-            us.push(u);
-
-
-            localStorage.setItem(
-                "novaXUsers",
-                JSON.stringify(us)
-            );
-
-
-            enterApp(u);
-
-            toast(
-                "Account yaratildi ✦"
-            );
-        };
 }
 
 
-/* =========================================
-   SEARCH + FILTER
-========================================= */
+/* =========================================================
+   ENTER APP
+========================================================= */
+
+function enterApp(user) {
+
+    localStorage.setItem(
+        "novaUser",
+        JSON.stringify(user)
+    );
+
+
+    $("#authGate")
+        ?.classList
+        .add("hidden");
+
+
+    $("#app")
+        ?.classList
+        .remove("hidden");
+
+
+    updateUserUI(
+        user
+    );
+
+
+    updateCart();
+
+    renderCategories();
+
+    renderProducts();
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function updateUserUI(user) {
+
+    const name =
+        user?.name ||
+        "Account";
+
+
+    const letter =
+        name
+            .slice(0, 1)
+            .toUpperCase();
+
+
+    if ($("#avatar"))
+        $("#avatar")
+            .textContent =
+            letter;
+
+
+    if ($("#userLabel"))
+        $("#userLabel")
+            .textContent =
+            name;
+
+
+    if ($("#drawerName"))
+        $("#drawerName")
+            .textContent =
+            name;
+
+
+    if ($("#drawerEmail"))
+        $("#drawerEmail")
+            .textContent =
+            user?.email ||
+            "";
+
+    if ($("#drawerAvatar"))
+        $("#drawerAvatar")
+            .textContent =
+            letter;
+
+}
+
+
+function openProfile() {
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "novaUser"
+            ) || "null"
+        );
+
+
+    if (!user)
+        return;
+
+
+    updateUserUI(
+        user
+    );
+
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "novaOrders"
+            ) || "[]"
+        );
+
+
+    if ($("#drawerOrders"))
+        $("#drawerOrders")
+            .textContent =
+            orders.length;
+
+
+    if ($("#drawerBag"))
+        $("#drawerBag")
+            .textContent =
+            state.cart.reduce(
+                (a, b) =>
+                    a + b.qty,
+                0
+            );
+
+
+    $("#profileDrawer")
+        ?.classList
+        .remove("hidden");
+
+}
+
+
+function initProfile() {
+
+    $("#profileBtn")
+        ?.addEventListener(
+            "click",
+            openProfile
+        );
+
+
+    $("#closeProfile")
+        ?.addEventListener(
+            "click",
+            () =>
+                $("#profileDrawer")
+                    ?.classList
+                    .add("hidden")
+        );
+
+
+    $(".drawer-backdrop")
+        ?.addEventListener(
+            "click",
+            () =>
+                $("#profileDrawer")
+                    ?.classList
+                    .add("hidden")
+        );
+
+
+    $("#logoutBtn")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                localStorage.removeItem(
+                    "novaUser"
+                );
+
+
+                $("#profileDrawer")
+                    ?.classList
+                    .add("hidden");
+
+
+                $("#app")
+                    ?.classList
+                    .add("hidden");
+
+
+                $("#authGate")
+                    ?.classList
+                    .remove("hidden");
+
+
+                toast(
+                    t("logout")
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
 
 function initSearch() {
 
-    $("#openSearch").onclick =
-        () => {
+    $("#openSearch")
+        ?.addEventListener(
+            "click",
+            () => {
 
-            openModal(
-                "searchModal"
-            );
-
-            setTimeout(
-                () =>
-                    $("#globalSearch").focus(),
-                100
-            );
-        };
+                $("#searchModal")
+                    ?.classList
+                    .remove("hidden");
 
 
-    $("#globalSearch").oninput =
-        e => {
+                setTimeout(
+                    () =>
+                        $("#globalSearch")
+                            ?.focus(),
+                    100
+                );
 
-            state.query =
-                e.target.value;
-
-            state.page = 1;
-
-            $("#productSearch").value =
-                state.query;
-
-            renderProducts();
-        };
+            }
+        );
 
 
-    $$(".search-hints button")
-        .forEach(b => {
-
-            b.onclick = () => {
-
-                $("#globalSearch").value =
-                    b.dataset.query;
+    $("#globalSearch")
+        ?.addEventListener(
+            "input",
+            e => {
 
                 state.query =
-                    b.dataset.query;
+                    e.target.value;
 
                 state.page = 1;
 
-                $("#productSearch").value =
-                    state.query;
+                if ($("#productSearch"))
+                    $("#productSearch")
+                        .value =
+                        state.query;
 
                 renderProducts();
 
-                closeModal(
-                    "searchModal"
-                );
-
-                $("#store")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-            };
-
-        });
+            }
+        );
 
 
-    $("#productSearch").oninput =
-        e => {
+    $("#productSearch")
+        ?.addEventListener(
+            "input",
+            e => {
 
-            state.query =
-                e.target.value;
+                state.query =
+                    e.target.value;
 
-            state.page = 1;
+                state.page = 1;
 
-            renderProducts();
-        };
+                renderProducts();
 
-
-    $("#sortSelect").onchange =
-        e => {
-
-            state.sort =
-                e.target.value;
-
-            state.page = 1;
-
-            renderProducts();
-        };
+            }
+        );
 
 
-    $("#openFilters").onclick =
-        () =>
-            openModal(
-                "filterModal"
-            );
+    $("#sortSelect")
+        ?.addEventListener(
+            "change",
+            e => {
+
+                state.sort =
+                    e.target.value;
+
+                state.page = 1;
+
+                renderProducts();
+
+            }
+        );
 
 
-    $("#applyFilters").onclick =
-        () => {
-
-            state.min =
-                Number(
-                    $("#minPrice").value || 0
-                );
-
-
-            state.max =
-                Number(
-                    $("#maxPrice").value ||
-                    99999
-                );
+    $("#openFilters")
+        ?.addEventListener(
+            "click",
+            () =>
+                $("#filterModal")
+                    ?.classList
+                    .remove("hidden")
+        );
 
 
-            state.page = 1;
+    $("#applyFilters")
+        ?.addEventListener(
+            "click",
+            () => {
 
-            renderProducts();
+                state.min =
+                    Number(
+                        $("#minPrice")
+                            ?.value || 0
+                    );
 
-            closeModal(
-                "filterModal"
-            );
 
-            toast(
-                "Filters applied"
-            );
-        };
+                state.max =
+                    Number(
+                        $("#maxPrice")
+                            ?.value || 99999
+                    );
+
+
+                state.page = 1;
+
+                renderProducts();
+
+
+                $("#filterModal")
+                    ?.classList
+                    .add("hidden");
+
+            }
+        );
 
 
     $$("[data-close]")
-        .forEach(b => {
+        .forEach(button => {
 
-            b.onclick =
-                () =>
-                    closeModal(
-                        b.dataset.close
-                    );
+            button.onclick =
+                () => {
+
+                    const id =
+                        button.dataset.close;
+
+
+                    $("#" + id)
+                        ?.classList
+                        .add("hidden");
+
+                };
+
         });
 
 
     $$(".modal-backdrop")
-        .forEach(b => {
+        .forEach(backdrop => {
 
-            b.onclick =
-                () =>
-                    b.parentElement
-                        .classList
+            backdrop.onclick =
+                () => {
+
+                    backdrop.parentElement
+                        ?.classList
                         .add("hidden");
+
+                };
+
         });
+
 }
 
 
-/* =========================================
-   PROFILE
-========================================= */
-
-function initProfile() {
-
-    $("#profileBtn").onclick =
-        openProfile;
-
-
-    $("#closeProfile").onclick =
-        () =>
-            closeModal(
-                "profileDrawer"
-            );
-
-
-    $(".drawer-backdrop").onclick =
-        () =>
-            closeModal(
-                "profileDrawer"
-            );
-
-
-    $("#logoutBtn").onclick =
-        () => {
-
-            localStorage.removeItem(
-                "novaXUser"
-            );
-
-
-            $("#app")
-                .classList
-                .add("hidden");
-
-
-            $("#authGate")
-                .classList
-                .remove("hidden");
-
-
-            closeModal(
-                "profileDrawer"
-            );
-
-
-            toast(
-                "Signed out"
-            );
-        };
-
-
-    $("#cartBtn").onclick =
-        () => {
-
-            if (!state.cart.length) {
-
-                return toast(
-                    "Bag hozircha bo‘sh"
-                );
-            }
-
-
-            const lines =
-                state.cart
-                    .map(x => {
-
-                        const p =
-                            products.find(
-                                y => y.id === x.id
-                            );
-
-                        return `${p.name} ×${x.qty}`;
-                    })
-                    .join(" • ");
-
-
-            toast(
-                lines.slice(0, 150)
-            );
-        };
-}
-
-
-/* =========================================
-   FOOTBALL GAME
-========================================= */
+/* =========================================================
+   FOOTBALL
+========================================================= */
 
 function initFootball() {
 
     let selected =
         "center";
 
-    let shot = 1;
 
-    let score = 0;
+    let score =
+        0;
 
-    let opp = 0;
 
-    let locked = false;
+    let opponent =
+        0;
+
+
+    let shot =
+        1;
+
+
+    let locked =
+        false;
 
 
     const keeper =
         $("#keeper");
 
+
     const ball =
         $("#ball");
 
-    const power =
-        $("#powerFill");
-
-
-    /* DIRECTION */
-
-    $$(".shot-btn")
-        .forEach(b => {
-
-            b.onclick = () => {
-
-                if (locked) return;
-
-
-                selected =
-                    b.dataset.dir;
-
-
-                $$(".shot-btn")
-                    .forEach(
-                        x =>
-                            x.classList
-                                .remove("selected")
-                    );
-
-
-                b.classList.add(
-                    "selected"
-                );
-            };
-
-        });
-
-
-    /* RESET */
 
     function reset() {
 
-        shot = 1;
-
         score = 0;
 
-        opp = 0;
+        opponent = 0;
+
+        shot = 1;
 
         locked = false;
 
 
-        $("#score")
-            .textContent = 0;
-
-        $("#oppScore")
-            .textContent = 0;
-
-        $("#roundText")
-            .textContent =
-            "SHOT 1 / 5";
-
-        $("#gameMessage")
-            .textContent =
-            "Yo‘nalishni tanlang va zarba bering.";
+        if ($("#score"))
+            $("#score")
+                .textContent =
+                "0";
 
 
-        ball.style.transform =
-            "translateX(-50%)";
+        if ($("#oppScore"))
+            $("#oppScore")
+                .textContent =
+                "0";
 
 
-        keeper.style.transform =
-            "translateX(-50%)";
+        if ($("#roundText"))
+            $("#roundText")
+                .textContent =
+                "SHOT 1 / 5";
 
 
-        power.style.width =
-            "70%";
+        if ($("#gameMessage"))
+            $("#gameMessage")
+                .textContent =
+                t("direction");
+
+
+        if (ball)
+            ball.style.transform =
+                "translateX(-50%)";
+
+
+        if (keeper)
+            keeper.style.transform =
+                "translateX(-50%)";
+
     }
 
 
-    /* SHOOT */
+    $$(".shot-btn")
+        .forEach(button => {
 
-    $("#shootBtn").onclick =
-        () => {
-
-            if (locked) return;
-
-
-            locked = true;
-
-
-            const keeperDirs = [
-                "left",
-                "center",
-                "right"
-            ];
-
-
-            const kd =
-                keeperDirs[
-                Math.floor(
-                    Math.random() *
-                    3
-                )
-                ];
-
-
-            const goal =
-                kd !== selected;
-
-
-            const dx =
-                selected === "left"
-                    ? -135
-                    : selected === "right"
-                        ? 135
-                        : 0;
-
-
-            const kx =
-                kd === "left"
-                    ? -130
-                    : kd === "right"
-                        ? 130
-                        : 0;
-
-
-            ball.style.transform =
-                `translate(
-          calc(-50% + ${dx}px),
-          -235px
-        ) scale(.55)`;
-
-
-            keeper.style.transform =
-                `translate(
-          calc(-50% + ${kx}px),
-          0
-        )`;
-
-
-            setTimeout(
+            button.onclick =
                 () => {
 
-                    if (goal) {
-
-                        score++;
-
-                        $("#gameMessage")
-                            .textContent =
-                            "GOOOAL! ⚡ Darvozabon aldandi.";
-
-                    } else {
-
-                        opp++;
-
-                        $("#gameMessage")
-                            .textContent =
-                            "SAVE! 🧤 Darvozabon zarbani qaytardi.";
-                    }
+                    if (locked)
+                        return;
 
 
-                    $("#score")
-                        .textContent =
-                        score;
+                    selected =
+                        button.dataset.dir;
 
 
-                    $("#oppScore")
-                        .textContent =
-                        opp;
-
-
-                    shot++;
-
-
-                    if (shot <= 5) {
-
-                        setTimeout(
-                            () => {
-
-                                ball.style.transform =
-                                    "translateX(-50%)";
-
-                                keeper.style.transform =
-                                    "translateX(-50%)";
-
-
-                                $("#roundText")
-                                    .textContent =
-                                    `SHOT ${shot} / 5`;
-
-
-                                locked = false;
-
-                            },
-                            900
+                    $$(".shot-btn")
+                        .forEach(
+                            x =>
+                                x.classList
+                                    .remove(
+                                        "selected"
+                                    )
                         );
 
-                    } else {
 
-                        setTimeout(
-                            () => {
+                    button.classList.add(
+                        "selected"
+                    );
 
-                                const result =
-                                    score > opp
-                                        ? "YOU WIN 🏆"
-                                        : score < opp
-                                            ? "CPU WINS"
-                                            : "DRAW 🤝";
+                };
+
+        });
 
 
-                                $("#gameMessage")
-                                    .textContent =
-                                    `${result} — ${score}:${opp}`;
+    $("#shootBtn")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                if (locked)
+                    return;
 
 
-                                if (
-                                    score >
-                                    state.best
-                                ) {
-
-                                    state.best =
-                                        score;
+                locked = true;
 
 
-                                    localStorage.setItem(
-                                        "novaXBest",
-                                        score
-                                    );
+                const keeperDir =
+                    [
+                        "left",
+                        "center",
+                        "right"
+                    ][
+                    Math.floor(
+                        Math.random() * 3
+                    )
+                    ];
 
 
-                                    $("#bestScore")
+                const goal =
+                    keeperDir !==
+                    selected;
+
+
+                const ballX =
+                    selected === "left"
+                        ? -130
+                        : selected === "right"
+                            ? 130
+                            : 0;
+
+
+                const keeperX =
+                    keeperDir === "left"
+                        ? -130
+                        : keeperDir === "right"
+                            ? 130
+                            : 0;
+
+
+                if (ball) {
+
+                    ball.style.transform =
+                        `
+              translate(
+                calc(
+                  -50% +
+                  ${ballX}px
+                ),
+                -235px
+              )
+              scale(.55)
+            `;
+
+                }
+
+
+                if (keeper) {
+
+                    keeper.style.transform =
+                        `
+              translate(
+                calc(
+                  -50% +
+                  ${keeperX}px
+                ),
+                0
+              )
+            `;
+
+                }
+
+
+                setTimeout(
+                    () => {
+
+                        if (goal) {
+
+                            score++;
+
+                            $("#gameMessage")
+                                .textContent =
+                                t("goal");
+
+                        } else {
+
+                            opponent++;
+
+                            $("#gameMessage")
+                                .textContent =
+                                t("save");
+
+                        }
+
+
+                        if ($("#score"))
+                            $("#score")
+                                .textContent =
+                                score;
+
+
+                        if ($("#oppScore"))
+                            $("#oppScore")
+                                .textContent =
+                                opponent;
+
+
+                        shot++;
+
+
+                        if (shot <= 5) {
+
+                            setTimeout(
+                                () => {
+
+                                    ball.style.transform =
+                                        "translateX(-50%)";
+
+                                    keeper.style.transform =
+                                        "translateX(-50%)";
+
+
+                                    $("#roundText")
                                         .textContent =
-                                        score;
-                                }
-
-                            },
-                            500
-                        );
-                    }
-
-                },
-                650
-            );
-        };
+                                        `SHOT ${shot} / 5`;
 
 
-    $("#restartGame").onclick =
-        reset;
+                                    locked = false;
+
+                                },
+                                850
+                            );
+
+                        } else {
+
+                            setTimeout(
+                                () => {
+
+                                    let result;
 
 
-    $("#bestScore")
-        .textContent =
-        state.best;
+                                    if (score > opponent) {
+
+                                        result =
+                                            state.language === "ru"
+                                                ? "ПОБЕДА 🏆"
+                                                : state.language === "en"
+                                                    ? "YOU WIN 🏆"
+                                                    : "SIZ YUTDINGIZ 🏆";
+
+                                    } else if (
+                                        score < opponent
+                                    ) {
+
+                                        result =
+                                            state.language === "ru"
+                                                ? "CPU ПОБЕДИЛ"
+                                                : state.language === "en"
+                                                    ? "CPU WINS"
+                                                    : "CPU YUTDI";
+
+                                    } else {
+
+                                        result =
+                                            state.language === "ru"
+                                                ? "НИЧЬЯ 🤝"
+                                                : state.language === "en"
+                                                    ? "DRAW 🤝"
+                                                    : "DURRANG 🤝";
+
+                                    }
+
+
+                                    $("#gameMessage")
+                                        .textContent =
+                                        `${result} — ${score}:${opponent}`;
+
+
+                                    if (
+                                        score >
+                                        state.best
+                                    ) {
+
+                                        state.best =
+                                            score;
+
+
+                                        localStorage.setItem(
+                                            "novaBest",
+                                            score
+                                        );
+
+
+                                        $("#bestScore")
+                                            .textContent =
+                                            score;
+
+                                    }
+
+
+                                },
+                                500
+                            );
+
+                        }
+
+                    },
+                    650
+                );
+
+            }
+        );
+
+
+    $("#restartGame")
+        ?.addEventListener(
+            "click",
+            reset
+        );
+
+
+    if ($("#bestScore"))
+        $("#bestScore")
+            .textContent =
+            state.best;
 
 
     reset();
+
 }
 
 
-/* =========================================
+/* =========================================================
    INITIALIZE
-========================================= */
+========================================================= */
 
 function init() {
 
-    initAuth();
+    createWeatherUI();
 
-    initSearch();
+    applyTheme();
+
+    applyLanguage();
+
+    updateClock();
+
+    loadWeather();
+
+    initAuth();
 
     initProfile();
 
+    initSearch();
+
     initFootball();
 
-    updateCartUI();
+    updateCart();
 
+    renderCategories();
 
-    $$(".nav-link")
-        .forEach(a => {
+    renderProducts();
 
-            a.onclick = () => {
-
-                $$(".nav-link")
-                    .forEach(
-                        x =>
-                            x.classList
-                                .remove("active")
-                    );
-
-
-                a.classList.add(
-                    "active"
-                );
-            };
-
-        });
 }
 
 
-init();
+document.addEventListener(
+    "DOMContentLoaded",
+    init
+);
