@@ -1,2201 +1,1450 @@
-/* =========================================================
-   NOVA X — PREMIUM ENGINE
-   550+ PRODUCTS
-   3 LANGUAGES
-   DAY / NIGHT
-   SNOW / CLOUDS
-   LIVE CLOCK
-   LIVE WEATHER
-   PRODUCT IMAGES
-   CART
-   AUTH
-   FOOTBALL
-========================================================= */
-
-const LANGS = {
-
-    uz: {
-        home: "Bosh sahifa",
-        store: "Do‘kon",
-        football: "Futbol",
-        about: "Biz haqimizda",
-
-        search: "Qidirish",
-        account: "Hisob",
-        bag: "Savat",
-
-        discover: "KEYINGI QURILMANGIZNI TOPING",
-        everything: "Hammasi.",
-        onePlace: "Bitta joyda.",
-
-        searchPlaceholder: "Mahsulot qidiring...",
-
-        filters: "Filtrlar",
-        products: "mahsulot",
-
-        featured: "Tavsiya etilgan",
-        low: "Narx: arzon → qimmat",
-        high: "Narx: qimmat → arzon",
-        name: "Nomi A → Z",
-
-        catalog: "Katalogni ko‘rish",
-        arena: "Football Arena",
-
-        footballTitle: "Football",
-        footballSub: "Penalty Arena.",
-
-        direction: "Yo‘nalishni tanlang va zarba bering.",
-        shoot: "ZARBA",
-
-        left: "CHAP",
-        center: "MARKAZ",
-        right: "O‘NG",
-
-        how: "QANDAY O‘YNALADI",
-        five: "5 ta penalti.",
-        who: "Kim kuchli?",
-
-        goal: "GOOOAL! ⚡ Darvozabon aldandi.",
-        save: "SAVE! 🧤 Darvozabon zarbani qaytardi.",
-
-        restart: "O‘yinni qayta boshlash",
-
-        best: "ENG YAXSHI NATIJA",
-
-        weather: "Ob-havo",
-        live: "JONLI",
-
-        signin: "Kirish",
-        signup: "Ro‘yxatdan o‘tish",
-
-        nameLabel: "Ism",
-        password: "Parol",
-
-        login: "Kirish",
-        create: "Account yaratish",
-
-        demo: "Demo kirish",
-
-        logout: "Chiqish",
-
-        day: "Kunduz",
-        night: "Tun"
-    },
-
-    ru: {
-        home: "Главная",
-        store: "Магазин",
-        football: "Футбол",
-        about: "О нас",
-
-        search: "Поиск",
-        account: "Аккаунт",
-        bag: "Корзина",
-
-        discover: "НАЙДИТЕ СВОЁ УСТРОЙСТВО",
-        everything: "Всё.",
-        onePlace: "В одном месте.",
-
-        searchPlaceholder: "Поиск товара...",
-
-        filters: "Фильтры",
-        products: "товаров",
-
-        featured: "Рекомендуемые",
-        low: "Цена: по возрастанию",
-        high: "Цена: по убыванию",
-        name: "Название А → Я",
-
-        catalog: "Смотреть каталог",
-        arena: "Football Arena",
-
-        footballTitle: "Football",
-        footballSub: "Penalty Arena.",
-
-        direction: "Выберите направление и бейте.",
-        shoot: "УДАР",
-
-        left: "ЛЕВО",
-        center: "ЦЕНТР",
-        right: "ПРАВО",
-
-        how: "КАК ИГРАТЬ",
-        five: "5 пенальти.",
-        who: "Кто сильнее?",
-
-        goal: "ГООООЛ! ⚡ Вратарь обманут.",
-        save: "SAVE! 🧤 Вратарь отбил удар.",
-
-        restart: "Начать заново",
-
-        best: "ЛУЧШИЙ РЕЗУЛЬТАТ",
-
-        weather: "Погода",
-        live: "LIVE",
-
-        signin: "Войти",
-        signup: "Регистрация",
-
-        nameLabel: "Имя",
-        password: "Пароль",
-
-        login: "Войти",
-        create: "Создать аккаунт",
-
-        demo: "Демо вход",
-
-        logout: "Выйти",
-
-        day: "День",
-        night: "Ночь"
-    },
-
-    en: {
-        home: "Home",
-        store: "Store",
-        football: "Football",
-        about: "About",
-
-        search: "Search",
-        account: "Account",
-        bag: "Bag",
-
-        discover: "DISCOVER YOUR NEXT DEVICE",
-        everything: "Everything.",
-        onePlace: "In one place.",
-
-        searchPlaceholder: "Search products...",
-
-        filters: "Filters",
-        products: "products",
-
-        featured: "Featured",
-        low: "Price: Low → High",
-        high: "Price: High → Low",
-        name: "Name A → Z",
-
-        catalog: "Explore catalog",
-        arena: "Football Arena",
-
-        footballTitle: "Football",
-        footballSub: "Penalty Arena.",
-
-        direction: "Choose a direction and shoot.",
-        shoot: "SHOOT",
-
-        left: "LEFT",
-        center: "CENTER",
-        right: "RIGHT",
-
-        how: "HOW TO PLAY",
-        five: "5 penalties.",
-        who: "Who is stronger?",
-
-        goal: "GOOOAL! ⚡ The keeper was fooled.",
-        save: "SAVE! 🧤 The keeper stopped it.",
-
-        restart: "Restart Match",
-
-        best: "PERSONAL BEST",
-
-        weather: "Weather",
-        live: "LIVE",
-
-        signin: "Sign In",
-        signup: "Sign Up",
-
-        nameLabel: "Name",
-        password: "Password",
-
-        login: "Sign In",
-        create: "Create account",
-
-        demo: "Demo access",
-
-        logout: "Log out",
-
-        day: "Day",
-        night: "Night"
-    }
-
-};
-
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-const CATEGORIES = [
-    "Telefonlar",
-    "Noutbuklar",
-    "Dronlar",
-    "iPadlar",
-    "Televizorlar",
-    "Xolodilniklar",
-    "Kir moshinalar",
-    "Gaz plitalar",
-    "Mikroto‘lqinli pechlar",
-    "Aqlli Uy",
-    "O‘yinlar"
-];
-
-
-const CATEGORY_NAMES = {
-
-    uz: {
-        "Telefonlar": "Telefonlar",
-        "Noutbuklar": "Noutbuklar",
-        "Dronlar": "Dronlar",
-        "iPadlar": "iPadlar",
-        "Televizorlar": "Televizorlar",
-        "Xolodilniklar": "Xolodilniklar",
-        "Kir moshinalar": "Kir moshinalar",
-        "Gaz plitalar": "Gaz plitalar",
-        "Mikroto‘lqinli pechlar": "Mikroto‘lqinli pechlar",
-        "Aqlli Uy": "Aqlli Uy",
-        "O‘yinlar": "O‘yinlar"
-    },
-
-    ru: {
-        "Telefonlar": "Телефоны",
-        "Noutbuklar": "Ноутбуки",
-        "Dronlar": "Дроны",
-        "iPadlar": "iPad",
-        "Televizorlar": "Телевизоры",
-        "Xolodilniklar": "Холодильники",
-        "Kir moshinalar": "Стиральные машины",
-        "Gaz plitalar": "Газовые плиты",
-        "Mikroto‘lqinli pechlar": "Микроволновки",
-        "Aqlli Uy": "Умный дом",
-        "O‘yinlar": "Игры"
-    },
-
-    en: {
-        "Telefonlar": "Phones",
-        "Noutbuklar": "Laptops",
-        "Dronlar": "Drones",
-        "iPadlar": "iPads",
-        "Televizorlar": "TVs",
-        "Xolodilniklar": "Refrigerators",
-        "Kir moshinalar": "Washing Machines",
-        "Gaz plitalar": "Gas Stoves",
-        "Mikroto‘lqinli pechlar": "Microwaves",
-        "Aqlli Uy": "Smart Home",
-        "O‘yinlar": "Gaming"
-    }
-
-};
-
-
-/* =========================================================
-   PRODUCT DATA
-========================================================= */
-
-const META = {
-
-    "Telefonlar": {
-        icon: "📱",
-        query: "smartphone",
-        brands: [
-            "Apple",
-            "Samsung",
-            "Google",
-            "Xiaomi",
-            "OnePlus"
-        ],
-        models: [
-            "Pro Max",
-            "Ultra",
-            "Air",
-            "Plus",
-            "Edge",
-            "Max"
-        ],
-        base: 499
-    },
-
-    "Noutbuklar": {
-        icon: "💻",
-        query: "laptop",
-        brands: [
-            "Apple",
-            "ASUS",
-            "Lenovo",
-            "Dell",
-            "HP"
-        ],
-        models: [
-            "Pro",
-            "Air",
-            "X",
-            "G16",
-            "Carbon",
-            "Studio"
-        ],
-        base: 799
-    },
-
-    "Dronlar": {
-        icon: "🚁",
-        query: "drone",
-        brands: [
-            "DJI",
-            "Autel",
-            "HoverAir",
-            "Skydio",
-            "Potensic"
-        ],
-        models: [
-            "Fly",
-            "Pro",
-            "Air",
-            "Vision",
-            "Explorer",
-            "Mini"
-        ],
-        base: 399
-    },
-
-    "iPadlar": {
-        icon: "▣",
-        query: "ipad tablet",
-        brands: ["Apple"],
-        models: [
-            "Pro",
-            "Air",
-            "Mini",
-            "Studio",
-            "Max",
-            "Creator"
-        ],
-        base: 599
-    },
-
-    "Televizorlar": {
-        icon: "📺",
-        query: "smart tv television",
-        brands: [
-            "Sony",
-            "Samsung",
-            "LG",
-            "TCL",
-            "Hisense"
-        ],
-        models: [
-            "OLED",
-            "Neo QLED",
-            "Mini LED",
-            "Bravia",
-            "Cinema",
-            "Ultra"
-        ],
-        base: 599
-    },
-
-    "Xolodilniklar": {
-        icon: "🧊",
-        query: "refrigerator",
-        brands: [
-            "Samsung",
-            "LG",
-            "Bosch",
-            "Haier",
-            "Artel"
-        ],
-        models: [
-            "Family Hub",
-            "Fresh",
-            "Inverter",
-            "French Door",
-            "Smart",
-            "Prime"
-        ],
-        base: 699
-    },
-
-    "Kir moshinalar": {
-        icon: "🫧",
-        query: "washing machine",
-        brands: [
-            "LG",
-            "Samsung",
-            "Bosch",
-            "Beko",
-            "Haier"
-        ],
-        models: [
-            "AI Wash",
-            "Steam",
-            "Pro",
-            "Eco",
-            "Turbo",
-            "Smart"
-        ],
-        base: 449
-    },
-
-    "Gaz plitalar": {
-        icon: "🔥",
-        query: "gas stove kitchen",
-        brands: [
-            "Artel",
-            "Bosch",
-            "Gorenje",
-            "Beko",
-            "Hansa"
-        ],
-        models: [
-            "Chef",
-            "Flame",
-            "Pro",
-            "Steel",
-            "Smart",
-            "Master"
-        ],
-        base: 299
-    },
-
-    "Mikroto‘lqinli pechlar": {
-        icon: "◉",
-        query: "microwave oven",
-        brands: [
-            "Samsung",
-            "LG",
-            "Panasonic",
-            "Bosch",
-            "Artel"
-        ],
-        models: [
-            "Grill",
-            "Chef",
-            "Smart",
-            "Quick",
-            "Pro",
-            "Heat"
-        ],
-        base: 149
-    },
-
-    "Aqlli Uy": {
-        icon: "⌂",
-        query: "smart home",
-        brands: [
-            "Google",
-            "Apple",
-            "Xiaomi",
-            "Philips",
-            "Aqara"
-        ],
-        models: [
-            "Hub",
-            "Sense",
-            "Home",
-            "Cam",
-            "Light",
-            "Secure"
-        ],
-        base: 79
-    },
-
-    "O‘yinlar": {
-        icon: "🎮",
-        query: "gaming console",
-        brands: [
-            "PlayStation",
-            "Xbox",
-            "Nintendo",
-            "Meta",
-            "Razer"
-        ],
-        models: [
-            "Pro",
-            "Elite",
-            "Next",
-            "Series",
-            "VR",
-            "Ultimate"
-        ],
-        base: 199
-    }
-
-};
-
-
-/*
-  Har bir productga alohida lock beriladi.
-  Shu sababli 550 ta mahsulotning image URL'i
-  bir-biridan farq qiladi.
-*/
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+const money = n =>
+    "$" + Number(n).toLocaleString("en-US");
 
 const products = [];
 
-let productId = 1;
+const names = [
+    "iPhone 17 Pro Max",
+    "Samsung Galaxy S26 Ultra",
+    "Google Pixel 10 Pro",
+    "Xiaomi 16 Ultra",
+    "OnePlus 14 Pro",
+    "iPhone 17 Pro",
+    "Galaxy S26+",
+    "Xiaomi 16 Pro",
+    "MacBook Pro M5",
+    "MacBook Air M5",
+    "ASUS ROG Zephyrus G16",
+    "ASUS Zenbook Pro",
+    "Lenovo Legion 7",
+    "Lenovo ThinkPad X1",
+    "HP Spectre x360",
+    "Dell XPS 15",
+    "iPad Pro M4",
+    "iPad Air M3",
+    "Samsung Galaxy Tab S11",
+    "Xiaomi Pad 8 Pro",
+    "Lenovo Tab Extreme",
+    "Samsung OLED 65",
+    "LG OLED C5",
+    "Sony Bravia XR",
+    "Samsung Neo QLED",
+    "LG QNED",
+    "TCL Mini LED",
+    "PlayStation 5 Pro",
+    "PlayStation 5 Slim",
+    "Xbox Series X",
+    "Xbox Series S",
+    "ROG Ally X",
+    "Steam Deck OLED",
+    "Nintendo Switch 2",
+    "DualSense Edge",
+    "AirPods Pro 3",
+    "AirPods Max",
+    "Sony WH-1000XM6",
+    "Sony WF-1000XM6",
+    "JBL Tour One M3",
+    "JBL Live Pro 3",
+    "Bose QuietComfort Ultra",
+    "Apple Watch Ultra",
+    "Apple Watch Series 11",
+    "Galaxy Watch 8 Classic",
+    "Galaxy Watch Ultra",
+    "Garmin Fenix",
+    "Xiaomi Watch S5",
+    "Dyson Air Purifier",
+    "Samsung Bespoke Fridge",
+    "LG InstaView",
+    "Dyson V16",
+    "Roborock S9",
+    "DJI Mini 5 Pro",
+    "GoPro Hero 14",
+    "Sony Alpha A7 V",
+    "Canon EOS R8",
+    "Nikon Z6 III",
+    "Meta Quest 4",
+    "Apple Vision Pro"
+];
 
-CATEGORIES.forEach(category => {
+const categories = [
+    "phones",
+    "phones",
+    "phones",
+    "phones",
+    "phones",
+    "phones",
+    "phones",
+    "phones",
+    "laptops",
+    "laptops",
+    "laptops",
+    "laptops",
+    "laptops",
+    "laptops",
+    "laptops",
+    "laptops",
+    "tablets",
+    "tablets",
+    "tablets",
+    "tablets",
+    "tablets",
+    "tvs",
+    "tvs",
+    "tvs",
+    "tvs",
+    "tvs",
+    "tvs",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "audio",
+    "audio",
+    "audio",
+    "audio",
+    "audio",
+    "audio",
+    "audio",
+    "watch",
+    "watch",
+    "watch",
+    "watch",
+    "watch",
+    "watch",
+    "home",
+    "home",
+    "home",
+    "home",
+    "home",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming",
+    "gaming"
+];
 
-    const m = META[category];
+const prices = [
+    1299, 1199, 999, 899, 799, 1099, 999, 949,
+    1899, 1199, 1699, 1799, 1599, 1499, 1399, 1599,
+    999, 649, 799, 599, 899,
+    1499, 1799, 1699, 1599, 1299, 899,
+    699, 499, 499, 299, 799, 549, 449, 199,
+    249, 549, 399, 299, 249, 199, 449,
+    799, 449, 599, 649, 899, 399,
+    699, 2199, 1599, 899, 999,
+    1099, 799, 2499, 1499, 999, 3499
+];
 
-    for (let i = 0; i < 50; i++) {
+const images = [
+    "https://images.unsplash.com/photo-1592286927505-2fd5b8e8b4e4",
+    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+    "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5",
+    "https://images.unsplash.com/photo-1598327105666-5b89351aff97",
+    "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
+    "https://images.unsplash.com/photo-1556656793-08538906a9f8",
+    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+    "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0",
+    "https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf",
+    "https://images.unsplash.com/photo-1603302576837-37561b2e2302",
+    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed"
+];
 
-        const brand =
-            m.brands[
-            i % m.brands.length
-            ];
+for (let i = 0; i < 60; i++) {
 
-        const model =
-            m.models[
-            i % m.models.length
-            ];
+    products.push([
+        names[i],
+        categories[i],
+        prices[i],
+        +(4.3 + Math.random() * .7).toFixed(1),
+        images[i % images.length] +
+        "?auto=format&fit=crop&w=900&q=85"
+    ]);
 
-        const price =
-            Math.round(
-                m.base +
-                ((i + 1) * 47) % 900
-            );
-
-
-        const image =
-            `https://loremflickr.com/900/900/${encodeURIComponent(m.query)}?lock=${productId}`;
-
-
-        products.push({
-
-            id: productId,
-
-            category,
-
-            brand,
-
-            name:
-                `${brand} ${model} ${2026 + (i % 2)} ${String(i + 1).padStart(2, "0")}`,
-
-            price,
-
-            image,
-
-            icon: m.icon,
-
-            tag:
-                i % 9 === 0
-                    ? "NOVA PICK"
-                    : i % 5 === 0
-                        ? "NEW"
-                        : "PREMIUM"
-
-        });
+}
 
 
-        productId++;
-    }
+/* STATE */
 
-});
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let state = {
-
-    language:
-        localStorage.getItem("novaLanguage") ||
-        "uz",
-
-    theme:
-        localStorage.getItem("novaTheme") ||
-        "night",
-
-    category: "Barchasi",
-
+const state = {
+    cat: "all",
     query: "",
-
-    sort: "featured",
-
-    min: 0,
-
-    max: 99999,
-
-    page: 1,
-
-    perPage: 20,
-
-    cart:
-        JSON.parse(
-            localStorage.getItem("novaCart") ||
-            "[]"
-        ),
-
-    favorites:
-        JSON.parse(
-            localStorage.getItem("novaFavorites") ||
-            "[]"
-        ),
-
-    selectedDir: "center",
-
-    score: 0,
-
-    opponent: 0,
-
-    shot: 1,
-
-    best:
-        Number(
-            localStorage.getItem(
-                "novaBest"
-            ) || 0
-        )
-
+    sort: "default",
+    cart: JSON.parse(
+        localStorage.getItem("novaCart") || "[]"
+    ),
+    fav: JSON.parse(
+        localStorage.getItem("novaFav") || "[]"
+    ),
+    lang: localStorage.getItem("novaLang") || "uz",
+    user: JSON.parse(
+        localStorage.getItem("novaUser") || "null"
+    )
 };
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
+function save() {
 
-const $ =
-    s =>
-        document.querySelector(s);
-
-const $$ =
-    s =>
-        document.querySelectorAll(s);
-
-
-function money(n) {
-
-    return "$" +
-        n.toLocaleString(
-            "en-US"
-        );
-
-}
-
-
-function t(key) {
-
-    return (
-        LANGS[state.language] ||
-        LANGS.uz
-    )[key] || key;
-
-}
-
-
-function categoryName(cat) {
-
-    return (
-        CATEGORY_NAMES[state.language] ||
-        CATEGORY_NAMES.uz
-    )[cat] || cat;
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function toast(message) {
-
-    const box =
-        $("#toast");
-
-    if (!box) return;
-
-    box.textContent =
-        message;
-
-    box.classList.add("show");
-
-    clearTimeout(
-        window.__novaToast
+    localStorage.setItem(
+        "novaCart",
+        JSON.stringify(state.cart)
     );
 
-    window.__novaToast =
+    localStorage.setItem(
+        "novaFav",
+        JSON.stringify(state.fav)
+    );
+
+}
+
+
+/* TOAST */
+
+function toast(text) {
+
+    const t = $("#toast");
+
+    t.textContent = text;
+
+    t.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer =
         setTimeout(
-            () =>
-                box.classList.remove("show"),
+            () => t.classList.remove("show"),
             2200
         );
 
 }
 
 
-/* =========================================================
-   WEATHER UI
-========================================================= */
+/* FILTERS */
 
-function createWeatherUI() {
+function renderFilters() {
 
-    if (!$("#weatherLayer")) {
+    const names = {
+        all: "Barchasi",
+        phones: "Telefonlar",
+        laptops: "Noutbuklar",
+        tablets: "Planshetlar",
+        tvs: "Televizorlar",
+        gaming: "Gaming",
+        audio: "Audio",
+        watch: "Smart Watch",
+        home: "Uy texnikasi"
+    };
 
-        const layer =
-            document.createElement("div");
+    $("#filters").innerHTML =
+        Object.entries(names)
+            .map(([key, name]) => `
+        <button
+          class="${state.cat === key ? "active" : ""}"
+          onclick="setCategory('${key}')"
+        >
+          ${name}
+        </button>
+      `)
+            .join("");
 
-        layer.id =
-            "weatherLayer";
+}
 
-        document.body
-            .prepend(layer);
+
+window.setCategory = key => {
+
+    state.cat = key;
+
+    renderFilters();
+    renderProducts();
+
+};
+
+
+/* PRODUCTS */
+
+function renderProducts() {
+
+    let arr = [...products];
+
+    if (state.cat !== "all") {
+        arr = arr.filter(
+            p => p[1] === state.cat
+        );
+    }
+
+    if (state.query) {
+
+        const q = state.query.toLowerCase();
+
+        arr = arr.filter(
+            p =>
+                p[0].toLowerCase().includes(q) ||
+                p[1].toLowerCase().includes(q)
+        );
 
     }
 
+    if (state.sort === "low") {
+        arr.sort((a, b) => a[2] - b[2]);
+    }
 
-    if (!$("#liveBar")) {
+    if (state.sort === "high") {
+        arr.sort((a, b) => b[2] - a[2]);
+    }
 
-        const bar =
-            document.createElement("div");
-
-        bar.id =
-            "liveBar";
-
-        bar.className =
-            "live-bar";
-
-        bar.innerHTML = `
-
-      <span class="live-dot"></span>
-
-      <span
-        id="liveTime"
-        class="live-time"
-      >
-        --:--:--
-      </span>
-
-      <span
-        id="liveWeather"
-        class="live-weather"
-      >
-        --
-      </span>
-
-      <span
-        id="liveCity"
-        class="live-city"
-      >
-        TASHKENT
-      </span>
-
-    `;
-
-        document.body
-            .append(bar);
-
+    if (state.sort === "rating") {
+        arr.sort((a, b) => b[3] - a[3]);
     }
 
 
-    if (!$("#weatherPanel")) {
+    $("#productGrid").innerHTML =
+        arr.map((p, i) => {
 
-        const panel =
-            document.createElement("div");
+            const index =
+                products.indexOf(p);
 
-        panel.id =
-            "weatherPanel";
+            const liked =
+                state.fav.includes(index);
 
-        panel.className =
-            "weather-panel";
+            return `
+        <article class="product">
 
-        panel.innerHTML = `
+          <div class="product-img">
 
-      <span
-        id="weatherIcon"
-        class="weather-icon"
-      >
-        ☁️
-      </span>
+            <img
+              src="${p[4]}"
+              alt="${p[0]}"
+              loading="lazy"
+            >
 
-      <div>
+            <span class="product-badge">
+              ${i < 3 ? "POPULAR" : "NOVA"}
+            </span>
 
-        <div
-          id="weatherTemp"
-          class="weather-temp"
+            <button
+              class="heart ${liked ? "on" : ""}"
+              onclick="toggleFav(${index})"
+            >
+              ${liked ? "♥" : "♡"}
+            </button>
+
+          </div>
+
+          <div class="product-body">
+
+            <small>
+              ${p[1]}
+            </small>
+
+            <h3>
+              ${p[0]}
+            </h3>
+
+            <div class="rating">
+              ⭐ ${p[3]}
+            </div>
+
+            <div class="product-bottom">
+
+              <strong class="price">
+                ${money(p[2])}
+              </strong>
+
+              <button
+                class="add"
+                onclick="addCart(${index})"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+      `;
+
+        }).join("");
+
+}
+
+
+/* CART */
+
+window.addCart = index => {
+
+    const p = products[index];
+
+    const existing =
+        state.cart.findIndex(
+            x => x[0] === p[0]
+        );
+
+    if (existing > -1) {
+
+        state.cart[existing][1]++;
+
+    } else {
+
+        state.cart.push([
+            p[0],
+            1,
+            p[2],
+            p[4]
+        ]);
+
+    }
+
+    save();
+    updateCounts();
+
+    toast(
+        p[0] + " savatchaga qo'shildi ✓"
+    );
+
+};
+
+
+window.toggleFav = index => {
+
+    const i =
+        state.fav.indexOf(index);
+
+    if (i > -1) {
+
+        state.fav.splice(i, 1);
+
+    } else {
+
+        state.fav.push(index);
+
+    }
+
+    save();
+    renderProducts();
+    updateCounts();
+
+    toast(
+        i > -1
+            ? "Sevimlilardan olindi"
+            : "Sevimlilarga qo'shildi ♥"
+    );
+
+};
+
+
+function updateCounts() {
+
+    $("#cartCount").textContent =
+        state.cart.reduce(
+            (a, x) => a + x[1],
+            0
+        );
+
+    $("#favCount").textContent =
+        state.fav.length;
+
+}
+
+
+function renderCart() {
+
+    const box = $("#cartItems");
+
+    const empty = $("#cartEmpty");
+
+    if (!state.cart.length) {
+
+        box.innerHTML = "";
+
+        empty.style.display = "block";
+
+        $("#cartTotal").textContent = "$0";
+
+        return;
+    }
+
+    empty.style.display = "none";
+
+    box.innerHTML =
+        state.cart.map((x, i) => `
+
+      <div class="cart-row">
+
+        <img
+          src="${x[3]}"
+          alt="${x[0]}"
         >
-          --°C
+
+        <div>
+
+          <b>
+            ${x[0]}
+          </b>
+
+          <small>
+            ${money(x[2])} · x${x[1]}
+          </small>
+
+          <div>
+
+            <button
+              onclick="changeQty(${i},-1)"
+            >
+              −
+            </button>
+
+            <button
+              onclick="changeQty(${i},1)"
+            >
+              +
+            </button>
+
+          </div>
+
         </div>
 
-        <div
-          id="weatherText"
-          class="weather-text"
+        <button
+          class="remove"
+          onclick="removeCart(${i})"
         >
-          ${t("weather")}
-        </div>
-
-        <div
-          id="weatherUpdate"
-          class="weather-update"
-        >
-          LIVE
-        </div>
+          ×
+        </button>
 
       </div>
 
-    `;
+    `).join("");
 
-        document.body
-            .append(panel);
-
-    }
-
-
-    if (!$("#modeBtn")) {
-
-        const button =
-            document.createElement("button");
-
-        button.id =
-            "modeBtn";
-
-        button.className =
-            "mode-btn";
-
-        button.title =
-            "Theme";
-
-        button.textContent =
-            state.theme === "night"
-                ? "☀"
-                : "🌙";
-
-
-        button.onclick =
-            toggleTheme;
-
-
-        const header =
-            $(".header-actions");
-
-        if (header) {
-
-            header.prepend(
-                button
-            );
-
-        }
-
-    }
-
-
-    if (!$("#languageSelect")) {
-
-        const select =
-            document.createElement("select");
-
-        select.id =
-            "languageSelect";
-
-        select.className =
-            "language-select";
-
-        select.innerHTML = `
-
-      <option value="uz">
-        UZ
-      </option>
-
-      <option value="ru">
-        RU
-      </option>
-
-      <option value="en">
-        EN
-      </option>
-
-    `;
-
-        select.value =
-            state.language;
-
-        select.onchange =
-            () => {
-
-                state.language =
-                    select.value;
-
-                localStorage.setItem(
-                    "novaLanguage",
-                    state.language
-                );
-
-                applyLanguage();
-
-                renderCategories();
-
-                renderProducts();
-
-            };
-
-
-        const header =
-            $(".header-actions");
-
-        if (header) {
-
-            header.prepend(
-                select
-            );
-
-        }
-
-    }
+    $("#cartTotal").textContent =
+        money(
+            state.cart.reduce(
+                (a, x) => a + x[1] * x[2],
+                0
+            )
+        );
 
 }
 
 
-/* =========================================================
-   DAY / NIGHT
-========================================================= */
+window.changeQty = (i, d) => {
 
-function createSnow() {
+    state.cart[i][1] += d;
 
-    const layer =
-        $("#weatherLayer");
+    if (state.cart[i][1] <= 0) {
 
-    if (!layer) return;
+        state.cart.splice(i, 1);
 
-    layer
-        .querySelectorAll(".snowflake")
-        .forEach(
-            x => x.remove()
-        );
+    }
 
+    save();
+    renderCart();
+    updateCounts();
 
-    if (state.theme !== "night")
-        return;
+};
 
 
-    for (
-        let i = 0;
-        i < 65;
-        i++
-    ) {
+window.removeCart = i => {
 
-        const snow =
-            document.createElement("span");
+    state.cart.splice(i, 1);
 
-        snow.className =
-            "snowflake";
+    save();
+    renderCart();
+    updateCounts();
 
-        snow.style.left =
+};
+
+
+function openCart() {
+
+    renderCart();
+
+    $("#cartDrawer")
+        .classList.add("open");
+
+    $("#drawerOverlay")
+        .classList.add("show");
+
+}
+
+
+function closeCart() {
+
+    $("#cartDrawer")
+        .classList.remove("open");
+
+    $("#drawerOverlay")
+        .classList.remove("show");
+
+}
+
+
+/* SNOW */
+
+function snow() {
+
+    const s = $("#snow");
+
+    for (let i = 0; i < 70; i++) {
+
+        const x =
+            document.createElement("i");
+
+        x.style.left =
             Math.random() * 100 + "%";
 
-        snow.style.width =
-            (Math.random() * 3 + 2) + "px";
+        x.style.top =
+            Math.random() * -100 + "px";
 
-        snow.style.height =
-            snow.style.width;
+        x.style.animationDuration =
+            (6 + Math.random() * 10) + "s";
 
-        snow.style.opacity =
-            .3 + Math.random() * .6;
+        x.style.animationDelay =
+            (-Math.random() * 10) + "s";
 
-        snow.style.animationDuration =
-            (7 + Math.random() * 10) + "s";
+        x.style.opacity =
+            .25 + Math.random() * .7;
 
-        snow.style.animationDelay =
-            (-Math.random() * 15) + "s";
-
-
-        layer.appendChild(
-            snow
-        );
+        s.appendChild(x);
 
     }
 
 }
 
 
-function createClouds() {
+/* CLOCK */
 
-    const layer =
-        $("#weatherLayer");
+function clock() {
 
-    if (!layer) return;
+    const d = new Date();
 
+    $("#clock").textContent =
+        d.toLocaleTimeString("en-GB");
 
-    layer
-        .querySelectorAll(".weather-cloud")
-        .forEach(
-            x => x.remove()
-        );
+    $("#date").textContent =
+        d.toLocaleDateString("en-GB");
 
-
-    if (state.theme !== "day")
-        return;
-
-
-    ["c1", "c2", "c3"]
-        .forEach(cls => {
-
-            const cloud =
-                document.createElement("span");
-
-            cloud.className =
-                "weather-cloud " +
-                cls;
-
-            layer.appendChild(
-                cloud
-            );
-
-        });
+    $("#weatherTemp").textContent =
+        (22 + Math.floor(Math.random() * 5))
+        + "°C";
 
 }
 
 
-function toggleTheme() {
+/* THEME */
 
-    state.theme =
-        state.theme === "night"
-            ? "day"
-            : "night";
+function theme() {
 
+    const light =
+        localStorage.getItem("novaTheme")
+        === "light";
+
+    document.body.classList
+        .toggle("light", light);
+
+    $("#themeBtn").textContent =
+        light ? "🌙" : "☀️";
+
+}
+
+
+/* LANGUAGE */
+
+const translations = {
+
+    uz: {
+        home: "Bosh sahifa",
+        store: "Do'kon",
+        categories: "Kategoriyalar",
+        about: "Biz haqimizda",
+        heroText:
+            "60+ premium mahsulot, aqlli yordamchi, gaming va bitta zamonaviy ekotizim.",
+        shopNow: "Xarid qilish →"
+    },
+
+    ru: {
+        home: "Главная",
+        store: "Магазин",
+        categories: "Категории",
+        about: "О нас",
+        heroText:
+            "60+ премиальных товаров, умный помощник и gaming в одной экосистеме.",
+        shopNow: "Купить →"
+    },
+
+    en: {
+        home: "Home",
+        store: "Store",
+        categories: "Categories",
+        about: "About us",
+        heroText:
+            "60+ premium products, a smart assistant, gaming and one modern ecosystem.",
+        shopNow: "Shop now →"
+    }
+
+};
+
+
+function setLang(l) {
+
+    state.lang = l;
 
     localStorage.setItem(
-        "novaTheme",
-        state.theme
+        "novaLang",
+        l
     );
 
+    $$("[data-i18n]").forEach(e => {
 
-    applyTheme();
+        const k =
+            e.dataset.i18n;
+
+        if (translations[l][k]) {
+            e.textContent =
+                translations[l][k];
+        }
+
+    });
+
+    $("#langBtn").textContent =
+        l === "uz"
+            ? "🇺🇿 UZ⌄"
+            : l === "ru"
+                ? "🇷🇺 RU⌄"
+                : "🇬🇧 EN⌄";
+
+    toast("Language changed");
 
 }
 
 
-function applyTheme() {
+/* AUTH */
 
-    document.body
-        .classList
-        .toggle(
-            "day-mode",
-            state.theme === "day"
+function openAuth() {
+
+    $("#authModal")
+        .classList.add("show");
+
+}
+
+
+/* AI */
+
+function smartAI(q) {
+
+    const s =
+        q.toLowerCase();
+
+    let answer = "";
+
+    const budgetMatch =
+        s.match(
+            /(?:\$|usd|dollar|dollargacha|до|up to)\s*(\d[\d,]*)/
         );
 
+    const budget =
+        budgetMatch
+            ? budgetMatch[1]
+            : null;
 
-    const button =
-        $("#modeBtn");
 
-    if (button) {
+    if (
+        s.includes("savatch") ||
+        s.includes("cart")
+    ) {
 
-        button.textContent =
-            state.theme === "night"
-                ? "☀"
-                : "🌙";
+        if (state.cart.length) {
+
+            const total =
+                state.cart.reduce(
+                    (a, x) => a + x[1] * x[2],
+                    0
+                );
+
+            answer =
+                `Savatchangizda ${state.cart.reduce(
+                    (a, x) => a + x[1],
+                    0
+                )
+                } ta mahsulot bor. Jami: ${money(total)
+                }.`;
+
+        } else {
+
+            answer =
+                "Savatchangiz hozircha bo'sh.";
+
+        }
 
     }
 
+    else if (
+        s.includes("gaming") ||
+        s.includes("playstation") ||
+        s.includes("o'yin")
+    ) {
 
-    createSnow();
+        const g =
+            products
+                .filter(p => p[1] === "gaming")
+                .sort((a, b) => b[3] - a[3])
+                .slice(0, 4);
 
-    createClouds();
+        answer =
+            "Gaming uchun men mana bularni tavsiya qilaman: "
+            +
+            g.map(
+                p => `${p[0]} (${money(p[2])})`
+            ).join(", ")
+            +
+            ". Agar byudjetingizni aytsangiz, setupni aniqroq tuzaman.";
+
+    }
+
+    else if (
+        s.includes("telefon") ||
+        s.includes("iphone") ||
+        s.includes("samsung")
+    ) {
+
+        let g =
+            products.filter(
+                p => p[1] === "phones"
+            );
+
+        if (budget) {
+
+            g =
+                g.filter(
+                    p => p[2] <=
+                        Number(
+                            budget.replace(/,/g, "")
+                        )
+                );
+
+        }
+
+        g =
+            g.sort(
+                (a, b) => b[3] - a[3]
+            ).slice(0, 4);
+
+        answer =
+            (
+                g.length
+                    ? "Siz uchun eng yaxshi variantlar: "
+                    : "Bu byudjetda mos telefon topilmadi. "
+            )
+            +
+            g.map(
+                p =>
+                    `${p[0]} — ${money(p[2])}, ⭐${p[3]}`
+            ).join("; ");
+
+    }
+
+    else if (
+        s.includes("macbook") ||
+        s.includes("noutbuk") ||
+        s.includes("laptop") ||
+        s.includes("asus")
+    ) {
+
+        let g =
+            products.filter(
+                p => p[1] === "laptops"
+            );
+
+        if (budget) {
+
+            g =
+                g.filter(
+                    p => p[2] <=
+                        Number(
+                            budget.replace(/,/g, "")
+                        )
+                );
+
+        }
+
+        g =
+            g.sort(
+                (a, b) => b[3] - a[3]
+            ).slice(0, 4);
+
+        answer =
+            "Noutbuk bo'yicha tavsiyam: "
+            +
+            g.map(
+                p => `${p[0]} — ${money(p[2])}`
+            ).join("; ")
+            +
+            ". Ish, o'qish yoki gaming uchun alohida tanlab bera olaman.";
+
+    }
+
+    else if (
+        s.includes("audio") ||
+        s.includes("airpods") ||
+        s.includes("quloq") ||
+        s.includes("naushnik")
+    ) {
+
+        const g =
+            products
+                .filter(
+                    p => p[1] === "audio"
+                )
+                .sort(
+                    (a, b) => b[3] - a[3]
+                )
+                .slice(0, 4);
+
+        answer =
+            "Audio uchun: "
+            +
+            g.map(
+                p => `${p[0]} — ${money(p[2])}`
+            ).join("; ");
+
+    }
+
+    else if (
+        s.includes("salom") ||
+        s.includes("hello") ||
+        s.includes("привет")
+    ) {
+
+        answer =
+            "Salom! Men NOVA AI. Sizga mahsulot tanlash, solishtirish, narx bo'yicha filtr qilish va sayt funksiyalaridan foydalanishda yordam beraman.";
+
+    }
+
+    else if (
+        s.includes("eng yaxshi") ||
+        s.includes("best")
+    ) {
+
+        const g =
+            [...products]
+                .sort((a, b) => b[3] - a[3])
+                .slice(0, 5);
+
+        answer =
+            "Hozirgi katalogdagi eng yuqori reytingli mahsulotlardan: "
+            +
+            g.map(
+                p => `${p[0]} ⭐${p[3]}`
+            ).join("; ");
+
+    }
+
+    else {
+
+        answer =
+            "Men buni ham tahlil qila olaman. Masalan: “$1200 gacha telefon”, “MacBook va ASUSni solishtir”, “gaming setup tuz”, “savatchamni tekshir” yoki “eng yaxshi AirPodsni top” deb yozing.";
+
+    }
+
+    return answer;
 
 }
 
 
-/* =========================================================
-   REAL TIME
-========================================================= */
+function addChat(text, who) {
 
-function updateClock() {
+    const d =
+        document.createElement("div");
 
-    const now =
-        new Date();
+    d.className =
+        "msg " + who;
 
+    d.textContent =
+        text;
 
-    const time =
-        now.toLocaleTimeString(
-            "en-GB",
-            {
-                timeZone: "Asia/Tashkent",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            }
-        );
+    $("#chatMessages")
+        .appendChild(d);
 
-
-    if ($("#liveTime")) {
-
-        $("#liveTime")
-            .textContent =
-            time;
-
-    }
+    $("#chatMessages").scrollTop =
+        999999;
 
 }
 
 
-setInterval(
-    updateClock,
-    1000
-);
+function sendAI(q) {
 
+    if (!q.trim()) return;
 
-/* =========================================================
-   REAL WEATHER
-   Open-Meteo — API KEY KERAK EMAS
-========================================================= */
+    addChat(q, "user");
 
-async function loadWeather() {
-
-    try {
-
-        const response =
-            await fetch(
-                "https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current=temperature_2m,weather_code,wind_speed_10m&timezone=Asia%2FTashkent"
-            );
-
-
-        const data =
-            await response.json();
-
-
-        const current =
-            data.current;
-
-
-        const temp =
-            Math.round(
-                current.temperature_2m
-            );
-
-
-        const code =
-            current.weather_code;
-
-
-        const weather =
-            weatherDescription(
-                code
-            );
-
-
-        if ($("#weatherTemp"))
-            $("#weatherTemp")
-                .textContent =
-                `${temp}°C`;
-
-
-        if ($("#weatherText"))
-            $("#weatherText")
-                .textContent =
-                weather.text;
-
-
-        if ($("#weatherIcon"))
-            $("#weatherIcon")
-                .textContent =
-                weather.icon;
-
-
-        if ($("#liveWeather"))
-            $("#liveWeather")
-                .textContent =
-                `${weather.icon} ${temp}°C`;
-
-
-        if ($("#weatherUpdate"))
-            $("#weatherUpdate")
-                .textContent =
-                `${t("live")} • TASHKENT`;
-
-    }
-    catch (error) {
-
-        console.log(
-            "Weather error:",
-            error
-        );
-
-    }
+    setTimeout(
+        () =>
+            addChat(
+                smartAI(q),
+                "ai"
+            ),
+        350
+    );
 
 }
 
 
-function weatherDescription(code) {
+/* FOOTBALL */
 
-    if (code === 0)
-        return {
-            icon: "☀️",
-            text:
-                state.language === "ru"
-                    ? "Ясно"
-                    : state.language === "en"
-                        ? "Clear"
-                        : "Ochiq"
-        };
+function gameInit() {
 
+    let score = 0;
 
-    if (
-        [1, 2, 3].includes(code)
-    )
-        return {
-            icon: "⛅",
-            text:
-                state.language === "ru"
-                    ? "Облачно"
-                    : state.language === "en"
-                        ? "Cloudy"
-                        : "Bulutli"
-        };
+    let bot = 0;
+
+    let time = 30;
+
+    let running = false;
+
+    let timer;
 
 
-    if (
-        [45, 48].includes(code)
-    )
-        return {
-            icon: "🌫️",
-            text:
-                state.language === "ru"
-                    ? "Туман"
-                    : state.language === "en"
-                        ? "Fog"
-                        : "Tuman"
-        };
+    const ball =
+        $("#ball");
+
+    const overlay =
+        $("#gameOverlay");
+
+    const keeper =
+        $("#keeper");
 
 
-    if (
-        [51, 53, 55, 56, 57].includes(code)
-    )
-        return {
-            icon: "🌦️",
-            text:
-                state.language === "ru"
-                    ? "Морось"
-                    : state.language === "en"
-                        ? "Drizzle"
-                        : "Mayda yomg‘ir"
-        };
+    $("#startGame").onclick = () => {
+
+        score = 0;
+        bot = 0;
+        time = 30;
+        running = true;
+
+        $("#score").textContent = 0;
+
+        $("#botScore").textContent = 0;
+
+        $("#gameTime").textContent = time;
+
+        overlay.style.display =
+            "none";
+
+        clearInterval(timer);
+
+        timer =
+            setInterval(() => {
+
+                time--;
+
+                $("#gameTime")
+                    .textContent = time;
+
+                if (time <= 0) {
+
+                    clearInterval(timer);
+
+                    running = false;
+
+                    overlay.querySelector("h3")
+                        .textContent =
+                        `Game Over — ${score}:${bot}`;
+
+                    overlay.querySelector("p")
+                        .textContent =
+                        "Yana bir marta urinib ko'ring!";
+
+                    $("#startGame")
+                        .textContent =
+                        "Restart";
+
+                    overlay.style.display =
+                        "grid";
+
+                }
+
+            }, 1000);
+
+    };
 
 
-    if (
-        [61, 63, 65, 80, 81, 82].includes(code)
-    )
-        return {
-            icon: "🌧️",
-            text:
-                state.language === "ru"
-                    ? "Дождь"
-                    : state.language === "en"
-                        ? "Rain"
-                        : "Yomg‘ir"
-        };
+    $("#kick").onclick = () => {
+
+        if (!running) return;
+
+        const goal =
+            Math.random() > .35;
+
+        if (goal) {
+
+            score++;
+
+            $("#score")
+                .textContent = score;
+
+            ball.style.transform =
+                "translate(170%,-50%) scale(.7)";
+
+            toast(
+                "GOOOOL! ⚽"
+            );
+
+        } else {
+
+            keeper.style.transform =
+                "translateX(-90px)";
+
+            toast(
+                "Darvozabon qaytardi 😮"
+            );
+
+        }
+
+        setTimeout(() => {
+
+            ball.style.transform =
+                "translate(-50%,-50%)";
+
+            keeper.style.transform = "";
+
+        }, 450);
+
+    };
 
 
-    if (
-        [71, 73, 75, 77, 85, 86].includes(code)
-    )
-        return {
-            icon: "❄️",
-            text:
-                state.language === "ru"
-                    ? "Снег"
-                    : state.language === "en"
-                        ? "Snow"
-                        : "Qor"
-        };
+    ball.onclick = () =>
+        $("#kick").click();
 
 
-    if (
-        [95, 96, 99].includes(code)
-    )
-        return {
-            icon: "⛈️",
-            text:
-                state.language === "ru"
-                    ? "Гроза"
-                    : state.language === "en"
-                        ? "Thunderstorm"
-                        : "Momaqaldiroq"
-        };
+    $("#leftMove").onclick = () => {
+
+        if (running) {
+
+            ball.style.left =
+                Math.max(
+                    12,
+                    ball.offsetLeft - 45
+                ) + "px";
+
+        }
+
+    };
 
 
-    return {
-        icon: "🌤️",
-        text: "Weather"
+    $("#rightMove").onclick = () => {
+
+        if (running) {
+
+            ball.style.left =
+                Math.min(
+                    $("#field").clientWidth - 35,
+                    ball.offsetLeft + 45
+                ) + "px";
+
+        }
+
     };
 
 }
 
 
-/* =========================================================
-   LANGUAGE
-========================================================= */
-
-function applyLanguage() {
-
-    const lang =
-        state.language;
-
-
-    const nav =
-        $$(".nav-link");
-
-
-    if (nav[0])
-        nav[0].textContent =
-            t("home");
-
-
-    if (nav[1])
-        nav[1].textContent =
-            t("store");
-
-
-    if (nav[2])
-        nav[2].textContent =
-            t("football");
-
-
-    if (nav[3])
-        nav[3].textContent =
-            t("about");
-
-
-    if ($("#userLabel"))
-        $("#userLabel")
-            .textContent =
-            t("account");
-
-
-    if ($("#cartBtn")) {
-
-        const b =
-            $("#cartCount")
-                ?.outerHTML || "";
-
-        $("#cartBtn")
-            .innerHTML =
-            `${t("bag")} ${b}`;
-
-    }
-
-
-    if ($("#productSearch"))
-        $("#productSearch")
-            .placeholder =
-            t("searchPlaceholder");
-
-
-    if ($("#globalSearch"))
-        $("#globalSearch")
-            .placeholder =
-            t("searchPlaceholder");
-
-
-    const select =
-        $("#sortSelect");
-
-    if (select) {
-
-        select.options[0]
-            .textContent =
-            t("featured");
-
-        select.options[1]
-            .textContent =
-            t("low");
-
-        select.options[2]
-            .textContent =
-            t("high");
-
-        select.options[3]
-            .textContent =
-            t("name");
-
-    }
-
-
-    if ($("#openFilters"))
-        $("#openFilters").innerHTML =
-            `${t("filters")} <span>☷</span>`;
-
-
-    if ($(".hero-copy .eyebrow"))
-        $(".hero-copy .eyebrow")
-            .textContent =
-            "NOVA X EXPERIENCE";
-
-
-    if ($(".hero-copy h2"))
-        $(".hero-copy h2").innerHTML =
-            `${t("everything")}<br><em>${t("onePlace")}</em>`;
-
-
-    if ($(".hero-actions .primary-btn"))
-        $(".hero-actions .primary-btn")
-            .innerHTML =
-            `${t("catalog")} <span>↗</span>`;
-
-
-    if ($(".hero-actions .ghost-btn"))
-        $(".hero-actions .ghost-btn")
-            .textContent =
-            "⚽ " + t("arena");
-
-
-    if ($(".football-head h3"))
-        $(".football-head h3").innerHTML =
-            `${t("footballTitle")}<br><em>${t("footballSub")}</em>`;
-
-
-    if ($("#gameMessage"))
-        $("#gameMessage")
-            .textContent =
-            t("direction");
-
-
-    if ($("#shootBtn"))
-        $("#shootBtn").innerHTML =
-            `${t("shoot")} <span>⚡</span>`;
-
-
-    const buttons =
-        $$(".shot-btn");
-
-
-    if (buttons[0])
-        buttons[0].innerHTML =
-            `↙<small>${t("left")}</small>`;
-
-
-    if (buttons[1])
-        buttons[1].innerHTML =
-            `↑<small>${t("center")}</small>`;
-
-
-    if (buttons[2])
-        buttons[2].innerHTML =
-            `↘<small>${t("right")}</small>`;
-
-
-    if ($(".info-card .mini-label"))
-        $(".info-card .mini-label")
-            .textContent =
-            t("how");
-
-
-    if ($(".info-card h4"))
-        $(".info-card h4").innerHTML =
-            `${t("five")}<br>${t("who")}`;
-
-
-    if ($("#restartGame"))
-        $("#restartGame")
-            .textContent =
-            t("restart");
-
-
-    if ($(".leader-card span"))
-        $(".leader-card span")
-            .textContent =
-            t("best");
-
-
-    if ($("#logoutBtn"))
-        $("#logoutBtn")
-            .textContent =
-            t("logout");
-
-
-    if ($("#weatherText"))
-        $("#weatherText")
-            .textContent =
-            t("weather");
-
-
-    loadWeather();
-
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-function saveCart() {
-
-    localStorage.setItem(
-        "novaCart",
-        JSON.stringify(
-            state.cart
-        )
-    );
-
-    updateCart();
-
-}
-
-
-function updateCart() {
-
-    const count =
-        state.cart.reduce(
-            (sum, item) =>
-                sum + item.qty,
-            0
+/* START */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        setTimeout(
+            () =>
+                $("#loader").style.display =
+                "none",
+            1100
         );
 
 
-    if ($("#cartCount"))
-        $("#cartCount")
-            .textContent =
-            count;
+        snow();
 
+        renderFilters();
 
-    if ($("#drawerBag"))
-        $("#drawerBag")
-            .textContent =
-            count;
+        renderProducts();
 
-}
+        updateCounts();
 
+        clock();
 
-function addToCart(id) {
+        setInterval(
+            clock,
+            1000
+        );
 
-    const item =
-        state.cart.find(
-            x => x.id === id
+        theme();
+
+        setLang(
+            state.lang
         );
 
 
-    if (item) {
 
-        item.qty++;
+        /* THEME */
 
-    } else {
+        $("#themeBtn").onclick = () => {
 
-        state.cart.push({
-            id,
-            qty: 1
-        });
-
-    }
-
-
-    saveCart();
-
-    toast(
-        state.language === "ru"
-            ? "Товар добавлен в корзину ✦"
-            : state.language === "en"
-                ? "Product added to bag ✦"
-                : "Mahsulot savatga qo‘shildi ✦"
-    );
-
-}
-
-
-/* =========================================================
-   FAVORITES
-========================================================= */
-
-function toggleFavorite(id, button) {
-
-    const index =
-        state.favorites
-            .indexOf(id);
-
-
-    if (index >= 0) {
-
-        state.favorites
-            .splice(index, 1);
-
-        button.textContent =
-            "♡";
-
-    } else {
-
-        state.favorites
-            .push(id);
-
-        button.textContent =
-            "♥";
-
-        button.style.color =
-            "#ff6680";
-
-    }
-
-
-    localStorage.setItem(
-        "novaFavorites",
-        JSON.stringify(
-            state.favorites
-        )
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCTS
-========================================================= */
-
-function filteredProducts() {
-
-    let list =
-        products.filter(p => {
-
-            const categoryMatch =
-                state.category === "Barchasi" ||
-                p.category === state.category;
-
-
-            const query =
-                state.query
-                    .toLowerCase();
-
-
-            const queryMatch =
-                !query ||
-                p.name
-                    .toLowerCase()
-                    .includes(query) ||
-                p.brand
-                    .toLowerCase()
-                    .includes(query) ||
-                p.category
-                    .toLowerCase()
-                    .includes(query);
-
-
-            return (
-                categoryMatch &&
-                queryMatch &&
-                p.price >= state.min &&
-                p.price <= state.max
+            localStorage.setItem(
+                "novaTheme",
+                document.body.classList.contains("light")
+                    ? "dark"
+                    : "light"
             );
 
-        });
-
-
-    if (state.sort === "low") {
-
-        list.sort(
-            (a, b) =>
-                a.price - b.price
-        );
-
-    }
-
-
-    if (state.sort === "high") {
-
-        list.sort(
-            (a, b) =>
-                b.price - a.price
-        );
-
-    }
-
-
-    if (state.sort === "name") {
-
-        list.sort(
-            (a, b) =>
-                a.name.localeCompare(
-                    b.name
-                )
-        );
-
-    }
-
-
-    return list;
-
-}
-
-
-function renderCategories() {
-
-    const box =
-        $("#categoryStrip");
-
-    if (!box) return;
-
-
-    box.innerHTML = "";
-
-
-    const all =
-        document.createElement("button");
-
-
-    all.className =
-        "category-pill" +
-        (
-            state.category === "Barchasi"
-                ? " active"
-                : ""
-        );
-
-
-    all.textContent =
-        state.language === "ru"
-            ? "Все"
-            : state.language === "en"
-                ? "All"
-                : "Barchasi";
-
-
-    all.onclick =
-        () => {
-
-            state.category =
-                "Barchasi";
-
-            state.page = 1;
-
-            renderCategories();
-
-            renderProducts();
+            theme();
 
         };
 
 
-    box.appendChild(all);
+        /* CART */
+
+        $("#cartBtn")
+            .onclick = openCart;
+
+        $("#cartClose")
+            .onclick = closeCart;
+
+        $("#drawerOverlay")
+            .onclick = closeCart;
 
 
-    CATEGORIES.forEach(category => {
+        /* ACCOUNT */
 
-        const button =
-            document.createElement("button");
+        $("#accountBtn")
+            .onclick = openAuth;
 
 
-        button.className =
-            "category-pill" +
-            (
-                state.category === category
-                    ? " active"
-                    : ""
+        /* SEARCH */
+
+        $("#searchBtn").onclick =
+            () =>
+                $("#searchModal")
+                    .classList.add("show");
+
+
+        $$("[data-close]")
+            .forEach(
+                b =>
+                    b.onclick =
+                    () =>
+                        $(
+                            "#" + b.dataset.close
+                        )
+                            .classList.remove("show")
             );
 
 
-        button.textContent =
-            categoryName(
-                category
-            );
+        /* MOBILE */
+
+        $("#mobileBtn").onclick =
+            () =>
+                $("#mobileNav")
+                    .classList.toggle("open");
 
 
-        button.onclick =
-            () => {
+        /* PRODUCT SEARCH */
 
-                state.category =
-                    category;
+        $("#productSearch").oninput =
+            e => {
 
-                state.page = 1;
-
-                renderCategories();
+                state.query =
+                    e.target.value;
 
                 renderProducts();
 
             };
 
 
-        box.appendChild(
-            button
-        );
+        /* SORT */
 
-    });
+        $("#sort").onchange =
+            e => {
 
-}
+                state.sort =
+                    e.target.value;
 
+                renderProducts();
 
-function renderProducts() {
-
-    const box =
-        $("#productGrid");
-
-    if (!box) return;
+            };
 
 
-    const list =
-        filteredProducts();
+        /* CATEGORY */
 
+        $$("[data-cat]")
+            .forEach(
+                b =>
+                    b.onclick =
+                    () => {
 
-    if ($("#productCount")) {
+                        if (
+                            b.classList.contains("cat")
+                        ) {
 
-        $("#productCount")
-            .textContent =
-            `${list.length} ${t("products")}`;
+                            state.cat =
+                                b.dataset.cat;
 
-    }
+                            renderFilters();
 
+                            renderProducts();
 
-    const pages =
-        Math.max(
-            1,
-            Math.ceil(
-                list.length /
-                state.perPage
-            )
-        );
+                            location.hash =
+                                "products";
 
+                        }
 
-    state.page =
-        Math.min(
-            state.page,
-            pages
-        );
-
-
-    const start =
-        (
-            state.page - 1
-        ) *
-        state.perPage;
-
-
-    const visible =
-        list.slice(
-            start,
-            start + state.perPage
-        );
-
-
-    box.innerHTML =
-        visible
-            .map(product => {
-
-                const fav =
-                    state.favorites
-                        .includes(
-                            product.id
-                        );
-
-
-                return `
-
-          <article
-            class="product-card"
-          >
-
-            <div
-              class="product-art"
-            >
-
-              <span class="badge">
-                ${product.tag}
-              </span>
-
-              <button
-                class="heart"
-                onclick="
-                  toggleFavorite(
-                    ${product.id},
-                    this
-                  )
-                "
-                style="
-                  color:
-                  ${fav
-                        ? "#ff6680"
-                        : ""
                     }
-                "
-              >
-                ${fav ? "♥" : "♡"}
-              </button>
-
-              <img
-                src="${product.image}"
-                alt="${product.name}"
-                loading="lazy"
-                onerror="
-                  this.src=
-                  'https://loremflickr.com/900/900/technology?lock=${product.id}'
-                "
-              >
-
-            </div>
+            );
 
 
-            <div class="product-info">
+        /* GLOBAL SEARCH */
 
-              <span class="product-category">
-                ${categoryName(
-                        product.category
-                    ).toUpperCase()}
-              </span>
+        $("#globalSearch").oninput =
+            e => {
 
-              <div class="product-name">
-                ${product.name}
-              </div>
+                state.query =
+                    e.target.value;
 
-              <div class="product-desc">
-                ${product.brand}
-                • NOVA Premium Edition
-              </div>
+                $("#productSearch")
+                    .value =
+                    e.target.value;
 
+                renderProducts();
 
-              <div class="product-bottom">
-
-                <span class="price">
-                  ${money(
-                        product.price
-                    )}
-                </span>
-
-                <button
-                  class="add-btn"
-                  onclick="
-                    addToCart(
-                      ${product.id}
-                    )
-                  "
-                >
-                  +
-                </button>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        `;
-
-            })
-            .join("");
+            };
 
 
-    renderPagination(
-        pages
-    );
+        /* LANGUAGE */
 
-}
-
-
-function renderPagination(pages) {
-
-    const box =
-        $("#pagination");
-
-    if (!box) return;
-
-
-    box.innerHTML =
-        Array
-            .from(
-                {
-                    length:
-                        Math.min(
-                            pages,
-                            9
+        $$("[data-lang]")
+            .forEach(
+                b =>
+                    b.onclick =
+                    () =>
+                        setLang(
+                            b.dataset.lang
                         )
-                },
-                (_, i) =>
-                    i + 1
-            )
-            .map(
-                page => `
+            );
 
-          <button
-            class="
-              page-btn
-              ${page === state.page
-                        ? "active"
-                        : ""
+
+        /* AUTH TABS */
+
+        $$("[data-auth]")
+            .forEach(
+                b =>
+                    b.onclick =
+                    () => {
+
+                        $$("[data-auth]")
+                            .forEach(
+                                x =>
+                                    x.classList
+                                        .remove("active")
+                            );
+
+                        b.classList
+                            .add("active");
+
+                        $("#signinForm").hidden =
+                            b.dataset.auth !==
+                            "signin";
+
+                        $("#signupForm").hidden =
+                            b.dataset.auth !==
+                            "signup";
+
                     }
-            "
-            onclick="
-              changePage(
-                ${page}
-              )
-            "
-          >
-            ${page}
-          </button>
-
-        `
-            )
-            .join("");
-
-}
+            );
 
 
-function changePage(page) {
+        /* SIGN IN */
 
-    state.page =
-        page;
-
-    renderProducts();
-
-    $("#store")
-        ?.scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-function initAuth() {
-
-    let users =
-        JSON.parse(
-            localStorage.getItem(
-                "novaUsers"
-            ) || "[]"
-        );
-
-
-    if (
-        !users.some(
-            u =>
-                u.email ===
-                "demo@nova.uz"
-        )
-    ) {
-
-        users.push({
-            name: "NOVA Demo",
-            email: "demo@nova.uz",
-            password: "123456"
-        });
-
-
-        localStorage.setItem(
-            "novaUsers",
-            JSON.stringify(users)
-        );
-
-    }
-
-
-    const saved =
-        JSON.parse(
-            localStorage.getItem(
-                "novaUser"
-            ) || "null"
-        );
-
-
-    if (saved) {
-
-        enterApp(
-            saved
-        );
-
-    }
-
-
-    $$(".auth-tab")
-        .forEach(tab => {
-
-            tab.onclick =
-                () => {
-
-                    $$(".auth-tab")
-                        .forEach(
-                            x =>
-                                x.classList
-                                    .remove(
-                                        "active"
-                                    )
-                        );
-
-
-                    tab.classList.add(
-                        "active"
-                    );
-
-
-                    const signin =
-                        tab.dataset.auth ===
-                        "signin";
-
-
-                    $("#signinForm")
-                        ?.classList
-                        .toggle(
-                            "active",
-                            signin
-                        );
-
-
-                    $("#signupForm")
-                        ?.classList
-                        .toggle(
-                            "active",
-                            !signin
-                        );
-
-                };
-
-        });
-
-
-    $$(".eye")
-        .forEach(button => {
-
-            button.onclick =
-                () => {
-
-                    const input =
-                        $("#" +
-                            button.dataset.target
-                        );
-
-
-                    if (!input)
-                        return;
-
-
-                    input.type =
-                        input.type ===
-                            "password"
-                            ? "text"
-                            : "password";
-
-                };
-
-        });
-
-
-    $("#demoLogin")
-        ?.addEventListener(
-            "click",
-            () => {
-
-                $("#loginEmail").value =
-                    "demo@nova.uz";
-
-                $("#loginPassword").value =
-                    "123456";
-
-                $("#signinForm")
-                    .requestSubmit();
-
-            }
-        );
-
-
-    $("#signinForm")
-        ?.addEventListener(
-            "submit",
+        $("#signinForm").onsubmit =
             e => {
 
                 e.preventDefault();
 
-
-                const email =
+                const em =
                     $("#loginEmail")
-                        .value
-                        .trim()
-                        .toLowerCase();
+                        .value.trim();
 
-
-                const password =
-                    $("#loginPassword")
+                const pw =
+                    $("#loginPass")
                         .value;
 
+                const users =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "novaUsers"
+                        ) || "[]"
+                    );
+
+                const ok =
+                    (
+                        em === "demo@nova.uz" &&
+                        pw === "123456"
+                    )
+                    ||
+                    users.some(
+                        u =>
+                            u.email === em &&
+                            u.pass === pw
+                    );
+
+
+                if (ok) {
+
+                    state.user = {
+                        email: em
+                    };
+
+                    localStorage.setItem(
+                        "novaUser",
+                        JSON.stringify(
+                            state.user
+                        )
+                    );
+
+                    $("#authModal")
+                        .classList.remove("show");
+
+                    $("#accountBtn span")
+                        .textContent =
+                        em.split("@")[0];
+
+                    toast(
+                        "Xush kelibsiz ✓"
+                    );
+
+                } else {
+
+                    $("#authMsg")
+                        .textContent =
+                        "Email yoki parol noto'g'ri.";
+
+                }
+
+            };
+
+
+        /* SIGN UP */
+
+        $("#signupForm").onsubmit =
+            e => {
+
+                e.preventDefault();
 
                 const users =
                     JSON.parse(
@@ -2205,96 +1454,30 @@ function initAuth() {
                     );
 
 
-                const user =
-                    users.find(
-                        u =>
-                            u.email ===
-                            email &&
-                            u.password ===
-                            password
-                    );
+                const u = {
 
+                    name:
+                        $("#regName").value,
 
-                if (!user) {
+                    email:
+                        $("#regEmail").value,
 
-                    toast(
-                        state.language === "ru"
-                            ? "Неверный email или пароль"
-                            : state.language === "en"
-                                ? "Wrong email or password"
-                                : "Email yoki parol noto‘g‘ri"
-                    );
+                    pass:
+                        $("#regPass").value
 
-                    return;
-
-                }
-
-
-                enterApp(
-                    user
-                );
-
-            }
-        );
-
-
-    $("#signupForm")
-        ?.addEventListener(
-            "submit",
-            e => {
-
-                e.preventDefault();
-
-
-                const name =
-                    $("#signupName")
-                        .value
-                        .trim();
-
-
-                const email =
-                    $("#signupEmail")
-                        .value
-                        .trim()
-                        .toLowerCase();
-
-
-                const password =
-                    $("#signupPassword")
-                        .value;
-
-
-                if (
-                    password.length < 6
-                ) {
-
-                    toast(
-                        "Password kamida 6 belgi"
-                    );
-
-                    return;
-
-                }
-
-
-                let users =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "novaUsers"
-                        ) || "[]"
-                    );
+                };
 
 
                 if (
                     users.some(
-                        u =>
-                            u.email ===
-                            email
+                        x =>
+                            x.email ===
+                            u.email
                     )
                 ) {
 
                     toast(
-                        "Bu email mavjud"
+                        "Bu email allaqachon mavjud"
                     );
 
                     return;
@@ -2302,781 +1485,135 @@ function initAuth() {
                 }
 
 
-                const user = {
-                    name,
-                    email,
-                    password
-                };
-
-
-                users.push(
-                    user
-                );
-
+                users.push(u);
 
                 localStorage.setItem(
                     "novaUsers",
                     JSON.stringify(users)
                 );
 
+                state.user = u;
 
-                enterApp(
-                    user
+                localStorage.setItem(
+                    "novaUser",
+                    JSON.stringify(u)
                 );
 
+
+                $("#authModal")
+                    .classList.remove("show");
+
+                $("#accountBtn span")
+                    .textContent =
+                    u.name;
 
                 toast(
-                    "Account yaratildi ✦"
+                    "Account yaratildi ✓"
                 );
 
-            }
-        );
-
-}
+            };
 
 
-/* =========================================================
-   ENTER APP
-========================================================= */
+        /* AI */
 
-function enterApp(user) {
+        $("#chatForm").onsubmit =
+            e => {
 
-    localStorage.setItem(
-        "novaUser",
-        JSON.stringify(user)
-    );
+                e.preventDefault();
 
+                const v =
+                    $("#chatInput")
+                        .value;
 
-    $("#authGate")
-        ?.classList
-        .add("hidden");
+                $("#chatInput")
+                    .value = "";
 
+                sendAI(v);
 
-    $("#app")
-        ?.classList
-        .remove("hidden");
+            };
 
 
-    updateUserUI(
-        user
-    );
-
-
-    updateCart();
-
-    renderCategories();
-
-    renderProducts();
-
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-function updateUserUI(user) {
-
-    const name =
-        user?.name ||
-        "Account";
-
-
-    const letter =
-        name
-            .slice(0, 1)
-            .toUpperCase();
-
-
-    if ($("#avatar"))
-        $("#avatar")
-            .textContent =
-            letter;
-
-
-    if ($("#userLabel"))
-        $("#userLabel")
-            .textContent =
-            name;
-
-
-    if ($("#drawerName"))
-        $("#drawerName")
-            .textContent =
-            name;
-
-
-    if ($("#drawerEmail"))
-        $("#drawerEmail")
-            .textContent =
-            user?.email ||
-            "";
-
-    if ($("#drawerAvatar"))
-        $("#drawerAvatar")
-            .textContent =
-            letter;
-
-}
-
-
-function openProfile() {
-
-    const user =
-        JSON.parse(
-            localStorage.getItem(
-                "novaUser"
-            ) || "null"
-        );
-
-
-    if (!user)
-        return;
-
-
-    updateUserUI(
-        user
-    );
-
-
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "novaOrders"
-            ) || "[]"
-        );
-
-
-    if ($("#drawerOrders"))
-        $("#drawerOrders")
-            .textContent =
-            orders.length;
-
-
-    if ($("#drawerBag"))
-        $("#drawerBag")
-            .textContent =
-            state.cart.reduce(
-                (a, b) =>
-                    a + b.qty,
-                0
+        $$("[data-ai]")
+            .forEach(
+                b =>
+                    b.onclick =
+                    () =>
+                        sendAI(
+                            b.dataset.ai
+                        )
             );
 
 
-    $("#profileDrawer")
-        ?.classList
-        .remove("hidden");
-
-}
-
-
-function initProfile() {
-
-    $("#profileBtn")
-        ?.addEventListener(
-            "click",
-            openProfile
-        );
-
-
-    $("#closeProfile")
-        ?.addEventListener(
-            "click",
+        $("#clearChat").onclick =
             () =>
-                $("#profileDrawer")
-                    ?.classList
-                    .add("hidden")
-        );
+                $("#chatMessages").innerHTML =
+                `
+            <div class="msg ai">
+              Chat tozalandi.
+              Savolingizni yozing.
+            </div>
+          `;
 
 
-    $(".drawer-backdrop")
-        ?.addEventListener(
-            "click",
-            () =>
-                $("#profileDrawer")
-                    ?.classList
-                    .add("hidden")
-        );
+        /* CHECKOUT */
 
-
-    $("#logoutBtn")
-        ?.addEventListener(
-            "click",
+        $("#checkout").onclick =
             () => {
 
-                localStorage.removeItem(
-                    "novaUser"
-                );
+                if (!state.cart.length) {
 
+                    return toast(
+                        "Savatcha bo'sh"
+                    );
 
-                $("#profileDrawer")
-                    ?.classList
-                    .add("hidden");
+                }
 
+                if (!state.user) {
 
-                $("#app")
-                    ?.classList
-                    .add("hidden");
+                    return openAuth();
 
+                }
 
-                $("#authGate")
-                    ?.classList
-                    .remove("hidden");
+                state.cart = [];
 
+                save();
+
+                renderCart();
+
+                updateCounts();
 
                 toast(
-                    t("logout")
+                    "Buyurtma qabul qilindi ✓"
                 );
 
-            }
-        );
-
-}
+            };
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+        /* TOP BUTTON */
 
-function initSearch() {
-
-    $("#openSearch")
-        ?.addEventListener(
-            "click",
-            () => {
-
-                $("#searchModal")
-                    ?.classList
-                    .remove("hidden");
-
-
-                setTimeout(
-                    () =>
-                        $("#globalSearch")
-                            ?.focus(),
-                    100
-                );
-
-            }
-        );
-
-
-    $("#globalSearch")
-        ?.addEventListener(
-            "input",
-            e => {
-
-                state.query =
-                    e.target.value;
-
-                state.page = 1;
-
-                if ($("#productSearch"))
-                    $("#productSearch")
-                        .value =
-                        state.query;
-
-                renderProducts();
-
-            }
-        );
-
-
-    $("#productSearch")
-        ?.addEventListener(
-            "input",
-            e => {
-
-                state.query =
-                    e.target.value;
-
-                state.page = 1;
-
-                renderProducts();
-
-            }
-        );
-
-
-    $("#sortSelect")
-        ?.addEventListener(
-            "change",
-            e => {
-
-                state.sort =
-                    e.target.value;
-
-                state.page = 1;
-
-                renderProducts();
-
-            }
-        );
-
-
-    $("#openFilters")
-        ?.addEventListener(
-            "click",
+        window.addEventListener(
+            "scroll",
             () =>
-                $("#filterModal")
-                    ?.classList
-                    .remove("hidden")
+                $("#top")
+                    .classList
+                    .toggle(
+                        "show",
+                        scrollY > 600
+                    )
         );
 
 
-    $("#applyFilters")
-        ?.addEventListener(
-            "click",
-            () => {
-
-                state.min =
-                    Number(
-                        $("#minPrice")
-                            ?.value || 0
-                    );
+        $("#top").onclick =
+            () =>
+                scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
 
-                state.max =
-                    Number(
-                        $("#maxPrice")
-                            ?.value || 99999
-                    );
+        /* FOOTBALL */
 
-
-                state.page = 1;
-
-                renderProducts();
-
-
-                $("#filterModal")
-                    ?.classList
-                    .add("hidden");
-
-            }
-        );
-
-
-    $$("[data-close]")
-        .forEach(button => {
-
-            button.onclick =
-                () => {
-
-                    const id =
-                        button.dataset.close;
-
-
-                    $("#" + id)
-                        ?.classList
-                        .add("hidden");
-
-                };
-
-        });
-
-
-    $$(".modal-backdrop")
-        .forEach(backdrop => {
-
-            backdrop.onclick =
-                () => {
-
-                    backdrop.parentElement
-                        ?.classList
-                        .add("hidden");
-
-                };
-
-        });
-
-}
-
-
-/* =========================================================
-   FOOTBALL
-========================================================= */
-
-function initFootball() {
-
-    let selected =
-        "center";
-
-
-    let score =
-        0;
-
-
-    let opponent =
-        0;
-
-
-    let shot =
-        1;
-
-
-    let locked =
-        false;
-
-
-    const keeper =
-        $("#keeper");
-
-
-    const ball =
-        $("#ball");
-
-
-    function reset() {
-
-        score = 0;
-
-        opponent = 0;
-
-        shot = 1;
-
-        locked = false;
-
-
-        if ($("#score"))
-            $("#score")
-                .textContent =
-                "0";
-
-
-        if ($("#oppScore"))
-            $("#oppScore")
-                .textContent =
-                "0";
-
-
-        if ($("#roundText"))
-            $("#roundText")
-                .textContent =
-                "SHOT 1 / 5";
-
-
-        if ($("#gameMessage"))
-            $("#gameMessage")
-                .textContent =
-                t("direction");
-
-
-        if (ball)
-            ball.style.transform =
-                "translateX(-50%)";
-
-
-        if (keeper)
-            keeper.style.transform =
-                "translateX(-50%)";
+        gameInit();
 
     }
-
-
-    $$(".shot-btn")
-        .forEach(button => {
-
-            button.onclick =
-                () => {
-
-                    if (locked)
-                        return;
-
-
-                    selected =
-                        button.dataset.dir;
-
-
-                    $$(".shot-btn")
-                        .forEach(
-                            x =>
-                                x.classList
-                                    .remove(
-                                        "selected"
-                                    )
-                        );
-
-
-                    button.classList.add(
-                        "selected"
-                    );
-
-                };
-
-        });
-
-
-    $("#shootBtn")
-        ?.addEventListener(
-            "click",
-            () => {
-
-                if (locked)
-                    return;
-
-
-                locked = true;
-
-
-                const keeperDir =
-                    [
-                        "left",
-                        "center",
-                        "right"
-                    ][
-                    Math.floor(
-                        Math.random() * 3
-                    )
-                    ];
-
-
-                const goal =
-                    keeperDir !==
-                    selected;
-
-
-                const ballX =
-                    selected === "left"
-                        ? -130
-                        : selected === "right"
-                            ? 130
-                            : 0;
-
-
-                const keeperX =
-                    keeperDir === "left"
-                        ? -130
-                        : keeperDir === "right"
-                            ? 130
-                            : 0;
-
-
-                if (ball) {
-
-                    ball.style.transform =
-                        `
-              translate(
-                calc(
-                  -50% +
-                  ${ballX}px
-                ),
-                -235px
-              )
-              scale(.55)
-            `;
-
-                }
-
-
-                if (keeper) {
-
-                    keeper.style.transform =
-                        `
-              translate(
-                calc(
-                  -50% +
-                  ${keeperX}px
-                ),
-                0
-              )
-            `;
-
-                }
-
-
-                setTimeout(
-                    () => {
-
-                        if (goal) {
-
-                            score++;
-
-                            $("#gameMessage")
-                                .textContent =
-                                t("goal");
-
-                        } else {
-
-                            opponent++;
-
-                            $("#gameMessage")
-                                .textContent =
-                                t("save");
-
-                        }
-
-
-                        if ($("#score"))
-                            $("#score")
-                                .textContent =
-                                score;
-
-
-                        if ($("#oppScore"))
-                            $("#oppScore")
-                                .textContent =
-                                opponent;
-
-
-                        shot++;
-
-
-                        if (shot <= 5) {
-
-                            setTimeout(
-                                () => {
-
-                                    ball.style.transform =
-                                        "translateX(-50%)";
-
-                                    keeper.style.transform =
-                                        "translateX(-50%)";
-
-
-                                    $("#roundText")
-                                        .textContent =
-                                        `SHOT ${shot} / 5`;
-
-
-                                    locked = false;
-
-                                },
-                                850
-                            );
-
-                        } else {
-
-                            setTimeout(
-                                () => {
-
-                                    let result;
-
-
-                                    if (score > opponent) {
-
-                                        result =
-                                            state.language === "ru"
-                                                ? "ПОБЕДА 🏆"
-                                                : state.language === "en"
-                                                    ? "YOU WIN 🏆"
-                                                    : "SIZ YUTDINGIZ 🏆";
-
-                                    } else if (
-                                        score < opponent
-                                    ) {
-
-                                        result =
-                                            state.language === "ru"
-                                                ? "CPU ПОБЕДИЛ"
-                                                : state.language === "en"
-                                                    ? "CPU WINS"
-                                                    : "CPU YUTDI";
-
-                                    } else {
-
-                                        result =
-                                            state.language === "ru"
-                                                ? "НИЧЬЯ 🤝"
-                                                : state.language === "en"
-                                                    ? "DRAW 🤝"
-                                                    : "DURRANG 🤝";
-
-                                    }
-
-
-                                    $("#gameMessage")
-                                        .textContent =
-                                        `${result} — ${score}:${opponent}`;
-
-
-                                    if (
-                                        score >
-                                        state.best
-                                    ) {
-
-                                        state.best =
-                                            score;
-
-
-                                        localStorage.setItem(
-                                            "novaBest",
-                                            score
-                                        );
-
-
-                                        $("#bestScore")
-                                            .textContent =
-                                            score;
-
-                                    }
-
-
-                                },
-                                500
-                            );
-
-                        }
-
-                    },
-                    650
-                );
-
-            }
-        );
-
-
-    $("#restartGame")
-        ?.addEventListener(
-            "click",
-            reset
-        );
-
-
-    if ($("#bestScore"))
-        $("#bestScore")
-            .textContent =
-            state.best;
-
-
-    reset();
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-function init() {
-
-    createWeatherUI();
-
-    applyTheme();
-
-    applyLanguage();
-
-    updateClock();
-
-    loadWeather();
-
-    initAuth();
-
-    initProfile();
-
-    initSearch();
-
-    initFootball();
-
-    updateCart();
-
-    renderCategories();
-
-    renderProducts();
-
-}
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    init
 );

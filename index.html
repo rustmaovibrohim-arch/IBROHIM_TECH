@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <title>NOVA STORE — Premium Technology</title>
+    <title>NOVA — Premium Technology Universe</title>
 
     <meta name="description"
-        content="NOVA STORE — premium smartphones, laptops, TVs, gaming, appliances and electronics.">
+        content="NOVA premium technology store with 60+ products, smart AI assistant, day/night mode and football game.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="./main.css">
@@ -22,122 +22,84 @@
 
 <body>
 
-    <!-- =========================================================
-     PAGE LOADER
-========================================================= -->
-
-    <div class="page-loader" id="pageLoader">
-
-        <div class="loader-logo">
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-mark">
             NOVA<span>.</span>
         </div>
 
-        <div class="loader-line">
-            <span></span>
+        <div class="loader-bar">
+            <i></i>
         </div>
 
-        <p>Loading premium experience...</p>
-
+        <p>Premium experience loading...</p>
     </div>
 
+    <!-- WEATHER EFFECTS -->
+    <div id="snow"></div>
 
-    <!-- =========================================================
-     WEATHER / SNOW EFFECT
-========================================================= -->
-
-    <div id="snowContainer"></div>
-
-    <div class="cloud-container" id="cloudContainer">
-
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-
+    <div id="clouds">
+        <i></i>
+        <i></i>
+        <i></i>
     </div>
 
+    <!-- HEADER -->
+    <header class="header">
 
-    <!-- =========================================================
-     HEADER
-========================================================= -->
+        <div class="nav-wrap">
 
-    <header class="main-header" id="mainHeader">
-
-        <div class="header-inner">
-
-            <!-- LOGO -->
-
-            <a href="#" class="logo" data-page="home">
-                <span class="logo-symbol">N</span>
-
-                <span class="logo-text">
-                    NOVA<span>.</span>
-                </span>
+            <a class="brand" href="#home">
+                <b>N</b>
+                <span>NOVA<em>.</em></span>
             </a>
 
-
-            <!-- DESKTOP NAVIGATION -->
-
-            <nav class="main-nav">
-
-                <a href="#home" class="nav-link active">
+            <nav>
+                <a href="#home" class="active" data-i18n="home">
                     Bosh sahifa
                 </a>
 
-                <a href="#products" class="nav-link">
-                    Mahsulotlar
+                <a href="#products" data-i18n="store">
+                    Do'kon
                 </a>
 
-                <a href="#categories" class="nav-link">
+                <a href="#categories" data-i18n="categories">
                     Kategoriyalar
                 </a>
 
-                <a href="#gaming" class="nav-link">
-                    Gaming
-                </a>
-
-                <a href="#football" class="nav-link">
+                <a href="#football">
                     ⚽ Football
                 </a>
 
-                <a href="#about" class="nav-link">
+                <a href="#about" data-i18n="about">
                     Biz haqimizda
                 </a>
-
             </nav>
 
+            <div class="actions">
 
-            <!-- HEADER ACTIONS -->
-
-            <div class="header-actions">
-
-                <!-- SEARCH -->
-
-                <button class="header-icon search-open" id="searchOpen" aria-label="Search">
-                    <span>⌕</span>
+                <button id="searchBtn" class="icon-btn">
+                    ⌕
                 </button>
 
-
                 <!-- LANGUAGE -->
+                <div class="lang">
 
-                <div class="language-selector">
-
-                    <button class="language-button" id="languageButton">
-                        🇺🇿
-                        <span>UZ</span>
-                        <small>⌄</small>
+                    <button id="langBtn">
+                        🇺🇿 UZ⌄
                     </button>
 
-                    <div class="language-dropdown" id="languageDropdown">
+                    <div id="langMenu">
 
-                        <button data-language="uz">
+                        <button data-lang="uz">
                             🇺🇿 O'zbekcha
                         </button>
 
-                        <button data-language="ru">
+                        <button data-lang="ru">
                             🇷🇺 Русский
                         </button>
 
-                        <button data-language="en">
+                        <button data-lang="en">
                             🇬🇧 English
                         </button>
 
@@ -145,53 +107,30 @@
 
                 </div>
 
-
                 <!-- THEME -->
-
-                <button class="header-icon theme-button" id="themeButton" aria-label="Theme">
+                <button id="themeBtn" class="icon-btn">
                     ☀️
                 </button>
 
-
                 <!-- FAVORITES -->
-
-                <button class="header-icon" id="favoritesButton">
+                <button id="favBtn" class="icon-btn">
                     ♡
-                    <span class="counter" id="favoriteCount">
-                        0
-                    </span>
+                    <i id="favCount">0</i>
                 </button>
-
 
                 <!-- CART -->
-
-                <button class="header-icon cart-button" id="cartButton">
+                <button id="cartBtn" class="icon-btn">
                     🛒
-
-                    <span class="counter" id="cartCount">
-                        0
-                    </span>
+                    <i id="cartCount">0</i>
                 </button>
 
-
-                <!-- PROFILE -->
-
-                <button class="profile-button" id="profileButton">
-
-                    <span class="profile-avatar">
-                        👤
-                    </span>
-
-                    <span class="profile-name">
-                        Account
-                    </span>
-
+                <!-- ACCOUNT -->
+                <button id="accountBtn" class="account">
+                    👤
+                    <span>Account</span>
                 </button>
 
-
-                <!-- MOBILE MENU -->
-
-                <button class="mobile-menu-button" id="mobileMenuButton">
+                <button id="mobileBtn" class="mobile-btn">
                     ☰
                 </button>
 
@@ -199,25 +138,19 @@
 
         </div>
 
-
         <!-- MOBILE NAV -->
-
-        <div class="mobile-navigation" id="mobileNavigation">
+        <div id="mobileNav" class="mobile-nav">
 
             <a href="#home">
                 Bosh sahifa
             </a>
 
             <a href="#products">
-                Mahsulotlar
+                Do'kon
             </a>
 
             <a href="#categories">
                 Kategoriyalar
-            </a>
-
-            <a href="#gaming">
-                Gaming
             </a>
 
             <a href="#football">
@@ -233,180 +166,89 @@
     </header>
 
 
+    <!-- LIVE INFORMATION -->
+    <div class="live-strip">
 
-    <!-- =========================================================
-     LIVE INFO BAR
-========================================================= -->
+        <span class="live">
+            <b></b>
+            LIVE
+        </span>
 
-    <div class="live-bar">
+        <span>
+            🌤️
+            <strong id="weatherTemp">24°C</strong>
+            <small id="weatherText">Bulutli</small>
+        </span>
 
-        <div class="live-item">
+        <span>
+            🕐
+            <strong id="clock">00:00:00</strong>
+        </span>
 
-            <span class="live-dot"></span>
+        <span id="date">
+            01.01.2026
+        </span>
 
-            <span>
-                LIVE
-            </span>
-
-        </div>
-
-
-        <div class="live-weather">
-
-            <span id="weatherIcon">
-                ☁️
-            </span>
-
-            <span id="weatherText">
-                Tashkent — Cloudy
-            </span>
-
-            <strong id="weatherTemperature">
-                24°C
-            </strong>
-
-        </div>
-
-
-        <div class="live-time">
-
-            <span>
-                🕐
-            </span>
-
-            <strong id="realTime">
-                00:00:00
-            </strong>
-
-            <span id="realDate">
-                01.01.2026
-            </span>
-
-        </div>
-
-
-        <div class="delivery-info">
-
-            🚚
-
-            <span>
-                Bugun bepul yetkazib berish
-            </span>
-
-        </div>
+        <span class="location">
+            📍 TASHKENT
+        </span>
 
     </div>
 
 
-
-    <!-- =========================================================
-     HERO
-========================================================= -->
-
     <main id="home">
 
-        <section class="hero-section">
+        <!-- HERO -->
+        <section class="hero">
 
-            <div class="hero-background">
+            <div class="hero-glow a"></div>
+            <div class="hero-glow b"></div>
+            <div class="hero-grid"></div>
 
-                <div class="hero-glow hero-glow-1"></div>
-                <div class="hero-glow hero-glow-2"></div>
+            <div class="hero-copy">
 
-                <div class="hero-grid"></div>
-
-            </div>
-
-
-            <div class="hero-content">
-
-                <div class="hero-badge">
-
-                    <span class="badge-dot"></span>
-
-                    PREMIUM TECHNOLOGY STORE
-
-                </div>
-
+                <span class="eyebrow">
+                    NOVA TECHNOLOGY UNIVERSE
+                </span>
 
                 <h1>
-
                     Technology
-
-                    <span>
-                        without
-                    </span>
-
-                    limits.
-
+                    <br>
+                    <span>without limits.</span>
                 </h1>
 
-
-                <p class="hero-description">
-
-                    Eng so‘nggi smartfonlar, MacBook, iPad,
-                    PlayStation, televizorlar va premium
-                    texnologiyalar — barchasi bitta joyda.
-
+                <p data-i18n="heroText">
+                    60+ premium mahsulot, aqlli yordamchi,
+                    gaming va bitta zamonaviy ekotizim.
                 </p>
 
+                <div class="hero-cta">
 
-                <div class="hero-buttons">
-
-                    <a href="#products" class="primary-button">
-                        Xarid qilish
-
-                        <span>→</span>
-
+                    <a class="btn primary" href="#products" data-i18n="shopNow">
+                        Xarid qilish →
                     </a>
 
-
-                    <a href="#categories" class="secondary-button">
-                        Kategoriyalar
+                    <a class="btn ghost" href="#ai">
+                        NOVA AI ✦
                     </a>
 
                 </div>
 
+                <div class="stats">
 
-                <!-- HERO STATS -->
-
-                <div class="hero-stats">
-
-                    <div class="hero-stat">
-
-                        <strong>
-                            50+
-                        </strong>
-
-                        <span>
-                            Mahsulot
-                        </span>
-
+                    <div>
+                        <b>60+</b>
+                        <small>Mahsulot</small>
                     </div>
 
-
-                    <div class="hero-stat">
-
-                        <strong>
-                            12K+
-                        </strong>
-
-                        <span>
-                            Mijoz
-                        </span>
-
+                    <div>
+                        <b>12K+</b>
+                        <small>Mijoz</small>
                     </div>
 
-
-                    <div class="hero-stat">
-
-                        <strong>
-                            4.9
-                        </strong>
-
-                        <span>
-                            Reyting
-                        </span>
-
+                    <div>
+                        <b>4.9</b>
+                        <small>Reyting</small>
                     </div>
 
                 </div>
@@ -414,69 +256,31 @@
             </div>
 
 
-            <!-- HERO PRODUCT -->
+            <!-- HERO DEVICE -->
+            <div class="hero-device">
 
-            <div class="hero-product">
+                <div class="device-glow"></div>
 
-                <div class="hero-product-glow"></div>
+                <div class="phone">
 
-                <div class="hero-product-card">
-
-                    <span class="floating-tag">
-                        NEW
-                    </span>
-
-                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=90"
-                        alt="Premium smartphone">
+                    <img src="https://images.unsplash.com/photo-1592286927505-2fd5b8e8b4e4?auto=format&fit=crop&w=900&q=90"
+                        alt="Premium phone">
 
                 </div>
 
-
-                <div class="floating-product-info">
-
-                    <span>
-                        Featured
-                    </span>
-
-                    <strong>
-                        iPhone Pro
-                    </strong>
+                <div class="float-card">
 
                     <small>
-                        From $1,299
+                        FEATURED
                     </small>
 
-                </div>
+                    <b>
+                        iPhone Pro
+                    </b>
 
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================================
-     BRANDS
-========================================================= -->
-
-        <section class="brands-section">
-
-            <div class="section-container">
-
-                <p class="brands-title">
-                    DUNYONING ENG YAXSHI BRENDLARI
-                </p>
-
-
-                <div class="brands-list">
-
-                    <span>APPLE</span>
-                    <span>SAMSUNG</span>
-                    <span>SONY</span>
-                    <span>ASUS</span>
-                    <span>LG</span>
-                    <span>LENOVO</span>
-                    <span>XIAOMI</span>
-                    <span>MICROSOFT</span>
+                    <span>
+                        $1,299
+                    </span>
 
                 </div>
 
@@ -485,880 +289,367 @@
         </section>
 
 
-
-        <!-- =========================================================
-     CATEGORIES
-========================================================= -->
-
-        <section class="categories-section" id="categories">
-
-            <div class="section-container">
-
-                <div class="section-heading">
-
-                    <div>
-
-                        <span class="section-label">
-                            EXPLORE
-                        </span>
-
-                        <h2>
-                            Kategoriyalar
-                        </h2>
-
-                    </div>
-
-
-                    <a href="#products" class="text-link">
-                        Barchasini ko‘rish →
-                    </a>
-
-                </div>
-
-
-                <div class="category-grid">
-
-                    <!-- PHONE -->
-
-                    <article class="category-card category-phone" data-category="phones">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                01
-                            </span>
-
-                            <h3>
-                                Telefonlar
-                            </h3>
-
-                            <p>
-                                iPhone, Samsung,
-                                Xiaomi va boshqalar
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=85"
-                            alt="Smartphones">
-
-                    </article>
-
-
-                    <!-- LAPTOP -->
-
-                    <article class="category-card category-laptop" data-category="laptops">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                02
-                            </span>
-
-                            <h3>
-                                Noutbuklar
-                            </h3>
-
-                            <p>
-                                MacBook, ASUS,
-                                Lenovo va boshqalar
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=85"
-                            alt="Laptop">
-
-                    </article>
-
-
-                    <!-- TV -->
-
-                    <article class="category-card category-tv" data-category="tvs">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                03
-                            </span>
-
-                            <h3>
-                                Televizorlar
-                            </h3>
-
-                            <p>
-                                4K, OLED, QLED
-                                va Smart TV
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=85"
-                            alt="Television">
-
-                    </article>
-
-
-                    <!-- GAMING -->
-
-                    <article class="category-card category-gaming" data-category="gaming">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                04
-                            </span>
-
-                            <h3>
-                                Gaming
-                            </h3>
-
-                            <p>
-                                PlayStation, Xbox,
-                                PC va accessories
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=800&q=85"
-                            alt="Gaming">
-
-                    </article>
-
-
-                    <!-- AUDIO -->
-
-                    <article class="category-card category-audio" data-category="audio">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                05
-                            </span>
-
-                            <h3>
-                                Audio
-                            </h3>
-
-                            <p>
-                                AirPods, Sony,
-                                JBL va boshqalar
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85"
-                            alt="Headphones">
-
-                    </article>
-
-
-                    <!-- APPLIANCES -->
-
-                    <article class="category-card category-appliances" data-category="appliances">
-
-                        <div class="category-content">
-
-                            <span class="category-number">
-                                06
-                            </span>
-
-                            <h3>
-                                Maishiy texnika
-                            </h3>
-
-                            <p>
-                                Uy uchun aqlli
-                                texnologiyalar
-                            </p>
-
-                            <button>
-                                Ko‘rish →
-                            </button>
-
-                        </div>
-
-
-                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=85"
-                            alt="Home appliances">
-
-                    </article>
-
-                </div>
-
-            </div>
+        <!-- BRANDS -->
+        <section class="ticker">
+
+            <div>APPLE</div>
+            <div>SAMSUNG</div>
+            <div>SONY</div>
+            <div>ASUS</div>
+            <div>LG</div>
+            <div>LENOVO</div>
+            <div>XIAOMI</div>
+            <div>MICROSOFT</div>
 
         </section>
 
 
+        <!-- CATEGORIES -->
+        <section id="categories" class="section">
 
-        <!-- =========================================================
-     PRODUCT SECTION
-========================================================= -->
+            <div class="section-head">
 
-        <section class="products-section" id="products">
+                <div>
 
-            <div class="section-container">
+                    <span class="eyebrow">
+                        EXPLORE
+                    </span>
 
-                <div class="section-heading">
-
-                    <div>
-
-                        <span class="section-label">
-                            NOVA STORE
-                        </span>
-
-                        <h2>
-                            Mashhur mahsulotlar
-                        </h2>
-
-                    </div>
-
-
-                    <div class="product-controls">
-
-                        <button class="filter-button active" data-filter="all">
-                            Barchasi
-                        </button>
-
-                        <button class="filter-button" data-filter="phones">
-                            Telefon
-                        </button>
-
-                        <button class="filter-button" data-filter="laptops">
-                            Noutbuk
-                        </button>
-
-                        <button class="filter-button" data-filter="gaming">
-                            Gaming
-                        </button>
-
-                        <button class="filter-button" data-filter="audio">
-                            Audio
-                        </button>
-
-                    </div>
+                    <h2>
+                        Kategoriyalar
+                    </h2>
 
                 </div>
 
+                <a href="#products" class="text-link">
+                    Barchasini ko'rish →
+                </a>
 
-                <!-- SEARCH + SORT -->
-
-                <div class="store-toolbar">
-
-                    <div class="store-search">
-
-                        <span>
-                            ⌕
-                        </span>
-
-                        <input type="text" id="productSearch" placeholder="Mahsulot qidirish...">
-
-                    </div>
+            </div>
 
 
-                    <select id="productSort" class="sort-select">
+            <div class="category-grid">
 
-                        <option value="default">
-                            Tartiblash
-                        </option>
-
-                        <option value="low">
-                            Narx: arzon → qimmat
-                        </option>
-
-                        <option value="high">
-                            Narx: qimmat → arzon
-                        </option>
-
-                        <option value="rating">
-                            Reyting bo‘yicha
-                        </option>
-
-                        <option value="new">
-                            Yangilari
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- PRODUCTS ARE INSERTED BY JS -->
-
-                <div class="products-grid" id="productsGrid">
-
-                    <!-- JS PRODUCTS -->
-
-                </div>
-
-
-                <div class="products-loading" id="productsLoading">
-
-                    <div class="loading-spinner"></div>
-
-                    <p>
-                        Mahsulotlar yuklanmoqda...
-                    </p>
-
-                </div>
-
-
-                <div class="no-products" id="noProducts" hidden>
-
-                    <div>
-                        🔍
-                    </div>
+                <button class="cat cat-1" data-cat="phones">
+                    <span>01</span>
 
                     <h3>
-                        Mahsulot topilmadi
+                        Telefonlar
                     </h3>
 
                     <p>
-                        Boshqa mahsulot nomini qidirib ko‘ring.
+                        iPhone, Galaxy, Pixel, Xiaomi
                     </p>
 
-                </div>
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
+
+
+                <button class="cat cat-2" data-cat="laptops">
+                    <span>02</span>
+
+                    <h3>
+                        Noutbuklar
+                    </h3>
+
+                    <p>
+                        MacBook, ASUS, Lenovo, ROG
+                    </p>
+
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
+
+
+                <button class="cat cat-3" data-cat="tablets">
+                    <span>03</span>
+
+                    <h3>
+                        iPad & Planshet
+                    </h3>
+
+                    <p>
+                        Pro, Air va Android planshetlar
+                    </p>
+
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
+
+
+                <button class="cat cat-4" data-cat="tvs">
+                    <span>04</span>
+
+                    <h3>
+                        Televizorlar
+                    </h3>
+
+                    <p>
+                        OLED, QLED, 4K Smart TV
+                    </p>
+
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
+
+
+                <button class="cat cat-5" data-cat="gaming">
+                    <span>05</span>
+
+                    <h3>
+                        Gaming
+                    </h3>
+
+                    <p>
+                        PlayStation, Xbox, PC
+                    </p>
+
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
+
+
+                <button class="cat cat-6" data-cat="audio">
+                    <span>06</span>
+
+                    <h3>
+                        Audio
+                    </h3>
+
+                    <p>
+                        AirPods, Sony, JBL
+                    </p>
+
+                    <b>
+                        Ko'rish →
+                    </b>
+                </button>
 
             </div>
 
         </section>
 
 
+        <!-- PRODUCTS -->
+        <section id="products" class="section products">
 
-        <!-- =========================================================
-     FLASH SALE
-========================================================= -->
+            <div class="section-head">
 
-        <section class="flash-sale-section">
+                <div>
 
-            <div class="section-container">
-
-                <div class="flash-sale">
-
-                    <div class="flash-content">
-
-                        <span class="section-label">
-                            LIMITED OFFER
-                        </span>
-
-                        <h2>
-                            Flash Sale
-                        </h2>
-
-                        <p>
-                            Tanlangan mahsulotlarga
-                            maxsus chegirmalar.
-                        </p>
-
-
-                        <div class="countdown" id="saleCountdown">
-
-                            <div>
-                                <strong id="saleHours">
-                                    08
-                                </strong>
-
-                                <span>
-                                    Soat
-                                </span>
-                            </div>
-
-
-                            <div>
-                                <strong id="saleMinutes">
-                                    42
-                                </strong>
-
-                                <span>
-                                    Min
-                                </span>
-                            </div>
-
-
-                            <div>
-                                <strong id="saleSeconds">
-                                    18
-                                </strong>
-
-                                <span>
-                                    Sek
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                        <a href="#products" class="primary-button">
-                            Chegirmalarni ko‘rish →
-                        </a>
-
-                    </div>
-
-
-                    <div class="flash-product">
-
-                        <span class="sale-badge">
-                            -25%
-                        </span>
-
-                        <img src="https://images.unsplash.com/photo-1592286927505-2fd5b8e8b4e4?auto=format&fit=crop&w=900&q=90"
-                            alt="Premium smartphone">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================================
-     GAMING
-========================================================= -->
-
-        <section class="gaming-section" id="gaming">
-
-            <div class="gaming-background">
-
-                <div class="gaming-glow"></div>
-
-                <div class="gaming-grid"></div>
-
-            </div>
-
-
-            <div class="section-container">
-
-                <div class="gaming-header">
-
-                    <div>
-
-                        <span class="section-label">
-                            GAMING ZONE
-                        </span>
-
-                        <h2>
-                            O‘yin olamiga kir
-                        </h2>
-
-                        <p>
-                            Kuchli konsollar va gaming
-                            texnikalari bilan yangi
-                            darajaga chiqing.
-                        </p>
-
-                    </div>
-
-
-                    <a href="#products" class="secondary-button">
-                        Gaming shop →
-                    </a>
-
-                </div>
-
-
-                <div class="gaming-cards">
-
-                    <div class="gaming-card">
-
-                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=1000&q=90"
-                            alt="PlayStation">
-
-                        <div class="gaming-card-content">
-
-                            <span>
-                                SONY
-                            </span>
-
-                            <h3>
-                                PlayStation 5
-                            </h3>
-
-                            <p>
-                                Next generation gaming.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="gaming-card">
-
-                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1000&q=90"
-                            alt="Gaming setup">
-
-                        <div class="gaming-card-content">
-
-                            <span>
-                                NOVA GAMING
-                            </span>
-
-                            <h3>
-                                Ultimate Setup
-                            </h3>
-
-                            <p>
-                                Monitor + PC + Accessories
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================================
-     FOOTBALL GAME
-========================================================= -->
-
-        <section class="football-section" id="football">
-
-            <div class="football-background">
-
-                <div class="stadium-lights"></div>
-
-                <div class="stadium-lines"></div>
-
-            </div>
-
-
-            <div class="section-container">
-
-                <div class="football-header">
-
-                    <span class="section-label">
-                        NOVA SPORTS
+                    <span class="eyebrow">
+                        NOVA STORE
                     </span>
 
                     <h2>
-                        ⚽ NOVA Football
+                        Premium mahsulotlar
                     </h2>
-
-                    <p>
-                        Saytda o‘ynash mumkin bo‘lgan
-                        mini futbol o‘yini.
-                    </p>
 
                 </div>
 
-
-                <!-- GAME -->
-
-                <div class="football-game">
-
-                    <div class="game-topbar">
-
-                        <div class="game-team">
-
-                            <span>
-                                YOU
-                            </span>
-
-                            <strong id="playerScore">
-                                0
-                            </strong>
-
-                        </div>
-
-
-                        <div class="game-time">
-
-                            <span>
-                                TIME
-                            </span>
-
-                            <strong id="gameTimer">
-                                60
-                            </strong>
-
-                        </div>
-
-
-                        <div class="game-team">
-
-                            <strong id="computerScore">
-                                0
-                            </strong>
-
-                            <span>
-                                NOVA FC
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="football-field" id="footballField">
-
-                        <!-- CENTER CIRCLE -->
-
-                        <div class="field-center-line"></div>
-
-                        <div class="center-circle"></div>
-
-
-                        <!-- LEFT GOAL -->
-
-                        <div class="football-goal left-goal">
-
-                            <div class="goal-net"></div>
-
-                        </div>
-
-
-                        <!-- RIGHT GOAL -->
-
-                        <div class="football-goal right-goal">
-
-                            <div class="goal-net"></div>
-
-                        </div>
-
-
-                        <!-- BALL -->
-
-                        <button class="football-ball" id="footballBall" aria-label="Football">
-                            ⚽
-                        </button>
-
-
-                        <!-- PLAYER -->
-
-                        <div class="football-player player-one" id="footballPlayer">
-                            🧑‍💻
-                        </div>
-
-
-                        <!-- COMPUTER -->
-
-                        <div class="football-player player-two" id="computerPlayer">
-                            🤖
-                        </div>
-
-
-                        <!-- GAME MESSAGE -->
-
-                        <div class="game-message" id="gameMessage">
-
-                            <h3>
-                                NOVA Football
-                            </h3>
-
-                            <p>
-                                To‘pni bosing va gol uring!
-                            </p>
-
-                            <button class="primary-button" id="startGameButton">
-                                O‘yinni boshlash
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="game-controls">
-
-                        <button class="game-control" id="moveLeft">
-                            ←
-                        </button>
-
-                        <button class="game-control" id="kickBall">
-                            ⚽ KICK
-                        </button>
-
-                        <button class="game-control" id="moveRight">
-                            →
-                        </button>
-
-                    </div>
-
+                <div class="mini-note">
+                    60+ items · Live catalog
                 </div>
 
             </div>
 
+
+            <div class="toolbar">
+
+                <div class="searchbox">
+
+                    ⌕
+
+                    <input id="productSearch" placeholder="Mahsulot qidirish...">
+
+                </div>
+
+
+                <select id="sort">
+
+                    <option value="default">
+                        Tartiblash
+                    </option>
+
+                    <option value="low">
+                        Arzon → qimmat
+                    </option>
+
+                    <option value="high">
+                        Qimmat → arzon
+                    </option>
+
+                    <option value="rating">
+                        Reyting
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="filters" class="filters"></div>
+
+
+            <div id="productGrid" class="product-grid"></div>
+
         </section>
 
 
+        <!-- FLASH SALE -->
+        <section class="sale section">
 
-        <!-- =========================================================
-     WHY NOVA
-========================================================= -->
+            <div>
 
-        <section class="why-section" id="about">
+                <span class="eyebrow">
+                    LIMITED DROP
+                </span>
 
-            <div class="section-container">
+                <h2>
+                    Flash Sale
+                </h2>
 
-                <div class="section-heading centered">
+                <p>
+                    Bugungi tanlangan mahsulotlarga
+                    maxsus narx.
+                </p>
 
-                    <span class="section-label">
-                        WHY NOVA
+
+                <div class="countdown">
+
+                    <b id="hh">08</b>
+
+                    <i>:</i>
+
+                    <b id="mm">42</b>
+
+                    <i>:</i>
+
+                    <b id="ss">18</b>
+
+                </div>
+
+
+                <a href="#products" class="btn primary">
+                    Chegirmalarni ko'rish →
+                </a>
+
+            </div>
+
+
+            <img src="https://images.unsplash.com/photo-1592286927505-2fd5b8e8b4e4?auto=format&fit=crop&w=1000&q=90"
+                alt="sale phone">
+
+        </section>
+
+
+        <!-- AI -->
+        <section id="ai" class="ai-section section">
+
+            <div class="ai-wrap">
+
+                <div class="ai-intro">
+
+                    <span class="eyebrow">
+                        NOVA INTELLIGENCE
                     </span>
 
                     <h2>
-                        Nega aynan NOVA?
+                        Sizning shaxsiy
+                        <span>AI yordamchingiz.</span>
                     </h2>
 
                     <p>
-                        Oddiy do‘kon emas.
-                        Premium texnologiyalar dunyosi.
+                        NOVA AI mahsulotlarni topadi,
+                        solishtiradi, byudjetga mos tavsiya qiladi,
+                        savatchani boshqaradi va saytdagi
+                        funksiyalarni tushuntiradi.
                     </p>
 
-                </div>
 
+                    <div class="ai-chips">
 
-                <div class="advantages-grid">
+                        <button data-ai="Menga 1500 dollargacha eng yaxshi telefonni top">
+                            📱 Telefon top
+                        </button>
 
-                    <article class="advantage-card">
+                        <button data-ai="MacBook va ASUS noutbukni solishtir">
+                            💻 Solishtir
+                        </button>
 
-                        <div class="advantage-icon">
-                            🚚
-                        </div>
+                        <button data-ai="Mening savatchamni tekshir">
+                            🛒 Savatcham
+                        </button>
 
-                        <h3>
-                            Tez yetkazib berish
-                        </h3>
+                        <button data-ai="Menga gaming setup tavsiya qil">
+                            🎮 Gaming setup
+                        </button>
 
-                        <p>
-                            Toshkent bo‘ylab tezkor
-                            va ishonchli yetkazib berish.
-                        </p>
-
-                    </article>
-
-
-                    <article class="advantage-card">
-
-                        <div class="advantage-icon">
-                            🛡️
-                        </div>
-
-                        <h3>
-                            Kafolat
-                        </h3>
-
-                        <p>
-                            Barcha mahsulotlar
-                            kafolat bilan.
-                        </p>
-
-                    </article>
-
-
-                    <article class="advantage-card">
-
-                        <div class="advantage-icon">
-                            💳
-                        </div>
-
-                        <h3>
-                            Qulay to‘lov
-                        </h3>
-
-                        <p>
-                            Naqd, karta va
-                            online to‘lovlar.
-                        </p>
-
-                    </article>
-
-
-                    <article class="advantage-card">
-
-                        <div class="advantage-icon">
-                            ⭐
-                        </div>
-
-                        <h3>
-                            Premium servis
-                        </h3>
-
-                        <p>
-                            Har bir mijozga
-                            individual yondashuv.
-                        </p>
-
-                    </article>
+                    </div>
 
                 </div>
 
-            </div>
 
-        </section>
+                <!-- AI CHAT -->
+                <div class="ai-chat">
 
+                    <div class="chat-head">
 
-
-        <!-- =========================================================
-     NEWSLETTER
-========================================================= -->
-
-        <section class="newsletter-section">
-
-            <div class="section-container">
-
-                <div class="newsletter">
-
-                    <div>
-
-                        <span class="section-label">
-                            NOVA NEWS
+                        <span class="ai-orb">
+                            ✦
                         </span>
 
-                        <h2>
-                            Yangiliklardan xabardor bo‘ling
-                        </h2>
+                        <div>
 
-                        <p>
-                            Yangi mahsulotlar va
-                            maxsus chegirmalarni birinchi
-                            bo‘lib biling.
-                        </p>
+                            <b>
+                                NOVA AI
+                            </b>
+
+                            <small>
+                                Smart assistant · Online
+                            </small>
+
+                        </div>
+
+                        <button id="clearChat">
+                            ↻
+                        </button>
 
                     </div>
 
 
-                    <form class="newsletter-form" id="newsletterForm">
+                    <div id="chatMessages" class="chat-messages">
 
-                        <input type="email" id="newsletterEmail" placeholder="Email manzilingiz" required>
+                        <div class="msg ai">
 
-                        <button type="submit" class="primary-button">
-                            Obuna bo‘lish →
+                            Salom! Men NOVA AI.
+                            Mahsulot tanlash, taqqoslash,
+                            narx, kategoriya yoki savatcha
+                            bo'yicha yordam beraman.
+
+                            Masalan:
+
+                            <b>
+                                “$1200 gacha eng yaxshi telefonni top”
+                            </b>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="chatForm" class="chat-form">
+
+                        <input id="chatInput" autocomplete="off" placeholder="NOVA AI ga savol bering...">
+
+                        <button>
+                            ➤
                         </button>
 
                     </form>
@@ -1369,235 +660,330 @@
 
         </section>
 
-    </main>
 
+        <!-- FOOTBALL -->
+        <section id="football" class="football section">
 
+            <div class="section-head">
 
-    <!-- =========================================================
-     FOOTER
-========================================================= -->
+                <div>
 
-    <footer class="main-footer">
+                    <span class="eyebrow">
+                        NOVA SPORTS
+                    </span>
 
-        <div class="section-container">
-
-            <div class="footer-grid">
-
-
-                <!-- BRAND -->
-
-                <div class="footer-brand">
-
-                    <a href="#home" class="logo">
-
-                        <span class="logo-symbol">
-                            N
-                        </span>
-
-                        <span class="logo-text">
-                            NOVA<span>.</span>
-                        </span>
-
-                    </a>
-
+                    <h2>
+                        ⚽ NOVA Football
+                    </h2>
 
                     <p>
-                        Premium technology.
-                        Premium experience.
+                        To'pni bosing, gol uring
+                        va rekord o'rnating.
                     </p>
 
+                </div>
 
-                    <div class="social-links">
+            </div>
 
-                        <a href="#">
-                            Instagram
-                        </a>
 
-                        <a href="#">
-                            Telegram
-                        </a>
+            <div class="game">
 
-                        <a href="#">
-                            YouTube
-                        </a>
+                <div class="scorebar">
+
+                    <span>
+                        YOU
+                        <b id="score">0</b>
+                    </span>
+
+                    <span>
+                        TIME
+                        <b id="gameTime">30</b>
+                    </span>
+
+                    <span>
+                        NOVA FC
+                        <b id="botScore">0</b>
+                    </span>
+
+                </div>
+
+
+                <div id="field" class="field">
+
+                    <div class="goal left"></div>
+
+                    <div class="goal right"></div>
+
+                    <div class="midline"></div>
+
+                    <div class="circle"></div>
+
+                    <button id="ball" class="ball">
+                        ⚽
+                    </button>
+
+                    <div id="keeper" class="keeper">
+                        🧤
+                    </div>
+
+
+                    <div id="gameOverlay" class="game-overlay">
+
+                        <h3>
+                            NOVA Football
+                        </h3>
+
+                        <p>
+                            Start tugmasini bosing
+                            va to'pni tepib gol uring.
+                        </p>
+
+                        <button id="startGame" class="btn primary">
+                            Start game
+                        </button>
 
                     </div>
 
                 </div>
 
 
-                <!-- SHOP -->
+                <div class="game-controls">
 
-                <div class="footer-column">
+                    <button id="leftMove">
+                        ←
+                    </button>
 
-                    <h4>
-                        Shop
-                    </h4>
+                    <button id="kick">
+                        ⚽ KICK
+                    </button>
 
-                    <a href="#products">
-                        Telefonlar
-                    </a>
-
-                    <a href="#products">
-                        Noutbuklar
-                    </a>
-
-                    <a href="#products">
-                        iPad
-                    </a>
-
-                    <a href="#products">
-                        Gaming
-                    </a>
-
-                    <a href="#products">
-                        Audio
-                    </a>
-
-                </div>
-
-
-                <!-- INFORMATION -->
-
-                <div class="footer-column">
-
-                    <h4>
-                        Ma'lumot
-                    </h4>
-
-                    <a href="#">
-                        Biz haqimizda
-                    </a>
-
-                    <a href="#">
-                        Yetkazib berish
-                    </a>
-
-                    <a href="#">
-                        Kafolat
-                    </a>
-
-                    <a href="#">
-                        FAQ
-                    </a>
-
-                    <a href="#">
-                        Aloqa
-                    </a>
-
-                </div>
-
-
-                <!-- CONTACT -->
-
-                <div class="footer-column">
-
-                    <h4>
-                        Aloqa
-                    </h4>
-
-                    <a href="tel:+998901234567">
-                        +998 90 123 45 67
-                    </a>
-
-                    <a href="mailto:hello@nova.uz">
-                        hello@nova.uz
-                    </a>
-
-                    <span>
-                        Toshkent, Uzbekistan
-                    </span>
-
-                    <span>
-                        09:00 — 22:00
-                    </span>
+                    <button id="rightMove">
+                        →
+                    </button>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <div class="footer-bottom">
 
-                <span>
-                    © 2026 NOVA STORE.
-                    All rights reserved.
+        <!-- ABOUT -->
+        <section id="about" class="section about">
+
+            <div class="section-head centered">
+
+                <span class="eyebrow">
+                    WHY NOVA
                 </span>
 
-                <div>
+                <h2>
+                    Oddiy do'kon emas.
+                </h2>
 
-                    <a href="#">
-                        Privacy
-                    </a>
-
-                    <a href="#">
-                        Terms
-                    </a>
-
-                </div>
+                <p>
+                    Premium texnologiya,
+                    aqlli servis va interaktiv tajriba.
+                </p>
 
             </div>
+
+
+            <div class="benefits">
+
+                <article>
+
+                    <b>🚚</b>
+
+                    <h3>
+                        Tez yetkazish
+                    </h3>
+
+                    <p>
+                        Toshkent bo'ylab tezkor
+                        yetkazib berish.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <b>🛡️</b>
+
+                    <h3>
+                        Kafolat
+                    </h3>
+
+                    <p>
+                        Mahsulotlar uchun
+                        ishonchli kafolat.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <b>💳</b>
+
+                    <h3>
+                        Qulay to'lov
+                    </h3>
+
+                    <p>
+                        Karta, naqd va online to'lov.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <b>✦</b>
+
+                    <h3>
+                        NOVA AI
+                    </h3>
+
+                    <p>
+                        Tanlovingizda aqlli yordamchi.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-grid">
+
+            <div>
+
+                <a class="brand" href="#home">
+
+                    <b>N</b>
+
+                    <span>
+                        NOVA<em>.</em>
+                    </span>
+
+                </a>
+
+                <p>
+                    Premium technology.
+                    Premium experience.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Shop
+                </h4>
+
+                <a href="#products">
+                    Telefonlar
+                </a>
+
+                <a href="#products">
+                    Noutbuklar
+                </a>
+
+                <a href="#products">
+                    Gaming
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Service
+                </h4>
+
+                <a href="#ai">
+                    NOVA AI
+                </a>
+
+                <a href="#football">
+                    Football
+                </a>
+
+                <a href="#about">
+                    Biz haqimizda
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Aloqa
+                </h4>
+
+                <a href="tel:+998901234567">
+                    +998 90 123 45 67
+                </a>
+
+                <a href="mailto:hello@nova.uz">
+                    hello@nova.uz
+                </a>
+
+                <span>
+                    Toshkent, Uzbekistan
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 NOVA STORE
+
+            <span>
+                Premium technology universe
+            </span>
 
         </div>
 
     </footer>
 
 
+    <!-- SEARCH MODAL -->
+    <div id="searchModal" class="modal">
 
-    <!-- =========================================================
-     SEARCH MODAL
-========================================================= -->
+        <div class="modal-box search-modal">
 
-    <div class="modal-overlay" id="searchModal">
-
-        <div class="search-modal">
-
-            <button class="modal-close" data-close="searchModal">
+            <button class="close" data-close="searchModal">
                 ×
             </button>
 
-
-            <span class="section-label">
-                SEARCH NOVA
+            <span class="eyebrow">
+                SEARCH
             </span>
 
             <h2>
-                Nima qidiryapsiz?
+                Qidiruv
             </h2>
 
+            <div class="searchbox big">
 
-            <div class="big-search">
+                ⌕
 
-                <span>
-                    ⌕
-                </span>
-
-                <input type="text" id="globalSearch" placeholder="iPhone, MacBook, PlayStation...">
-
-            </div>
-
-
-            <div class="search-suggestions">
-
-                <span>
-                    Mashhur:
-                </span>
-
-                <button>
-                    iPhone
-                </button>
-
-                <button>
-                    MacBook
-                </button>
-
-                <button>
-                    PlayStation
-                </button>
-
-                <button>
-                    AirPods
-                </button>
+                <input id="globalSearch" placeholder="iPhone, MacBook, PlayStation...">
 
             </div>
 
@@ -1606,59 +992,35 @@
     </div>
 
 
+    <!-- AUTH -->
+    <div id="authModal" class="modal">
 
-    <!-- =========================================================
-     AUTH MODAL
-========================================================= -->
+        <div class="modal-box auth">
 
-    <div class="modal-overlay auth-overlay" id="authModal">
-
-        <div class="auth-modal">
-
-            <button class="modal-close" id="authClose">
+            <button class="close" data-close="authModal">
                 ×
             </button>
 
-
-            <div class="auth-brand">
-
-                <span class="logo-symbol">
-                    N
-                </span>
-
-                <span class="logo-text">
-                    NOVA<span>.</span>
-                </span>
-
+            <div class="auth-logo">
+                NOVA<span>.</span>
             </div>
 
+            <span class="eyebrow">
+                WELCOME
+            </span>
 
-            <div class="auth-heading">
-
-                <span class="section-label">
-                    WELCOME
-                </span>
-
-                <h2 id="authTitle">
-                    NOVA ga xush kelibsiz
-                </h2>
-
-                <p id="authSubtitle">
-                    Hisobingizga kiring yoki yangi account yarating.
-                </p>
-
-            </div>
+            <h2 id="authTitle">
+                NOVA ga xush kelibsiz
+            </h2>
 
 
-            <!-- AUTH TABS -->
+            <div class="tabs">
 
-            <div class="auth-tabs">
-
-                <button class="auth-tab active" data-auth="signin">
+                <button class="active" data-auth="signin">
                     Sign In
                 </button>
 
-                <button class="auth-tab" data-auth="signup">
+                <button data-auth="signup">
                     Sign Up
                 </button>
 
@@ -1666,13 +1028,12 @@
 
 
             <!-- SIGN IN -->
-
-            <form class="auth-form" id="signInForm">
+            <form id="signinForm">
 
                 <label>
                     Email
 
-                    <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                    <input id="loginEmail" type="email" required placeholder="you@example.com">
 
                 </label>
 
@@ -1680,71 +1041,29 @@
                 <label>
                     Parol
 
-                    <div class="password-field">
-
-                        <input type="password" id="loginPassword" placeholder="••••••••" required>
-
-                        <button type="button" class="password-toggle" data-target="loginPassword">
-                            👁
-                        </button>
-
-                    </div>
+                    <input id="loginPass" type="password" required placeholder="••••••••">
 
                 </label>
 
 
-                <div class="auth-options">
-
-                    <label class="checkbox-label">
-
-                        <input type="checkbox" id="rememberMe">
-
-                        <span>
-                            Eslab qolish
-                        </span>
-
-                    </label>
-
-
-                    <button type="button" class="forgot-password">
-                        Parolni unutdingizmi?
-                    </button>
-
-                </div>
-
-
-                <button type="submit" class="auth-submit">
+                <button class="btn primary full">
                     Sign In →
                 </button>
 
-
-                <div class="demo-login">
-
-                    <span>
-                        Demo account
-                    </span>
-
-                    <code>
-                    demo@nova.uz
-                </code>
-
-                    <code>
-                    123456
-                </code>
-
-                </div>
+                <p class="demo">
+                    Demo: demo@nova.uz / 123456
+                </p>
 
             </form>
 
 
             <!-- SIGN UP -->
-
-            <form class="auth-form" id="signUpForm" hidden>
+            <form id="signupForm" hidden>
 
                 <label>
                     Ism
 
-                    <input type="text" id="registerName" placeholder="Ismingiz" required>
+                    <input id="regName" required placeholder="Ismingiz">
 
                 </label>
 
@@ -1752,7 +1071,7 @@
                 <label>
                     Email
 
-                    <input type="email" id="registerEmail" placeholder="you@example.com" required>
+                    <input id="regEmail" type="email" required placeholder="you@example.com">
 
                 </label>
 
@@ -1760,59 +1079,42 @@
                 <label>
                     Parol
 
-                    <div class="password-field">
-
-                        <input type="password" id="registerPassword" placeholder="Kamida 6 ta belgi" required>
-
-                        <button type="button" class="password-toggle" data-target="registerPassword">
-                            👁
-                        </button>
-
-                    </div>
+                    <input id="regPass" type="password" required minlength="6" placeholder="Kamida 6 belgi">
 
                 </label>
 
 
-                <label class="checkbox-label terms">
+                <label class="check">
 
-                    <input type="checkbox" id="acceptTerms" required>
+                    <input type="checkbox" required>
 
-                    <span>
-                        Foydalanish shartlariga roziman
-                    </span>
+                    Shartlarga roziman
 
                 </label>
 
 
-                <button type="submit" class="auth-submit">
+                <button class="btn primary full">
                     Account yaratish →
                 </button>
 
             </form>
 
 
-            <div class="auth-message" id="authMessage"></div>
+            <p id="authMsg"></p>
 
         </div>
 
     </div>
 
 
+    <!-- CART -->
+    <aside id="cartDrawer">
 
-    <!-- =========================================================
-     CART DRAWER
-========================================================= -->
-
-    <div class="drawer-overlay" id="cartOverlay"></div>
-
-
-    <aside class="cart-drawer" id="cartDrawer">
-
-        <div class="drawer-header">
+        <div class="drawer-head">
 
             <div>
 
-                <span class="section-label">
+                <span class="eyebrow">
                     NOVA BAG
                 </span>
 
@@ -1822,59 +1124,44 @@
 
             </div>
 
-
-            <button class="drawer-close" id="cartClose">
+            <button id="cartClose">
                 ×
             </button>
 
         </div>
 
 
-        <div class="cart-items" id="cartItems">
-
-            <!-- JS -->
-
-        </div>
+        <div id="cartItems"></div>
 
 
-        <div class="cart-empty" id="cartEmpty">
+        <div id="cartEmpty" class="empty">
 
-            <div>
+            <b>
                 🛒
-            </div>
+            </b>
 
             <h3>
-                Savatchangiz bo‘sh
+                Savatcha bo'sh
             </h3>
 
             <p>
-                O‘zingizga yoqqan mahsulotlarni
-                qo‘shing.
+                Mahsulotlarni qo'shing.
             </p>
-
-            <a href="#products" class="primary-button" id="continueShopping">
-                Xaridni boshlash
-            </a>
 
         </div>
 
 
-        <div class="cart-summary">
+        <div class="cart-total">
 
-            <div>
+            <span>
+                Jami
+            </span>
 
-                <span>
-                    Jami:
-                </span>
+            <b id="cartTotal">
+                $0
+            </b>
 
-                <strong id="cartTotal">
-                    $0
-                </strong>
-
-            </div>
-
-
-            <button class="checkout-button" id="checkoutButton">
+            <button id="checkout" class="btn primary full">
                 Checkout →
             </button>
 
@@ -1883,137 +1170,18 @@
     </aside>
 
 
-
-    <!-- =========================================================
-     PRODUCT QUICK VIEW
-========================================================= -->
-
-    <div class="modal-overlay" id="productModal">
-
-        <div class="product-modal">
-
-            <button class="modal-close" data-close="productModal">
-                ×
-            </button>
+    <div id="drawerOverlay" class="drawer-overlay"></div>
 
 
-            <div class="product-modal-content" id="productModalContent">
-
-                <!-- JS -->
-
-            </div>
-
-        </div>
-
-    </div>
+    <!-- TOAST -->
+    <div id="toast"></div>
 
 
-
-    <!-- =========================================================
-     PROFILE MODAL
-========================================================= -->
-
-    <div class="modal-overlay" id="profileModal">
-
-        <div class="profile-modal">
-
-            <button class="modal-close" data-close="profileModal">
-                ×
-            </button>
-
-
-            <div class="profile-avatar-large">
-                👤
-            </div>
-
-
-            <h2 id="profileName">
-                Account
-            </h2>
-
-            <p id="profileEmail">
-                user@example.com
-            </p>
-
-
-            <div class="profile-stats">
-
-                <div>
-
-                    <strong id="profileOrders">
-                        0
-                    </strong>
-
-                    <span>
-                        Orders
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong id="profileFavorites">
-                        0
-                    </strong>
-
-                    <span>
-                        Favorites
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        ⭐
-                    </strong>
-
-                    <span>
-                        Member
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <button class="profile-action" id="logoutButton">
-                Logout
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =========================================================
-     TOAST
-========================================================= -->
-
-    <div class="toast-container" id="toastContainer">
-
-    </div>
-
-
-
-    <!-- =========================================================
-     BACK TO TOP
-========================================================= -->
-
-    <button class="back-to-top" id="backToTop">
-
+    <!-- TOP -->
+    <button id="top" class="top">
         ↑
-
     </button>
 
-
-
-    <!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
 
     <script src="./main.js"></script>
 
