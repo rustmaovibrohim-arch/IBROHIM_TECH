@@ -1,823 +1,290 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ELECTRONICS - IBROHIM_TECH</title>
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(22, 31, 48, 0.75);
-            --text-color: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --modal-bg: #111827;
-        }
-
-        .light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-color: #0f172a;
-            --text-secondary: #64748b;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --modal-bg: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        #weather-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .app-container {
-            position: relative;
-            z-index: 2;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px 40px;
-        }
-
-        /* Header Navigation */
-        header {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
-        }
-
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--accent-color);
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .top-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 14px;
-        }
-
-        .phone-contact {
-            color: var(--accent-color);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .weather-badge {
-            background: var(--card-bg);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn {
-            background: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-        }
-
-        /* Nav links for multi-page view */
-        .page-tabs {
-            display: flex;
-            gap: 15px;
-            margin-top: 5px;
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            padding-bottom: 5px;
-        }
-
-        .tab-btn.active {
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        /* Pages */
-        .page-content {
-            display: none;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-
-        /* Hero Banner */
-        .hero-banner {
-            margin: 25px 0;
-            padding: 50px 20px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(192, 132, 252, 0.1));
-            border: 1px solid var(--border-color);
-            text-align: center;
-            backdrop-filter: blur(12px);
-        }
-
-        .hero-banner h1 {
-            font-size: 40px;
-            font-weight: 900;
-            margin-bottom: 12px;
-            color: var(--text-color);
-            letter-spacing: 1px;
-        }
-
-        .hero-banner p {
-            color: var(--text-secondary);
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Search & Categories Filter */
-        .controls-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-color);
-            outline: none;
-            font-size: 14px;
-        }
-
-        .category-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            width: 100%;
-            scrollbar-width: thin;
-        }
-
-        .cat-chip {
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            font-size: 13px;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-
-        .cat-chip.active {
-            background: var(--accent-color);
-            color: #fff;
-            border-color: var(--accent-color);
-        }
-
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backdrop-filter: blur(8px);
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .product-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .product-category {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        .product-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .product-price {
-            font-size: 17px;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        /* Modals */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: var(--modal-bg);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            width: 100%;
-            max-width: 450px;
-            padding: 25px;
-            position: relative;
-            color: var(--text-color);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            cursor: pointer;
-            font-size: 20px;
-            color: var(--text-secondary);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-color);
-            outline: none;
-        }
-
-        /* Cart Items */
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .cart-item img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .cart-details {
-            flex: 1;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .hero-banner h1 {
-                font-size: 26px;
-            }
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#070a12">
+    <title>NOVA X — Premium Technology Store</title>
+    <link rel="stylesheet" href="./main.css">
 </head>
 
 <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="noise"></div>
 
-    <canvas id="weather-canvas"></canvas>
-
-    <div class="app-container">
-        <header>
-            <div class="top-nav">
-                <div class="logo" onclick="switchPage('home')">⚡ AURA ELECTRONICS</div>
-                <div class="top-info">
-                    <a href="tel:+998901234567" class="phone-contact">📞 +998 90 123 45 67</a>
-                    <div class="weather-badge" id="weather-info">🌙 Toshkent: +18°C (Qor)</div>
-                </div>
-                <div class="nav-controls">
-                    <button class="btn" id="theme-toggle">🌙 Tun</button>
-                    <button class="btn" onclick="openModal('signin-modal')">Sign In</button>
-                    <button class="btn btn-primary" onclick="openModal('signup-modal')">Sign Up</button>
-                    <button class="btn btn-primary" onclick="openModal('cart-modal')">
-                        🛒 Savat (<span id="cart-count">0</span>)
-                    </button>
+    <!-- AUTH GATE -->
+    <section id="authGate" class="auth-gate">
+        <div class="auth-orbit orbit-1"></div>
+        <div class="auth-orbit orbit-2"></div>
+        <div class="auth-shell">
+            <div class="auth-brand">
+                <div class="brand-mark">N</div>
+                <div>
+                    <div class="brand-name">NOVA<span>X</span></div>
+                    <div class="brand-sub">NEXT-GEN TECHNOLOGY</div>
                 </div>
             </div>
 
-            <div class="page-tabs">
-                <button class="tab-btn active" onclick="switchPage('home')">Bosh sahifa</button>
-                <button class="tab-btn" onclick="switchPage('catalog')">Katalog</button>
-                <button class="tab-btn" onclick="switchPage('about')">Biz haqimizda</button>
-                <button class="tab-btn" onclick="switchPage('contact')">Aloqa</button>
+            <div class="auth-copy">
+                <span class="eyebrow">WELCOME TO THE FUTURE</span>
+                <h1>Texnologiya.<br><em>Boshqacha.</em></h1>
+                <p>550+ premium qurilmalar, aqlli uy ekotizimi va maxsus futbol mini-o‘yini — barchasi bitta
+                    platformada.</p>
+                <div class="auth-proof">
+                    <span>550+ mahsulot</span><i></i><span>11 kategoriya</span><i></i><span>24/7 online</span>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-auth="signin">Sign In</button>
+                    <button class="auth-tab" data-auth="signup">Sign Up</button>
+                    <div class="tab-line"></div>
+                </div>
+
+                <form id="signinForm" class="auth-form active">
+                    <div class="field">
+                        <label>Email</label>
+                        <input id="loginEmail" type="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <div class="password-wrap">
+                            <input id="loginPassword" type="password" placeholder="••••••••" required>
+                            <button type="button" class="eye" data-target="loginPassword">◉</button>
+                        </div>
+                    </div>
+                    <div class="auth-row">
+                        <label class="check"><input id="rememberMe" type="checkbox" checked><span></span> Remember
+                            me</label>
+                        <button type="button" class="text-btn" id="demoLogin">Demo access</button>
+                    </div>
+                    <button class="primary-btn full" type="submit">Kirish <span>→</span></button>
+                    <p class="hint">Demo: <b>demo@nova.uz</b> / <b>123456</b></p>
+                </form>
+
+                <form id="signupForm" class="auth-form">
+                    <div class="field">
+                        <label>Ism</label>
+                        <input id="signupName" type="text" placeholder="Ismingiz" required>
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <input id="signupEmail" type="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <div class="password-wrap">
+                            <input id="signupPassword" type="password" placeholder="Kamida 6 belgi" required>
+                            <button type="button" class="eye" data-target="signupPassword">◉</button>
+                        </div>
+                    </div>
+                    <label class="check terms"><input id="terms" type="checkbox" required><span></span> NOVA X
+                        shartlariga roziman</label>
+                    <button class="primary-btn full" type="submit">Account yaratish <span>→</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- APP -->
+    <main id="app" class="app hidden">
+        <header class="topbar">
+            <a class="logo" href="#home"><span class="brand-mark small">N</span><span>NOVA<span>X</span></span></a>
+            <nav>
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#store" class="nav-link">Store</a>
+                <a href="#football" class="nav-link">Football</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" id="openSearch" aria-label="Search">⌕</button>
+                <button class="profile-chip" id="profileBtn"><span class="avatar" id="avatar">N</span><span
+                        id="userLabel">Account</span></button>
+                <button class="cart-btn" id="cartBtn">Bag <b id="cartCount">0</b></button>
             </div>
         </header>
 
-        <!-- PAGE 1: HOME -->
-        <div id="page-home" class="page-content active">
-            <section class="hero-banner">
-                <h1>IBROHIM_TECH SAYTIGA XUSH KELIBSISIZ!</h1>
-                <p>Eng zamonaviy va yuqori sifatli 50+ dan ortiq original texnikalar va smart gadjetlar to'plami</p>
-            </section>
-
-            <div class="controls-bar">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Mahsulotlarni izlash..."
-                        oninput="renderProducts()">
+        <section id="home" class="hero section">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">THE NOVA X EXPERIENCE</span>
+                    <h2>Future is<br><em>in your hands.</em></h2>
+                    <p>Smartfonlardan tortib aqlli uy tizimlarigacha — 11 kategoriya, 550+ tanlov va premium shopping
+                        tajribasi.</p>
+                    <div class="hero-actions">
+                        <a href="#store" class="primary-btn">Katalogni ko‘rish <span>↗</span></a>
+                        <a href="#football" class="ghost-btn">⚽ Football Arena</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div><b>550+</b><span>Products</span></div>
+                        <div><b>11</b><span>Categories</span></div>
+                        <div><b>4.9/5</b><span>Experience</span></div>
+                    </div>
                 </div>
-                <div class="category-scroll" id="categories-container"></div>
+                <div class="hero-visual">
+                    <div class="halo"></div>
+                    <div class="hero-device phone-device">
+                        <div class="camera-dot"></div>
+                        <div class="device-screen">
+                            <span>NOVA</span><strong>X</strong>
+                            <small>PREMIUM / 2026</small>
+                        </div>
+                    </div>
+                    <div class="floating-card fc-one"><span>⚡</span>
+                        <div><b>Fast Delivery</b><small>Same day in Tashkent</small></div>
+                    </div>
+                    <div class="floating-card fc-two"><span>✦</span>
+                        <div><b>Premium Choice</b><small>550+ products</small></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="store" class="section store-section">
+            <div class="section-head">
+                <div><span class="eyebrow">DISCOVER YOUR NEXT DEVICE</span>
+                    <h3>Everything.<br><em>In one place.</em></h3>
+                </div>
+                <div class="store-meta"><span id="productCount">550 products</span><button class="filter-btn"
+                        id="openFilters">Filters <span>☷</span></button></div>
             </div>
 
-            <div class="products-grid" id="products-grid"></div>
-        </div>
+            <div class="category-strip" id="categoryStrip"></div>
 
-        <!-- PAGE 2: CATALOG -->
-        <div id="page-catalog" class="page-content">
-            <h2 style="margin: 25px 0 15px;">Barcha Texnikalar Katalogi</h2>
-            <div class="products-grid" id="catalog-grid"></div>
-        </div>
-
-        <!-- PAGE 3: ABOUT -->
-        <div id="page-about" class="page-content">
-            <div class="hero-banner" style="text-align: left; padding: 40px;">
-                <h2>Biz haqimizda - AURA ELECTRONICS (IBROHIM_TECH)</h2>
-                <br>
-                <p>AURA ELECTRONICS – O'zbekistondagi eng yetakchi texnika brendlaridan biri bo'lib, xaridorlarga eng
-                    so'nggi rusumdagi maishiy texnikalar, smartfonlar va noutbuklarni kafolati bilan yetkazib beradi.
-                </p>
+            <div class="store-toolbar">
+                <div class="search-inline"><span>⌕</span><input id="productSearch" placeholder="Mahsulot qidiring...">
+                </div>
+                <select id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="low">Price: Low → High</option>
+                    <option value="high">Price: High → Low</option>
+                    <option value="name">Name A → Z</option>
+                </select>
             </div>
-        </div>
 
-        <!-- PAGE 4: CONTACT -->
-        <div id="page-contact" class="page-content">
-            <div class="hero-banner" style="text-align: left; padding: 40px; max-width: 600px; margin: 25px auto;">
-                <h2>Biz bilan bog'lanish</h2>
-                <br>
-                <p><b>Telefon:</b> +998 90 123 45 67</p>
-                <p><b>Manzil:</b> Toshkent shahri, Chilonzor tumani, IBROHIM_TECH markazi</p>
-                <p><b>Ish vaqti:</b> 24/7 Onlayn xizmat</p>
+            <div class="product-grid" id="productGrid"></div>
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+        <section id="football" class="section football-section">
+            <div class="section-head football-head">
+                <div><span class="eyebrow">NOVA X SPORTS LAB</span>
+                    <h3>Football<br><em>Penalty Arena.</em></h3>
+                </div>
+                <div class="scoreboard"><span>YOU</span><b id="score">0</b><i>—</i><b
+                        id="oppScore">0</b><span>CPU</span></div>
             </div>
-        </div>
+
+            <div class="football-layout">
+                <div class="pitch-card">
+                    <div class="match-top"><span>FINAL SHOOTOUT</span><b id="roundText">SHOT 1 / 5</b></div>
+                    <div class="pitch" id="pitch">
+                        <div class="stadium-lights"></div>
+                        <div class="goal">
+                            <div class="net"></div>
+                            <div class="keeper" id="keeper">🧤</div>
+                        </div>
+                        <div class="penalty-spot"></div>
+                        <div class="ball" id="ball">⚽</div>
+                        <div class="power-bar">
+                            <div id="powerFill"></div>
+                        </div>
+                    </div>
+                    <div class="shot-controls">
+                        <div class="direction-row">
+                            <button class="shot-btn" data-dir="left">↙<small>LEFT</small></button>
+                            <button class="shot-btn" data-dir="center">↑<small>CENTER</small></button>
+                            <button class="shot-btn" data-dir="right">↘<small>RIGHT</small></button>
+                        </div>
+                        <button class="shoot-main" id="shootBtn">SHOOT <span>⚡</span></button>
+                    </div>
+                    <div id="gameMessage" class="game-message">Yo‘nalishni tanlang va zarba bering.</div>
+                    <button class="restart-btn" id="restartGame">Restart Match</button>
+                </div>
+
+                <aside class="football-info">
+                    <div class="info-card">
+                        <span class="mini-label">HOW TO PLAY</span>
+                        <h4>5 ta penalti.<br>Kim kuchli?</h4>
+                        <p>Yo‘nalishni tanlang, zarba bering va darvozabonni aldang. Har gol — 1 ochko.</p>
+                        <div class="tips"><span>1</span> Direction tanlang</div>
+                        <div class="tips"><span>2</span> SHOOT tugmasini bosing</div>
+                        <div class="tips"><span>3</span> 5 zarbada g‘alaba qiling</div>
+                    </div>
+                    <div class="leader-card"><span>PERSONAL BEST</span><strong id="bestScore">0</strong><small>goals /
+                            match</small></div>
+                </aside>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="about-card">
+                <span class="eyebrow">WHY NOVA X</span>
+                <h3>Shopping should feel<br><em>like an experience.</em></h3>
+                <p>Minimal interfeys, tezkor qidiruv, 550+ mahsulot, aqlli kategoriyalar va maxsus Football Arena — NOVA
+                    X oddiy katalog emas.</p>
+                <div class="about-points"><span>✦ Premium UI</span><span>✦ Smart Search</span><span>✦ Local
+                        Cart</span><span>✦ Football Game</span></div>
+            </div>
+        </section>
 
         <footer>
-            <p>© 2026 AURA ELECTRONICS (IBROHIM_TECH). Barcha huquqlar himoyalangan. Murojaat uchun: +998 90 123 45 67
-            </p>
+            <div class="logo"><span class="brand-mark small">N</span><span>NOVA<span>X</span></span></div>
+            <p>© 2026 NOVA X. Technology without limits.</p><span>MADE FOR THE NEXT</span>
         </footer>
-    </div>
+    </main>
 
-    <!-- Sign In Modal -->
-    <div class="modal" id="signin-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('signin-modal')">&times;</span>
-            <h2>Sign In (Kirish)</h2>
-            <form onsubmit="handleAuth(event, 'Tizimga muvaffaqiyatli kirdingiz!')">
-                <div class="form-group">
-                    <label>Telefon raqam yoki Email</label>
-                    <input type="text" required placeholder="+998 90 123 45 67">
-                </div>
-                <div class="form-group">
-                    <label>Parol</label>
-                    <input type="password" required placeholder="******">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%">Kirish</button>
-            </form>
+    <!-- SEARCH MODAL -->
+    <div class="modal hidden" id="searchModal">
+        <div class="modal-backdrop"></div>
+        <div class="search-modal">
+            <button class="close-modal" data-close="searchModal">×</button>
+            <span class="eyebrow">GLOBAL SEARCH</span>
+            <h3>Find your <em>next device.</em></h3>
+            <div class="big-search"><span>⌕</span><input id="globalSearch"
+                    placeholder="iPhone, TV, drone, PlayStation..."></div>
+            <div class="search-hints"><span>Popular:</span><button data-query="iPhone">iPhone</button><button
+                    data-query="MacBook">MacBook</button><button data-query="PlayStation">PlayStation</button><button
+                    data-query="Smart TV">Smart TV</button></div>
         </div>
     </div>
 
-    <!-- Sign Up Modal -->
-    <div class="modal" id="signup-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('signup-modal')">&times;</span>
-            <h2>Sign Up (Ro'yxatdan o'tish)</h2>
-            <form onsubmit="handleAuth(event, 'Ro\'yxatdan muvaffaqiyatli o\'tdingiz!')">
-                <div class="form-group">
-                    <label>Ism Familiya</label>
-                    <input type="text" required placeholder="Ismingizni kiriting">
-                </div>
-                <div class="form-group">
-                    <label>Telefon raqam</label>
-                    <input type="tel" required placeholder="+998 90 123 45 67">
-                </div>
-                <div class="form-group">
-                    <label>Parol</label>
-                    <input type="password" required placeholder="******">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%">Ro'yxatdan o'tish</button>
-            </form>
+    <!-- FILTER MODAL -->
+    <div class="modal hidden" id="filterModal">
+        <div class="modal-backdrop"></div>
+        <div class="filter-modal">
+            <button class="close-modal" data-close="filterModal">×</button>
+            <span class="eyebrow">SMART FILTERS</span>
+            <h3>Refine your <em>selection.</em></h3>
+            <div class="filter-row"><label>Minimum price <input type="number" id="minPrice"
+                        placeholder="0"></label><label>Maximum price <input type="number" id="maxPrice"
+                        placeholder="5000"></label></div>
+            <button class="primary-btn full" id="applyFilters">Apply filters →</button>
         </div>
     </div>
 
-    <!-- Cart Modal & Checkout -->
-    <div class="modal" id="cart-modal">
-        <div class="modal-content" style="max-width: 550px;">
-            <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
-            <h2>Savatingiz</h2>
-            <div id="cart-items-container" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <div style="font-weight: bold; margin-bottom: 15px; font-size: 18px;">
-                Jami summasi: $<span id="cart-total-price">0</span>
+    <!-- PROFILE DRAWER -->
+    <div class="drawer hidden" id="profileDrawer">
+        <div class="drawer-backdrop"></div>
+        <aside class="drawer-panel">
+            <button class="close-modal" id="closeProfile">×</button>
+            <div class="drawer-avatar" id="drawerAvatar">N</div>
+            <span class="eyebrow">YOUR NOVA ID</span>
+            <h3 id="drawerName">Account</h3>
+            <p id="drawerEmail">email</p>
+            <div class="drawer-stats">
+                <div><b id="drawerOrders">0</b><span>Orders</span></div>
+                <div><b id="drawerBag">0</b><span>Bag items</span></div>
             </div>
-            <hr style="border-color: var(--border-color); margin-bottom: 15px;">
-            <h3>Buyurtmani rasmiylashtirish</h3>
-            <form onsubmit="handleCheckout(event)">
-                <div class="form-group">
-                    <label>Ism va Familiyangiz</label>
-                    <input type="text" id="checkout-name" required placeholder="Ism Familiya">
-                </div>
-                <div class="form-group">
-                    <label>Telefon Raqamingiz</label>
-                    <input type="tel" id="checkout-phone" required placeholder="+998 90 123 45 67">
-                </div>
-                <div class="form-group">
-                    <label>Manzilingiz</label>
-                    <input type="text" id="checkout-address" required placeholder="Toshkent sh, Chilonzor tumani...">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%">Buyurtmani tasdiqlash</button>
-            </form>
-        </div>
+            <button class="ghost-btn full" id="logoutBtn">Log out</button>
+        </aside>
     </div>
 
-    <script>
-        // 50 TA MUTLAQ HAR XIL VA REAL TEXNIKALAR
-        const products = [
-            // TELEFONLAR
-            { id: 1, name: "iPhone 16 Pro Max 512GB", cat: "Telefonlar", price: 1450, img: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400" },
-            { id: 2, name: "Samsung Galaxy S25 Ultra", cat: "Telefonlar", price: 1350, img: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" },
-            { id: 3, name: "Google Pixel 9 Pro XL", cat: "Telefonlar", price: 1099, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400" },
-            { id: 4, name: "Xiaomi 14 Ultra Ceramic", cat: "Telefonlar", price: 999, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" },
-            { id: 5, name: "OnePlus 12 5G Emerald", cat: "Telefonlar", price: 850, img: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400" },
-
-            // NOUTBUKLAR
-            { id: 6, name: "MacBook Pro 16 M3 Max", cat: "Noutbuklar", price: 2899, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400" },
-            { id: 7, name: "ASUS ROG Strix SCAR 18", cat: "Noutbuklar", price: 2599, img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400" },
-            { id: 8, name: "Dell XPS 16 Touch OLED", cat: "Noutbuklar", price: 2199, img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400" },
-            { id: 9, name: "Lenovo Legion Pro 7i", cat: "Noutbuklar", price: 1999, img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400" },
-            { id: 10, name: "HP Spectre x360 2-in-1", cat: "Noutbuklar", price: 1499, img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400" },
-
-            // DRONLAR
-            { id: 11, name: "DJI Mavic 3 Pro Cine", cat: "Dronlar", price: 2399, img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400" },
-            { id: 12, name: "DJI Air 3 Fly More Combo", cat: "Dronlar", price: 1349, img: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=400" },
-            { id: 13, name: "DJI Mini 4 Pro 4K", cat: "Dronlar", price: 899, img: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=400" },
-            { id: 14, name: "Autel Robotics EVO Lite+", cat: "Dronlar", price: 1199, img: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=400" },
-            { id: 15, name: "DJI Avata 2 FPV Drone", cat: "Dronlar", price: 999, img: "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=400" },
-
-            // IPADLAR VA TABLETLAR
-            { id: 16, name: "iPad Pro 13 M4 Nano-Texture", cat: "iPadlar", price: 1299, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
-            { id: 17, name: "Samsung Galaxy Tab S9 Ultra", cat: "iPadlar", price: 1199, img: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400" },
-            { id: 18, name: "iPad Air 11 M2 256GB", cat: "iPadlar", price: 699, img: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400" },
-            { id: 19, name: "Xiaomi Pad 6 Max 14", cat: "iPadlar", price: 599, img: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=400" },
-            { id: 20, name: "iPad Mini 6 Cellular", cat: "iPadlar", price: 549, img: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400" },
-
-            // TELEVIZORLAR
-            { id: 21, name: "LG OLED evo G4 65 inch 4K", cat: "Televizorlar", price: 2499, img: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400" },
-            { id: 22, name: "Samsung Neo QLED 8K 75 inch", cat: "Televizorlar", price: 3299, img: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400" },
-            { id: 23, name: "Sony BRAVIA XR A95L OLED", cat: "Televizorlar", price: 2799, img: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400" },
-            { id: 24, name: "TCL 85 inch Mini-LED 4K TV", cat: "Televizorlar", price: 1899, img: "https://images.unsplash.com/photo-1571415060414-07f90f230206?w=400" },
-            { id: 25, name: "Hisense U8N QLED Smart TV", cat: "Televizorlar", price: 1299, img: "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=400" },
-
-            // XOLODILNIKLAR
-            { id: 26, name: "LG InstaView Door-in-Door Smart", cat: "Xolodilniklar", price: 2199, img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400" },
-            { id: 27, name: "Samsung Family Hub French Door", cat: "Xolodilniklar", price: 2499, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" },
-            { id: 28, name: "Bosch Serie 8 NoFrost MultiAir", cat: "Xolodilniklar", price: 1599, img: "https://images.unsplash.com/photo-1536353284924-9220c421d1cd?w=400" },
-            { id: 29, name: "Haier Side-by-Side Inverter", cat: "Xolodilniklar", price: 1199, img: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400" },
-            { id: 30, name: "Beko HarvestFresh Smart Refrig", cat: "Xolodilniklar", price: 899, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
-
-            // KIR YUVISH MASHINALARI
-            { id: 31, name: "Bosch Series 8 HomeConnect 10kg", cat: "Kir moshinalar", price: 950, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
-            { id: 32, name: "LG AI DD DirectDrive 10.5kg", cat: "Kir moshinalar", price: 850, img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400" },
-            { id: 33, name: "Samsung EcoBubble AI Control", cat: "Kir moshinalar", price: 780, img: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400" },
-            { id: 34, name: "Whirlpool Supreme Care Steam", cat: "Kir moshinalar", price: 690, img: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400" },
-            { id: 35, name: "Indesit MyTime Fast Wash 8kg", cat: "Kir moshinalar", price: 490, img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400" },
-
-            // GAZ PLITALAR
-            { id: 36, name: "Hansa Smart Touch Gas Stove", cat: "Gaz plitalar", price: 580, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
-            { id: 37, name: "Bosch FlameSelect Gas Hob 5", cat: "Gaz plitalar", price: 720, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
-            { id: 38, name: "Gorenje Chef's Gas Cooker", cat: "Gaz plitalar", price: 620, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
-            { id: 39, name: "Artel Grand Electric-Gas Stove", cat: "Gaz plitalar", price: 350, img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400" },
-            { id: 40, name: "Electrolux Intuitive Gas Range", cat: "Gaz plitalar", price: 640, img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
-
-            // MIKROTO'LQINLI PECHLAR
-            { id: 41, name: "Panasonic Inverter Genius Grill", cat: "Mikroto'lqinli pechlar", price: 230, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
-            { id: 42, name: "Samsung HotBlast Convection", cat: "Mikroto'lqinli pechlar", price: 260, img: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=400" },
-            { id: 43, name: "LG NeoChef Smart Inverter 30L", cat: "Mikroto'lqinli pechlar", price: 210, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
-            { id: 44, name: "Bosch Serie 6 Built-in Oven", cat: "Mikroto'lqinli pechlar", price: 420, img: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=400" },
-            { id: 45, name: "Whirlpool Jet Chef Steam Pek", cat: "Mikroto'lqinli pechlar", price: 290, img: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400" },
-
-            // QO'SHIMCHA MAISHIY SMART TEXNIKALAR (50 TA TO'LISHI UCHUN)
-            { id: 46, name: "Dyson V15 Detect Vacuum", cat: "Aqlli Uy", price: 749, img: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400" },
-            { id: 47, name: "iRobot Roomba j7+ Robot", cat: "Aqlli Uy", price: 699, img: "https://images.unsplash.com/photo-1618103138281-99609303353b?w=400" },
-            { id: 48, name: "Apple HomePod 2nd Gen", cat: "Aqlli Uy", price: 299, img: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=400" },
-            { id: 49, name: "Sony PlayStation 5 Slim 1TB", cat: "O'yinlar", price: 499, img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" },
-            { id: 50, name: "Meta Quest 3 VR Headset 512GB", cat: "O'yinlar", price: 649, img: "https://images.unsplash.com/photo-1622979135225-d2ba269bc1bd?w=400" }
-        ];
-
-        const categories = ["Barchasi", "Telefonlar", "Noutbuklar", "Dronlar", "iPadlar", "Televizorlar", "Xolodilniklar", "Kir moshinalar", "Gaz plitalar", "Mikroto'lqinli pechlar", "Aqlli Uy", "O'yinlar"];
-        let currentCategory = "Barchasi";
-        let cart = [];
-        let isNight = true;
-
-        // Render Categories
-        const catContainer = document.getElementById("categories-container");
-        categories.forEach(cat => {
-            const chip = document.createElement("div");
-            chip.className = `cat-chip ${cat === 'Barchasi' ? 'active' : ''}`;
-            chip.innerText = cat;
-            chip.onclick = () => {
-                document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                currentCategory = cat;
-                renderProducts();
-            };
-            catContainer.appendChild(chip);
-        });
-
-        // Render Products
-        function renderProducts() {
-            const grid = document.getElementById("products-grid");
-            const catalogGrid = document.getElementById("catalog-grid");
-            const search = document.getElementById("search-input").value.toLowerCase();
-
-            grid.innerHTML = "";
-            catalogGrid.innerHTML = "";
-
-            const filtered = products.filter(p => {
-                const matchesCat = currentCategory === "Barchasi" || p.cat === currentCategory;
-                const matchesSearch = p.name.toLowerCase().includes(search);
-                return matchesCat && matchesSearch;
-            });
-
-            filtered.forEach(p => {
-                const cardHtml = `
-                    <img src="${p.img}" class="product-img" alt="${p.name}">
-                    <div>
-                        <div class="product-category">${p.cat}</div>
-                        <div class="product-title">${p.name}</div>
-                    </div>
-                    <div class="product-bottom">
-                        <div class="product-price">$${p.price}</div>
-                        <button class="btn btn-primary" onclick="addToCart(${p.id})">+ Savat</button>
-                    </div>
-                `;
-
-                const card1 = document.createElement("div");
-                card1.className = "product-card";
-                card1.innerHTML = cardHtml;
-                grid.appendChild(card1);
-
-                const card2 = document.createElement("div");
-                card2.className = "product-card";
-                card2.innerHTML = cardHtml;
-                catalogGrid.appendChild(card2);
-            });
-        }
-
-        // Cart Functions
-        function addToCart(id) {
-            const prod = products.find(p => p.id === id);
-            cart.push(prod);
-            updateCart();
-            alert(`${prod.name} savatga qo'shildi!`);
-        }
-
-        function updateCart() {
-            document.getElementById("cart-count").innerText = cart.length;
-            const container = document.getElementById("cart-items-container");
-            container.innerHTML = "";
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.price;
-                const div = document.createElement("div");
-                div.className = "cart-item";
-                div.innerHTML = `
-                    <img src="${item.img}">
-                    <div class="cart-details">
-                        <div><b>${item.name}</b></div>
-                        <div>$${item.price}</div>
-                    </div>
-                    <button class="btn" onclick="removeFromCart(${index})">❌</button>
-                `;
-                container.appendChild(div);
-            });
-
-            document.getElementById("cart-total-price").innerText = total;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        // Navigation (Multi-Page SPA)
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-            document.getElementById(`page-${pageId}`).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Modals
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function handleAuth(e, msg) {
-            e.preventDefault();
-            alert(msg);
-            closeModal('signin-modal');
-            closeModal('signup-modal');
-        }
-
-        function handleCheckout(e) {
-            e.preventDefault();
-            if (cart.length === 0) {
-                alert("Savatingiz bo'sh!");
-                return;
-            }
-            alert("Rahmat! Buyurtmangiz qabul qilindi. Operatorlarimiz tez orada siz bilan bog'lanishadi.");
-            cart = [];
-            updateCart();
-            closeModal('cart-modal');
-        }
-
-        // Real-Time Theme & Weather
-        const themeBtn = document.getElementById("theme-toggle");
-        themeBtn.onclick = () => {
-            isNight = !isNight;
-            document.body.classList.toggle("light-mode", !isNight);
-            themeBtn.innerText = isNight ? "🌙 Tun" : "☀️️ Kun";
-            document.getElementById("weather-info").innerText = isNight ? "🌙 Toshkent: +18°C (Qor yog'moqda)" : "☀️ Toshkent: +24°C (Quyoshli)";
-        };
-
-        // Weather Canvas Effect (Snow for Night, Sun for Day)
-        const canvas = document.getElementById("weather-canvas");
-        const ctx = canvas.getContext("2d");
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.onresize = resizeCanvas;
-        resizeCanvas();
-
-        for (let i = 0; i < 70; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 3 + 1,
-                d: Math.random() * 1 + 0.5
-            });
-        }
-
-        function drawWeather() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (isNight) {
-                ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-                ctx.beginPath();
-                particles.forEach(p => {
-                    ctx.moveTo(p.x, p.y);
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    p.y += p.d;
-                    if (p.y > canvas.height) p.y = 0;
-                });
-                ctx.fill();
-            } else {
-                ctx.fillStyle = "rgba(255, 215, 0, 0.25)";
-                ctx.beginPath();
-                ctx.arc(canvas.width - 100, 100, 120, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            requestAnimationFrame(drawWeather);
-        }
-
-        // Start App
-        renderProducts();
-        drawWeather();
-    </script>
+    <div class="toast" id="toast"></div>
+    <script src="./main.js"></script>
 </body>
 
 </html>
