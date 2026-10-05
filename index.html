@@ -2,62 +2,363 @@
 <html lang="uz">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Texnomarket — telefon, noutbuk, PlayStation, AirPods, iPad</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Fraunces:opsz,wght@9..144,600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="./main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechZone — Premium Electronics Store</title>
+    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body>
-    <header class="top">
-        <a href="#/" class="logo">texno<b>market</b></a>
-        <nav>
-            <a href="#/" data-r="">Bosh sahifa</a>
-            <a href="#/catalog" data-r="catalog">Katalog</a>
-            <a href="#/about" data-r="about">Biz haqimizda</a>
-        </nav>
-        <form id="sf" class="search"><input id="q" placeholder="Qidirish: iPhone, PS5, AirPods…" autocomplete="off">
-        </form>
-        <button class="ib" id="cartBtn" aria-label="Savat">🛒<span id="cc">0</span></button>
-        <button class="btn sm" id="userBtn">Kirish</button>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo"><i class="fa-solid fa-bolt"></i> Tech<span>Zone</span></a>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active">Bosh sahifa</a>
+                <a href="#shop" class="nav-link">Do'kon</a>
+                <a href="#categories" class="nav-link">Kategoriyalar</a>
+                <a href="#about" class="nav-link">Biz haqimizda</a>
+                <a href="#contact" class="nav-link">Aloqa</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="icon-btn" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn" id="cartBtn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+                <button class="btn-primary" id="authBtn">
+                    <i class="fa-solid fa-user"></i> <span id="authBtnText">Kirish</span>
+                </button>
+            </div>
+        </div>
     </header>
-    <main id="app"></main>
-    <footer class="foot">
-        <div><a href="#/" class="logo">texno<b>market</b></a>
-            <p>Original texnika, rasmiy kafolat, shu kunning o'zida yetkazish.</p>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Mahsulot qidirish..." />
+            <button id="closeSearch"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div>
-            <h4>Katalog</h4><a href="#/catalog?cat=phone">Telefonlar</a><a href="#/catalog?cat=laptop">Noutbuklar</a><a
-                href="#/catalog?cat=console">PlayStation</a><a href="#/catalog?cat=audio">Quloqchinlar</a>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <span class="hero-tag">🔥 Yangi kolleksiya 2026</span>
+                <h1 class="hero-title">Kelajak texnologiyasi <br /><span>bugun sizning qo'lingizda</span></h1>
+                <p class="hero-desc">iPhone, MacBook, PlayStation, AirPods va boshqa premium texnologiyalar — eng yaxshi
+                    narxlarda, rasmiy kafolat bilan.</p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn-primary btn-lg">Xarid qilish <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#categories" class="btn-outline btn-lg">Kategoriyalar</a>
+                </div>
+                <div class="hero-stats">
+                    <div><strong>10K+</strong><span>Mijozlar</span></div>
+                    <div><strong>500+</strong><span>Mahsulotlar</span></div>
+                    <div><strong>4.9★</strong><span>Reyting</span></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card fc1"><i class="fa-brands fa-apple"></i> iPhone 15 Pro</div>
+                <div class="floating-card fc2"><i class="fa-solid fa-gamepad"></i> PS5 Slim</div>
+                <div class="floating-card fc3"><i class="fa-solid fa-headphones"></i> AirPods Pro</div>
+                <div class="hero-circle"></div>
+            </div>
         </div>
-        <div>
-            <h4>Aloqa</h4><a href="#/about">Savol yuborish</a><span>Toshkent, Amir Temur ko'chasi</span><span>+998 71
-                200 00 00</span>
+
+        <!-- CATEGORIES -->
+        <div id="categories" class="section">
+            <h2 class="section-title">Kategoriyalar</h2>
+            <p class="section-sub">Sevimli kategoriyangizni tanlang</p>
+            <div class="categories-grid">
+                <div class="cat-card" data-cat="phone"><i class="fa-solid fa-mobile-screen"></i>
+                    <h3>Telefonlar</h3>
+                </div>
+                <div class="cat-card" data-cat="laptop"><i class="fa-solid fa-laptop"></i>
+                    <h3>Noutbuklar</h3>
+                </div>
+                <div class="cat-card" data-cat="tablet"><i class="fa-solid fa-tablet-screen-button"></i>
+                    <h3>Planshetlar</h3>
+                </div>
+                <div class="cat-card" data-cat="audio"><i class="fa-solid fa-headphones"></i>
+                    <h3>Audio</h3>
+                </div>
+                <div class="cat-card" data-cat="gaming"><i class="fa-solid fa-gamepad"></i>
+                    <h3>O'yin konsollari</h3>
+                </div>
+                <div class="cat-card" data-cat="watch"><i class="fa-solid fa-clock"></i>
+                    <h3>Soatlar</h3>
+                </div>
+            </div>
         </div>
-        <small>© 2026 Texnomarket. Barcha huquqlar himoyalangan.</small>
-    </footer>
-    <div class="modal" id="auth" hidden>
-        <div class="box" role="dialog" aria-modal="true">
-            <button class="x" data-close aria-label="Yopish">✕</button>
-            <div class="tabs"><button data-t="in" class="on">Kirish</button><button data-t="up">Ro'yxatdan
-                    o'tish</button></div>
-            <form id="af" novalidate>
-                <label class="up-only">Ism<input name="name" autocomplete="name" placeholder="Ismingiz"></label>
-                <label>Email<input name="email" type="email" autocomplete="email" placeholder="siz@mail.uz"></label>
-                <label>Parol<span class="pw"><input name="pass" type="password" autocomplete="current-password"
-                            placeholder="Kamida 6 belgi"><button type="button" id="eye"
-                            aria-label="Parolni ko'rsatish">👁</button></span></label>
-                <div class="meter up-only"><i></i></div>
-                <p class="err" id="aerr"></p>
-                <button class="btn full" id="asub">Kirish</button>
+
+        <!-- FEATURED PRODUCTS -->
+        <div class="section">
+            <h2 class="section-title">Mashhur mahsulotlar</h2>
+            <p class="section-sub">Eng ko'p sotilayotgan mahsulotlar</p>
+            <div class="products-grid" id="featuredProducts"></div>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="section features-section">
+            <div class="feature"><i class="fa-solid fa-truck-fast"></i>
+                <h4>Bepul yetkazish</h4>
+                <p>500 000 so'mdan oshgan buyurtmalarga</p>
+            </div>
+            <div class="feature"><i class="fa-solid fa-shield-halved"></i>
+                <h4>Rasmiy kafolat</h4>
+                <p>Barcha mahsulotlarga 1 yil kafolat</p>
+            </div>
+            <div class="feature"><i class="fa-solid fa-rotate-left"></i>
+                <h4>14 kun ichida qaytarish</h4>
+                <p>Mahsulot yoqmagan bo'lsa</p>
+            </div>
+            <div class="feature"><i class="fa-solid fa-headset"></i>
+                <h4>24/7 qo'llab-quvvatlash</h4>
+                <p>Har doim aloqadamiz</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOP PAGE -->
+    <section id="shop" class="page">
+        <div class="page-header">
+            <h1>Barcha mahsulotlar</h1>
+            <p>Sifatli texnologiya — arzon narxda</p>
+        </div>
+        <div class="shop-container">
+            <aside class="shop-sidebar">
+                <h3>Filtrlar</h3>
+                <div class="filter-group">
+                    <h4>Kategoriya</h4>
+                    <label><input type="radio" name="cat" value="all" checked /> Barchasi</label>
+                    <label><input type="radio" name="cat" value="phone" /> Telefonlar</label>
+                    <label><input type="radio" name="cat" value="laptop" /> Noutbuklar</label>
+                    <label><input type="radio" name="cat" value="tablet" /> Planshetlar</label>
+                    <label><input type="radio" name="cat" value="audio" /> Audio</label>
+                    <label><input type="radio" name="cat" value="gaming" /> O'yin konsollari</label>
+                    <label><input type="radio" name="cat" value="watch" /> Soatlar</label>
+                </div>
+                <div class="filter-group">
+                    <h4>Narx (so'm)</h4>
+                    <input type="range" id="priceRange" min="0" max="30000000" step="500000" value="30000000" />
+                    <div class="price-values"><span id="minPrice">0</span> — <span id="maxPrice">30 000 000</span></div>
+                </div>
+            </aside>
+            <div class="shop-main">
+                <div class="shop-toolbar">
+                    <span id="productCount">0 ta mahsulot</span>
+                    <select id="sortSelect">
+                        <option value="default">Standart</option>
+                        <option value="price-asc">Narx: arzon → qimmat</option>
+                        <option value="price-desc">Narx: qimmat → arzon</option>
+                        <option value="name">Nomi bo'yicha</option>
+                    </select>
+                </div>
+                <div class="products-grid" id="shopProducts"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <section id="product" class="page">
+        <div class="product-detail" id="productDetail"></div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section id="about" class="page">
+        <div class="page-header">
+            <h1>Biz haqimizda</h1>
+            <p>TechZone — 2020-yildan beri O'zbekistonda</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Bizning missiyamiz</h2>
+                <p>TechZone — bu zamonaviy texnologiyalarni har bir oilaga yetkazishga qaratilgan premium elektronika
+                    do'koni. Biz faqat original, rasmiy kafolatli mahsulotlarni taklif qilamiz. 5 yildan beri 10 000 dan
+                    ortiq mijozlar bizga ishonch bildirgan.</p>
+                <p>Bizning jamoamiz har doim sizga eng yaxshi xizmatni ko'rsatishga tayyor. 24/7 qo'llab-quvvatlash, tez
+                    yetkazib berish va qulay to'lov shartlari — bularning barchasi siz uchun.</p>
+                <div class="about-stats">
+                    <div><strong>5+</strong><span>Yillik tajriba</span></div>
+                    <div><strong>10K+</strong><span>Mijozlar</span></div>
+                    <div><strong>500+</strong><span>Mahsulotlar</span></div>
+                    <div><strong>50+</strong><span>Xodimlar</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact" class="page">
+        <div class="page-header">
+            <h1>Aloqa</h1>
+            <p>Biz bilan bog'laning</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item"><i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Manzil</h4>
+                        <p>Toshkent sh., Amir Temur ko'chasi 108</p>
+                    </div>
+                </div>
+                <div class="contact-item"><i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Telefon</h4>
+                        <p>+998 90 123 45 67</p>
+                    </div>
+                </div>
+                <div class="contact-item"><i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@techzone.uz</p>
+                    </div>
+                </div>
+                <div class="contact-item"><i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h4>Ish vaqti</h4>
+                        <p>Dushanba - Yakshanba: 09:00 - 21:00</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <h3>Xabar yuboring</h3>
+                <input type="text" placeholder="Ismingiz" required />
+                <input type="email" placeholder="Email" required />
+                <textarea placeholder="Xabaringiz..." rows="5" required></textarea>
+                <button type="submit" class="btn-primary btn-lg">Yuborish <i
+                        class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping"></i> Savatcha</h3>
+            <button id="closeCart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">Jami: <span id="cartTotal">0 so'm</span></div>
+            <button class="btn-primary btn-lg" id="checkoutBtn">Buyurtma berish</button>
+        </div>
+    </div>
+
+    <!-- AUTH MODAL -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAuth"><i class="fa-solid fa-xmark"></i></button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Kirish</button>
+                <button class="auth-tab" data-tab="register">Ro'yxatdan o'tish</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form class="auth-form active" id="loginForm">
+                <div class="auth-icon"><i class="fa-solid fa-user-lock"></i></div>
+                <h2>Xush kelibsiz!</h2>
+                <p class="auth-sub">Hisobingizga kiring</p>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="loginEmail" placeholder="Email" required />
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Parol" required />
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" /> Eslab qolish</label>
+                    <a href="#">Parolni unutdim?</a>
+                </div>
+                <button type="submit" class="btn-primary btn-lg btn-full">Kirish</button>
+                <div class="divider"><span>yoki</span></div>
+                <div class="social-login">
+                    <button type="button" class="social-btn"><i class="fa-brands fa-google"></i></button>
+                    <button type="button" class="social-btn"><i class="fa-brands fa-apple"></i></button>
+                    <button type="button" class="social-btn"><i class="fa-brands fa-facebook"></i></button>
+                </div>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form class="auth-form" id="registerForm">
+                <div class="auth-icon"><i class="fa-solid fa-user-plus"></i></div>
+                <h2>Hisob yarating</h2>
+                <p class="auth-sub">Bepul ro'yxatdan o'ting</p>
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="regName" placeholder="To'liq ism" required />
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="regEmail" placeholder="Email" required />
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="regPhone" placeholder="+998 __ ___ __ __" required />
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="regPassword" placeholder="Parol (min 6 belgi)" required minlength="6" />
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="regPassword2" placeholder="Parolni tasdiqlang" required />
+                </div>
+                <label class="checkbox-label"><input type="checkbox" required /> <span>Shartlarga roziman</span></label>
+                <button type="submit" class="btn-primary btn-lg btn-full">Ro'yxatdan o'tish</button>
             </form>
         </div>
     </div>
-    <div id="toasts"></div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3><i class="fa-solid fa-bolt"></i> TechZone</h3>
+                <p>Premium elektronika do'koni. 2020-yildan beri xizmatdamiz.</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Sahifalar</h4>
+                <a href="#home">Bosh sahifa</a>
+                <a href="#shop">Do'kon</a>
+                <a href="#about">Biz haqimizda</a>
+                <a href="#contact">Aloqa</a>
+            </div>
+            <div class="footer-col">
+                <h4>Yordam</h4>
+                <a href="#">Yetkazib berish</a>
+                <a href="#">Qaytarish</a>
+                <a href="#">Kafolat</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Aloqa</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Toshkent, Amir Temur 108</p>
+                <p><i class="fa-solid fa-phone"></i> +998 90 123 45 67</p>
+                <p><i class="fa-solid fa-envelope"></i> info@techzone.uz</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TechZone. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
     <script src="./main.js"></script>
 </body>
 
